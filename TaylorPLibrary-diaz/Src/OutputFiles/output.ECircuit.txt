@@ -1,0 +1,271 @@
+[0;36m
+-----------------------------------------------
+Index determination in DAEs using AD techniques
+-----------------------------------------------
+
+[0m[0;30mdeg = 5
+eps = 1e-010
+ioeps = 1e-012
+printWhat = 2
+t = 1
+n_tra = 1
+m_tra = 3
+n_dyn = 3
+m_dyn = 2
+n_dae = 5
+m_dae = 3
+[0m
+*** COMPUTATIONS ***
+
+[0;36m
+-------------------
+T R A J E C T O R Y
+-------------------[0m[0;30m
+x(t) =
+  0.84147098
+  0.54030231
+  0.69314718
+
+[0m[0;36m
+-------------
+D Y N A M I C
+-------------[0m[0;30m
+d(x(t), t) =
+  0.84147098
+  0.54030231
+
+[0m[0;36m
+-----
+D A E
+-----[0m[0;30m
+f(d'(x(t),t), x(t), t) =
+  2.5848868
+  -2.1929083
+  0
+
+[0m[0;36m------------------------
+Matrices  D,  A,  and  B
+------------------------[0m[0;35m
+D = 
+  1	0	0	
+  0	1	0	
+
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+
+[0m[0;35m
+A = 
+  1	0	
+  0	1	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+[0m[0;35m
+B = 
+  1.3514373	-1.3514373	1	
+  -1.3514373	1.3514373	0	
+  1	0	0	
+
+  1.8673799	-1.8673799	0	
+  -1.8673799	1.8673799	0	
+  0	0	0	
+
+  1.0866426	-1.0866426	0	
+  -1.0866426	1.0866426	0	
+  0	0	0	
+
+  0.0018024543	-0.0018024543	0	
+  -0.0018024543	0.0018024543	0	
+  0	0	0	
+
+  -0.38677122	0.38677122	0	
+  0.38677122	-0.38677122	0	
+  0	0	0	
+
+[0mApplying Householder to A...
+[0;32m
+First Householder pivot element = 1[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 1[0m[0m
+
+Rank(A) = 2
+
+Applying Householder to D^T...
+[0;32m
+First Householder pivot element = 1[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 1[0m[0m
+
+Rank(D^T) = 2
+
+Applying Householder to G0=A*D...
+[0;32m
+First Householder pivot element = 1[0m[0;32m
+Last Householder pivot <= eps (it does not hold the condition for eps=1e-010) = 0[0m[0m
+
+Rank(G0=A*D) = 2
+
+Computing Dm...[0;30m
+R = D*Dm =
+  1	0	
+  0	1	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m
+Computing R01m, -R01m*R02, V0, U0, ...
+Computing G0m...
+
+niter = -1,  dim = 2
+[0;36m
+---------------------------------------
+M A T R I X   S E Q U E N C E   L O O P
+---------------------------------------[0m
+
+i = 0,  dim = 2
+----------------
+
+Computing D*Pi*Dm and updating PPi...[0;30m
+D*Pi*Dm = 
+  1	0	
+  0	1	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m[0;30m
+updated PPi = PP_i-1*D*Pi*Dm = 
+  1	0	
+  0	1	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m
+Computing Bibar, Bibar22, ...
+Applying Householder to Bibar22...
+[0;32m
+First Householder pivot element = 0[0m[0;32m
+Last Householder pivot <= eps (it does not hold the condition for eps=1e-010) = 0[0m[0m[0;35m
+
+Intermediate rank value (rank of Bbar_i,22) = 0
+[0m
+dim = 2 < m_dae = 3
+Continue with the while cycle...
+
+Decomposing Stilde and calculating Ri1m, Ri1m*Ri2...
+Computing Zi...
+Computing Wihat using Gaussian elimin. with scalling and col. pivoting...
+Decomposing V_i+1=[V_i+1,1|V_i+1,2] and updating b=[b|V_i+1,2]...
+Applying Householder to Ztilde...
+[0;32m
+First Householder pivot element = 1[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 1[0m[0m
+
+i = 1,  dim = 2
+----------------
+
+Computing D*Pi*Dm and updating PPi...[0;30m
+D*Pi*Dm = 
+  0	0	
+  0	1	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m[0;30m
+updated PPi = PP_i-1*D*Pi*Dm = 
+  0	0	
+  0	1	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m
+Computing Bibar, Bibar22, ...
+Applying Householder to Bibar22...
+[0;32m
+First Householder pivot element = 1[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 1[0m[0m[0;35m
+
+Intermediate rank value (rank of Bbar_i,22) = 1
+[0m
+i = 1, dim = 3, m_dae = 3
+The rank is = 3
+We are done! Terminating while-cycle...
+
+[0;35m**************
+The INDEX is = 2
+**************
+[0m
+*** END OF COMPUTATIONS ***
+
+Successful termination! Returned code = 0

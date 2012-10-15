@@ -1,0 +1,415 @@
+[0;36m
+-----------------------------------------------
+Index determination in DAEs using AD techniques
+-----------------------------------------------
+
+[0m[0;30mdeg = 5
+eps = 1e-010
+ioeps = 1e-012
+printWhat = 2
+t = 1
+n_tra = 1
+m_tra = 3
+n_dyn = 3
+m_dyn = 2
+n_dae = 5
+m_dae = 3
+[0m
+*** COMPUTATIONS ***
+
+[0;36m
+-------------------
+T R A J E C T O R Y
+-------------------[0m[0;30m
+x(t) =
+  2
+  1
+  0.69314718
+
+[0m[0;36m
+-------------
+D Y N A M I C
+-------------[0m[0;30m
+d(x(t), t) =
+  1
+  1.6931472
+
+[0m[0;36m
+-----
+D A E
+-----[0m[0;30m
+f(d'(x(t),t), x(t), t) =
+  -1
+  0.5
+  1.1931472
+
+[0m[0;36m------------------------
+Matrices  D,  A,  and  B
+------------------------[0m[0;35m
+D = 
+  0	1	0	
+  0	1	1	
+
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+
+[0m[0;35m
+A = 
+  1	0	
+  0	1	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+  0	0	
+
+[0m[0;35m
+B = 
+  1	0	0	
+  1	3	0	
+  0	0	1	
+
+  0	0	0	
+  -2	1	0	
+  0	2	0	
+
+  0	0	0	
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+  0	0	0	
+
+  0	0	0	
+  0	0	0	
+  0	0	0	
+
+[0mApplying Householder to A...
+[0;32m
+First Householder pivot element = 1[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 1[0m[0m
+
+Rank(A) = 2
+
+Applying Householder to D^T...
+[0;32m
+First Householder pivot element = 2[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 0.5000000000000001[0m[0m
+
+Rank(D^T) = 2
+
+Applying Householder to G0=A*D...
+[0;32m
+First Householder pivot element = 2[0m[0;32m
+Last Householder pivot <= eps (it does not hold the condition for eps=1e-010) = 0[0m[0m
+
+Rank(G0=A*D) = 2
+
+Computing Dm...[0;30m
+R = D*Dm =
+  1	0	
+  0	0.9999999999999999	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m
+Computing R01m, -R01m*R02, V0, U0, ...
+Computing G0m...
+
+niter = -1,  dim = 2
+[0;36m
+---------------------------------------
+M A T R I X   S E Q U E N C E   L O O P
+---------------------------------------[0m
+
+i = 0,  dim = 2
+----------------
+
+Computing D*Pi*Dm and updating PPi...[0;30m
+D*Pi*Dm = 
+  0.9999999999999998	0	
+  0	0.9999999999999999	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m[0;30m
+updated PPi = PP_i-1*D*Pi*Dm = 
+  0.9999999999999998	0	
+  0	0.9999999999999999	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m
+Computing Bibar, Bibar22, ...
+Applying Householder to Bibar22...
+[0;32m
+First Householder pivot element = 0[0m[0;32m
+Last Householder pivot <= eps (it does not hold the condition for eps=1e-010) = 0[0m[0m[0;35m
+
+Intermediate rank value (rank of Bbar_i,22) = 0
+[0m
+dim = 2 < m_dae = 3
+Continue with the while cycle...
+
+Decomposing Stilde and calculating Ri1m, Ri1m*Ri2...
+Computing Zi...
+Computing Wihat using Gaussian elimin. with scalling and col. pivoting...
+Decomposing V_i+1=[V_i+1,1|V_i+1,2] and updating b=[b|V_i+1,2]...
+Applying Householder to Ztilde...
+[0;32m
+First Householder pivot element = 2[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 2[0m[0m
+
+i = 1,  dim = 2
+----------------
+
+Computing D*Pi*Dm and updating PPi...[0;30m
+D*Pi*Dm = 
+  0.4999999999999996	-0.4999999999999999	
+  -0.5000000000000002	0.4999999999999997	
+
+  -0.5000000000000004	-0.5	
+  0.4999999999999998	0.4999999999999998	
+
+  -0.5000000000000006	-0.5000000000000002	
+  0.5000000000000003	0.4999999999999999	
+
+  -0.5000000000000008	-0.5000000000000002	
+  0.5000000000000003	0.5000000000000002	
+
+  -0.5000000000000008	-0.5000000000000002	
+  0.5000000000000008	0.5000000000000002	
+
+[0m[0;30m
+updated PPi = PP_i-1*D*Pi*Dm = 
+  0.4999999999999994	-0.4999999999999998	
+  -0.5000000000000001	0.4999999999999996	
+
+  -0.5000000000000003	-0.4999999999999999	
+  0.4999999999999996	0.4999999999999997	
+
+  -0.5000000000000004	-0.5000000000000001	
+  0.5000000000000001	0.4999999999999998	
+
+  -0.5000000000000007	-0.5000000000000001	
+  0.5000000000000001	0.5000000000000001	
+
+  -0.5000000000000007	-0.5000000000000001	
+  0.5000000000000006	0.5000000000000001	
+
+[0m
+Computing Bibar, Bibar22, ...
+Applying Householder to Bibar22...
+[0;32m
+First Householder pivot element = 1.109335647967048e-031[0m[0;32m
+Last Householder pivot <= eps (it does not hold the condition for eps=1e-010) = 1.109335647967048e-031[0m[0m[0;35m
+
+Intermediate rank value (rank of Bbar_i,22) = 0
+[0m
+dim = 2 < m_dae = 3
+Continue with the while cycle...
+
+Decomposing Stilde and calculating Ri1m, Ri1m*Ri2...
+Applying shift operator to DPiDm to calculate (DPiDm)'...[0;30m
+DPiDm = 
+  0.4999999999999996	-0.4999999999999999	
+  -0.5000000000000002	0.4999999999999997	
+
+  -0.5000000000000004	-0.5	
+  0.4999999999999998	0.4999999999999998	
+
+  -0.5000000000000006	-0.5000000000000002	
+  0.5000000000000003	0.4999999999999999	
+
+  -0.5000000000000008	-0.5000000000000002	
+  0.5000000000000003	0.5000000000000002	
+
+  -0.5000000000000008	-0.5000000000000002	
+  0.5000000000000008	0.5000000000000002	
+
+[0m[0;30m
+dDPiDm = DPiDm shifted = (DPiDm)' = 
+  -0.5000000000000004	-0.5	
+  0.4999999999999998	0.4999999999999998	
+
+  -1.000000000000001	-1	
+  1.000000000000001	0.9999999999999999	
+
+  -1.500000000000002	-1.500000000000001	
+  1.500000000000001	1.500000000000001	
+
+  -2.000000000000003	-2.000000000000001	
+  2.000000000000003	2.000000000000001	
+
+  0	0	
+  0	0	
+
+[0m[0;30m
+PPi_{i-1} = 
+  0.9999999999999998	0	
+  0	0.9999999999999999	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m[0;30m
+(DP_{i-1}Dm)' = 
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m[0;30m
+DerivPPi = (PP_{i-1}DPiDm)' = 
+  -0.5000000000000003	-0.4999999999999999	
+  0.4999999999999996	0.4999999999999997	
+
+  -1.000000000000001	-1	
+  1	0.9999999999999996	
+
+  -1.500000000000002	-1.5	
+  1.5	1.5	
+
+  -2.000000000000003	-2	
+  2.000000000000002	2	
+
+  0	0	
+  0	0	
+
+[0m
+Computing Zi...
+Computing Wihat using Gaussian elimin. with scalling and col. pivoting...
+Decomposing V_i+1=[V_i+1,1|V_i+1,2] and updating b=[b|V_i+1,2]...
+Applying Householder to Ztilde...
+[0;32m
+First Householder pivot element = 5.000000000000005[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 0.2000000000000004[0m[0m
+
+i = 2,  dim = 2
+----------------
+
+Computing D*Pi*Dm and updating PPi...[0;30m
+D*Pi*Dm = 
+  -0.4999999999999973	1.499999999999998	
+  -0.4999999999999976	1.5	
+
+  3.499999999999992	-0.5000000000000007	
+  4.499999999999992	-3.499999999999993	
+
+  -2.499999999999996	1.499999999999983	
+  -9.499999999999973	2.5	
+
+  3.499999999999963	-0.5000000000000102	
+  8.499999999999984	-3.499999999999958	
+
+  7.499999999999973	-8.500000000000044	
+  0.5000000000000586	-7.499999999999983	
+
+[0m[0;30m
+updated PPi = PP_i-1*D*Pi*Dm = 
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+  0	0	
+  0	0	
+
+[0m
+Computing Bibar, Bibar22, ...
+Applying Householder to Bibar22...
+[0;32m
+First Householder pivot element = 1.000000000000001[0m[0;32m
+Last Householder pivot > eps (it holds the condition for eps=1e-010) = 1.000000000000001[0m[0m[0;35m
+
+Intermediate rank value (rank of Bbar_i,22) = 1
+[0m
+i = 2, dim = 3, m_dae = 3
+The rank is = 3
+We are done! Terminating while-cycle...
+
+[0;35m**************
+The INDEX is = 3
+**************
+[0m
+*** END OF COMPUTATIONS ***
+
+Successful termination! Returned code = 0
