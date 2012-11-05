@@ -8,41 +8,44 @@
 // #include "IDException.h"
 // #include "esccolors.h"
 // #include "ioutil.h"
-// #include "TPolyn.h"											// Taylor arithmetic
+// #include "TPolyn.h"
 
 class Matrix
 {
 	private:
 		int _rows,											// The number of rows
 			_cols,											// The number of columns
-			_dimT;											// The dimension of the type T
+			_dimT;											// The dimension of the Taylor polynomials 
     	double **_data;										// The pointer to the allocated memory
+
+    	void allocateMemory();
 
 	public:
 		//
 		// Constructors, destructor
 		//
-		__declspec(dllexport) Matrix::Matrix();									// Default constructor
-		// Matrix::Matrix( int r, int c );						// Regular constructor
-		// Matrix::Matrix( int r, int c, int dimT );			// Regular constructor
-		// Matrix::Matrix( const Matrix &m );					// Copy constructor
-		// Matrix Matrix::redim( int r, int c );				// Reset the current object dimensions
-		// Matrix Matrix::redim( int r, int c, int dimT );		// Reset the current object dimensions
+		Matrix::Matrix();										// Default constructor
+		Matrix::Matrix(int rows, int cols);						// Regular constructor
+		Matrix::Matrix(int rows, int cols, int dimT);			// Regular constructor
+		// Matrix::Matrix(const Matrix &m);						// Copy constructor
+		// Matrix Matrix::redim(int rows, int cols);			// Reset the current object dimensions
+		// Matrix Matrix::redim(int rows, int cols, int dimT);	// Reset the current object dimensions
 		// Matrix::~Matrix();									// Destructor
+
 		//
 		// Accessing properties
 		//
-		// double** data() { return _data; }					// Returns the ptr to the alloc. memory
-		// int nrows() { return _rows; }						// Returns the number of rows
-		// int ncols() { return _cols; }						// Returns the number of columns
-		// int dimT() { return _dimT; }						// Returns the dimension of the type T
-		// void setnrows( int v ) { _rows = v; }				// Sets the number of rows
-		// void setncols( int v ) { _cols = v; }				// Sets the number of columns
-		// void setdimT( int v ) { _dimT = v; }				// Sets the dimension of T
-		// void setdim( int v1, int v2 ) {
-		// 	_rows = v1; _cols = v2; }						// Sets both the nr. rows and columns
-		// void setdim( int v1, int v2, int v3 ) {
-		// 	_rows = v1; _cols = v2; _dimT = v3; }			// Sets the dimensions
+		double** data() { return _data; }						// Returns the ptr to the alloc. memory
+		int nrows() { return _rows; }							// Returns the number of rows
+		int ncols() { return _cols; }							// Returns the number of columns
+		int dimT() { return _dimT; }							// Returns the dimension of the type T
+		// void setnrows( int rows ) { _rows = rows; }			// Sets the number of rows
+		// void setncols( int cols ) { _cols = cols; }			// Sets the number of columns
+		// void setdimT( int dimT ) { _dimT = dimT; }			// Sets the dimension of T
+		// void setdim( int rows, int cols ) {
+		// 	_rows = rows; _cols = cols; }											// Sets numbers of rows and columns
+		// void setdim( int rows, int cols, int dimT ) {
+		// 	_rows = rows; _cols = cols; _dimT = dimT; }								// Sets numbers of rows and columns and the dimension of the Taylor polynomials
 
 		//
 		// Overloaded operators

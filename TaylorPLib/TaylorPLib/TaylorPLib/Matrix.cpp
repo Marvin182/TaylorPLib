@@ -15,41 +15,12 @@ using namespace std;
  * 		m(0,0) == 0.0
  * 
  */
-Matrix::Matrix()
+Matrix::Matrix():
+	_rows(0),
+	_cols(0)
+	_dimT(0)
 {
-	try
-	{
-		// setdim( 1, 1, 1 );									// just one row, just one column,
-															// ... just one third dimension
-		
-		// memory allocation
-		_data = new double*[1];
-		if( _data == 0  || _data == NULL)
-			throw exception("Memory allocation failure.");
-			// throw IDException( "Memory allocation failure.", 3 );
-
-		_data[0] = new double[1];
-		if(_data[0] == 0 || _data[ 0 ] == NULL)
-			throw exception("Memory allocation failure.");
-			//throw IDException( "Memory allocation failure.", 3 );
-
-		_data[0][0] = 0.0;
-		// _data[0][0].set2zero();
-	}
-	catch( bad_alloc e )
-	{
-		printf( "" );
-		printf( "\n***Exception bad_alloc found:");
-        printf( "\n***%s" , e.what() );
-		printf( "" );
-        throw 4;
-	}
-	catch(...)												// other exceptions
-	{
-		exception e( "Error when allocating a matrix.", 34 );
-        // e.report();
-		// throw e.;
-	}
+	allocateMemory();
 }
 
 /**
@@ -60,42 +31,13 @@ Matrix::Matrix()
  * \param[in] c The number of columns.
  * 
  */
-// Matrix::Matrix( int r, int c ) : _rows ( r ), _cols ( c )
-// {
-// 	try
-// 	{
-// 		if( r <= 0  ||  c <= 0 )							// bounds checking
-// 			throw IDException( "Matrix constructor has wrong size.", 35 );
-// 		_data = new double*[ r ];								// data allocation
-// 		if( (_data == 0)  ||  (_data == NULL))
-// 			throw IDException( "Memory allocation failure.", 3 );
-// 		for( int i = 0; i < r; i++ )
-// 		{
-// 			_data[ i ] = new double[ c ];
-// 			if( (_data[ i ] == 0)  ||  (_data[ i ] == NULL) )
-// 				throw IDException( "Memory allocation failure.", 3 );
-// 		}
-// 	}
-// 	catch( bad_alloc e )
-// 	{
-// 		printf( red );
-// 		printf( "\n***Exception bad_alloc found:");
-//         printf( "\n***%s" , e.what() );
-// 		printf( normal );
-//         throw 4;
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	catch(...)												// other exceptions
-// 	{
-// 		IDException e( "Error when allocating a matrix.", 34 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// }
+Matrix::Matrix(int rows, int cols): 
+	_rows(rows), 
+	_cols(cols),
+	_dimT(0)
+{
+	allocateMemory();
+}
 
 // /**
 //  * Constructor for the class with both the number of rows and columns as parameters,
@@ -107,46 +49,13 @@ Matrix::Matrix()
 //  * \param[in] dimT The dimension of the type \type T.
 //  * 
 //  */
-// Matrix::Matrix( int r, int c, int dimT ) 
-// 	: _rows ( r ), _cols ( c ), _dimT ( dimT )
-// {
-// 	try
-// 	{
-// 		if( r <= 0  ||  c <= 0 )							// bounds checking
-// 			throw IDException( "Matrix constructor has wrong size.", 35 );
-// 		setmaxdim( r, c );									// set max. dimensions
-// 		_data = new double*[ r ];								// data allocation
-// 		if( (_data == 0)  ||  (_data == NULL))
-// 			throw IDException( "Memory allocation failure.", 3 );
-// 		for( int i = 0; i < r; i++ )
-// 		{
-// 			_data[ i ] = new double[ c ];
-// 			if( (_data[ i ] == 0)  ||  (_data[ i ] == NULL) )
-// 				throw IDException( "Memory allocation failure.", 3 );
-// 			for( int j = 0; j < c; j++ )
-// 				_data[ i ][ j ] = T( dimT );				// Taylor polyn. of grade dimT
-// 		}
-// 	}
-// 	catch( bad_alloc e )
-// 	{
-// 		printf( red );
-// 		printf( "\n***Exception bad_alloc found:");
-//         printf( "\n***%s" , e.what() );
-// 		printf( normal );
-//         throw 4;
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	catch(...)												// other exceptions
-// 	{
-// 		IDException e( "Error when allocating a matrix.", 34 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// }
+Matrix::Matrix(int rows, int cols, int dimT):
+	_rows(rows),
+	_cols(cols),
+	_dimT(dimT)
+{
+	allocateMemory();
+}
 
 // /**
 //  * Copy constructor.
@@ -3084,3 +2993,56 @@ Matrix::Matrix()
 // 		fprintf( fn, "\n" );
 // 	}
 // }
+
+
+
+
+
+
+/***************
+  P R I V A T E
+  **************/
+
+void Matrix::allocateMemory()
+{
+	try
+	{
+		// bounds checking
+		if( _rows <= 0 || _cols <= 0 )
+			throw IDException( "Matrix invalid matrix size", 35 ); // TODO what means 35?, add invalid size to message
+
+		_data = new double*[_rows];
+		if( _data == 0 || _data == NULL )
+			throw IDException( "Memory allocation failure.", 3 ); // TODO what meansi 3?
+		
+		for( int i = 0; i < _rows; i++ )
+		{
+			_data[i] = new double[c];
+			if( _data[i] == 0 || _data[i] == NULL )
+				throw IDException( "Memory allocation failure.", 3 ); // TODO
+			
+			// TODO initialisation necessary?
+			for( int j = 0; j < _cols; j++)
+			{
+				_data[i][j] = 0.0;
+				// _data[i][j].set2zero();
+				// _data[i][j] = TPoly(_dimT);
+			}
+		}
+	}
+	catch( bad_alloc e )
+	{
+		// TODO bad!
+		printf( "" );
+		printf( "\n***Exception bad_alloc found:");
+        printf( "\n***%s" , e.what() );
+		printf( "" );
+        throw 4;
+	}
+	catch(...)
+	{
+		exception e( "Error when allocating a matrix.", 34 );
+        // e.report();
+		// throw e.;
+	}
+}
