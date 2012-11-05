@@ -53,12 +53,12 @@ class Matrix
 		//
 		double & Matrix::operator()(int i, int j);				// Element
 		Matrix Matrix::operator=(const Matrix &m);				// Assignment operator
-		// bool Matrix::operator==( const Matrix &m );			// Comparison operators
-		// bool Matrix::operator!=( const Matrix &m );
+		bool Matrix::operator==( const Matrix &m );				// Comparison operators
+		bool Matrix::operator!=( const Matrix &m );
 		// Matrix Matrix::operator+( const Matrix &m );			// Arithmetic operators
-		// Matrix Matrix::operator+=( const Matrix &m );
+		Matrix Matrix::operator+=( const Matrix &m );
 		// Matrix Matrix::operator-( const Matrix &m );
-		// Matrix Matrix::operator-=( const Matrix &m );
+		Matrix Matrix::operator-=( const Matrix &m );
 		// Matrix Matrix::operator-();
 		// Matrix Matrix::operator*( double alpha );
 		// *= missing?
