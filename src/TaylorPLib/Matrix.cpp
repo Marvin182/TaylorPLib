@@ -290,7 +290,7 @@ Matrix Matrix::operator+(const Matrix &m)
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		IDException("Cannot substract the matrices. Operation not allowed.", 37).what();
+		exception("Cannot substract the matrices. Operation not allowed.", 37).what();
 		throw 37;
 	}
 
@@ -340,7 +340,7 @@ Matrix Matrix::operator-(const Matrix &m)
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		IDException("Cannot substract the matrices. Operation not allowed.", 38 ).what();
+		exception("Cannot substract the matrices. Operation not allowed.", 38 ).what();
 		throw 38;
 	}
 
@@ -2444,7 +2444,7 @@ void Matrix::printm( char *str )
  	{
  		for( int j = 0; j < _cols; j++ )
  		{
- 			printf("%f", _data[ i ][ j ]);
+ 			printf("%3.2f", _data[ i ][ j ]);
  			printf( "%c", '\t' );
  		}
  		printf( "\n" );

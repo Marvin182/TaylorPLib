@@ -20,7 +20,7 @@ namespace LibMatrix {
 				_dimT;											// The dimension of the Taylor polynomials 
     		double **_data;										// The pointer to the allocated memory
 
-    		void allocateMemory();
+			void allocateMemory(bool initialize);
 	    	void deallocateMemory();
 			void copyFrom(const Matrix &m);
 
@@ -28,13 +28,13 @@ namespace LibMatrix {
 			//
 			// Constructors, destructor
 			//
-			Matrix::Matrix();										// Default constructor
-			Matrix::Matrix(int rows, int cols);						// Regular constructor
-			Matrix::Matrix(int rows, int cols, int dimT);			// Regular constructor
-			Matrix::Matrix(const Matrix &m);						// Copy constructor
-			// Matrix Matrix::redim(int rows, int cols);			// Reset the current object dimensions
-			// Matrix Matrix::redim(int rows, int cols, int dimT);	// Reset the current object dimensions
-			// Matrix::~Matrix();									// Destructor
+			Matrix::Matrix();														// Default constructor
+			Matrix::Matrix(int rows, int cols, bool initialize = true);				// Regular constructor
+			Matrix::Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
+			Matrix::Matrix(const Matrix &m);										// Copy constructor
+			// Matrix Matrix::redim(int rows, int cols);							// Reset the current object dimensions
+			// Matrix Matrix::redim(int rows, int cols, int dimT);					// Reset the current object dimensions
+			// Matrix::~Matrix();													// Destructor
 
 			//
 			// Accessing properties
@@ -47,25 +47,25 @@ namespace LibMatrix {
 			// void setncols( int cols ) { _cols = cols; }			// Sets the number of columns
 			// void setdimT( int dimT ) { _dimT = dimT; }			// Sets the dimension of T
 			// void setdim( int rows, int cols ) {
-			// 	_rows = rows; _cols = cols; }											// Sets numbers of rows and columns
+			// 	_rows = rows; _cols = cols; }						// Sets numbers of rows and columns
 			// void setdim( int rows, int cols, int dimT ) {
-			// 	_rows = rows; _cols = cols; _dimT = dimT; }								// Sets numbers of rows and columns and the dimension of the Taylor polynomials
+			// 	_rows = rows; _cols = cols; _dimT = dimT; }			// Sets numbers of rows and columns and the dimension of the Taylor polynomials
 
 			//
 			// Overloaded operators
 			//
-			double & Matrix::operator()( int i, int j );		// Element
-			// double Matrix::operator()( int i, int j );		    // Element
-			Matrix Matrix::operator=( const Matrix &m );		// Assignment operators
-			bool Matrix::operator==( const Matrix &m );			// Comparison operators
-			bool Matrix::operator!=( const Matrix &m );
-			// Matrix Matrix::operator+( const Matrix &m );		// Arithmetic operators
-			Matrix Matrix::operator+=( const Matrix &m );
-			// Matrix Matrix::operator-( const Matrix &m );
-			Matrix Matrix::operator-=( const Matrix &m );
+			double & Matrix::operator()(int i, int j);				// Element
+			Matrix Matrix::operator=(const Matrix &m);				// Assignment operators
+			bool Matrix::operator==(const Matrix &m);				// Comparison operators
+			bool Matrix::operator!=(const Matrix &m);
+			Matrix Matrix::operator+(const Matrix &m);				// Arithmetic operators
+			Matrix Matrix::operator+=(const Matrix &m);
+			Matrix Matrix::operator-(const Matrix &m);
+			Matrix Matrix::operator-=(const Matrix &m);
 			Matrix Matrix::operator-();
-			// Matrix Matrix::operator*( double alpha );
-			// *= missing?
+			Matrix Matrix::operator*(double alpha);
+			Matrix Matrix::operator*=(double alpha);
+			// * Matrix
 
 			//
 			// Especial matrix multiplications
