@@ -20,7 +20,7 @@ namespace LibMatrix {
 				_dimT;											// The dimension of the Taylor polynomials 
     		double **_data;										// The pointer to the allocated memory
 
-    		void allocateMemory(bool initialize);
+			void allocateMemory(bool initialize);
 	    	void deallocateMemory();
 			void copyFrom(const Matrix &m);
 
@@ -54,18 +54,17 @@ namespace LibMatrix {
 			//
 			// Overloaded operators
 			//
-			double & Matrix::operator()( int i, int j );			// Element
-			// double Matrix::operator()( int i, int j );		    // Element
-			Matrix Matrix::operator=( const Matrix &m );			// Assignment operators
-			bool Matrix::operator==( const Matrix &m );				// Comparison operators
-			bool Matrix::operator!=( const Matrix &m );
-			Matrix Matrix::operator+( const Matrix &m );			// Arithmetic operators
-			Matrix Matrix::operator+=( const Matrix &m );
-			Matrix Matrix::operator-( const Matrix &m );
-			Matrix Matrix::operator-=( const Matrix &m );
+			double & Matrix::operator()(int i, int j);				// Element
+			Matrix Matrix::operator=(const Matrix &m);				// Assignment operators
+			bool Matrix::operator==(const Matrix &m);				// Comparison operators
+			bool Matrix::operator!=(const Matrix &m);
+			Matrix Matrix::operator+(const Matrix &m);				// Arithmetic operators
+			Matrix Matrix::operator+=(const Matrix &m);
+			Matrix Matrix::operator-(const Matrix &m);
+			Matrix Matrix::operator-=(const Matrix &m);
 			Matrix Matrix::operator-();
-			// Matrix Matrix::operator*( double alpha );
-			// *= missing?
+			Matrix Matrix::operator*(double alpha);
+			Matrix Matrix::operator*=(double alpha);
 			// * Matrix
 
 			//
