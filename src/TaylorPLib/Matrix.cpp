@@ -65,7 +65,7 @@ Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
  * \param[in] m A pointer to the \a Matrix object to copy from.
  * 
  */
-Matrix::Matrix( const Matrix &m )
+Matrix::Matrix(const Matrix &m)
 {
 	copyFrom(m);
 }
@@ -233,9 +233,12 @@ double &Matrix::operator()(int i, int j)
  */
 Matrix Matrix::operator=(const Matrix &m)
 {
-	if( this != &m )
-	  	copyFrom(m);
-	
+	if(this != &m)
+	{
+		deallocateMemory();
+	 	copyFrom(m);
+	}
+
 	return *this;
 }
 
@@ -308,7 +311,7 @@ Matrix Matrix::operator+(const Matrix &m)
  * \return A pointer to the resulting \a Matrix object.
  * 
  */
-Matrix Matrix::operator+=( const Matrix &m )
+Matrix Matrix::operator+=(const Matrix &m)
 {	
 	// dimensions checking
 	if( _rows != m._rows || _cols != m._cols )
@@ -331,7 +334,7 @@ Matrix Matrix::operator+=( const Matrix &m )
  * \return A pointer to the resulting \a Matrix object.
  * 
  */
-Matrix Matrix::operator-( const Matrix &m )
+Matrix Matrix::operator-(const Matrix &m)
 {	
 	// dimensions checking
 	if( _rows != m._rows  ||  _cols != m._cols )
@@ -357,7 +360,7 @@ Matrix Matrix::operator-( const Matrix &m )
  * \return The resulting matrix.
  * 
  */
-Matrix Matrix::operator-=( const Matrix &m )
+Matrix Matrix::operator-=(const Matrix &m)
 {		
 	// dimensions checking
 	if( _rows != m._rows || _cols != m._cols )
@@ -390,27 +393,45 @@ Matrix Matrix::operator-()
 	return aux;
 }
 
-// /**
-//  * Implements the * operator. It multiplies a matrix by a scalar.
-//  * 
-//  * \param[in] alpha The scalar to multiply by.
-//  * \return A pointer to the resulting \a Matrix object.
-//  * 
-//  */
-// Matrix Matrix::operator*( double alpha )
-// {
-// 	Matrix aux( _rows, _cols, _dimT );					// an auxiliary object
+/**
+ * Implements the * operator. It multiplies a matrix by a scalar.
+ * 
+ * \param[in] alpha The scalar to multiply by.
+ * \return A pointer to the resulting \a Matrix object.
+ * 
+ */
+Matrix Matrix::operator*(double alpha)
+{
+	// an auxiliary object
+	Matrix aux(_rows, _cols, _dimT);
 
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			aux( i, j ) = _data[ i ][ j ] * alpha;
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++ )
+			aux._data[i][j] = _data[i][j] * alpha;
 	
-// 	return aux;
-// }
+	return aux;
+}
 
-// //
-// // E S P E C I A L   M A T R I X   M U L T I P L I C A T I O N S
-// //
+/**
+ * Implements the *= operator. It multiplies a matrix by a scalar.
+ * 
+ * \param[in] alpha The scalar to multiply by.
+ * \return A pointer to the resulting \a Matrix object.
+ * 
+ */
+Matrix Matrix::operator*=(double alpha)
+{
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++ )
+			_data[ i ][ j ] *= alpha;
+	
+	return *this;
+}
+
+
+//
+// E S P E C I A L   M A T R I X   M U L T I P L I C A T I O N S
+//
 
 // /**
 //  * Matrix multiplication of the form:
@@ -2946,8 +2967,6 @@ void Matrix::deallocateMemory()
 
 void Matrix::copyFrom(const Matrix &m)
 {
-	// deallocateMemory();
-
 	_rows = m._rows;
 	_cols = m._cols;
 	_dimT = m._dimT;
