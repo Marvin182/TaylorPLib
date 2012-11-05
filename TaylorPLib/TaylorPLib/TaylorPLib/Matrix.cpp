@@ -39,16 +39,16 @@ Matrix::Matrix(int rows, int cols):
 	allocateMemory();
 }
 
-// /**
-//  * Constructor for the class with both the number of rows and columns as parameters,
-//  * as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. 
-//  * Creates the object.
-//  * 
-//  * \param[in] r The number of rows.
-//  * \param[in] c The number of columns.
-//  * \param[in] dimT The dimension of the type \type T.
-//  * 
-//  */
+/**
+ * Constructor for the class with both the number of rows and columns as parameters,
+ * as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. 
+ * Creates the object.
+ * 
+ * \param[in] r The number of rows.
+ * \param[in] c The number of columns.
+ * \param[in] dimT The dimension of the type \type T.
+ * 
+ */
 Matrix::Matrix(int rows, int cols, int dimT):
 	_rows(rows),
 	_cols(cols),
@@ -57,57 +57,18 @@ Matrix::Matrix(int rows, int cols, int dimT):
 	allocateMemory();
 }
 
-// /**
-//  * Copy constructor.
-//  * 
-//  * 		Matrix *newm = new Matrix( (*m) );
-//  * 
-//  * \param[in] m A pointer to the \a Matrix object to copy from.
-//  * 
-//  */
-// Matrix::Matrix( const Matrix &m )
-// {
-// 	int i, j;
-	
-// 	try
-// 	{
-// 		setdim( m._rows, m._cols, m._dimT );				// number of rows, columns, dim. of T
-// 		setmaxdim( m._maxr, m._maxc );						// set max. dimensions
-// 		_data = new double*[ m._rows ];							// data allocation
-// 		if( (_data == 0)  ||  (_data == NULL))
-// 			throw IDException( "Memory allocation failure.", 3 );
-// 		for( i = 0; i < m._rows; i++ )
-// 		{
-// 			_data[ i ] = new double[ m._cols ];
-// 			if( (_data[ i ] == 0)  ||  (_data[ i ] == NULL) )
-// 				throw IDException( "Memory allocation failure.", 3 );
-// 			for( int j = 0; j < m._cols; j++ )
-// 				_data[ i ][ j ] = T( m._dimT );				// Taylor polyn. of grade dimT
-// 		}
-// 		for( i = 0; i < m._rows; i++ )
-// 			for( j = 0; j < m._cols; j++ )
-// 				_data[ i ][ j ] = m._data[ i ][ j ];
-// 	}
-// 	catch( bad_alloc e )
-// 	{
-// 		printf( red );
-// 		printf( "\n***Exception bad_alloc found:");
-//         printf( "\n***%s" , e.what() );
-// 		printf( normal );
-//         throw 4;
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	catch(...)												// other exceptions
-// 	{
-// 		IDException e( "Error when allocating a matrix.", 34 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// }
+/**
+ * Copy constructor.
+ * 
+ * 		Matrix *newm = new Matrix( (*m) );
+ * 
+ * \param[in] m A pointer to the \a Matrix object to copy from.
+ * 
+ */
+Matrix::Matrix( const Matrix &m )
+{
+	copyFrom(m);
+}
 
 // /**
 //  * A special constructor for the class with both the number of rows and columns as parameters. 
@@ -236,98 +197,49 @@ Matrix::Matrix(int rows, int cols, int dimT):
 // */	delete [] _data;
 // }
 
-// //
-// // O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
-// //
+//
+// O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
+//
 
-// /**
-//  * Implements the () operator.
-//  * 
-//  * (T & Matrix::... with '&' allows m(2] = 7, i.e., '( )' also in the left side!!)
-//  * 
-//  * \param[in] i The row index.
-//  * \param[in] j The column index.
-//  * \return The value of the desired element.
-//  * 
-//  */
-// T & Matrix::operator()( int i, int j )
-// { 
-// 	try
-// 	{
-// 		if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )// bounds checking
-// 			throw IDException( "Wrong matrix indexing.", 36 );
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return _data[ i ][ j ];
-// }
+/**
+ * Implements the () operator.
+ * 
+ * (T & Matrix::... with '&' allows m(2] = 7, i.e., '( )' also in the left side!!)
+ * 
+ * \param[in] i The row index.
+ * \param[in] j The column index.
+ * \return The value of the desired element.
+ * 
+ */
+double Matrix::operator()(int i, int j)
+{ 
+	// bounds checking
+	if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )
+		IDException("Wrong matrix indexing.", 36).report();
+		throw 36
+	return _data[i][j];
+}
 
-// /**
-//  * Implements the assignment operator.
-//  * 
-//  * 		newm = m;
-//  * 
-//  * \param[in] m The \a Matrix object to assign to.
-//  * \return A pointer to the \a Matrix new object.
-//  * 
-//  */
-// Matrix Matrix::operator=( const Matrix &m )
-// {
-// 	int i, j;
+/**
+ * Implements the assignment operator.
+ * 
+ * 		newm = m;
+ * 
+ * \param[in] m The \a Matrix object to assign to.
+ * \return A pointer to the \a Matrix new object.
+ * 
+ */
+Matrix Matrix::operator=(const Matrix &m)
+{
+	if( this != &m )
+	  	copyFrom(m);
 	
-// 	try
-// 	{
-// 		if( this == &m )									// it is the same object
-// 	  		return *this;
-// 		for( i = 0; i < _rows; i++ )						// deallocates the old object
-// 			delete [] _data[ i ];
-// 		delete [] _data;
-// 		setdim( m._rows, m._cols, m._dimT );				// number of rows, columns
-// 		setmaxdim( m._maxr, m._maxc );						// max. number of rows, columns
-// 		_data = new double*[ m._rows ];							// data allocation
-// 		if( (_data == 0)  ||  (_data == NULL))
-// 			throw IDException( "Memory allocation failure.", 3 );
-// 		for( i = 0; i < m._rows; i++ )
-// 		{
-// 			_data[ i ] = new double[ m._cols ];
-// 			if( (_data[ i ] == 0)  ||  (_data[ i ] == NULL) )
-// 				throw IDException( "Memory allocation failure.", 3 );
-// 			for( int j = 0; j < m._cols; j++ )
-// 				_data[ i ][ j ] = T( m._dimT );				// Taylor polyn. of grade dimT
-// 		}
-// 		for( i = 0; i < m._rows; i++ )
-// 			for( j = 0; j < m._cols; j++ )
-// 				_data[ i ][ j ] = m._data[ i ][ j ];
-// 	}
-// 	catch( bad_alloc e )
-// 	{
-// 		printf( red );
-// 		printf( "\n***Exception bad_alloc found:");
-//         printf( "\n***%s" , e.what() );
-// 		printf( normal );
-//         throw 4;
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	catch(...)												// other exceptions
-// 	{
-// 		IDException e( "Error when allocating a matrix.", 34 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-	
-// 	return *this;
-// }
+	return *this;
+}
 
-// //
-// // O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
-// //
+//
+// O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
+//
 
 // /**
 //  * Implements the == operator. It compares two matrices.
@@ -3046,3 +2958,54 @@ void Matrix::allocateMemory()
 		// throw e.;
 	}
 }
+
+void copyFrom(const Matrix &m)
+{
+	deallocateMemory();
+
+	_rows = m._rows;
+	_cols = m._cols;
+	_dimT = m._dimT;
+
+	try
+	{
+		_data = new double*[_rows];
+		if( _data == 0 || _data == NULL )
+			throw IDException( "Memory allocation failure.", 3 ); // TODO what meansi 3?
+		
+		for( int i = 0; i < _rows; i++ )
+		{
+			_data[i] = new double[c];
+			if( _data[i] == 0 || _data[i] == NULL )
+				throw IDException( "Memory allocation failure.", 3 ); // TODO
+			
+			for( int j = 0; j < _cols; j++)
+			{
+				_data[i][j] = m._data[i][j];
+			}
+		}
+	}
+	catch( bad_alloc e )
+	{
+		// TODO bad!
+		printf( "" );
+		printf( "\n***Exception bad_alloc found:");
+        printf( "\n***%s" , e.what() );
+		printf( "" );
+        throw 4;
+	}
+	catch(...)
+	{
+		exception e( "Error when allocating a matrix.", 34 );
+        // e.report();
+		// throw e.;
+	}
+}
+
+void Matrix::deallocateMemory()
+{
+	for( i = 0; i < _rows; i++ )
+		delete [] _data[ i ];
+	delete [] _data;
+}
+

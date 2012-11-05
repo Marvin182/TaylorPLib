@@ -19,6 +19,7 @@ class Matrix
     	double **_data;										// The pointer to the allocated memory
 
     	void allocateMemory();
+    	void deallocateMemory();
 
 	public:
 		//
@@ -43,18 +44,18 @@ class Matrix
 		// void setncols( int cols ) { _cols = cols; }			// Sets the number of columns
 		// void setdimT( int dimT ) { _dimT = dimT; }			// Sets the dimension of T
 		// void setdim( int rows, int cols ) {
-		// 	_rows = rows; _cols = cols; }											// Sets numbers of rows and columns
+		// 	_rows = rows; _cols = cols; }						// Sets numbers of rows and columns
 		// void setdim( int rows, int cols, int dimT ) {
-		// 	_rows = rows; _cols = cols; _dimT = dimT; }								// Sets numbers of rows and columns and the dimension of the Taylor polynomials
+		// 	_rows = rows; _cols = cols; _dimT = dimT; }			// Sets numbers of rows and columns and the dimension of the Taylor polynomials
 
 		//
 		// Overloaded operators
 		//
-		// double & Matrix::operator()( int i, int j );		// Element
-		// Matrix Matrix::operator=( const Matrix &m );		// Assignment operators
+		double & Matrix::operator()(int i, int j);				// Element
+		Matrix Matrix::operator=(const Matrix &m);				// Assignment operator
 		// bool Matrix::operator==( const Matrix &m );			// Comparison operators
 		// bool Matrix::operator!=( const Matrix &m );
-		// Matrix Matrix::operator+( const Matrix &m );		// Arithmetic operators
+		// Matrix Matrix::operator+( const Matrix &m );			// Arithmetic operators
 		// Matrix Matrix::operator+=( const Matrix &m );
 		// Matrix Matrix::operator-( const Matrix &m );
 		// Matrix Matrix::operator-=( const Matrix &m );
