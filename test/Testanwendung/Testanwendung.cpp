@@ -110,6 +110,11 @@ void matrixMultiplication()
 	mA.printm("");
 	printf("\n\nMatrix B: \n");
 	mB.printm("");
+
+	mA = mA * mB;
+
+	printf("\n\nMatrix A * Matrix B: \n");
+	mA.printm("");
  }
 
 void fillMatrixRandom(Matrix &m) 
