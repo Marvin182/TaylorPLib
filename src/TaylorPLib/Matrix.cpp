@@ -255,7 +255,7 @@ Matrix Matrix::operator=(const Matrix &m)
  */
 bool Matrix::operator==( const Matrix &m )
 {
-	if( _rows != m._rows || _cols != m._cols ) // TODO _dimT ?
+	if(_rows != m._rows || _cols != m._cols) // TODO _dimT ?
 		return false;
 
 	for( int i = 0; i < _rows; i++ )
@@ -288,7 +288,7 @@ bool Matrix::operator!=( const Matrix &m )
 Matrix Matrix::operator+(const Matrix &m)
 {	
 	// dimensions checking
-	if( _rows != m._rows  ||  _cols != m._cols )
+	if(_rows != m._rows || _cols != m._cols)
 	{
 		IDException("Cannot substract the matrices. Operation not allowed.", 37).what();
 		throw 37;
@@ -314,12 +314,13 @@ Matrix Matrix::operator+(const Matrix &m)
 Matrix Matrix::operator+=(const Matrix &m)
 {	
 	// dimensions checking
-	if( _rows != m._rows || _cols != m._cols )
+	if(_rows != m._rows || _cols != m._cols)
 	{
 		// TODO more information?
 		exception( "Cannot add up the matrices. Operation not allowed.", 37 ).what();
 		throw 37;
 	}
+
 	for( int i = 0; i < m._rows; i++ )
 		for( int j = 0; j < m._cols; j++ )
 			_data[i][j] += m._data[i][j];
@@ -337,7 +338,7 @@ Matrix Matrix::operator+=(const Matrix &m)
 Matrix Matrix::operator-(const Matrix &m)
 {	
 	// dimensions checking
-	if( _rows != m._rows  ||  _cols != m._cols )
+	if(_rows != m._rows || _cols != m._cols)
 	{
 		IDException("Cannot substract the matrices. Operation not allowed.", 38 ).what();
 		throw 38;
@@ -363,12 +364,13 @@ Matrix Matrix::operator-(const Matrix &m)
 Matrix Matrix::operator-=(const Matrix &m)
 {		
 	// dimensions checking
-	if( _rows != m._rows || _cols != m._cols )
+	if(_rows != m._rows || _cols != m._cols)
 	{
 		// TODO more information?
-		exception( "Cannot substract up the matrices. Operation not allowed.", 38 ).what();
+		exception( "Cannot substract the matrices. Operation not allowed.", 38 ).what();
 		throw 38;
 	}
+
 	for( int i = 0; i < m._rows; i++ )
 		for( int j = 0; j < m._cols; j++ )
 			_data[i][j] -= m._data[i][j];
@@ -384,7 +386,8 @@ Matrix Matrix::operator-=(const Matrix &m)
  */
 Matrix Matrix::operator-()
 {	
-	Matrix aux( _rows, _cols, _dimT);
+	// an auxiliary object
+	Matrix aux( _rows, _cols, _dimT, false);
 	
 	for( int i = 0; i < _rows; i++ )
 		for( int j = 0; j < _cols; j++ )
@@ -403,7 +406,7 @@ Matrix Matrix::operator-()
 Matrix Matrix::operator*(double alpha)
 {
 	// an auxiliary object
-	Matrix aux(_rows, _cols, _dimT);
+	Matrix aux(_rows, _cols, _dimT, false);
 
 	for( int i = 0; i < _rows; i++ )
 		for( int j = 0; j < _cols; j++ )
@@ -413,7 +416,7 @@ Matrix Matrix::operator*(double alpha)
 }
 
 /**
- * Implements the *= operator. It multiplies a matrix by a scalar.
+ * Implements the *= operator. It multiplies the matrix by a scalar.
  * 
  * \param[in] alpha The scalar to multiply by.
  * \return A pointer to the resulting \a Matrix object.
@@ -428,6 +431,37 @@ Matrix Matrix::operator*=(double alpha)
 	return *this;
 }
 
+/**
+ * Implements the * operator. It multiplies the matrix with another matrix.
+ *
+ * \param[in] m The matrix to multiply with.
+ * \return A pointer ot the resulting \a Matrix object.
+ *
+ */
+Matrix Matrix::operator*(const Matrix &m)
+{
+	if(_cols != m._rows) 
+	{
+		// TODO more information?
+		exception("Cannot multiply the matrices. Operation not allowed.", 40).what();
+		throw 40;
+	}
+
+	// an auxiliary object
+	Matrix aux( _rows, _cols, _dimT, true);
+	
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			// because we initliazed aux all fields are already set to 0
+			for( int k = 0; k < _cols; k++ )
+				aux._data[i][j] += _data[i][k] * m._data[k][j];
+		}
+	}
+
+	return aux;	
+}
 
 //
 // E S P E C I A L   M A T R I X   M U L T I P L I C A T I O N S
