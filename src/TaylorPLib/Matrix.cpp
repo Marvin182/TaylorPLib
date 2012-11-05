@@ -16,11 +16,11 @@ using namespace LibMatrix;
  * 
  */
 Matrix::Matrix():
-	_rows(0),
-	_cols(0),
+	_rows(1),
+	_cols(1),
 	_dimT(0)
 {
-	allocateMemory();
+	allocateMemory(true);
 }
 
 /**
@@ -31,12 +31,12 @@ Matrix::Matrix():
  * \param[in] c The number of columns.
  * 
  */
-Matrix::Matrix(int rows, int cols): 
+Matrix::Matrix(int rows, int cols, bool initialize): 
 	_rows(rows), 
 	_cols(cols),
 	_dimT(0)
 {
-	allocateMemory();
+	allocateMemory(initialize);
 }
 
 // /**
@@ -49,12 +49,12 @@ Matrix::Matrix(int rows, int cols):
 //  * \param[in] dimT The dimension of the type \type T.
 //  * 
 //  */
-Matrix::Matrix(int rows, int cols, int dimT):
+Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
 	_rows(rows),
 	_cols(cols),
 	_dimT(dimT)
 {
-	allocateMemory();
+	allocateMemory(initialize);
 }
 
 /**
@@ -278,33 +278,31 @@ bool Matrix::operator!=( const Matrix &m )
 	return !(*this == m);
 }
 
-// /**
-//  * Implements the + operator. It adds up two matrices.
-//  * 
-//  * \param[in] m The \a Matrix object to add up.
-//  * \return A pointer to the resulting \a Matrix object.
-//  * 
-//  */
-// Matrix Matrix::operator+( const Matrix &m )
-// {	
-// 	Matrix aux( _rows, _cols, _dimT );					// an auxiliary object
+/**
+ * Implements the + operator. It adds up two matrices.
+ * 
+ * \param[in] m The \a Matrix object to add up.
+ * \return A pointer to the resulting \a Matrix object.
+ * 
+ */
+Matrix Matrix::operator+(const Matrix &m)
+{	
+	// dimensions checking
+	if( _rows != m._rows  ||  _cols != m._cols )
+	{
+		IDException("Cannot substract the matrices. Operation not allowed.", 37).what();
+		throw 37;
+	}
 
-// 	try
-// 	{
-// 		if( _rows != m._rows  ||  _cols != m._cols )		// dimensions checking
-// 			throw IDException( "Cannot add up the matrices. Operation not allowed.", 37 );
-// 		for( int i = 0; i < m._rows; i++ )
-// 			for( int j = 0; j < m._cols; j++ )
-// 				aux( i, j ) = _data[ i ][ j ] + m._data[ i ][ j ];
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
+	// an auxiliary object
+	Matrix aux(_rows, _cols, _dimT, false);
 
-// 	return aux;
-// }
+	for( int i = 0; i < m._rows; i++ )
+		for( int j = 0; j < m._cols; j++ )
+			aux._data[i][j] = _data[i][j] + m._data[i][j];
+
+	return aux;
+}
 
 /**
  * Implements the += operator. It adds up two matrices.
@@ -328,32 +326,31 @@ Matrix Matrix::operator+=( const Matrix &m )
  	return *this;
 }
 
-// /**
-//  * Implements the - operator. It substracts two matrices.
-//  * 
-//  * \param[in] m The \a Matrix object to substract from.
-//  * \return A pointer to the resulting \a Matrix object.
-//  * 
-//  */
-// Matrix Matrix::operator-( const Matrix &m )
-// {	
-// 	Matrix aux( _rows, _cols, _dimT );					// an auxiliary object
-// 	try
-// 	{
-// 		if( _rows != m._rows  ||  _cols != m._cols )		// dimensions checking
-// 			throw IDException( "Cannot substract the matrices. Operation not allowed.", 38 );
-// 		for( int i = 0; i < m._rows; i++ )
-// 			for( int j = 0; j < m._cols; j++ )
-// 				aux( i, j ) = _data[ i ][ j ] - m._data[ i ][ j ];
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
+/**
+ * Implements the - operator. It substracts two matrices.
+ * 
+ * \param[in] m The \a Matrix object to substract from.
+ * \return A pointer to the resulting \a Matrix object.
+ * 
+ */
+Matrix Matrix::operator-( const Matrix &m )
+{	
+	// dimensions checking
+	if( _rows != m._rows  ||  _cols != m._cols )
+	{
+		IDException("Cannot substract the matrices. Operation not allowed.", 38 ).what();
+		throw 38;
+	}
 
-// 	return aux;
-// }
+	// an auxiliary object
+	Matrix aux(_rows, _cols, _dimT, false);
+
+	for( int i = 0; i < m._rows; i++ )
+		for( int j = 0; j < m._cols; j++ )
+			aux._data[i][j] = _data[i][j] - m._data[i][j];
+
+	return aux;
+}
 
 /**
  * Implements the -= operator. It substracts two matrices.
@@ -389,7 +386,7 @@ Matrix Matrix::operator-()
 	
 	for( int i = 0; i < _rows; i++ )
 		for( int j = 0; j < _cols; j++ )
-			aux(i, j) = - _data[i][j];
+			aux._data[i][j] = - _data[i][j];
 	
 	return aux;
 }
@@ -2895,7 +2892,7 @@ void Matrix::printm( char *str )
   P R I V A T E
   **************/
 
-void Matrix::allocateMemory()
+void Matrix::allocateMemory(bool initialize)
 {
 	try
 	{
@@ -2913,12 +2910,14 @@ void Matrix::allocateMemory()
 			if( _data[i] == 0 || _data[i] == NULL )
 				throw exception( "Memory allocation failure.", 3 ); // TODO
 			
-			// TODO initialisation necessary?
-			for( int j = 0; j < _cols; j++)
+			if(initialize)
 			{
-				_data[i][j] = 0.0;
-				// _data[i][j].set2zero();
-				// _data[i][j] = TPoly(_dimT);
+				for( int j = 0; j < _cols; j++)
+				{
+					_data[i][j] = 0.0;
+					// _data[i][j].set2zero();
+					// _data[i][j] = TPoly(_dimT);
+				}
 			}
 		}
 	}
@@ -2954,37 +2953,9 @@ void Matrix::copyFrom(const Matrix &m)
 	_cols = m._cols;
 	_dimT = m._dimT;
 
-	try
-	{
-		_data = new double*[_rows];
-		if( _data == 0 || _data == NULL )
-			throw exception( "Memory allocation failure.", 3 ); // TODO what meansi 3?
-		
-		for( int i = 0; i < _rows; i++ )
-		{
-			_data[i] = new double[_cols];
-			if( _data[i] == 0 || _data[i] == NULL )
-				throw exception( "Memory allocation failure.", 3 ); // TODO
-			
-			for( int j = 0; j < _cols; j++)
-			{
-				_data[i][j] = m._data[i][j];
-			}
-		}
-	}
-	catch( bad_alloc e )
-	{
-		// TODO bad!
-		printf( "" );
-		printf( "\n***Exception bad_alloc found:");
-        printf( "\n***%s" , e.what() );
-		printf( "" );
-        throw 4;
-	}
-	catch(...)
-	{
-		exception e( "Error when allocating a matrix.", 34 );
-        // e.report();
-		// throw e.;
-	}
+	allocateMemory(false);
+
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++)
+			_data[i][j] = m._data[i][j];
 }
