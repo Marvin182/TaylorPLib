@@ -1,13 +1,21 @@
-// Testanwendung.cpp : Definiert den Einstiegspunkt für die Konsolenanwendung.
-//
+#include "Matrix.h"
 
-#include "stdafx.h"
-#include "Include\Matrix.h"
+using namespace std;
+using namespace LibMatrix;
 
-int _tmain(int argc, _TCHAR* argv[])
+void createSimpleMatrixAndPrint();
+
+int main (int argc, char* argv[]) 
 {
-	Matrix m;
+	printf("\n");
+	createSimpleMatrixAndPrint();
 
+	system("pause");
 	return 0;
 }
 
+void createSimpleMatrixAndPrint()
+{
+	Matrix m(3,4);
+	m.printm("");
+}

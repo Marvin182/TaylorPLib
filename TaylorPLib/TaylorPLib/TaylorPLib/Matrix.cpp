@@ -1,7 +1,7 @@
 #include "Matrix.h"
 
 using namespace std;
-
+using namespace LibMatrix;
 
 //
 // C O N S T R U C T O R S
@@ -17,7 +17,7 @@ using namespace std;
  */
 Matrix::Matrix():
 	_rows(0),
-	_cols(0)
+	_cols(0),
 	_dimT(0)
 {
 	allocateMemory();
@@ -39,16 +39,16 @@ Matrix::Matrix(int rows, int cols):
 	allocateMemory();
 }
 
-/**
- * Constructor for the class with both the number of rows and columns as parameters,
- * as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. 
- * Creates the object.
- * 
- * \param[in] r The number of rows.
- * \param[in] c The number of columns.
- * \param[in] dimT The dimension of the type \type T.
- * 
- */
+// /**
+//  * Constructor for the class with both the number of rows and columns as parameters,
+//  * as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. 
+//  * Creates the object.
+//  * 
+//  * \param[in] r The number of rows.
+//  * \param[in] c The number of columns.
+//  * \param[in] dimT The dimension of the type \type T.
+//  * 
+//  */
 Matrix::Matrix(int rows, int cols, int dimT):
 	_rows(rows),
 	_cols(cols),
@@ -197,9 +197,9 @@ Matrix::Matrix( const Matrix &m )
 // */	delete [] _data;
 // }
 
-//
-// O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
-//
+// //
+// // O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
+// //
 
 /**
  * Implements the () operator.
@@ -211,12 +211,13 @@ Matrix::Matrix( const Matrix &m )
  * \return The value of the desired element.
  * 
  */
-double Matrix::operator()(int i, int j)
+double &Matrix::operator()(int i, int j)
 { 
 	// bounds checking
 	if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )
-		IDException("Wrong matrix indexing.", 36).report();
-		throw 36
+		exception("Wrong matrix indexing.", 36).what();
+		throw 36;
+
 	return _data[i][j];
 }
 
@@ -237,9 +238,9 @@ Matrix Matrix::operator=(const Matrix &m)
 	return *this;
 }
 
-//
-// O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
-//
+// //
+// // O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
+// //
 
 // /**
 //  * Implements the == operator. It compares two matrices.
@@ -2398,27 +2399,25 @@ Matrix Matrix::operator=(const Matrix &m)
 // // P R I N T   O U T   F U N C T I O N S
 // //
 
-// /**
-//  * Prints out a matrix in a given format, with the previously set color.
-//  * 
-//  * \param[in] str The character string to be printed out.
-//  * 
-//  */
-// void Matrix::printm( char *str )
-// {
-// 	printf( yellow );
-// 	printf( str );
-// 	for( int i = 0; i < _rows; i++ )
-// 	{
-// 		for( int j = 0; j < _cols; j++ )
-// 		{
-// 			_data[ i ][ j ].print();
-// 			printf( "%c", '\t' );
-// 		}
-// 		printf( "\n" );
-// 	}
-// }
-
+ /**
+  * Prints out a matrix in a given format, with the previously set color.
+  * 
+  * \param[in] str The character string to be printed out.
+  * 
+  */
+void Matrix::printm( char *str )
+{
+ 	printf( str );
+ 	for( int i = 0; i < _rows; i++ )
+ 	{
+ 		for( int j = 0; j < _cols; j++ )
+ 		{
+ 			printf("%d", _data[ i ][ j ]);
+ 			printf( "%c", '\t' );
+ 		}
+ 		printf( "\n" );
+ 	}
+}
 // /**
 //  * Prints out to a file a matrix in a given format, with the previously set color.
 //  * 
@@ -2921,17 +2920,17 @@ void Matrix::allocateMemory()
 	{
 		// bounds checking
 		if( _rows <= 0 || _cols <= 0 )
-			throw IDException( "Matrix invalid matrix size", 35 ); // TODO what means 35?, add invalid size to message
+			throw exception( "Matrix invalid matrix size", 35 ); // TODO what means 35?, add invalid size to message
 
 		_data = new double*[_rows];
 		if( _data == 0 || _data == NULL )
-			throw IDException( "Memory allocation failure.", 3 ); // TODO what meansi 3?
+			throw exception( "Memory allocation failure.", 3 ); // TODO what meansi 3?
 		
 		for( int i = 0; i < _rows; i++ )
 		{
-			_data[i] = new double[c];
+			_data[i] = new double[_cols];
 			if( _data[i] == 0 || _data[i] == NULL )
-				throw IDException( "Memory allocation failure.", 3 ); // TODO
+				throw exception( "Memory allocation failure.", 3 ); // TODO
 			
 			// TODO initialisation necessary?
 			for( int j = 0; j < _cols; j++)
@@ -2959,7 +2958,14 @@ void Matrix::allocateMemory()
 	}
 }
 
-void copyFrom(const Matrix &m)
+void Matrix::deallocateMemory()
+{
+	for( int i = 0; i < _rows; i++ )
+		delete [] _data[ i ];
+	delete [] _data;
+}
+
+void Matrix::copyFrom(const Matrix &m)
 {
 	deallocateMemory();
 
@@ -2971,13 +2977,13 @@ void copyFrom(const Matrix &m)
 	{
 		_data = new double*[_rows];
 		if( _data == 0 || _data == NULL )
-			throw IDException( "Memory allocation failure.", 3 ); // TODO what meansi 3?
+			throw exception( "Memory allocation failure.", 3 ); // TODO what meansi 3?
 		
 		for( int i = 0; i < _rows; i++ )
 		{
-			_data[i] = new double[c];
+			_data[i] = new double[_cols];
 			if( _data[i] == 0 || _data[i] == NULL )
-				throw IDException( "Memory allocation failure.", 3 ); // TODO
+				throw exception( "Memory allocation failure.", 3 ); // TODO
 			
 			for( int j = 0; j < _cols; j++)
 			{
@@ -3001,11 +3007,3 @@ void copyFrom(const Matrix &m)
 		// throw e.;
 	}
 }
-
-void Matrix::deallocateMemory()
-{
-	for( i = 0; i < _rows; i++ )
-		delete [] _data[ i ];
-	delete [] _data;
-}
-

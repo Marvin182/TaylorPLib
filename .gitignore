@@ -1,2 +1,10 @@
 *.sublime-project
 *.sublime-workspace
+/TaylorPLib/TaylorPLib/Debug
+/TaylorPLib/TaylorPLib/ipch
+/TaylorPLib/TaylorPLib/TaylorPLib.sdf
+/TaylorPLib/TaylorPLib/TaylorPLib/Debug
+/TaylorPLib/Testanwendung/Debug
+/TaylorPLib/Testanwendung/ipch
+/TaylorPLib/Testanwendung/Testanwendung.sdf
+/TaylorPLib/Testanwendung/Testanwendung/Debug

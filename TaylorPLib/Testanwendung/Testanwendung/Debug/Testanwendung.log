@@ -1,21 +1,28 @@
-﻿Der Buildvorgang wurde am 05.11.2012 11:22:25 gestartet.
+﻿Der Buildvorgang wurde am 05.11.2012 13:40:04 gestartet.
 Projekt "C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Testanwendung\Testanwendung.vcxproj" auf Knoten "2", build Ziel(e).
 InitializeBuildStatus:
   Aktualisieren des Timestamps von "Debug\Testanwendung.unsuccessfulbuild".
 ClCompile:
-  Alle Ausgaben sind aktuell.
-  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"StdAfx.h" /Fp"Debug\Testanwendung.pch" /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Testanwendung.cpp
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Testanwendung.cpp
   Testanwendung.cpp
 ManifestResourceCompile:
   Alle Ausgaben sind aktuell.
 Link:
-  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /ASSEMBLYRESOURCE:TaylorPLib.dll /MANIFEST /ManifestFile:"Debug\Testanwendung.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.lib" /MACHINE:X86 Debug\Testanwendung.exe.embed.manifest.res
-  Debug\stdafx.obj
+  c:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\Testanwendung.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.lib" /MACHINE:X86 Debug\Testanwendung.exe.embed.manifest.res
   Debug\Testanwendung.obj
-Testanwendung.obj : error LNK2019: Verweis auf nicht aufgelöstes externes Symbol ""public: __thiscall Matrix::Matrix(void)" (??0Matrix@@QAE@XZ)" in Funktion "_wmain".
-C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.exe : fatal error LNK1120: 1 nicht aufgelöste externe Verweise.
-Die Erstellung des Projekts "C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Testanwendung\Testanwendung.vcxproj" ist abgeschlossen, build Ziel(e) -- FEHLER.
+  TaylorPLib.lib
+     Bibliothek "C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.lib" und Objekt "C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.exp" werden erstellt.
+Manifest:
+  C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /out:"Debug\Testanwendung.exe.embed.manifest" /manifest Debug\Testanwendung.exe.intermediate.manifest
+  Alle Ausgaben sind aktuell.
+LinkEmbedManifest:
+  Alle Ausgaben sind aktuell.
+  Testanwendung.vcxproj -> C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Debug\Testanwendung.exe
+FinalizeBuildStatus:
+  Die Datei "Debug\Testanwendung.unsuccessfulbuild" wird gelöscht.
+  Aktualisieren des Timestamps von "Debug\Testanwendung.lastbuildstate".
+Die Erstellung des Projekts "C:\Temp\Development\Studienprojekt 2\Working Directory\Testanwendung\Testanwendung\Testanwendung.vcxproj" ist abgeschlossen, build Ziel(e).
 
-Fehler beim Erstellen
+Das Erstellen war erfolgreich.
 
-Verstrichene Zeit 00:00:01.56
+Verstrichene Zeit 00:00:02.03
