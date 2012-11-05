@@ -20,7 +20,7 @@
 #include "IDException.h"
 #include "esccolors.h"
 #include "ioutil.h"
-#include "adolc/adolc.h"									// ADOL-C functionalities
+//#include "adolc/adolc.h"									// ADOL-C functionalities
 #include "TPolyn.h"											// Taylor arithmetic
 
 template <typename T> class Matrix
@@ -158,6 +158,7 @@ template <typename T> class Matrix
 				char *str, double eps );
 		void Matrix::printtpm( int *piv, char *str, const char *const color, double eps );
 		void Matrix::fprinttpm( FILE * fn, int *piv, char *str, double eps );
+    double Matrix::abs(double& value);
 
 };
 

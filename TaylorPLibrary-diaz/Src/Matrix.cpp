@@ -2937,6 +2937,14 @@ template <typename T> void Matrix<T>::printtpm( char *str, const char *const col
 	printf( normal );
 }
 
+template <typename T> double Matrix<T>::abs(double& value) 
+{
+  if (value < 0) 
+  {
+    value *= (-1);
+  }
+}
+
 /**
  * Prints out a submatrix of Taylor polynomials in a given format.
  * 
