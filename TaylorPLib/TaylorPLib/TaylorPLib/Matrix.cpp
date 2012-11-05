@@ -215,7 +215,11 @@ double &Matrix::operator()(int i, int j)
 { 
 	// bounds checking
 	if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )
+<<<<<<< HEAD
+		IDException("Wrong matrix indexing.", 36).report();
+=======
 		exception("Wrong matrix indexing.", 36).what();
+>>>>>>> 344efd808a43362ecd22ee590841b0d9dc69fc25
 		throw 36;
 
 	return _data[i][j];
@@ -373,22 +377,22 @@ Matrix Matrix::operator-=( const Matrix &m )
  	return *this;
 }
 
-// /**
-//  * Implements the unary - operator.
-//  * 
-//  * \return A pointer to the resulting \a Matrix object.
-//  * 
-//  */
-// Matrix Matrix::operator-()
-// {	
-// 	Matrix aux( _rows, _cols, _dimT );					// an auxiliary object
-
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			aux( i, j ) = - _data[ i ][ j ];
+/**
+ * Implements the unary - operator.
+ * 
+ * \return A pointer to the resulting \a Matrix object.
+ * 
+ */
+Matrix Matrix::operator-()
+{	
+	Matrix aux( _rows, _cols, _dimT);
 	
-// 	return aux;
-// }
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++ )
+			aux(i, j) = - _data[i][j];
+	
+	return aux;
+}
 
 // /**
 //  * Implements the * operator. It multiplies a matrix by a scalar.
