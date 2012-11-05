@@ -215,13 +215,10 @@ double &Matrix::operator()(int i, int j)
 { 
 	// bounds checking
 	if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )
-<<<<<<< HEAD
-		IDException("Wrong matrix indexing.", 36).report();
-=======
+	{
 		exception("Wrong matrix indexing.", 36).what();
->>>>>>> 344efd808a43362ecd22ee590841b0d9dc69fc25
 		throw 36;
-
+	}
 	return _data[i][j];
 }
 
@@ -317,10 +314,11 @@ Matrix Matrix::operator+=( const Matrix &m )
 {	
 	// dimensions checking
 	if( _rows != m._rows || _cols != m._cols )
+	{
 		// TODO more information?
 		exception( "Cannot add up the matrices. Operation not allowed.", 37 ).what();
 		throw 37;
-
+	}
 	for( int i = 0; i < m._rows; i++ )
 		for( int j = 0; j < m._cols; j++ )
 			_data[i][j] += m._data[i][j];
@@ -366,10 +364,11 @@ Matrix Matrix::operator-=( const Matrix &m )
 {		
 	// dimensions checking
 	if( _rows != m._rows || _cols != m._cols )
+	{
 		// TODO more information?
 		exception( "Cannot substract up the matrices. Operation not allowed.", 38 ).what();
 		throw 38;
-
+	}
 	for( int i = 0; i < m._rows; i++ )
 		for( int j = 0; j < m._cols; j++ )
 			_data[i][j] -= m._data[i][j];
@@ -2393,7 +2392,7 @@ void Matrix::printm( char *str )
  	{
  		for( int j = 0; j < _cols; j++ )
  		{
- 			printf("%d", _data[ i ][ j ]);
+ 			printf("%f", _data[ i ][ j ]);
  			printf( "%c", '\t' );
  		}
  		printf( "\n" );

@@ -63,7 +63,7 @@ namespace LibMatrix {
 			Matrix Matrix::operator+=( const Matrix &m );
 			// Matrix Matrix::operator-( const Matrix &m );
 			Matrix Matrix::operator-=( const Matrix &m );
-			// Matrix Matrix::operator-();
+			Matrix Matrix::operator-();
 			// Matrix Matrix::operator*( double alpha );
 			// *= missing?
 
