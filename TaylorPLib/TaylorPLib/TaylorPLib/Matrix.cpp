@@ -242,52 +242,37 @@ Matrix Matrix::operator=(const Matrix &m)
 // // O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
 // //
 
-// /**
-//  * Implements the == operator. It compares two matrices.
-//  * 
-//  * \param[in] m The matrix to compare with.
-//  * \return \a true if the matrices are equal. Otherwise it returns \a false.
-//  * 
-//  */
-// bool Matrix::operator==( const Matrix &m )
-// {
-// 	bool equal = true;
-	
-// 	if( _rows == m._rows  &&  _cols == m._cols )
-// 	{
-// 		for( int i = 0; i < _rows; i++ )
-// 		{
-// 			for( int j = 0; j < _cols; j++ )
-// 				if( _data[ i ][ j ] != m._data[ i ][ j ] )
-// 				{
-// 					equal = false;
-// 					break;
-// 				}
-// 			if( !equal )
-// 				break;
-// 		}
-// 	}
-// 	else
-// 	{
-// 		equal = false;
-// 	}
-// 	return equal;
-// }
+/**
+ * Implements the == operator. It compares two matrices.
+ * 
+ * \param[in] m The matrix to compare with.
+ * \return \a true if the matrices are equal. Otherwise it returns \a false.
+ * 
+ */
+bool Matrix::operator==( const Matrix &m )
+{
+	if( _rows != m._rows || _cols != m._cols ) // TODO _dimT ?
+		return false;
 
-// /**
-//  * Implements the != operator. It compares two matrices.
-//  * 
-//  * \param[in] m The matrix to compare with.
-//  * \return \a true if the matrices are not equal. Otherwise it returns \a false.
-//  * 
-//  */
-// bool Matrix::operator!=( const Matrix &m )
-// {
-// 	if( *this == m )
-// 		return false;
-// 	else
-// 		return true;
-// }
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++ )
+			if( _data[ i ][ j ] != m._data[ i ][ j ] )
+				return false;
+
+	return true;
+}
+
+/**
+ * Implements the != operator. It compares two matrices.
+ * 
+ * \param[in] m The matrix to compare with.
+ * \return \a true if the matrices are not equal. Otherwise it returns \a false.
+ * 
+ */
+bool Matrix::operator!=( const Matrix &m )
+{
+	return !(*this == m);
+}
 
 // /**
 //  * Implements the + operator. It adds up two matrices.
@@ -317,31 +302,27 @@ Matrix Matrix::operator=(const Matrix &m)
 // 	return aux;
 // }
 
-// /**
-//  * Implements the += operator. It adds up two matrices.
-//  * 
-//  * \param[in] m The \a Matrix object to add up to the current matrix.
-//  * \return A pointer to the resulting \a Matrix object.
-//  * 
-//  */
-// Matrix Matrix::operator+=( const Matrix &m )
-// {	
-// 	try
-// 	{
-// 		if( _rows != m._rows  ||  _cols != m._cols )			// dimensions checking
-// 			throw IDException( "Cannot add up the matrices. Operation not allowed.", 37 );
-// 		for( int i = 0; i < m._rows; i++ )
-// 			for( int j = 0; j < m._cols; j++ )
-// 				_data[ i ][ j ] += m._data[ i ][ j ];
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
+/**
+ * Implements the += operator. It adds up two matrices.
+ * 
+ * \param[in] m The \a Matrix object to add up to the current matrix.
+ * \return A pointer to the resulting \a Matrix object.
+ * 
+ */
+Matrix Matrix::operator+=( const Matrix &m )
+{	
+	// dimensions checking
+	if( _rows != m._rows || _cols != m._cols )
+		// TODO more information?
+		IDException( "Cannot add up the matrices. Operation not allowed.", 37 ).report();
+		throw 37;
 
-// 	return *this;
-// }
+	for( int i = 0; i < m._rows; i++ )
+		for( int j = 0; j < m._cols; j++ )
+			_data[i][j] += m._data[i][j];
+
+ 	return *this;
+}
 
 // /**
 //  * Implements the - operator. It substracts two matrices.
@@ -370,31 +351,28 @@ Matrix Matrix::operator=(const Matrix &m)
 // 	return aux;
 // }
 
-// /**
-//  * Implements the -= operator. It substracts two matrices.
-//  * 
-//  * \param[in] m The \a Matrix object to substract from.
-//  * \return The resulting matrix.
-//  * 
-//  */
-// Matrix Matrix::operator-=( const Matrix &m )
-// {	
-// 	try
-// 	{
-// 		if( _rows != m._rows  ||  _cols != m._cols )			// dimensions checking
-// 			throw IDException( "Cannot substract the matrices. Operation not allowed.", 38 );
-// 		for( int i = 0; i < m._rows; i++ )
-// 			for( int j = 0; j < m._cols; j++ )
-// 				_data[ i ][ j ] -= m._data[ i ][ j ];
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
+/**
+ * Implements the -= operator. It substracts two matrices.
+ * 
+ * \param[in] m The \a Matrix object to substract from.
+ * \return The resulting matrix.
+ * 
+ */
+Matrix Matrix::operator-=( const Matrix &m )
+{	
+{	
+	// dimensions checking
+	if( _rows != m._rows || _cols != m._cols )
+		// TODO more information?
+		IDException( "Cannot substract up the matrices. Operation not allowed.", 38 ).report();
+		throw 38;
 
-// 	return *this;
-// }
+	for( int i = 0; i < m._rows; i++ )
+		for( int j = 0; j < m._cols; j++ )
+			_data[i][j] -= m._data[i][j];
+
+ 	return *this;
+}
 
 // /**
 //  * Implements the unary - operator.
