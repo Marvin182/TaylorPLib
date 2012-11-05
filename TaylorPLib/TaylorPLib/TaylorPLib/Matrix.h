@@ -19,6 +19,7 @@ namespace LibMatrix {
 				_cols,											// The number of columns
 				_dimT;											// The dimension of the Taylor polynomials 
     		double **_data;										// The pointer to the allocated memory
+
     		void allocateMemory();
 	    	void deallocateMemory();
 			void copyFrom(const Matrix &m);
@@ -56,12 +57,12 @@ namespace LibMatrix {
 			double & Matrix::operator()( int i, int j );		// Element
 			// double Matrix::operator()( int i, int j );		    // Element
 			Matrix Matrix::operator=( const Matrix &m );		// Assignment operators
-			// bool Matrix::operator==( const Matrix &m );			// Comparison operators
-			// bool Matrix::operator!=( const Matrix &m );
+			bool Matrix::operator==( const Matrix &m );			// Comparison operators
+			bool Matrix::operator!=( const Matrix &m );
 			// Matrix Matrix::operator+( const Matrix &m );		// Arithmetic operators
-			// Matrix Matrix::operator+=( const Matrix &m );
+			Matrix Matrix::operator+=( const Matrix &m );
 			// Matrix Matrix::operator-( const Matrix &m );
-			// Matrix Matrix::operator-=( const Matrix &m );
+			Matrix Matrix::operator-=( const Matrix &m );
 			// Matrix Matrix::operator-();
 			// Matrix Matrix::operator*( double alpha );
 			// *= missing?
@@ -150,8 +151,7 @@ namespace LibMatrix {
 			// 		char *str, double eps );
 			// void Matrix::printtpm( int *piv, char *str, const char *const color, double eps );
 			// void Matrix::fprinttpm( FILE * fn, int *piv, char *str, double eps );
-
 	};
-
 }
+
 #endif /* _MATRIX_H_ */

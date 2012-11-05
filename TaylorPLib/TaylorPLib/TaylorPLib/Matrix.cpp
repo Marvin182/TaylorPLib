@@ -314,7 +314,7 @@ Matrix Matrix::operator+=( const Matrix &m )
 	// dimensions checking
 	if( _rows != m._rows || _cols != m._cols )
 		// TODO more information?
-		IDException( "Cannot add up the matrices. Operation not allowed.", 37 ).report();
+		exception( "Cannot add up the matrices. Operation not allowed.", 37 ).what();
 		throw 37;
 
 	for( int i = 0; i < m._rows; i++ )
@@ -359,12 +359,11 @@ Matrix Matrix::operator+=( const Matrix &m )
  * 
  */
 Matrix Matrix::operator-=( const Matrix &m )
-{	
-{	
+{		
 	// dimensions checking
 	if( _rows != m._rows || _cols != m._cols )
 		// TODO more information?
-		IDException( "Cannot substract up the matrices. Operation not allowed.", 38 ).report();
+		exception( "Cannot substract up the matrices. Operation not allowed.", 38 ).what();
 		throw 38;
 
 	for( int i = 0; i < m._rows; i++ )
@@ -2377,12 +2376,12 @@ Matrix Matrix::operator-=( const Matrix &m )
 // // P R I N T   O U T   F U N C T I O N S
 // //
 
- /**
-  * Prints out a matrix in a given format, with the previously set color.
-  * 
-  * \param[in] str The character string to be printed out.
-  * 
-  */
+/**
+ * Prints out a matrix in a given format, with the previously set color.
+ * 
+ * \param[in] str The character string to be printed out.
+ * 
+*/
 void Matrix::printm( char *str )
 {
  	printf( str );
