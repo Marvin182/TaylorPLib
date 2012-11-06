@@ -89,7 +89,7 @@ Matrix::Matrix(const Matrix &m)
 // 		for( i = 0; i < _rows; i++ )						// deallocates the old object
 // 			delete [] _data[ i ];
 // 		delete [] _data;
-// 		setdim( r, c );										// number of rows, columns
+// 		setdim( r, c );								// number of rows, columns
 // 		setmaxdim( r, c );									// max. number of rows, columns
 // 		_data = new double*[ r ];								// data allocation
 // 		if( (_data == 0)  ||  (_data == NULL))
@@ -182,24 +182,22 @@ Matrix::Matrix(const Matrix &m)
 // 	return *this;
 // }
 
-// //
-// // D E S T R U C T O R
-// //
+//
+// D E S T R U C T O R
+//
 
-// /**
-//  * Destructor. Cleans up the object.
-//  * 
-//  */
-// Matrix::~Matrix()
-// {
-// /*	for( int i = 0; i < _rows; i++ )
-// 		delete [] _data[ i ];
-// */	delete [] _data;
-// }
+/**
+ * Destructor. Cleans up the object.
+ * 
+ */
+Matrix::~Matrix()
+{
+	deallocateMemory();
+}
 
-// //
-// // O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
-// //
+//
+// O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
+//
 
 /**
  * Implements the () operator.

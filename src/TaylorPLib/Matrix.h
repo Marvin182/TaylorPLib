@@ -34,7 +34,7 @@ namespace LibMatrix {
 			Matrix::Matrix(const Matrix &m);										// Copy constructor
 			// Matrix Matrix::redim(int rows, int cols);							// Reset the current object dimensions
 			// Matrix Matrix::redim(int rows, int cols, int dimT);					// Reset the current object dimensions
-			// Matrix::~Matrix();													// Destructor
+			Matrix::~Matrix();													// Destructor
 
 			//
 			// Accessing properties
