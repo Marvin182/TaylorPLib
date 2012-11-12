@@ -239,9 +239,9 @@ Matrix Matrix::operator=(const Matrix &m)
 	return *this;
 }
 
-// //
-// // O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
-// //
+//
+// O V E R L O A D E D   A R I T H M E T I C   O P E R A T O R S
+//
 
 /**
  * Implements the == operator. It compares two matrices.
@@ -462,46 +462,47 @@ Matrix Matrix::operator*(const Matrix &m)
 // E S P E C I A L   M A T R I X   M U L T I P L I C A T I O N S
 //
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A*B + beta*C
-//  * 
-//  * with A : m-by-p matrix
-//  * 		B : p-by-n matrix
-//  * 		C : m-by-n matrix
-//  * 		alpha, beta : real numbers
-//  * 
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix.
-//  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::mmCaABbC( double alpha, double beta, Matrix &A, Matrix &B )
-// {
-// 	try
-// 	{
-// 		for( int i = 0; i < A.nrows(); i++ )
-// 			for( int j = 0; j < B.ncols(); j++ )
-// 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 )// A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
-// 				for( int k = 0; k < B.nrows(); k++ )
-// 					_data[ i ][ j ] = A( i, k )*B( k, j )*alpha + _data[ i ][ j ]*beta;
-// 			}
-// 		//printm( "C = alpha*A*B + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha*A*B + beta*C
+ * 
+ * with A : m-by-p matrix
+ * 		B : p-by-n matrix
+ * 		C : m-by-n matrix
+ * 		alpha, beta : real numbers
+ * 
+ * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix.
+ * \param[in] B The pointer to \a B, an object of type \type Matrix.
+ * 
+ */
+void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
+{
+	if (A.ncols() != B.nrows())
+	{
+		exception("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10).what();
+		throw 10;
+	}
+	if (A.nrows() != _rows || B.ncols() != _cols)
+	{
+		exception("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10).what();
+		throw 10;
+	}
+
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++ )
+		{
+			double h = 0.0;
+			// TPoly h = TPoly(_dimT);
+			
+			for( int k = 0; k < B.nrows(); k++ )
+				h += A._data[i][k] * B._data[k][j];
+
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+}
 
 // /**
 //  * Matrix multiplication of the form:
