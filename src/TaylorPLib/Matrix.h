@@ -43,9 +43,9 @@ namespace LibMatrix {
 			// Accessing properties
 			//
 			double** data() { return _data; }						// Returns the ptr to the alloc. memory
-			int nrows() { return _rows; }							// Returns the number of rows
-			int ncols() { return _cols; }							// Returns the number of columns
-			int dimT() { return _dimT; }							// Returns the dimension of the type T
+			int nrows() const { return _rows; }							// Returns the number of rows
+			int ncols() const { return _cols; }							// Returns the number of columns
+			int dimT() const { return _dimT; }							// Returns the dimension of the type T
 			// void setnrows(int rows ) { _rows = rows; }			// Sets the number of rows
 			// void setncols(int cols ) { _cols = cols; }			// Sets the number of columns
 			// void setdimT(int dimT ) { _dimT = dimT; }			// Sets the dimension of T
@@ -134,6 +134,7 @@ namespace LibMatrix {
 			//
 			// Print out functions
 			//
+			void Matrix::printm();
 			void Matrix::printm(char *str);
 			// void Matrix::fprintm(FILE * fn, char *str);
 			// void Matrix::printm(char *str, const char *const color);

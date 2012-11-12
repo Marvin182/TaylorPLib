@@ -2447,6 +2447,26 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 // // P R I N T   O U T   F U N C T I O N S
 // //
 
+
+/**
+ * Prints out a matrix in a given format, with the previously set color.
+ * 
+ * \param[in] str The character string to be printed out.
+ * 
+*/
+void Matrix::printm()
+{
+ 	for( int i = 0; i < _rows; i++ )
+ 	{
+ 		for( int j = 0; j < _cols; j++ )
+ 		{
+ 			printf("%3.2f", _data[ i ][ j ]);
+ 			printf( "%c", '\t' );
+ 		}
+ 		printf( "\n" );
+ 	}
+}
+
 /**
  * Prints out a matrix in a given format, with the previously set color.
  * 

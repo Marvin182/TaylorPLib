@@ -103,6 +103,10 @@ void createSimpleMatrixAndPrint()
 
 void matrixMultiplication()
 {
+	double a[] = {1,2,3,4};
+	Matrix testA(a);
+	testA.printm("Test Matrix A with easy Constructor...\n");
+
 	Matrix mA(2,2);
 	Matrix mB(2,2);
 	Matrix mC(2,2);
@@ -111,41 +115,39 @@ void matrixMultiplication()
 
 	printf("Matrixmultiplikation!!! ");
 
-	printf("\n\nMatrix A: \n");
-	mA.printm("");
-	printf("\n\nMatrix B: \n");
-	mB.printm("");
-	printf("\n\nMatrix C: \n");
-	mC.printm("");
+	mA.printm("\nMatrix A: \n");
+	mB.printm("\nMatrix B: \n");
+	mC.printm("\nMatrix C: \n");
 
 	printf("\n\nMatrix C' = alpha*A*B + beta*C: \n");
-	printf("\n\nMatrix C' = 3*A*B + 4*C: \n");
 	mC.mmCaABbC(3,4,mA,mB);
-	mC.printm("");
+	mC.printm("\nMatrix C' = 3*A*B + 4*C: \n");
 
 	initializeMatricesABC(mA,mB,mC);
 
 	printf("\n\nMatrix C' = alpha*A' *A + beta*C: \n");
-	printf("\n\nMatrix C' = 3*A' *A + 4*C: \n");
-	mC.mmCaATAbC(3,4,mA);
-	mC.printm("");
-
-	mA = mA * mB;
+	mC.mmCaATAbC(2,3,mA);
+	mC.printm("\nMatrix C' = 3*A' *A + 4*C: \n");
 
 	initializeMatricesABC(mA,mB,mC);
+	mA = mA * mB;
 
-	printf("\n\nMatrix A * Matrix B: \n");
-	mA.printm("");
+	mA.printm("\nMatrix A * Matrix B: \n");
 
-	printf("\n\nMatrix B * 3: \n");
 	mB *= 3;
-	mB.printm("");
-
+	mB.printm("\nMatrix B * 3: \n");
  }
 
 void initializeMatricesABC(Matrix &mA, Matrix &mB, Matrix &mC)
 {
-	double ** data = mA.data();
+	double a[] = {1,2,3,4};
+	double b[] = {2,5,1,3};
+	double c[] = {2,3,4,1};
+	mA = Matrix(a);
+	mB = Matrix(b);
+	mC = Matrix(c);
+	// double ** data = mA.data();
+	/*
 	data[0][0] = 1;
 	data[0][1] = 2;
 	data[1][0] = 3;
@@ -160,6 +162,7 @@ void initializeMatricesABC(Matrix &mA, Matrix &mB, Matrix &mC)
 	data[0][1] = 3;
 	data[1][0] = 4;
 	data[1][1] = 1;
+	*/
 }
 
 void checkError() 

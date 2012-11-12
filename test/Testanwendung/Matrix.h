@@ -32,6 +32,9 @@ namespace LibMatrix {
 			Matrix::Matrix(int rows, int cols, bool initialize = true);				// Regular constructor
 			Matrix::Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
 			Matrix::Matrix(const Matrix &m);										// Copy constructor
+
+			Matrix::Matrix(double* values, int rows = 2, int cols = 2);				// easy test construtor		
+
 			// Matrix Matrix::redim(int rows, int cols);							// Reset the current object dimensions
 			// Matrix Matrix::redim(int rows, int cols, int dimT);					// Reset the current object dimensions
 			Matrix::~Matrix();													// Destructor
@@ -40,9 +43,9 @@ namespace LibMatrix {
 			// Accessing properties
 			//
 			double** data() { return _data; }						// Returns the ptr to the alloc. memory
-			int nrows() { return _rows; }							// Returns the number of rows
-			int ncols() { return _cols; }							// Returns the number of columns
-			int dimT() { return _dimT; }							// Returns the dimension of the type T
+			int nrows() const { return _rows; }							// Returns the number of rows
+			int ncols() const { return _cols; }							// Returns the number of columns
+			int dimT() const { return _dimT; }							// Returns the dimension of the type T
 			// void setnrows(int rows ) { _rows = rows; }			// Sets the number of rows
 			// void setncols(int cols ) { _cols = cols; }			// Sets the number of columns
 			// void setdimT(int dimT ) { _dimT = dimT; }			// Sets the dimension of T
@@ -70,21 +73,21 @@ namespace LibMatrix {
 			//
 			// Especial matrix multiplications
 			//
-			void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::bmmCaABbC(int r, int c, double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::mmCasABbC(int r, double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::mmCaAsBbC(int r, double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::mmCaAUTBPbC(double alpha, double beta, Matrix &A, Matrix &B, int *piv);
-			// int Matrix::mmCaAATbC(double alpha, double beta, Matrix &A);
-			void Matrix::mmCaATAbC(double alpha, double beta, Matrix &A);
-			// int Matrix::mmCaATBbC(double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::mmCaATBPbC(double alpha, double beta, Matrix &A, Matrix &B, int *piv);
-			// int Matrix::mmCaABTbC(double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, Matrix &A, Matrix &B);
-			// int Matrix::mmCaIBbC(double alpha, double beta, Matrix &B);
-			// int Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, Matrix &B);
-			// int Matrix::mmCaAIbC(double alpha, double beta, Matrix &A);
+			void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &B);
+			// int Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+			// int Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
+			void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
+			// int Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+			// int Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// int Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
+			// int Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
+			// int Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
 			// int Matrix::mmCaAIbC(double alpha, double beta, Matrix &A, int *piv, bool rows);
 
 			//
@@ -131,6 +134,7 @@ namespace LibMatrix {
 			//
 			// Print out functions
 			//
+			void Matrix::printm();
 			void Matrix::printm(char *str);
 			// void Matrix::fprintm(FILE * fn, char *str);
 			// void Matrix::printm(char *str, const char *const color);
