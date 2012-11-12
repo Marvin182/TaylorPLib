@@ -770,51 +770,45 @@ void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
 // 	return 0;
 // }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A^T*A + beta*C
-//  * 
-//  * with A, C : m-by-m matrix
-//  * 		alpha, beta : real numbers
-//  *
-//  * E.g.: Q^T * Q
-//  * 
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
-//  * \return The error code.
-//  *
-//  */
-// int Matrix::mmCaATAbC( double alpha, double beta, Matrix &A )
-// {
-// 	try
-// 	{
-// 		for( int i = 0; i < A.nrows(); i++ )
-// 			for( int j = 0; j < A.nrows(); j++ )
-// 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
-// 				for( int k = 0; k < A.nrows(); k++ )
-// 					_data[ i ][ j ] = A( k, i )*A( k, j )*alpha + _data[ i ][ j ]*beta;
-// 			}
-// 		//printm( "C = alpha*A^T*A + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha * A' * A + beta * C
+ * 
+ * with A, C : m-by-m matrix
+ * 		alpha, beta : real numbers
+ *
+ * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
+ * \return The error code.
+ *
+ */
+void Matrix::mmCaATAbC(double alpha, double beta, Matrix &A)
+{
+	if (A._rows != _rows || A._cols != _cols)
+	{
+		exception("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10).what();
+		throw 10;
+	}
+
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _rows; j++ )
+		{
+			double h = 0.0;
+			// TPoly h = TPoly(_dimT);
+
+			for( int k = 0; k < A.nrows(); k++ )
+				h += A._data[k][i] * A._data[k][j];
+
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+}
 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*A^T*B + beta*C
+//  *     C = alpha * A' * B + beta * C
 //  * 
 //  * with A : p-by-m matrix
 //  * 		B : p-by-n matrix
