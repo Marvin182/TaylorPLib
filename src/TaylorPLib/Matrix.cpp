@@ -479,10 +479,9 @@ Matrix Matrix::operator*(const Matrix &m)
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
- * \return The error code.
  * 
  */
-int Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
+void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
 {
 	if (A.ncols() != B.nrows())
 	{
@@ -495,8 +494,8 @@ int Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
 		throw 10;
 	}
 
-	for( int i = 0; i < _rows(); i++ )
-		for( int j = 0; j < _cols(); j++ )
+	for( int i = 0; i < _rows; i++ )
+		for( int j = 0; j < _cols; j++ )
 		{
 			double h = 0.0;
 			// TPoly h = TPoly(_dimT);
