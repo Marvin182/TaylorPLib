@@ -29,6 +29,9 @@
     <ClInclude Include="Matrix.h">
       <Filter>include</Filter>
     </ClInclude>
+    <ClInclude Include="CustomException.h">
+      <Filter>include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Library Include="TaylorPLib.lib">

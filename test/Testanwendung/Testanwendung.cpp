@@ -1,5 +1,6 @@
 #include <time.h>
 #include "Matrix.h"
+#include "CustomException.h"
 
 using namespace std;
 using namespace LibMatrix;
@@ -7,20 +8,29 @@ using namespace LibMatrix;
 void createSimpleMatrixAndPrint();
 void fillMatrixRandom(Matrix &m); 
 void matrixMultiplication();
+void checkError();
 
 int main (int argc, char* argv[]) 
 {
 	srand ( time(NULL) );
 	printf("\n");
-	// createSimpleMatrixAndPrint();
+	
+	createSimpleMatrixAndPrint();
 
-	// system("pause");
-
+	system("pause");
+	
 	system("cls");
 
 	matrixMultiplication();
 
 	system("pause");
+
+	system("cls");
+
+	checkError();
+
+	system("pause");
+
 	return 0;
 }
 
@@ -116,6 +126,21 @@ void matrixMultiplication()
 	printf("\n\nMatrix A * Matrix B: \n");
 	mA.printm("");
  }
+
+void checkError() 
+{
+	Matrix mA(2,2);
+	Matrix mB(3,3);
+
+	try 
+	{
+		mA + mB;
+	}
+	catch (CustomException e) 
+	{
+		printf(e.what());
+	}
+}
 
 void fillMatrixRandom(Matrix &m) 
 {

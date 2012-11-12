@@ -214,8 +214,7 @@ double &Matrix::operator()(int i, int j)
 	// bounds checking
 	if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )
 	{
-		exception("Wrong matrix indexing.", 36).what();
-		throw 36;
+		throw CustomException("Wrong matrix indexing.", 36);
 	}
 	return _data[i][j];
 }
@@ -288,8 +287,9 @@ Matrix Matrix::operator+(const Matrix &m)
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		exception("Cannot substract the matrices. Operation not allowed.", 37).what();
-		throw 37;
+		// CustomException ce("Cannot substract the matrices. Operation not allowed.", 37);
+		// exception("Cannot substract the matrices. Operation not allowed.", 37).what();
+		throw CustomException("Cannot substract the matrices. Operation not allowed.", 37);
 	}
 
 	// an auxiliary object
@@ -315,8 +315,8 @@ Matrix Matrix::operator+=(const Matrix &m)
 	if(_rows != m._rows || _cols != m._cols)
 	{
 		// TODO more information?
-		exception( "Cannot add up the matrices. Operation not allowed.", 37 ).what();
-		throw 37;
+		// exception( "Cannot add up the matrices. Operation not allowed.", 37 ).what();
+		throw CustomException("Cannot add up the matrices. Operation not allowed.", 37);
 	}
 
 	for( int i = 0; i < m._rows; i++ )
@@ -338,8 +338,7 @@ Matrix Matrix::operator-(const Matrix &m)
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		exception("Cannot substract the matrices. Operation not allowed.", 38 ).what();
-		throw 38;
+		throw CustomException("Cannot substract the matrices. Operation not allowed.", 38 );
 	}
 
 	// an auxiliary object
@@ -365,8 +364,7 @@ Matrix Matrix::operator-=(const Matrix &m)
 	if(_rows != m._rows || _cols != m._cols)
 	{
 		// TODO more information?
-		exception( "Cannot substract the matrices. Operation not allowed.", 38 ).what();
-		throw 38;
+		throw CustomException( "Cannot substract the matrices. Operation not allowed.", 38 );
 	}
 
 	for( int i = 0; i < m._rows; i++ )
@@ -441,8 +439,7 @@ Matrix Matrix::operator*(const Matrix &m)
 	if(_cols != m._rows) 
 	{
 		// TODO more information?
-		exception("Cannot multiply the matrices. Operation not allowed.", 40).what();
-		throw 40;
+		throw CustomException("Cannot multiply the matrices. Operation not allowed.", 40);
 	}
 
 	// an auxiliary object
@@ -2950,17 +2947,20 @@ void Matrix::allocateMemory(bool initialize)
 	{
 		// bounds checking
 		if( _rows <= 0 || _cols <= 0 )
-			throw exception( "Matrix invalid matrix size", 35 ); // TODO what means 35?, add invalid size to message
+			throw CustomException( "Matrix invalid matrix size", 35 );
+			// throw exception( "Matrix invalid matrix size", 35 ); // TODO what means 35?, add invalid size to message
 
 		_data = new double*[_rows];
 		if( _data == 0 || _data == NULL )
-			throw exception( "Memory allocation failure.", 3 ); // TODO what meansi 3?
+			throw CustomException("Memory allocation failure.", 3 );
+			// throw exception( "Memory allocation failure.", 3 ); // TODO what meansi 3?
 		
 		for( int i = 0; i < _rows; i++ )
 		{
 			_data[i] = new double[_cols];
 			if( _data[i] == 0 || _data[i] == NULL )
-				throw exception( "Memory allocation failure.", 3 ); // TODO
+				throw CustomException("Memory allocation failure.", 3 );
+				//throw exception( "Memory allocation failure.", 3 ); // TODO
 			
 			if(initialize)
 			{
@@ -2976,15 +2976,18 @@ void Matrix::allocateMemory(bool initialize)
 	catch( bad_alloc e )
 	{
 		// TODO bad!
-		printf( "" );
-		printf( "\n***Exception bad_alloc found:");
-        printf( "\n***%s" , e.what() );
-		printf( "" );
-        throw 4;
+		// printf( "" );
+		// printf( "\n***Exception bad_alloc found:");
+        // printf( "\n***%s" , e.what() );
+		// printf( "" );
+		char* tmp = (char*)e.what(); 
+		throw CustomException(tmp, 4 );
+        // throw 4;
 	}
 	catch(...)
 	{
-		exception e( "Error when allocating a matrix.", 34 );
+		// exception e( "Error when allocating a matrix.", 34 );
+		throw CustomException("Error when allocating a matrix.", 34 );
         // e.report();
 		// throw e.;
 	}

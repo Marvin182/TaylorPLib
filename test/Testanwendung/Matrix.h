@@ -5,7 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <typeinfo>
-// #include "IDException.h"
+#include "CustomException.h"
 // #include "esccolors.h"
 // #include "ioutil.h"
 // #include "TPolyn.h"
@@ -34,7 +34,7 @@ namespace LibMatrix {
 			Matrix::Matrix(const Matrix &m);										// Copy constructor
 			// Matrix Matrix::redim(int rows, int cols);							// Reset the current object dimensions
 			// Matrix Matrix::redim(int rows, int cols, int dimT);					// Reset the current object dimensions
-			// Matrix::~Matrix();													// Destructor
+			Matrix::~Matrix();													// Destructor
 
 			//
 			// Accessing properties
