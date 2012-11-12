@@ -478,7 +478,7 @@ Matrix Matrix::operator*(const Matrix &m)
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  * 
  */
-void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
+void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (A.ncols() != B.nrows())
 	{
@@ -492,16 +492,20 @@ void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
 	}
 
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _cols; j++ )
 		{
 			double h = 0.0;
 			// TPoly h = TPoly(_dimT);
 			
 			for( int k = 0; k < B.nrows(); k++ )
+			{
 				h += A._data[i][k] * B._data[k][j];
+			}
 
 			_data[i][j] = alpha * h + beta * _data[i][j];
 		}
+	}
 }
 
 // /**
@@ -781,28 +785,32 @@ void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
  * \param[in] alpha The scalar value that multiplies \a A*B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
- * \return The error code.
  *
  */
-void Matrix::mmCaATAbC(double alpha, double beta, Matrix &A)
+void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 {
-	if (A._rows != _rows || A._cols != _cols)
+	// if A is a m x n matrix A' * A is always a n x n matrix and must have the same dimension as this matrix
+	if (A._cols != _rows || _cols != _rows)
 	{
 		exception("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10).what();
 		throw 10;
 	}
 
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _rows; j++ )
 		{
 			double h = 0.0;
 			// TPoly h = TPoly(_dimT);
 
 			for( int k = 0; k < A.nrows(); k++ )
+			{
 				h += A._data[k][i] * A._data[k][j];
+			}
 
 			_data[i][j] = alpha * h + beta * _data[i][j];
 		}
+	}
 }
 
 // /**
