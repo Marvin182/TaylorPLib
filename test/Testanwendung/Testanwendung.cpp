@@ -1,6 +1,7 @@
 #include <time.h>
 #include "Matrix.h"
 #include "CustomException.h"
+#include <iostream>
 
 using namespace std;
 using namespace LibMatrix;
@@ -9,6 +10,7 @@ void createSimpleMatrixAndPrint();
 void fillMatrixRandom(Matrix &m); 
 void matrixMultiplication();
 void checkError();
+void initializeMatricesABC(Matrix &mA, Matrix &mB, Matrix &mC);
 
 int main (int argc, char* argv[]) 
 {
@@ -103,6 +105,46 @@ void matrixMultiplication()
 {
 	Matrix mA(2,2);
 	Matrix mB(2,2);
+	Matrix mC(2,2);
+
+	initializeMatricesABC(mA,mB,mC);
+
+	printf("Matrixmultiplikation!!! ");
+
+	printf("\n\nMatrix A: \n");
+	mA.printm("");
+	printf("\n\nMatrix B: \n");
+	mB.printm("");
+	printf("\n\nMatrix C: \n");
+	mC.printm("");
+
+	printf("\n\nMatrix C' = alpha*A*B + beta*C: \n");
+	printf("\n\nMatrix C' = 3*A*B + 4*C: \n");
+	mC.mmCaABbC(3,4,mA,mB);
+	mC.printm("");
+
+	initializeMatricesABC(mA,mB,mC);
+
+	printf("\n\nMatrix C' = alpha*A' *A + beta*C: \n");
+	printf("\n\nMatrix C' = 3*A' *A + 4*C: \n");
+	mC.mmCaATAbC(3,4,mA);
+	mC.printm("");
+
+	mA = mA * mB;
+
+	initializeMatricesABC(mA,mB,mC);
+
+	printf("\n\nMatrix A * Matrix B: \n");
+	mA.printm("");
+
+	printf("\n\nMatrix B * 3: \n");
+	mB *= 3;
+	mB.printm("");
+
+ }
+
+void initializeMatricesABC(Matrix &mA, Matrix &mB, Matrix &mC)
+{
 	double ** data = mA.data();
 	data[0][0] = 1;
 	data[0][1] = 2;
@@ -113,19 +155,12 @@ void matrixMultiplication()
 	data[0][1] = 5;
 	data[1][0] = 1;
 	data[1][1] = 3;
-
-	printf("Matrixmultiplikation!!! ");
-
-	printf("\n\nMatrix A: \n");
-	mA.printm("");
-	printf("\n\nMatrix B: \n");
-	mB.printm("");
-
-	mA = mA * mB;
-
-	printf("\n\nMatrix A * Matrix B: \n");
-	mA.printm("");
- }
+	data = mC.data();
+	data[0][0] = 2;
+	data[0][1] = 3;
+	data[1][0] = 4;
+	data[1][1] = 1;
+}
 
 void checkError() 
 {
@@ -138,7 +173,8 @@ void checkError()
 	}
 	catch (CustomException e) 
 	{
-		printf(e.what());
+		// cout << e.what();
+		printf(e.what().c_str());
 	}
 }
 

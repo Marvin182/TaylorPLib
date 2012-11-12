@@ -9,7 +9,7 @@ public:
 	CustomException();
 	CustomException( char* msg );
 	CustomException( char* msg, int err );
-	// ~CustomException();
+	~CustomException();
 	void addReason( char* msg );
 	void addReason( char* msg, int err );
 	std::string what();

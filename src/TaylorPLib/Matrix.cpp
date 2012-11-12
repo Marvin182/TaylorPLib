@@ -482,13 +482,11 @@ void Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B)
 {
 	if (A.ncols() != B.nrows())
 	{
-		exception("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10).what();
-		throw 10;
+		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
 	}
 	if (A.nrows() != _rows || B.ncols() != _cols)
 	{
-		exception("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10).what();
-		throw 10;
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -788,8 +786,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, Matrix &A)
 {
 	if (A._rows != _rows || A._cols != _cols)
 	{
-		exception("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10).what();
-		throw 10;
+		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
 	}
 
 	for( int i = 0; i < _rows; i++ )

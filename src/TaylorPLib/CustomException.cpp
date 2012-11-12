@@ -17,9 +17,9 @@ CustomException::CustomException( char* msg, int err ) : reason(msg), errCode(er
 {
 }
 
-// CustomException::~CustomException()
-// {
-// }
+CustomException::~CustomException()
+{
+}
 
 void CustomException::addReason( char* msg )
 {
