@@ -70,7 +70,7 @@ namespace LibMatrix {
 			//
 			// Especial matrix multiplications
 			//
-			// int Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B);
+			int Matrix::mmCaABbC(double alpha, double beta, Matrix &A, Matrix &B);
 			// int Matrix::bmmCaABbC(int r, int c, double alpha, double beta, Matrix &A, Matrix &B);
 			// int Matrix::mmCasABbC(int r, double alpha, double beta, Matrix &A, Matrix &B);
 			// int Matrix::mmCaAsBbC(int r, double alpha, double beta, Matrix &A, Matrix &B);
