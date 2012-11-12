@@ -70,6 +70,27 @@ Matrix::Matrix(const Matrix &m)
 	copyFrom(m);
 }
 
+/**
+ * Easy constructor for testing.
+ *
+ */
+Matrix::Matrix(double* values, int rows, int cols):
+	_rows(rows),
+	_cols(cols),
+	_dimT(0)
+{
+	allocateMemory(false);
+
+	for( int i = 0; i < rows; i++ )
+	{
+		for( int j = 0; j < cols; j++ )
+		{
+			_data[i][j] = values[i * rows + j];
+		}
+	}
+}
+
+
 // /**
 //  * A special constructor for the class with both the number of rows and columns as parameters. 
 //  * Creates a new object.
