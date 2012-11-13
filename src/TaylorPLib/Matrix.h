@@ -80,9 +80,9 @@ namespace LibMatrix {
 			// void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
 			void Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
 			void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
-			// void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
 			// void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
-			// void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
 			// void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
 			// void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
 			// void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
