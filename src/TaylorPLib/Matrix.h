@@ -74,21 +74,21 @@ namespace LibMatrix {
 			// Especial matrix multiplications
 			//
 			void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &B);
-			// int Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
-			// int Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
+			// void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+			void Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
 			void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
-			// int Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
-			// int Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// int Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
-			// int Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
-			// int Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
-			// int Matrix::mmCaAIbC(double alpha, double beta, Matrix &A, int *piv, bool rows);
+			// void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+			// void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			// void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
+			// void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
+			// void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
+			// void Matrix::mmCaAIbC(double alpha, double beta, Matrix &A, int *piv, bool rows);
 
 			//
 			// Solving systems of equations

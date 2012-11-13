@@ -752,46 +752,42 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 // 	return 0;
 // }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A*A^T + beta*C
-//  * 
-//  * with A, C : m-by-m matrix
-//  * 		alpha, beta : real numbers
-//  *
-//  * E.g.: Q * Q^T
-//  * 
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
-//  * \return The error code.
-//  *
-//  */
-// int Matrix::mmCaAATbC( double alpha, double beta, Matrix &A )
-// {
-// 	try
-// 	{
-// 		for( int i = 0; i < A.nrows(); i++ )
-// 			for( int j = 0; j < A.nrows(); j++ )
-// 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
-// 				for( int k = 0; k < A.nrows(); k++ )
-// 					_data[ i ][ j ] = A( i, k )*A( j, k )*alpha + _data[ i ][ j ]*beta;
-// 			}
-// 		//printm( "C = alpha*A*A^T + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha * A * A' + beta * C
+ * 
+ * with A, C : m-by-m matrix
+ * 		alpha, beta : real numbers
+ * 
+ * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
+ *
+ */
+void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
+{
+	// if A is a m-by-n matrix A * A' is always a m-by-m matrix and must have the same dimension as this matrix
+	if (A._rows != _rows || _cols != _rows)
+	{
+		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
+	}
+	
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _rows; j++ )
+		{
+			double h = 0.0;
+			// TPoly h = TPoly(_dimT);
+
+			for( int k = 0; k < _rows; k++ )
+				h += A._data[i][k] * A._data[i][k];
+			}
+
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+	}
+}
 
 /**
  * Matrix multiplication of the form:
@@ -808,7 +804,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
  */
 void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 {
-	// if A is a m x n matrix A' * A is always a n x n matrix and must have the same dimension as this matrix
+	// if A is a m-by-n matrix A' * A is always a n-by-n matrix and must have the same dimension as this matrix
 	if (A._cols != _rows || _cols != _rows)
 	{
 		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
