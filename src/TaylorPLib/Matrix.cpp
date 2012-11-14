@@ -586,62 +586,61 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 // 	return 0;
 // }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A*B + beta*C
-//  * 
-//  * with A : m-by-p matrix
-//  * 		B : p-by-n matrix
-//  * 		C : r-by-n matrix (only the last r rows from A are interesting)
-//  * 		alpha, beta : real numbers
-//  * 
-//  * where A ("special" A) is of the form:
-//  * 
-//  * 		(         )
-//  * 		(    X    )
-//  * 		( ------- )
-//  * 		( * ... * )
-//  * 		( * ... * )
-//  * 
-//  * so that a particular matrix multiplication is needed.
-//  * 
-//  * \param[in] r The last rows in \a A that are of interest (2 non-zero-rows in the example above).
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix.
-//  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \return The error code.
-//  *
-//  */
-// int Matrix::mmCasABbC( int r, double alpha, double beta, Matrix &A, Matrix &B )
-// {
-// 	int i, j, k;
-	
-// 	try
-// 	{
-// 		for( int i = A.nrows() - r; i < A.nrows(); i++ )	// only from row A.nrows()-r on
-// 			for( int j = 0; j < B.ncols(); j++ )
-// 			{
-// 				if( strcmp( _data[ i - A.nrows() + r ][ j ].typeName(), "TPolyn" ) == 0 )
-// 															// A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i - A.nrows() + r ][ j ].set2zero();// p(x) = 0, initialization
-// 				//else _data[ i - A.nrows() + r ][ j ] = 0.0;
-// 				for( int k = 0; k < B.nrows(); k++ )
-// 					_data[ i - A.nrows() + r ][ j ] = A( i, k )*B( k, j )*alpha + 
-// 								_data[ i - A.nrows() + r ][ j ]*beta;
-// 			}
-// 		//printm( "C = alpha*A*B + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha*A*B + beta*C
+ * 
+ * with A : m-by-p matrix
+ * 		B : p-by-n matrix
+ * 		C : r-by-n matrix (only the last r rows from A are interesting)
+ * 		alpha, beta : real numbers
+ * 
+ * where A ("special" A) is of the form:
+ * 
+ * 		(         )
+ * 		(    X    )
+ * 		( ------- )
+ * 		( * ... * )
+ * 		( * ... * )
+ * 
+ * so that a particular matrix multiplication is needed.
+ * 
+ * \param[in] r The last rows in \a A that are of interest (2 non-zero-rows in the example above).
+ * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix.
+ * \param[in] B The pointer to \a B, an object of type \type Matrix.
+ *
+ */
+void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B )
+{
+	if (r > _rows)
+	{
+		throw CustomException("Error in matrix multiplication. r (the number of last rows to use from A) cannot be larger than the number of rows of C"., 10);
+	}
+	if (B._cols > _rows)
+	{
+		throw CustomException("Error in matrix multiplication. B should not have more columns thar C.", 10);
+	}
+
+	int n = A._rows - r;
+	for( int i = n; i < A._rows; i++ )
+	{
+		for( int j = 0; j < B._cols; j++ )
+		{
+			double h = 0.0;
+			// TPoly h = TPoly(_dimT);
+
+			for( int k = 0; k < B._rows; k++ )
+			{
+				h += A._data[i][k] * B._data[k][j];
+			}
+
+			_data[i - n][j] = alpha * h + beta * _data[i - n][j];
+		}
+	}
+}
 
 // /**
 //  * Matrix multiplication of the form:
