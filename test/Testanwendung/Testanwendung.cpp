@@ -120,14 +120,34 @@ void matrixMultiplication()
 	mC.printm("\nMatrix C: \n");
 
 	printf("\n\nMatrix C' = alpha*A*B + beta*C: \n");
+	printf("mmCaABbC\n");
 	mC.mmCaABbC(3,4,mA,mB);
 	mC.printm("\nMatrix C' = 3*A*B + 4*C: \n");
 
 	initializeMatricesABC(mA,mB,mC);
+	printf("\n\nMatrix C' = alpha*A' *A + beta*C: \n");
+	printf("mmCaAATbC\n");
+	mC.mmCaAATbC(2,3,mA);
+	mC.printm("");
+
+	initializeMatricesABC(mA,mB,mC);
 
 	printf("\n\nMatrix C' = alpha*A' *A + beta*C: \n");
+	printf("mmCaATAbC\n");
 	mC.mmCaATAbC(2,3,mA);
 	mC.printm("\nMatrix C' = 3*A' *A + 4*C: \n");
+
+	initializeMatricesABC(mA,mB,mC);
+
+	printf("\nmmCaATBbC\n");
+	mC.mmCaATBbC(2,3,mA, mB);
+	mC.printm("");
+
+	initializeMatricesABC(mA,mB,mC);
+
+	printf("\nmmCaABTbC\n");
+	mC.mmCaABTbC(2,3,mA, mB);
+	mC.printm("");
 
 	initializeMatricesABC(mA,mB,mC);
 	mA = mA * mB;
@@ -136,7 +156,8 @@ void matrixMultiplication()
 
 	mB *= 3;
 	mB.printm("\nMatrix B * 3: \n");
- }
+
+}
 
 void initializeMatricesABC(Matrix &mA, Matrix &mB, Matrix &mC)
 {
@@ -172,7 +193,20 @@ void checkError()
 
 	try 
 	{
+		mA.printm("Matrix A: \n");
+		mB.printm("Matrix B: \n");
+		printf("\nMatrix A + Matrix B:\n");
 		mA + mB;
+	}
+	catch (CustomException e) 
+	{
+		// cout << e.what();
+		printf(e.what().c_str());
+	}
+	try 
+	{
+		printf("\nMatrix A - Matrix B:\n");
+		mA - mB;
 	}
 	catch (CustomException e) 
 	{
