@@ -35,8 +35,10 @@ namespace LibMatrix {
 
 			Matrix::Matrix(double* values, int rows = 2, int cols = 2);				// easy test construtor		
 
-			// Matrix Matrix::redim(int rows, int cols);							// Reset the current object dimensions
-			// Matrix Matrix::redim(int rows, int cols, int dimT);					// Reset the current object dimensions
+			// change size of the matrix, but keep the data which fitts into the new size
+			Matrix Matrix::redim(int rows, int cols, bool initializeEmptys = true);
+			Matrix Matrix::redim(int rows, int cols, int dimT, bool initializeEmptys = true);
+
 			Matrix::~Matrix();													// Destructor
 
 			//

@@ -91,117 +91,86 @@ Matrix::Matrix(double* values, int rows, int cols):
 }
 
 
-// /**
-//  * A special constructor for the class with both the number of rows and columns as parameters. 
-//  * Creates a new object.
-//  * 
-//  * \param[in] r The number of rows.
-//  * \param[in] c The number of columns.
-//  * 
-//  */
-// Matrix Matrix::redim( int r, int c )
-// {
-// 	int i, j;
-	
-// 	try
-// 	{
-// 		if( r <= 0  ||  c <= 0 )							// bounds checking
-// 			throw IDException( "Matrix constructor has wrong size.", 35 );
-// 		for( i = 0; i < _rows; i++ )						// deallocates the old object
-// 			delete [] _data[ i ];
-// 		delete [] _data;
-// 		setdim( r, c );								// number of rows, columns
-// 		setmaxdim( r, c );									// max. number of rows, columns
-// 		_data = new double*[ r ];								// data allocation
-// 		if( (_data == 0)  ||  (_data == NULL))
-// 			throw IDException( "Memory allocation failure.", 3 );
-// 		for( i = 0; i < r; i++ )
-// 		{
-// 			_data[ i ] = new double[ c ];
-// 			if( (_data[ i ] == 0)  ||  (_data[ i ] == NULL) )
-// 				throw IDException( "Memory allocation failure.", 3 );
-// 		}
-// 	}
-// 	catch( bad_alloc e )
-// 	{
-// 		printf( red );
-// 		printf( "\n***Exception bad_alloc found:");
-//         printf( "\n***%s" , e.what() );
-// 		printf( normal );
-//         throw 4;
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	catch(...)												// other exceptions
-// 	{
-// 		IDException e( "Error when allocating a matrix.", 34 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-	
-// 	return *this;
-// }
+/**
+ * A special constructor for the class with both the number of rows and columns as parameters. 
+ * Resizes this matrix.
+ * 
+ * \param[in] r The new number of rows.
+ * \param[in] c The new number of columns.
+ * 
+ */
+Matrix Matrix::redim(int rows, int cols, bool initializeEmptys)
+{
+	return redim(rows, cols, _dimT, initializeEmptys);
+}
 
-// /**
-//  * A special constructor for the class with both the number of rows and columns as parameters,
-//  * as well as the dimension of the elements' type (e.g. the Taylor polynomial's grade). 
-//  * Creates a new object.
-//  * 
-//  * \param[in] r The number of rows.
-//  * \param[in] c The number of columns.
-//  * \param[in] dimT The dimension of the type \type T.
-//  * 
-//  */
-// Matrix Matrix::redim( int r, int c, int dimT )
-// {
-// 	int i, j;
-	
-// 	try
-// 	{
-// 		if( r <= 0  ||  c <= 0 )							// bounds checking
-// 			throw IDException( "Matrix constructor has wrong size.", 35 );
-// 		for( i = 0; i < _rows; i++ )						// deallocates the old object
-// 			delete [] _data[ i ];
-// 		delete [] _data;
-// 		setdim( r, c, dimT );								// number of rows, columns, dim. of T
-// 		setmaxdim( r, c );									// max. number of rows, columns
-// 		_data = new double*[ r ];								// data allocation
-// 		if( (_data == 0)  ||  (_data == NULL))
-// 			throw IDException( "Memory allocation failure.", 3 );
-// 		for( i = 0; i < r; i++ )
-// 		{
-// 			_data[ i ] = new double[ c ];
-// 			if( (_data[ i ] == 0)  ||  (_data[ i ] == NULL) )
-// 				throw IDException( "Memory allocation failure.", 3 );
-// 			for( int j = 0; j < c; j++ )
-// 				_data[ i ][ j ] = T( dimT );
-// 		}
-// 	}
-// 	catch( bad_alloc e )
-// 	{
-// 		printf( red );
-// 		printf( "\n***Exception bad_alloc found:");
-//         printf( "\n***%s" , e.what() );
-// 		printf( normal );
-//         throw 4;
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	catch(...)												// other exceptions
-// 	{
-// 		IDException e( "Error when allocating a matrix.", 34 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-	
-// 	return *this;
-// }
+/**
+ * A special constructor for the class with both the number of rows and columns as parameters,
+ * as well as the dimension of the elements' type (e.g. the Taylor polynomial's grade). 
+ * Resize this matrix.
+ * 
+ * \param[in] r The new number of rows.
+ * \param[in] c The new number of columns.
+ * \param[in] dimT The new dimension of the type \type T.
+ * 
+ */
+Matrix Matrix::redim(int rows, int cols, int dimT, bool initializeEmptys)
+{
+	if (rows <= 0 || cols <= 0)
+	{
+		throw CustomException("Matrix constructor has wrong size.", 35);
+	}
+
+	double **oldData = _data;
+	int oldRows = _rows;
+	int oldCols = _cols;
+
+	_rows = rows;
+	_cols = cols;
+	_dimT = dimT;
+
+	allocateMemory(false);
+
+	int maxRowsCopy = min(oldRows, _rows);
+	int maxColsCopy = min(oldCols, _cols);
+
+	for( int i = 0; i < maxRowsCopy; i++ )
+	{
+		for ( int j = 0; j < maxColsCopy; j++ )
+		{
+			_data[i][j] = oldData[i][j];
+		}
+		if (initializeEmptys)
+		{
+			for( int j = maxColsCopy; j < _cols; j++ )
+			{
+				_data[i][j] = 0.0;
+				// _data[i][j].set2Zero();
+				// _data[i][j] = TPoly(_dimT);
+			}
+		}
+	}
+
+	if (initializeEmptys)
+	{
+		for( int i = maxRowsCopy; i < _rows; i++ )
+		{
+			for( int j = 0; j < _cols; j++ )
+			{
+				_data[i][j] = 0.0;
+				// _data[i][j].set2Zero();
+				// _data[i][j] = TPoly(_dimT);
+			}
+		}
+	}
+
+	// deallocate memory of old data
+	for( int i = 0; i < oldRows; i++ )
+		delete oldData[i];
+	delete oldData;
+
+	return *this;
+}
 
 //
 // D E S T R U C T O R
@@ -613,15 +582,15 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  *
  */
-void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B )
+void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (r > _rows)
 	{
-		throw CustomException("Error in matrix multiplication. r (the number of last rows to use from A) cannot be larger than the number of rows of C"., 10);
+		throw CustomException("Error in matrix multiplication. r (the number of last rows to use from A) cannot be larger than the number of rows of C", 10);
 	}
-	if (B._cols > _rows)
+	if (B._cols > _cols) // better != ?
 	{
-		throw CustomException("Error in matrix multiplication. B should not have more columns thar C.", 10);
+		throw CustomException("Error in matrix multiplication. B should not have more columns than C.", 10);
 	}
 
 	int n = A._rows - r;
@@ -630,7 +599,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 		for( int j = 0; j < B._cols; j++ )
 		{
 			double h = 0.0;
-			// TPoly h = TPoly(_dimT);
+			// TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -642,62 +611,61 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 	}
 }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A*B + beta*C
-//  * 
-//  * with A : m-by-p matrix
-//  * 		B : p-by-n matrix
-//  * 		C : m-by-r matrix (only the last r columns from B are interesting).
-//  * 		alpha, beta : real numbers
-//  * 
-//  * where B ("special" B) is of the form:
-//  * 
-//  * 		(   | * * * )
-//  * 		(   | . . . )
-//  * 		( X | . . . )
-//  * 		(   | . . . )
-//  * 		(   | * * * )
-//  * 
-//  * so that a particular matrix multiplication is needed.
-//  * 
-//  * \param[in] r The last columns in \a B that are of interest (3 non-zero-columns 
-//  * 				in the example above).
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix.
-//  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \return The error code.
-//  *
-//  */
-// int Matrix::mmCaAsBbC( int r, double alpha, double beta, Matrix &A, Matrix &B )
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha*A*B + beta*C
+ * 
+ * with A : m-by-p matrix
+ * 		B : p-by-n matrix
+ * 		C : m-by-r matrix (only the last r columns from B are interesting).
+ * 		alpha, beta : real numbers
+ * 
+ * where B ("special" B) is of the form:
+ * 
+ * 		(   | * * * )
+ * 		(   | . . . )
+ * 		( X | . . . )
+ * 		(   | . . . )
+ * 		(   | * * * )
+ * 
+ * so that a particular matrix multiplication is needed.
+ * 
+ * \param[in] r The last columns in \a B that are of interest (3 non-zero-columns 
+ * 				in the example above).
+ * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix.
+ * \param[in] B The pointer to \a B, an object of type \type Matrix.
+ *
+ */
+// void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 // {
-// 	int i, j, k;
-	
-// 	try
+// 	if (r > _cols)
 // 	{
-// 		for( int i = 0; i < A.nrows(); i++ )
-// 			for( int j = B.ncols() - r; j < B.ncols(); j++ )// only from column B.ncols()-r on
+// 		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of C"., 10);
+// 	}
+// 	// if (B._cols > _rows)
+// 	{
+// 		throw CustomException("Error in matrix multiplication. B should not have more columns than C.", 10);
+// 	}
+
+// 	int n = B._cols - r;
+// 	for( int i = 0; i < A._rows; i++ )
+// 	{
+// 		for( int j = n; j < B._cols; j++ )
+// 		{
+// 			double h = 0.0;
+// 			// TPoly h = TPoly(_dimT);
+
+// 			for( int k = 0; k < B._rows; k++ )
 // 			{
-// 				if( strcmp( _data[ i ][ j - B.ncols() + r ].typeName(), "TPolyn" ) == 0 )
-// 															// A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j - B.ncols() + r ].set2zero();// p(x) = 0, initialization
-// 				//else _data[ i ][ j - B.ncols() + r ] = 0.0;
-// 				for( int k = 0; k < B.nrows(); k++ )
-// 					_data[ i ][ j - B.ncols() + r ] = A( i, k )*B( k, j )*alpha + 
-// 								_data[ i ][ j - B.ncols() + r ]*beta;
+// 				h += A._data[i][k] * B._data[k][j];
 // 			}
-// 		//printm( "C = alpha*A*B + beta*C = \n" );
+
+// 			_data[i][j - n] = alpha * h + beta * _data[i][j - n];
+// 		}
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 // /**
@@ -721,34 +689,19 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix. Only its upper triangular 
 //  * 		part is interesting.
 //  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
-//  * \return The error code.
 //  *
 //  */
-// int Matrix::mmCaAUTBPbC( double alpha, double beta, Matrix &A, 
-// 		Matrix &B, int *piv )
+// void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 // {
-// 	try
-// 	{
 // 		for( int i = 0; i < A.nrows(); i++ )
 // 			for( int j = 0; j < B.ncols(); j++ )
 // 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
 // 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
 // 				for( int k = 0; k < B.nrows(); k++ )
 // 					if( k <= j )
 // 					_data[ i ][ j ] = A( i, k )*B( k, piv[ j ] )*alpha + _data[ i ][ j ]*beta;
 // 			}
-// 		//printm( "C = alpha*A*UTB + beta*C = \n" );
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 /**
@@ -841,7 +794,6 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
- * \return The error code.
  *
  */
 void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix &B)
@@ -893,33 +845,18 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix.
 //  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
-//  * \return The error code.
 //  * 
 //  */
-// int Matrix::mmCaATBPbC( double alpha, double beta, Matrix &A, 
-// 		Matrix &B, int *piv )
+// void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 // {
-// 	try
-// 	{
 // 		for( int i = 0; i < A.nrows(); i++ )
 // 			for( int j = 0; j < B.ncols(); j++ )
 // 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
 // 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
 // 				for( int k = 0; k < B.nrows(); k++ )
 // 					_data[ i ][ j ] = A( k, i )*B( k, piv[ j ] )*alpha + _data[ i ][ j ]*beta;
 // 			}
-// 		//printm( "C = alpha*A^T*B + beta*C = \n" );
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 /**
@@ -995,29 +932,16 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] A The pointer to \a A, an object of type \type Matrix.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
-//  * \return The error code.
 //  * 
 //  */
-// int Matrix::mmCaABTbC( int r, bool up, double alpha, double beta, 
-// 		Matrix &A, Matrix &B )
+// void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &A, const Matrix &B)
 // {
-// 	try
-// 	{
-// 		//printf( "\nr=%d", r );
-// 		//printf( "\nA.nrows()=%d, A.ncols()=%d", A.nrows(), A.ncols() );
-// 		//printf( "\nB.nrows()=%d, B.ncols()=%d", B.nrows(), B.ncols() );
-// 		//printf( "\nC.nrows()=%d, C.ncols()=%d", nrows(), ncols() );
 // 		for( int i = 0; i < A.nrows(); i++ )
 // 			for( int j = 0; j < B.ncols(); j++ )
 // 				{
-// 					if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) 
-// 															// A zero value indicates 
-// 															// that both strings are equal
 // 						_data[ i ][ j ].set2zero();			// p(x) = 0, initialization
-// 					//else _data[ i ][ j ] = 0.0;
 // 					if( up )								// first r columns from B are used
 // 					{
-// 						//printf( "\nr=%d", r );
 // 						for( int k = 0; k < r; k++ )
 // 							_data[ i ][ j ] = A( i, k )*B( j, k )*alpha + _data[ i ][ j ]*beta;
 // 					}
@@ -1026,15 +950,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // 						_data[ i ][ j ] = A( i, k - B.nrows() + r  )*B( j, k )*alpha 
 // 							+ _data[ i ][ j ]*beta;
 // 		}
-// 		//printm( "C = alpha*A*B^T + beta*C = \n" );
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 // /**
@@ -1062,38 +978,21 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] A The pointer to \a A, an object of type \type Matrix.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
-//  * \return The error code.
 //  * 
 //  */
-// int Matrix::bmmCaABTbC( int r, int c, double alpha, double beta, 
-// 		Matrix &A, Matrix &B )
+// void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
 // {
-// 	int i, j, k;
-
-// 	try
-// 	{
 // 		for( i = 0; i < r; i++ )							// only first r rows from A interesting
 // 			for( j = 0; j < c; j++ )						// only first c col. from A (col. from B)
 // 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
 // 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
 // 				for( k = 0; k < B.nrows(); k++ )
 // 					_data[ i ][ j ] = A( i, k )*B( j, k )*alpha + _data[ i ][ j ]*beta;
 // 			}
 // 		for( i = r; i < A.nrows(); i++ )					// last rows of B remain the same
 // 			for( j = 0; j < B.ncols(); j++ )
 // 				_data[ i ][ j ] = B( j, i )*alpha;
-// 		//printm( "C = alpha*A*B^T + beta*C = \n" );
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 // /**
@@ -1109,21 +1008,13 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] alpha The scalar value that multiplies \a B.
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \return The error code.
 //  * 
 //  */
-// int Matrix::mmCaIBbC( double alpha, double beta, Matrix &B )
+// void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 // {
-// 	int i, j;
-	
-// 	try
-// 	{
 // 		for( i = 0; i < nrows(); i++ )						// initialize C
 // 			for( j = 0; j < B.ncols(); j++ )
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
 // 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
 // 		if( nrows() >= B.nrows() )							// last rows from I are zeroed
 // 		{
 // 			for( i = 0; i < B.nrows(); i++ )				// last rows from C are already zeroed!!
@@ -1136,15 +1027,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // 				for( j = 0; j < B.nrows(); j++ )
 // 					_data[ i ][ j ] = B( i, j )*alpha + _data[ i ][ j ]*beta;			
 // 		}
-// 		//printm( "C = alpha*I*B + beta*C = \n" );
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 // /**
@@ -1166,12 +1049,8 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \return The error code.
 //  * 
 //  */
-// int Matrix::mmCaIBbC( double alpha, double beta, int *piv, bool rows, Matrix &B )
+// void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix &B)
 // {
-// 	int i, j;
-	
-// 	try
-// 	{
 // 		Matrix Id( nrows(), B.nrows(), dimT() );			// Id[m][p][nTcoeff]
 // 		Id.set2Id();										// set to the identity
 // 		if( rows )											// permute its columns
@@ -1179,15 +1058,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // 		else												// permute its rows
 // 			Id.rpermutem( piv );
 // 		mmCaABbC( alpha, beta, Id, B );
-// 		//printm( "C = alpha*I*B + beta*C = \n" );
 // 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 // /**
@@ -1203,21 +1074,13 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] alpha The scalar value that multiplies \a A.
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] A The pointer to \a A, an object of type \type Matrix.
-//  * \return The error code.
 //  * 
 //  */
-// int Matrix::mmCaAIbC( double alpha, double beta, Matrix &A )
+// void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 // {
-// 	int i, j;
-	
-// 	try
-// 	{
 // 		for( i = 0; i < A.nrows(); i++ )					// initialize C
 // 			for( j = 0; j < ncols(); j++ )
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
 // 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
 // 		if( A.nrows() <= nrows() )							// last columns from I are zeroed
 // 		{
 // 			for( i = 0; i < A.nrows(); i++ )				// C has no more row!!
@@ -1230,15 +1093,6 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // 				for( j = 0; j < ncols(); j++ )
 // 					_data[ i ][ j ] = A( i, j )*alpha + _data[ i ][ j ]*beta;			
 // 		}
-// 		//printm( "C = alpha*A*I + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
 // /**
@@ -1257,15 +1111,10 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] piv The pointer to \a piv, a vector of permutations on \a I, of type \type int.
 //  * \param[in] rows The binary parameter to indicate whether the rows or the columns of I
 //  * 		should be permuted (= 0, the rows; = 1, the columns).
-//  * \return The error code.
 //  * 
 //  */
-// int Matrix::mmCaAIbC( double alpha, double beta, Matrix &A, int *piv, bool rows )
+// void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows)
 // {
-// 	int i, j;
-	
-// 	try
-// 	{
 // 		Matrix Id( A.ncols(), ncols(), dimT() );			// Id[p][n][nTcoeff]
 // 		Id.set2Id();										// set to the identity
 // 		if( rows )											// permute its columns
@@ -1273,20 +1122,11 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // 		else												// permute its rows
 // 			Id.rpermutem( piv );
 // 		mmCaABbC( alpha, beta, A, Id );
-// 		//printm( "C = alpha*A*I + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
 // }
 
-// //
-// // S O L V I N G   S Y S T E M S   O F   E Q U A T I O N S
-// //
+//
+// S O L V I N G   S Y S T E M S   O F   E Q U A T I O N S
+//
 
 // /**
 //  * Solves the equation
@@ -1318,10 +1158,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // 		B( _rows - 1, k ) /= _data[ _rows - 1 ][ _rows - 1 ];
 // 		for( int i = _rows - 2; i > -1; i-- )
 // 		{
-// 			if( strcmp( sum.typeName(), "TPolyn" ) == 0 ) 	// A zero value indicates 
-// 															// that both strings are equal
 // 				sum.set2zero();								// p(x) = 0, initialization
-// 			//else sum = 0.0;
 // 			for( int j = i + 1; j < _rows; j++ )
 // 				sum += _data[ i ][ j ] * B( j, k );
 // 			B( i, k ) = ( B( i, k ) - sum ) / _data[ i ][ i ];
@@ -2983,8 +2820,6 @@ void Matrix::printm( char *str )
 
 
 
-
-
 /***************
   P R I V A T E
   **************/
@@ -3021,30 +2856,20 @@ void Matrix::allocateMemory(bool initialize)
 			}
 		}
 	}
-	catch( bad_alloc e )
+	catch(bad_alloc e)
 	{
-		// TODO bad!
-		// printf( "" );
-		// printf( "\n***Exception bad_alloc found:");
-        // printf( "\n***%s" , e.what() );
-		// printf( "" );
-		char* tmp = (char*)e.what(); 
-		throw CustomException(tmp, 4 );
-        // throw 4;
+		throw CustomException(e.what(), 4 );
 	}
 	catch(...)
 	{
-		// exception e( "Error when allocating a matrix.", 34 );
 		throw CustomException("Error when allocating a matrix.", 34 );
-        // e.report();
-		// throw e.;
 	}
 }
 
 void Matrix::deallocateMemory()
 {
 	for( int i = 0; i < _rows; i++ )
-		delete [] _data[ i ];
+		delete [] _data[i];
 	delete [] _data;
 }
 
