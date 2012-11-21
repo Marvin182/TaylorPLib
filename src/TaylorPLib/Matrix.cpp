@@ -310,7 +310,7 @@ Matrix Matrix::operator+(const Matrix &m)
 	{
 		// CustomException ce("Cannot substract the matrices. Operation not allowed.", 37);
 		// exception("Cannot substract the matrices. Operation not allowed.", 37).what();
-		throw CustomException("Cannot substract the matrices. Operation not allowed.", 37);
+		throw CustomException("Cannot add up the matrices. Operation not allowed.", 37);
 	}
 
 	// an auxiliary object
