@@ -7,15 +7,15 @@ class __declspec(dllexport) CustomException
 {
 public:
 	CustomException();
-	CustomException( char* msg );
-	CustomException( char* msg, int err );
+	CustomException( const char *msg );
+	CustomException( const char *msg, int err );
 	~CustomException();
-	void addReason( char* msg );
-	void addReason( char* msg, int err );
+	void addReason( const char *msg );
+	void addReason( const char *msg, int err );
 	std::string what();
 	int getErrCode();
 private:
-	char* reason;
+	const char* reason;
 	int errCode;
 };
 

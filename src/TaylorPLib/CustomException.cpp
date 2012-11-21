@@ -9,11 +9,15 @@ CustomException::CustomException() : reason(""), errCode(0)
 {
 }
 
-CustomException::CustomException( char* msg ) : reason(msg), errCode(0)
+CustomException::CustomException( const char *msg ):
+	reason(msg),
+	errCode(0)
 {
 }
 
-CustomException::CustomException( char* msg, int err ) : reason(msg), errCode(err)
+CustomException::CustomException( const char *msg, int err ):
+	reason(msg),
+	errCode(err)
 {
 }
 
@@ -21,12 +25,12 @@ CustomException::~CustomException()
 {
 }
 
-void CustomException::addReason( char* msg )
+void CustomException::addReason( const char *msg )
 {
 	this->reason = msg;
 }
 
-void CustomException::addReason( char* msg, int err )
+void CustomException::addReason( const char *msg, int err )
 {
 	this->reason = msg;
 	this->errCode = err;
