@@ -589,41 +589,54 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 	}
 }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A*UTB + beta*C
-//  * 
-//  * where UTB means that only the upper triangular part is of interest. Furthermore, a column
-//  * pivoting on B is considered.
-//  * 
-//  * with A : m-by-p matrix
-//  * 		B : p-by-n matrix
-//  * 		C : m-by-n matrix
-//  * 		alpha, beta : real numbers
-//  * 
-//  * E.g.: Q*R
-//  * 
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix.
-//  * \param[in] B The pointer to \a B, an object of type \type Matrix. Only its upper triangular 
-//  * 		part is interesting.
-//  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
-//  *
-//  */
-// void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
-// {
-// 		for( int i = 0; i < A.nrows(); i++ )
-// 			for( int j = 0; j < B.ncols(); j++ )
-// 			{
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				for( int k = 0; k < B.nrows(); k++ )
-// 					if( k <= j )
-// 					_data[ i ][ j ] = A( i, k )*B( k, piv[ j ] )*alpha + _data[ i ][ j ]*beta;
-// 			}
-// 	}
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha * A * UTB + beta * C
+ * 
+ * where UTB means that only the upper triangular part is of interest. Furthermore, a column
+ * pivoting on B is considered.
+ * 
+ * with A : m-by-p matrix
+ * 		B : p-by-n matrix
+ * 		C : m-by-n matrix
+ * 		alpha, beta : real numbers
+ * 
+ * \param[in] alpha The scalar value that multiplies \a A * B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix.
+ * \param[in] B The pointer to \a B, an object of type \type Matrix. Only its upper triangular 
+ * 		part is interesting.
+ * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a B.
+ *
+ */
+void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
+{
+	if (A._cols != B._rows)	
+	{
+		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
+	}
+	if (A._rows != _rows || B._cols != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
+	}
+
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			double h = 0.0;
+			// TPolyn h(_dimT);
+
+			for( int k = 0; k <= j; k++ )
+			{
+				h += A._data[i][k] * B._data[k][piv[j]];
+			}
+
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+	}
+}
 
 /**
  * Matrix multiplication of the form:
