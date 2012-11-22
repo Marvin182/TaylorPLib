@@ -484,7 +484,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 		for( int j = 0; j < _cols; j++ )
 		{
 			double h = 0.0;
-			// TPoly h = TPoly(_dimT);
+			// TPoly h(_dimT);
 			
 			for( int k = 0; k < B.nrows(); k++ )
 			{
@@ -639,34 +639,37 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  *
  */
-// void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
-// {
-// 	if (r > _cols)
-// 	{
-// 		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of C"., 10);
-// 	}
-// 	// if (B._cols > _rows)
-// 	{
-// 		throw CustomException("Error in matrix multiplication. B should not have more columns than C.", 10);
-// 	}
+void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
+{
+	if (A._cols != B._rows)	
+	{
+		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
+	}
+	if (r <= B._cols)
+	{
+		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
+	}
+	if (A._rows != _rows || B._cols != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
+	}
 
-// 	int n = B._cols - r;
-// 	for( int i = 0; i < A._rows; i++ )
-// 	{
-// 		for( int j = n; j < B._cols; j++ )
-// 		{
-// 			double h = 0.0;
-// 			// TPoly h = TPoly(_dimT);
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			double h = 0.0;
+			// TPoly h(_dimT);
 
-// 			for( int k = 0; k < B._rows; k++ )
-// 			{
-// 				h += A._data[i][k] * B._data[k][j];
-// 			}
+			for( int k = r; k < B._rows; k++ )
+			{
+				h += A._data[i][k] * B._data[k][j];
+			}
 
-// 			_data[i][j - n] = alpha * h + beta * _data[i][j - n];
-// 		}
-// 	}
-// }
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+	}
+}
 
 // /**
 //  * Matrix multiplication of the form:
@@ -730,7 +733,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 		for( int j = 0; j < _rows; j++ )
 		{
 			double h = 0.0;
-			// TPoly h = TPoly(_dimT);
+			// TPoly h(_dimT);
 
 			for( int k = 0; k < _rows; k++ )
 			{
@@ -768,7 +771,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 		for( int j = 0; j < _rows; j++ )
 		{
 			double h = 0.0;
-			// TPoly h = TPoly(_dimT);
+			// TPoly h(_dimT);
 
 			for( int k = 0; k < A.nrows(); k++ )
 			{
@@ -815,7 +818,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 		for( int j = 0; j < _cols; j++ )
 		{
 			double h = 0.0;
-			// TPoly h = TPoly(_dimT);
+			// TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -894,7 +897,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 		for( int j = 0; j < _cols; j++ )
 		{
 			double h = 0.0;
-			// TPoly h = TPoly(_dimT);
+			// TPoly h(_dimT);
 
 			for( int k = 0; k < _cols; k++ )
 			{
