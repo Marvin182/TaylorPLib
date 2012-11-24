@@ -161,12 +161,20 @@ Matrix Matrix::operator=(const Matrix &m)
 bool Matrix::operator==( const Matrix &m )
 {
 	if(_rows != m._rows || _cols != m._cols) // TODO _dimT ?
+	{
 		return false;
-
+	}
+	
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _cols; j++ )
-			if( _data[ i ][ j ] != m._data[ i ][ j ] )
+		{
+			if( _data[i][j] != m._data[i][j] )
+			{
 				return false;
+			}
+		}
+	}
 
 	return true;
 }
@@ -203,9 +211,13 @@ Matrix Matrix::operator+(const Matrix &m)
 	// an auxiliary object
 	Matrix aux(_rows, _cols, _dimT, false);
 
-	for( int i = 0; i < m._rows; i++ )
-		for( int j = 0; j < m._cols; j++ )
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
 			aux._data[i][j] = _data[i][j] + m._data[i][j];
+		}
+	}
 
 	return aux;
 }
@@ -227,9 +239,13 @@ Matrix Matrix::operator+=(const Matrix &m)
 		throw CustomException("Cannot add up the matrices. Operation not allowed.", 37);
 	}
 
-	for( int i = 0; i < m._rows; i++ )
-		for( int j = 0; j < m._cols; j++ )
+	for( int i = 0; i < _rows; i++ )
+	{	
+		for( int j = 0; j < _cols; j++ )
+		{
 			_data[i][j] += m._data[i][j];
+		}
+	}
 
  	return *this;
 }
@@ -252,9 +268,13 @@ Matrix Matrix::operator-(const Matrix &m)
 	// an auxiliary object
 	Matrix aux(_rows, _cols, _dimT, false);
 
-	for( int i = 0; i < m._rows; i++ )
-		for( int j = 0; j < m._cols; j++ )
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
 			aux._data[i][j] = _data[i][j] - m._data[i][j];
+		}
+	}
 
 	return aux;
 }
@@ -275,9 +295,13 @@ Matrix Matrix::operator-=(const Matrix &m)
 		throw CustomException( "Cannot substract the matrices. Operation not allowed.", 38 );
 	}
 
-	for( int i = 0; i < m._rows; i++ )
-		for( int j = 0; j < m._cols; j++ )
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
 			_data[i][j] -= m._data[i][j];
+		}
+	}
 
  	return *this;
 }
@@ -294,9 +318,13 @@ Matrix Matrix::operator-()
 	Matrix aux( _rows, _cols, _dimT, false);
 	
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _cols; j++ )
+		{
 			aux._data[i][j] = - _data[i][j];
-	
+		}
+	}
+
 	return aux;
 }
 
@@ -313,9 +341,13 @@ Matrix Matrix::operator*(double alpha)
 	Matrix aux(_rows, _cols, _dimT, false);
 
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _cols; j++ )
+		{
 			aux._data[i][j] = _data[i][j] * alpha;
-	
+		}
+	}
+
 	return aux;
 }
 
@@ -329,9 +361,13 @@ Matrix Matrix::operator*(double alpha)
 Matrix Matrix::operator*=(double alpha)
 {
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _cols; j++ )
+		{
 			_data[ i ][ j ] *= alpha;
-	
+		}
+	}
+
 	return *this;
 }
 
@@ -359,7 +395,9 @@ Matrix Matrix::operator*(const Matrix &m)
 		{
 			// because we initliazed aux all fields are already set to 0
 			for( int k = 0; k < _cols; k++ )
+			{
 				aux._data[i][j] += _data[i][k] * m._data[k][j];
+			}
 		}
 	}
 
@@ -373,14 +411,14 @@ Matrix Matrix::operator*(const Matrix &m)
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*A*B + beta*C
+ *     C = alpha * A * B + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : p-by-n matrix
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  * 
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
@@ -414,69 +452,79 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 	}
 }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A*B + beta*C
-//  * 
-//  * with A : m-by-p matrix
-//  * 		B : p-by-n matrix
-//  * 		C : m-by-n matrix
-//  * 		alpha, beta : real numbers
-//  * 
-//  * where the inferior-right block of B is an identity matrix like in:
-//  * 
-//  * 		( * * * 0 0 )
-//  * 		( * * * 0 0 )
-//  * 		( 0 0 0 1 0 )
-//  * 		( 0 0 0 0 1 )
-//  * 
-//  * so that a particular block multiplication is needed.
-//  * 
-//  * \param[in] r The number of rows in \a B that are of interest (2 in the example above).
-//  * \param[in] c The number of columns in \a B that are of interest (3 in the example above).
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix.
-//  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \return The error code.
-//  *
-//  */
-// int Matrix::bmmCaABbC( int r, int c, double alpha, double beta, 
-// 		Matrix &A, Matrix &B )
-// {
-// 	int i, j, k;
-	
-// 	try
-// 	{
-// 		for( i = 0; i < A.nrows(); i++ )
-// 			for( j = 0; j < c; j++ )						// only first c columns from B 
-// 			{												// are interesting
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 )// A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				//else _data[ i ][ j ] = 0.0;
-// 				for( k = 0; k < r; k++ )					// only first r rows from B (col. from A)
-// 					_data[ i ][ j ] = A( i, k )*B( k, j )*alpha + _data[ i ][ j ]*beta;
-// 			}
-// 		for( i = 0; i < A.nrows(); i++ )
-// 			for( j = r; j < B.ncols(); j++ )					// last columns of A remain the same
-// 				_data[ i ][ j ] = A( i, j )*alpha;
-// 		//printm( "C = alpha*A*B + beta*C = \n" );
-// 	}
-// 	catch(...)
-// 	{
-// 		IDException e( "Error in matrix multiplication. The matrices dimensions are probably wrong.", 10 );
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-// 	return 0;
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha * A * B + beta * C
+ * 
+ * with A : m-by-p matrix
+ * 		B : p-by-n matrix
+ * 		C : m-by-n matrix
+ * 		alpha, beta : real numbers
+ * 
+ * where the inferior-right block of B is an identity matrix like in:
+ * 
+ * 		( * * * 0 0 )
+ * 		( * * * 0 0 )
+ * 		( 0 0 0 1 0 )
+ * 		( 0 0 0 0 1 )
+ * 
+ * so that a particular block multiplication is needed.
+ * 
+ * \param[in] r The number of rows in \a B that are of interest (2 in the example above).
+ * \param[in] c The number of columns in \a B that are of interest (3 in the example above).
+ * \param[in] alpha The scalar value that multiplies \a A * B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix.
+ * \param[in] B The pointer to \a B, an object of type \type Matrix.
+ *
+ */
+void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
+{
+	if (A.ncols() != B.nrows())
+	{
+		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
+	}
+	if (r > B._rows)
+	{
+		throw CustomException("Error in matrix multiplication. r cannot be larger than the number of rows of B in total.", 10);
+	}
+	if (c > B._cols)
+	{
+		throw CustomException("Error in matrix multiplication. c cannot be larger than the number of columns of B in total.", 10);
+	}
+	if (A.nrows() != _rows || B.ncols() != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
+	}
+
+
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < c; j++ ) 
+		{
+			double h = 0.0;
+			// TPoly h(_dimT);
+
+			for( int k = 0; k < r; k++ )
+			{
+				h += A._data[i][k] * B._data[k][j];
+			}	
+
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+		
+		for( int j = r; j < _cols; j++ )
+		{
+			_data[i][j] = alpha * A._data[i][j] + beta * _data[i][j];
+		}
+	}
+}
 
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*A*B + beta*C
+ *     C = alpha * A * B + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : p-by-n matrix
@@ -494,7 +542,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
  * so that a particular matrix multiplication is needed.
  * 
  * \param[in] r The last rows in \a A that are of interest (2 non-zero-rows in the example above).
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
@@ -532,7 +580,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*A*B + beta*C
+ *     C = alpha * A * B + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : p-by-n matrix
@@ -551,7 +599,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
  * 
  * \param[in] r The last columns in \a B that are of interest (3 non-zero-columns 
  * 				in the example above).
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
@@ -646,7 +694,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
  * with A, C : m-by-m matrix
  * 		alpha, beta : real numbers
  * 
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
  *
@@ -684,7 +732,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
  * with A, C : m-by-m matrix
  * 		alpha, beta : real numbers
  *
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
  *
@@ -724,7 +772,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  *
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
@@ -761,37 +809,54 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 	}
 }
 
-// /**
-//  * Matrix multiplication of the form:
-//  * 
-//  *     C = alpha*A^T*B + beta*C
-//  * 
-//  * with A : p-by-m matrix
-//  * 		B : p-by-n matrix
-//  * 		C : m-by-n matrix
-//  * 		alpha, beta : real numbers
-//  *
-//  * and a column pivoting on A's rows.
-//  * E.g.: Q^T * A, Q^T * OA
-//  * 
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
-//  * \param[in] beta The scalar value that multiplies \a C.
-//  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
-//  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
-//  * 
-//  */
-// void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
-// {
-// 		for( int i = 0; i < A.nrows(); i++ )
-// 			for( int j = 0; j < B.ncols(); j++ )
-// 			{
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0, initialization
-// 				for( int k = 0; k < B.nrows(); k++ )
-// 					_data[ i ][ j ] = A( k, i )*B( k, piv[ j ] )*alpha + _data[ i ][ j ]*beta;
-// 			}
-// 	}
-// }
+/**
+ * Matrix multiplication of the form:
+ * 
+ *     C = alpha * A' * B + beta * C
+ * 
+ * with A : p-by-m matrix
+ * 		B : p-by-n matrix
+ * 		C : m-by-n matrix
+ * 		alpha, beta : real numbers
+ *
+ * and a column pivoting on A's rows.
+ * 
+ * \param[in] alpha The scalar value that multiplies \a A * B.
+ * \param[in] beta The scalar value that multiplies \a C.
+ * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
+ * \param[in] B The pointer to \a B, an object of type \type Matrix.
+ * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
+ */
+void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
+{
+	// A' und B can only be multiplied if A and B have the same number of rows
+	if (A._rows != B._rows)
+	{
+		throw CustomException("Error in matrix multiplication. Cannot multiply A' and B, A and B must have the same number of rows.", 10);
+	}
+
+	// (A' * B) must have the same size as this matrix
+	if (A._cols != _rows || B._cols != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. (A' * B) has not the same dimension as this matrix.", 10);
+	}
+
+	for( int i = 0; i < _rows i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			double h = 0.0;
+			// TPoly h(_dimT);
+
+			for( int k = 0; k < B._rows; k++ )
+			{
+				h += A._data[i][piv[i]] * B._data[k][j];
+			}
+
+			_data[i][j] = alpha * h + beta * _data[i][j];
+		}
+	}
+}
 
 /**
  * Matrix multiplication of the form:
@@ -803,7 +868,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  *
- * \param[in] alpha The scalar value that multiplies \a A*B.
+ * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
@@ -843,7 +908,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*A*B^T + beta*C
+//  *     C = alpha * A * B^T + beta * C
 //  * 
 //  * with A : m-by-p matrix
 //  * 		B : n-by-p matrix
@@ -862,11 +927,10 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] r The number of rows from \a B that should be considered.
 //  * \param[in] up The binary parameter to indicate whether the first or the last \a r rows 
 //  * 		from \a B should be considered (=1 if first rows; =0 otherwise).
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
+//  * \param[in] alpha The scalar value that multiplies \a A * B.
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] A The pointer to \a A, an object of type \type Matrix.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
-//  * 
 //  */
 // void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &A, const Matrix &B)
 // {
@@ -890,7 +954,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*A*B^T + beta*C
+//  *     C = alpha * A * B^T + beta * C
 //  * 
 //  * with A : m-by-p matrix
 //  * 		B : n-by-p matrix
@@ -908,11 +972,10 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * 
 //  * \param[in] r The number of rows in \a A that are of interest (2 in the example above).
 //  * \param[in] c The number of columns in \a A that are of interest (3 in the example above).
-//  * \param[in] alpha The scalar value that multiplies \a A*B.
+//  * \param[in] alpha The scalar value that multiplies \a A * B.
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] A The pointer to \a A, an object of type \type Matrix.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
-//  * 
 //  */
 // void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
 // {
@@ -932,7 +995,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*I*B + beta*C
+//  *     C = alpha*I*B + beta * C
 //  * 
 //  * with I : m-by-p matrix; identity matrix
 //  * 		B : p-by-n matrix
@@ -942,7 +1005,6 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] alpha The scalar value that multiplies \a B.
 //  * \param[in] beta The scalar value that multiplies \a C.
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * 
 //  */
 // void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 // {
@@ -967,7 +1029,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*I*B + beta*C
+//  *     C = alpha*I*B + beta * C
 //  * 
 //  * with I : m-by-p matrix; identity matrix permuted according to a vector of permutations, piv
 //  * 		B : p-by-n matrix
@@ -980,8 +1042,6 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 //  * \param[in] rows The binary parameter to indicate whether the rows or the columns of I
 //  * 		should be permuted (= 0, the rows; = 1, the columns).
 //  * \param[in] B The pointer to \a B, an object of type \type Matrix.
-//  * \return The error code.
-//  * 
 //  */
 // void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix &B)
 // {
@@ -998,7 +1058,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*A*I + beta*C
+//  *     C = alpha*A*I + beta * C
 //  * 
 //  * with A : m-by-p matrix
 //  * 		I : p-by-n matrix; identity matrix
@@ -1032,7 +1092,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 // /**
 //  * Matrix multiplication of the form:
 //  * 
-//  *     C = alpha*A*I + beta*C
+//  *     C = alpha*A*I + beta * C
 //  * 
 //  * with A : m-by-p matrix
 //  * 		I : p-by-n matrix; identity matrix permuted according to a vector of permutations, piv
@@ -2227,43 +2287,32 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 
 
 /**
- * Prints out a matrix in a given format, with the previously set color.
- * 
- * \param[in] str The character string to be printed out.
- * 
-*/
-void Matrix::printm()
+ * Prints out the matrix
+ */
+void Matrix::print()
 {
  	for( int i = 0; i < _rows; i++ )
  	{
  		for( int j = 0; j < _cols; j++ )
  		{
- 			printf("%3.2f", _data[ i ][ j ]);
- 			printf( "%c", '\t' );
+ 			printf("%3.2f\t", _data[i][j]);
  		}
- 		printf( "\n" );
+ 		printf("\n");
  	}
 }
 
 /**
- * Prints out a matrix in a given format, with the previously set color.
+ * Prints out the matrix after printing the given string
+ *
+ * \param[in] before The character string to be printed out before the matrix.
  * 
- * \param[in] str The character string to be printed out.
- * 
-*/
-void Matrix::printm( char *str )
+ */
+void Matrix::printm(const char *before)
 {
- 	printf( str );
- 	for( int i = 0; i < _rows; i++ )
- 	{
- 		for( int j = 0; j < _cols; j++ )
- 		{
- 			printf("%3.2f", _data[ i ][ j ]);
- 			printf( "%c", '\t' );
- 		}
- 		printf( "\n" );
- 	}
+ 	printf(before);
+ 	print();
 }
+
 // /**
 //  * Prints out to a file a matrix in a given format, with the previously set color.
 //  * 
@@ -2803,7 +2852,9 @@ void Matrix::allocateMemory(bool initialize)
 void Matrix::deallocateMemory()
 {
 	for( int i = 0; i < _rows; i++ )
+	{
 		delete [] _data[i];
+	}
 	delete [] _data;
 }
 
@@ -2816,6 +2867,10 @@ void Matrix::copyFrom(const Matrix &m)
 	allocateMemory(false);
 
 	for( int i = 0; i < _rows; i++ )
+	{
 		for( int j = 0; j < _cols; j++)
+		{
 			_data[i][j] = m._data[i][j];
+		}
+	}
 }
