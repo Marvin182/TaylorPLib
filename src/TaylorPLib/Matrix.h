@@ -33,7 +33,7 @@ namespace LibMatrix {
 			Matrix::Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
 			Matrix::Matrix(const Matrix &m);										// Copy constructor
 
-			Matrix::Matrix(double* values, int rows = 2, int cols = 2);				// easy test construtor		
+			Matrix::Matrix(int rows, int cols, ...);								// Test construtor		
 
 			Matrix::~Matrix();														// Destructor
 

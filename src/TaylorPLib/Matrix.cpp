@@ -74,20 +74,26 @@ Matrix::Matrix(const Matrix &m)
  * Easy constructor for testing.
  *
  */
-Matrix::Matrix(double* values, int rows, int cols):
+Matrix::Matrix(int rows, int cols, ...):
 	_rows(rows),
 	_cols(cols),
 	_dimT(0)
 {
 	allocateMemory(false);
 
-	for( int i = 0; i < rows; i++ )
+	int n = rows * cols;
+	
+	// open parameter list
+	va_list values;
+   	va_start(values, n);
+
+	for (int i = 0 ; i < n ; i++)
 	{
-		for( int j = 0; j < cols; j++ )
-		{
-			_data[i][j] = values[i * rows + j];
-		}
+		_data[i / n][i % n] = va_arg(values, double);
 	}
+
+	// close parameter list
+	va_end(values);
 }
 
 //
