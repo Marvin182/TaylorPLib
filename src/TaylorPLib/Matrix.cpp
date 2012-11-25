@@ -74,26 +74,20 @@ Matrix::Matrix(const Matrix &m)
  * Easy constructor for testing.
  *
  */
-Matrix::Matrix(int rows, int cols, ...):
+Matrix::Matrix(int rows, int cols, double *values):
 	_rows(rows),
 	_cols(cols),
 	_dimT(0)
 {
 	allocateMemory(false);
 
-	int n = rows * cols;
-	
-	// open parameter list
-	va_list values;
-   	va_start(values, n);
-
-	for (int i = 0 ; i < n ; i++)
+	for( int i = 0; i < _rows; i++ )
 	{
-		_data[i / n][i % n] = va_arg(values, double);
+		for( int j = 0; j < _cols; j++ )
+		{
+			_data[i][j] = values[i * _cols + j];
+		}
 	}
-
-	// close parameter list
-	va_end(values);
 }
 
 //
@@ -110,27 +104,48 @@ Matrix::~Matrix()
 }
 
 //
+// G E T T E R
+//
+
+/**
+ * Gets a single element from the matrix.
+ * 
+ * \param[in] row The row index.
+ * \param[in] col The column index.
+ * \return The value of the desired element.
+ */
+double Matrix::get(int row, int col) const
+{ 
+	// bounds checking
+	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
+	{
+		throw CustomException("Wrong matrix indexing.", 36);
+	}
+	return _data[row][col];
+}
+
+
+//
 // O V E R L O A D E D   ( )   A N D   =   O P E R A T O R S
 //
 
 /**
  * Implements the () operator.
  * 
- * (T & Matrix::... with '&' allows m(2] = 7, i.e., '( )' also in the left side!!)
+ * (T & Matrix::... with '&' allows m(2, 1)) = 7, i.e., '( )' also in the left side!!)
  * 
  * \param[in] i The row index.
  * \param[in] j The column index.
  * \return The value of the desired element.
- * 
  */
-double &Matrix::operator()(int i, int j)
+double &Matrix::operator()(int row, int col)
 { 
 	// bounds checking
-	if( i >= _rows  ||  i < 0  ||  j >= _cols  ||  j < 0 )
+	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
 		throw CustomException("Wrong matrix indexing.", 36);
 	}
-	return _data[i][j];
+	return _data[row][col];
 }
 
 /**
@@ -164,7 +179,7 @@ Matrix Matrix::operator=(const Matrix &m)
  * \return \a true if the matrices are equal. Otherwise it returns \a false.
  * 
  */
-bool Matrix::operator==( const Matrix &m )
+bool Matrix::operator==( const Matrix &m ) const
 {
 	if(_rows != m._rows || _cols != m._cols) // TODO _dimT ?
 	{
@@ -192,7 +207,7 @@ bool Matrix::operator==( const Matrix &m )
  * \return \a true if the matrices are not equal. Otherwise it returns \a false.
  * 
  */
-bool Matrix::operator!=( const Matrix &m )
+bool Matrix::operator!=( const Matrix &m ) const
 {
 	return !(*this == m);
 }
@@ -204,7 +219,7 @@ bool Matrix::operator!=( const Matrix &m )
  * \return A pointer to the resulting \a Matrix object.
  * 
  */
-Matrix Matrix::operator+(const Matrix &m)
+Matrix Matrix::operator+(const Matrix &m) const
 {	
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
@@ -263,7 +278,7 @@ Matrix Matrix::operator+=(const Matrix &m)
  * \return A pointer to the resulting \a Matrix object.
  * 
  */
-Matrix Matrix::operator-(const Matrix &m)
+Matrix Matrix::operator-(const Matrix &m) const
 {	
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
@@ -341,7 +356,7 @@ Matrix Matrix::operator-()
  * \return A pointer to the resulting \a Matrix object.
  * 
  */
-Matrix Matrix::operator*(double alpha)
+Matrix Matrix::operator*(double alpha) const
 {
 	// an auxiliary object
 	Matrix aux(_rows, _cols, _dimT, false);
@@ -384,7 +399,7 @@ Matrix Matrix::operator*=(double alpha)
  * \return A pointer ot the resulting \a Matrix object.
  *
  */
-Matrix Matrix::operator*(const Matrix &m)
+Matrix Matrix::operator*(const Matrix &m) const
 {
 	if(_cols != m._rows) 
 	{
@@ -393,11 +408,11 @@ Matrix Matrix::operator*(const Matrix &m)
 	}
 
 	// an auxiliary object
-	Matrix aux( _rows, _cols, _dimT, true);
+	Matrix aux( _rows, m._cols, _dimT, true);
 	
 	for( int i = 0; i < _rows; i++ )
 	{
-		for( int j = 0; j < _cols; j++ )
+		for( int j = 0; j < m._cols; j++ )
 		{
 			// because we initliazed aux all fields are already set to 0
 			for( int k = 0; k < _cols; k++ )
@@ -847,7 +862,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 		throw CustomException("Error in matrix multiplication. (A' * B) has not the same dimension as this matrix.", 10);
 	}
 
-	for( int i = 0; i < _rows i++ )
+	for( int i = 0; i < _rows; i++ )
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
@@ -2313,9 +2328,9 @@ void Matrix::print()
  * \param[in] before The character string to be printed out before the matrix.
  * 
  */
-void Matrix::printm(const char *before)
+void Matrix::print(const char *name)
 {
- 	printf(before);
+ 	printf("%s (%dx%d):\n", name, _rows, _cols);
  	print();
 }
 
@@ -2819,27 +2834,30 @@ void Matrix::allocateMemory(bool initialize)
 	{
 		// bounds checking
 		if( _rows <= 0 || _cols <= 0 )
-			throw CustomException( "Matrix invalid matrix size", 35 );
-			// throw exception( "Matrix invalid matrix size", 35 ); // TODO what means 35?, add invalid size to message
+		{
+			// TDOD: should be an invalid_argument exception
+			throw CustomException( "Matrix invalid matrix size", 35);
+		}
 
 		_data = new double*[_rows];
 		if( _data == 0 || _data == NULL )
-			throw CustomException("Memory allocation failure.", 3 );
-			// throw exception( "Memory allocation failure.", 3 ); // TODO what meansi 3?
-		
+		{
+			throw CustomException("Memory allocation failure.", 3);
+		}
+
 		for( int i = 0; i < _rows; i++ )
 		{
 			_data[i] = new double[_cols];
 			if( _data[i] == 0 || _data[i] == NULL )
-				throw CustomException("Memory allocation failure.", 3 );
-				//throw exception( "Memory allocation failure.", 3 ); // TODO
-			
+			{
+				throw CustomException("Memory allocation failure.", 3);
+			}
+
 			if(initialize)
 			{
 				for( int j = 0; j < _cols; j++)
 				{
 					_data[i][j] = 0.0;
-					// _data[i][j].set2zero();
 					// _data[i][j] = TPoly(_dimT);
 				}
 			}

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <math.h>
 #include <typeinfo>
+#include <stdarg.h> // only used by the test constructor
 #include "CustomException.h"
 // #include "esccolors.h"
 // #include "ioutil.h"
@@ -33,7 +34,7 @@ namespace LibMatrix {
 			Matrix::Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
 			Matrix::Matrix(const Matrix &m);										// Copy constructor
 
-			Matrix::Matrix(int rows, int cols, ...);								// Test construtor		
+			Matrix::Matrix(int rows, int cols, double *values);						// Test construtor		
 
 			Matrix::~Matrix();														// Destructor
 
@@ -44,22 +45,23 @@ namespace LibMatrix {
 			int nrows() const { return _rows; }			// Returns the number of rows
 			int ncols() const { return _cols; }			// Returns the number of columns
 			int dimT() const { return _dimT; }			// Returns the dimension of the type T
+			double get(int row, int col) const;			// Returns a single element from the matrix
 
 			//
 			// Overloaded operators
 			//
-			double & Matrix::operator()(int i, int j);				// Element
+			double & Matrix::operator()(int row, int col);			// Element
 			Matrix Matrix::operator=(const Matrix &m);				// Assignment operators
-			bool Matrix::operator==(const Matrix &m);				// Comparison operators
-			bool Matrix::operator!=(const Matrix &m);
-			Matrix Matrix::operator+(const Matrix &m);				// Arithmetic operators
+			bool Matrix::operator==(const Matrix &m) const;			// Comparison operators
+			bool Matrix::operator!=(const Matrix &m) const;
+			Matrix Matrix::operator+(const Matrix &m) const;		// Arithmetic operators
 			Matrix Matrix::operator+=(const Matrix &m);
-			Matrix Matrix::operator-(const Matrix &m);
+			Matrix Matrix::operator-(const Matrix &m) const;
 			Matrix Matrix::operator-=(const Matrix &m);
 			Matrix Matrix::operator-();
-			Matrix Matrix::operator*(double alpha);
+			Matrix Matrix::operator*(double alpha) const;
 			Matrix Matrix::operator*=(double alpha);
-			Matrix Matrix::operator*(const Matrix &m);				// simple matrix multiplication
+			Matrix Matrix::operator*(const Matrix &m) const;		// simple matrix multiplication
 
 			//
 			// Especial matrix multiplications
@@ -126,7 +128,7 @@ namespace LibMatrix {
 			// Print out functions
 			//
 			void Matrix::print();
-			void Matrix::print(const char *before);
+			void Matrix::print(const char *name);
 			// void Matrix::fprintm(FILE * fn, char *str);
 			// void Matrix::printm(char *str, const char *const color);
 			// void Matrix::printdm(char *str);

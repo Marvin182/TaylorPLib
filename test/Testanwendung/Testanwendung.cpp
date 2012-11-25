@@ -44,7 +44,7 @@ void createSimpleMatrixAndPrint()
 	fillMatrixRandom(m);
 	fillMatrixRandom(m2);
 
-	printf("Matrix 1: \n");
+	printf("M1: \n");
 	m.printm("");
 	printf("\n\nMatrix 2: \n");
 	m2.printm("");
