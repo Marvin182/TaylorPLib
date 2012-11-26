@@ -1082,16 +1082,15 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B^T must match the current matrix.", 10);
 	}
 
-	// only first r rows from A interesting
+	// only the first r rows from A are interesting
 	for( int i = 0; i < r; i++ )
 	{
-		// only first c col. from A (col. from B)
-		for( int j = 0; j < c; j++ )
+		for( int j = 0; j < _cols; j++ )
 		{
 			double h = 0.0;
 			// TPoly h(_dimT);
 
-			for( int k = 0; k < B._rows; k++ )
+			for( int k = 0; k < c; k++ )
 			{
 				h += A._data[i][k] * B._data[j][k];
 			}
@@ -1099,13 +1098,14 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
-		
-	// last rows of B remain the same
-	for( int i = r; i < A._rows; i++ )
+
+	// last rows of A, with exactly one 1 per row
+	int d = A._cols - A._rows;
+	for ( int i = r; i < _rows; i++ )
 	{
-		for( int j = 0; j < B._cols; j++ )
+		for( int j = 0; j < _cols; j++ )
 		{
-			_data[i][j] = B._data[j][i] * alpha + _data[i][j] * beta;
+			_data[i][j] = B._data[j][i + d] * alpha + _data[i][j] * beta;
 		}
 	}
 }

@@ -493,21 +493,50 @@ TEST_F(MatrixMultiplication, mmCaABTbC_down)
 	ASSERT_EQ(expect, C);
 }
 
-TEST_F(MatrixMultiplication, mmCaABTbC3)
+TEST_F(MatrixMultiplication, bmmCaABTbC)
 {
+	// double a[] = {
+	// 	1, 2, 3, 0, 0,
+	// 	4, 5, 6, 0, 0,
+	// 	0, 0, 0, 1, 0,
+	// 	0, 0, 0, 0, 1
+	// };
+	// A = Matrix(4, 5, a);
+
+	// double b[] = {
+	// 	1, 2, 3, 4, 5,
+	// 	2, 1, 3, 2, 1,
+	// 	4, 2, 1, 2, 3
+	// };
+	// B = Matrix(3, 5, b);
+
+	// double c[] = {
+	// 	 1,  2,  3,
+	// 	 4,  5,  6,
+	// 	 7,  8,  9,
+	// 	10, 11, 12
+	// };
+	// C = Matrix(4, 3, c);
+
+	// Matrix bt = B.transpose();
+	// Matrix expect = (A * bt * alpha) + (C * beta);
+
+	// C.bmmCaABTbC(2, 3, alpha, beta, A, B);
+	// ASSERT_EQ(expect, C);
+
 	double a[] = {
 		1, 2, 3, 0, 0,
 		4, 5, 6, 0, 0,
-		7, 8, 9, 0, 0,
+		0, 0, 1, 0, 0,
 		0, 0, 0, 1, 0,
 		0, 0, 0, 0, 1
 	};
-	A = Matrix(5,5, a);
+	A = Matrix(5, 5, a);
+	
 	Matrix bt = B.transpose();
-
-	C.bmmCaABTbC(3,3,alpha,beta,A,B);
 	Matrix expect = (A * bt * alpha) + (C * beta);
 
+	C.bmmCaABTbC(2, 3, alpha, beta, A, B);
 	ASSERT_EQ(expect, C);
 }
 
@@ -520,28 +549,28 @@ TEST_F(MatrixMultiplication, mmCaIBbC1)
 		0, 0, 0, 1, 0,
 		0, 0, 0, 0, 1
 	};
-	Matrix I(5,5,i);
-	Matrix expect = ( ( I * B ) * alpha) + (C * beta);
+	Matrix I(5, 5, i);
+	Matrix expect = (( I * B ) * alpha) + (C * beta);
 
 	C.mmCaIBbC(alpha, beta, B);
 	ASSERT_EQ(expect, C);
 }
 
-TEST_F(MatrixMultiplication, mmCaAIbC1)
-{
-	double i[] = {
-		1, 0, 0, 0, 0,
-		0, 1, 0, 0, 0,
-		0, 0, 1, 0, 0,
-		0, 0, 0, 1, 0,
-		0, 0, 0, 0, 1
-	};
-	Matrix I(5,5,i);
-	Matrix expect = ( ( A * I ) * alpha ) + (C * beta);
+// TEST_F(MatrixMultiplication, mmCaAIbC1)
+// {
+// 	double i[] = {
+// 		1, 0, 0, 0, 0,
+// 		0, 1, 0, 0, 0,
+// 		0, 0, 1, 0, 0,
+// 		0, 0, 0, 1, 0,
+// 		0, 0, 0, 0, 1
+// 	};
+// 	Matrix I(5,5,i);
+// 	Matrix expect = ( ( A * I ) * alpha ) + (C * beta);
 
-	C.mmCaAIbC(alpha, beta, A);
-	ASSERT_EQ(expect, C);
-}
+// 	C.mmCaAIbC(alpha, beta, A);
+// 	ASSERT_EQ(expect, C);
+// }
 /*
 void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
@@ -565,7 +594,7 @@ TEST_F(MatrixMethods, transpose)
 		2, 5, 8,
 		3, 6, 9
 	};
-	Matrix Atranspose = Matrix(3, 3, atrans);
+	Matrix Atranspose(3, 3, atrans);
 	ASSERT_EQ(Atranspose, A.transpose());
 
 	double btrans[] = {
@@ -574,7 +603,7 @@ TEST_F(MatrixMethods, transpose)
 		3,  7, 11,
 		4,  8, 12
 	};
-	Matrix Btranspose = Matrix(4, 3, btrans);
+	Matrix Btranspose(4, 3, btrans);
 	ASSERT_EQ(Btranspose, B.transpose());
 }
 
@@ -617,7 +646,7 @@ TEST_F(MatrixMethods, set2zero)
 		0, 0, 0, 0,
 		0, 0, 0, 0
 	};
-	Matrix Zeros = Matrix(3, 4, zeros);
+	Matrix Zeros(3, 4, zeros);
 	
 	B.set2zero();
 	ASSERT_EQ(Zeros, B);
@@ -632,7 +661,7 @@ TEST_F(MatrixMethods, set2Val)
 		42, 42, 42, 42,
 		42, 42, 42, 42,
 	};
-	Matrix B42 = Matrix(3, 4, b42);
+	Matrix B42(3, 4, b42);
 
 	B.set2val(42.0);
 	ASSERT_EQ(B42, B);
