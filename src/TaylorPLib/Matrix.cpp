@@ -468,7 +468,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 				h += A._data[i][k] * B._data[k][j];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -519,6 +519,9 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
 	}
 
+	int cr = c - r;
+	// If you wonder why cr = c-r and latter A(i, j-cr)?
+	// I don't know, bit take a sheet of paper the the matrices and you will see ;)
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -532,12 +535,12 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 				h += A._data[i][k] * B._data[k][j];
 			}	
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 		
-		for( int j = r; j < _cols; j++ )
+		for( int j = c; j < _cols; j++ )
 		{
-			_data[i][j] = alpha * A._data[i][j] + beta * _data[i][j];
+			_data[i][j] = A._data[i][j-cr] * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -593,7 +596,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 				h += A._data[i][k] * B._data[k][j];
 			}
 
-			_data[i - n][j] = alpha * h + beta * _data[i - n][j];
+			_data[i - n][j] = h * alpha + beta * _data[i - n][j];
 		}
 	}
 }
@@ -653,7 +656,7 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 				h += A._data[i][k] * B._data[k][j];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -702,7 +705,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 				h += A._data[i][k] * B._data[k][piv[j]];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -740,7 +743,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 				h += A._data[i][k] * A._data[i][k];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -778,7 +781,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 				h += A._data[k][i] * A._data[k][j];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -825,7 +828,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 				h += A._data[k][i] * B._data[k][j];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -874,7 +877,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 				h += A._data[i][piv[i]] * B._data[k][j];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
@@ -921,7 +924,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 				h += A._data[i][k] * B._data[i][k];
 			}
 
-			_data[i][j] = alpha * h + beta * _data[i][j];
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
