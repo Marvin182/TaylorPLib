@@ -39,16 +39,16 @@ Matrix::Matrix(int rows, int cols, bool initialize):
 	allocateMemory(initialize);
 }
 
-// /**
-//  * Constructor for the class with both the number of rows and columns as parameters,
-//  * as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. 
-//  * Creates the object.
-//  * 
-//  * \param[in] r The number of rows.
-//  * \param[in] c The number of columns.
-//  * \param[in] dimT The dimension of the type \type T.
-//  * 
-//  */
+/**
+ * Constructor for the class with both the number of rows and columns as parameters,
+ * as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. 
+ * Creates the object.
+ * 
+ * \param[in] r The number of rows.
+ * \param[in] c The number of columns.
+ * \param[in] dimT The dimension of the type \type T.
+ * 
+ */
 Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
 	_rows(rows),
 	_cols(cols),
@@ -113,6 +113,7 @@ Matrix::~Matrix()
  * \param[in] row The row index.
  * \param[in] col The column index.
  * \return The value of the desired element.
+ *
  */
 double Matrix::get(int row, int col) const
 { 
@@ -137,6 +138,7 @@ double Matrix::get(int row, int col) const
  * \param[in] i The row index.
  * \param[in] j The column index.
  * \return The value of the desired element.
+ *
  */
 double &Matrix::operator()(int row, int col)
 { 
@@ -572,7 +574,6 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  *
  */
-
 void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (r > _rows)
@@ -642,32 +643,37 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  *
  */
-
 void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
+	if (r > B._cols)
+	{
+		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
+	}
 	if (A._cols != B._rows)	
 	{
 		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
-	}
-	if (r >= B._cols)
-	{
-		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
 		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
 	}
 
+	int n = B._cols - r;
 	for( int i = 0; i < _rows; i++ )
 	{
-		for( int j = 0; j < _cols; j++ )
+		// zero-columns of B
+		for( int j = 0; j < n; j++ )
+		{
+			_data[i][j] *= beta;
+		}
+
+		// non-zero-columns of B
+		for( int j = n; j < _cols; j++ )
 		{
 			double h = 0.0;
 			// TPoly h(_dimT);
 
-			int n = B._cols - r;
-
-			for( int k = n; k < B._cols; k++ )
+			for( int k = 0; k < B._rows; k++ )
 			{
 				h += A._data[i][k] * B._data[k][j];
 			}
@@ -698,7 +704,6 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a B.
  *
  */
-
 void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 {
 	if (A._cols != B._rows)	
@@ -746,7 +751,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 {
 	// if A is a m-by-n matrix A * A' is always a m-by-m matrix and must have the same dimension as this matrix
-	if (A._rows != _rows || _cols != _rows)
+	if (A._rows != _rows || A._rows != _cols)
 	{
 		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
 	}
@@ -876,6 +881,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
+ *
  */
 
 /* TODO write test */
@@ -964,7 +970,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A * B^T + beta * C
+ *     C = alpha * A * B' + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : n-by-p matrix
@@ -978,7 +984,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
  * 		(         )				( * ... * )
  * 		(    X    )				( * ... * )
  * 
- * according to A dimensions. I.e., the matrix A has less columns than B^T rows has.
+ * according to A dimensions. I.e., the matrix A has less columns than B' rows has.
  * 
  * \param[in] r The number of rows from \a B that should be considered.
  * \param[in] up The binary parameter to indicate whether the first or the last \a r rows 
@@ -987,14 +993,30 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
+ *
  */
 
 /* TODO write test */
 
 void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
+	// A und B' can only be multiplied if A and B have the same number of columns
+	if (A._cols != B._cols)	
+	{
+		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
+	}
 
-	// TODO check dimensions
+	// (A * B') must have the same size as this matrix
+	if (A._rows != _rows || B._rows != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
+	}
+
+	// r <= (colmuns of B'), which is equal to r <= (rows of B)
+	if (r > B._rows)
+	{
+		throw CustomException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.")
+	}
 
 	int bRowsR = B._rows - r;
 
@@ -1005,7 +1027,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 			double h = 0.0;
 			// TPoly h(_dimT);
 
-			if( up )
+			if (up)
 			{
 				// first r columns from B are used
 				for( int k = 0; k < r; k++ )
@@ -1177,6 +1199,9 @@ void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matr
 
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 {
+	
+
+
 			// double h = 0.0;
 			// // TPoly h(_dimT);
 			// _data[i][j] = h * alpha + _data[i][j] * beta;

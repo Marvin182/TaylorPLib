@@ -7,7 +7,8 @@ using namespace LibMatrix;
 
 namespace LibMatrix {
 	// needed by GTest to print matrices if some ASSERT_EQ(matrix1, matrix2) failed
-	std::ostream& operator<<(std::ostream &out, const Matrix &m) {
+	std::ostream& operator<<(std::ostream &out, const Matrix &m)
+{
 		out << setiosflags(ios::fixed) << setprecision(2);
 		for (int i = 0; i < m.nrows(); i++)
 		{
@@ -95,8 +96,10 @@ class MatrixMultiplication: public ::testing::Test
 		Matrix A, B, C;
 		double alpha, beta;
 
-		double getRandomNumber() { return rand() % 10; }
-		void fillWithRandoms(Matrix &m) {
+		double getRandomNumber()
+{ return rand() % 10; }
+		void fillWithRandoms(Matrix &m)
+{
 			for (int i = 0; i < m.nrows(); i++)
 			{
 				for (int j = 0; j < m.ncols(); j++)
@@ -124,7 +127,8 @@ class MatrixMultiplication: public ::testing::Test
 /*
  * CONSTRUCTOR TESTS
  */
-TEST(MatrixConstructor, default_constructor) {
+TEST(MatrixConstructor, default_constructor)
+{
 	// default constructor should create a zero initialized 1x1 matrix 
 	Matrix d;
 	ASSERT_EQ(1, d.nrows());
@@ -132,7 +136,8 @@ TEST(MatrixConstructor, default_constructor) {
 	ASSERT_EQ(0, d(0, 0));
 }
 
-TEST(MatrixConstructor, regular_constructor) {	
+TEST(MatrixConstructor, regular_constructor)
+{	
 	// regular constructor
 	Matrix r(2, 3);
 	ASSERT_EQ(2, r.nrows());
@@ -141,7 +146,8 @@ TEST(MatrixConstructor, regular_constructor) {
 	ASSERT_EQ(0, r(1, 2));
 }
 
-TEST(MatrixConstructor, test_and_copy_constructor) {
+TEST(MatrixConstructor, test_and_copy_constructor)
+{
 	// test constructor
 	double values[] = {
 		1, 2,	// first row
@@ -176,7 +182,8 @@ TEST(MatrixConstructor, test_and_copy_constructor) {
 	ASSERT_EQ(6, c(2, 1));
 }
 
-TEST_F(MatrixOperator, assignment) {
+TEST_F(MatrixOperator, assignment)
+{
 	B = A;
 
 	ASSERT_EQ(2, B.nrows());
@@ -191,7 +198,8 @@ TEST_F(MatrixOperator, assignment) {
 	}
 }
 
-TEST_F(MatrixOperator, comparsion) {
+TEST_F(MatrixOperator, comparsion)
+{
 	ASSERT_TRUE(A == A);	
 	ASSERT_FALSE(A == B);
 
@@ -216,32 +224,37 @@ TEST_F(MatrixOperator, comparsion) {
 	ASSERT_NE(A, B);
 }
 
-TEST_F(MatrixOperator, plus) {
+TEST_F(MatrixOperator, plus)
+{
 	ASSERT_EQ(AplusB, A + B);
 
 	A += B;
 	ASSERT_EQ(AplusB, A);
 }
 
-TEST_F(MatrixOperator, unary) {
+TEST_F(MatrixOperator, unary)
+{
 	ASSERT_EQ(minusA, -A);
 }
 
-TEST_F(MatrixOperator, minus) {
+TEST_F(MatrixOperator, minus)
+{
 	ASSERT_EQ(AminusB, A - B);
 
 	A -= B;
 	ASSERT_EQ(AminusB, A);
 }
 
-TEST_F(MatrixOperator, timesScalar) {
+TEST_F(MatrixOperator, timesScalar)
+{
 	ASSERT_EQ(twoA, A * 2.0);
 
 	A *= 2.0;
 	ASSERT_EQ(twoA, A);
 }
 
-TEST_F(MatrixOperator, timesMatrix) {
+TEST_F(MatrixOperator, timesMatrix)
+{
 	ASSERT_EQ(AB, A * B);
 	ASSERT_EQ(BA, B * A);
 }
@@ -249,14 +262,16 @@ TEST_F(MatrixOperator, timesMatrix) {
 /*
  * SPECIAL MATRIX MULTIPLICATIONS
  */
-TEST_F(MatrixMultiplication, mmCaABbC) {
+TEST_F(MatrixMultiplication, mmCaABbC)
+{
 	Matrix expect = (A * B * alpha) + (C * beta);
 	C.mmCaABbC(alpha, beta, A, B);
 
 	ASSERT_EQ(expect, C);
 }
 
-TEST_F(MatrixMultiplication, bmmCaABbC) {
+TEST_F(MatrixMultiplication, bmmCaABbC)
+{
    	// special form for A
 	double b[] = {
 		1, 2, 3, 0, 0,
@@ -304,7 +319,7 @@ TEST_F(MatrixMultiplication, mmCaAsBbC)
 	B = Matrix(5, 5, b);
 
 	Matrix expect = (A * B * alpha) + (C * beta);
-	C.mmCaAsBbC(3, alpha, beta, A, B);
+	C.mmCaAsBbC(2, alpha, beta, A, B);
 	ASSERT_EQ(expect, C);	
 }
 
@@ -364,7 +379,8 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 /*
  * MAIN - RUN ALL TESTS
  */
-int main(int argc, char **argv) {
+int main(int argc, char **argv)
+{
 	::testing::InitGoogleTest(&argc, argv);
  
  	srand ( time(NULL) );
