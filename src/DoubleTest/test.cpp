@@ -123,6 +123,43 @@ class MatrixMultiplication: public ::testing::Test
 		}
 };
 
+class MatrixMethods: public ::testing::Test
+{
+	protected:
+		Matrix I, Z, A, B;
+
+		MatrixMethods()
+		{
+			double i[] = {
+				1, 0, 0,
+				0, 1, 0,
+				0, 0, 1
+			};
+			I = Matrix(3, 3, i);
+
+			double z[] = {
+				0, 0, 0,
+				0, 0, 0,
+				0, 0, 0
+			};
+			Z = Matrix(3, 3, z);
+
+			double a[] = {
+				1, 2, 3,
+				4, 5, 6,
+				7, 8, 9
+			};
+			A = Matrix(3, 3, a);
+
+			double b[] = {
+				1,  2,  3,  4,
+				5,  6,  7,  8,
+				9, 10, 11, 12
+			};
+			B = Matrix(3, 4, b);
+		}
+};
+
 /*
  * CONSTRUCTOR TESTS
  */
@@ -370,6 +407,105 @@ void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matr
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
 */
+
+/*
+ * OTHER MATRIX METHODS
+ */
+// double Matrix::fnorm();
+// int Matrix::tcfnorm(int nrTC, double *fn);
+// int Matrix::colnorm(double *c);
+// int Matrix::colnormdown(int pos, int *piv, double *c);
+// int Matrix::cpermutem(int *piv);
+// int Matrix::cpermutem(int *piv, bool trans);
+// int Matrix::rpermutem(int *piv);
+
+TEST_F(MatrixMethods, transpose)
+{
+	double atrans[] = {
+		1, 4, 7,
+		2, 5, 8,
+		3, 6, 9
+	};
+	Matrix Atranspose = Matrix(3, 3, atrans);
+	ASSERT_EQ(Atranspose, A.transpose());
+
+	double btrans[] = {
+		1,  5,  9,
+		2,  6, 10,
+		3,  7, 11,
+		4,  8, 12
+	};
+	Matrix Btranspose = Matrix(4, 3, btrans);
+	ASSERT_EQ(Btranspose, B.transpose());
+}
+
+// int Matrix::shift(Matrix &M);
+
+TEST_F(MatrixMethods, isId)
+{
+	ASSERT_TRUE(I.isId());
+	ASSERT_FALSE(Z.isId());
+	ASSERT_FALSE(A.isId());
+	ASSERT_FALSE(B.isId());		
+}
+// bool Matrix::isId(double eps);
+// bool Matrix::isId(int m1, int m2, int n1, int n2, double eps);
+
+TEST_F(MatrixMethods, isZero)
+{
+ 	ASSERT_FALSE(I.isZero());
+	ASSERT_TRUE(Z.isZero());
+	ASSERT_FALSE(A.isZero());
+	ASSERT_FALSE(B.isZero());
+}
+// bool Matrix::isZero(double eps);
+
+TEST_F(MatrixMethods, set2Id)
+{
+	A.set2Id();
+	ASSERT_EQ(I, A);
+}
+// int Matrix::set2Id(int m, int n);
+// int Matrix::set2Id(int m1, int m2, int n1, int n2);
+
+TEST_F(MatrixMethods, set2zero)
+{
+	A.set2zero();
+	ASSERT_EQ(Z, A);
+
+	double zeros[] = {
+		0, 0, 0, 0,
+		0, 0, 0, 0,
+		0, 0, 0, 0
+	};
+	Matrix Zeros = Matrix(3, 4, zeros);
+	
+	B.set2zero();
+	ASSERT_EQ(Zeros, B);
+}
+// int Matrix::set2zero(int m, int n);
+// int Matrix::set2zero(int m1, int m2, int n1, int n2);
+
+TEST_F(MatrixMethods, set2Val)
+{
+	double b42[] = {
+		42, 42, 42, 42,
+		42, 42, 42, 42,
+		42, 42, 42, 42,
+	};
+	Matrix B42 = Matrix(3, 4, b42);
+
+	B.set2val(42.0);
+	ASSERT_EQ(B42, B);
+}
+
+// int Matrix::set2val(int i, int j, double val);
+// int Matrix::trinvm(Matrix &Am);
+// int Matrix::trinvm(int r, Matrix &Am);
+// bool Matrix::mcompare(Matrix &B);
+// bool Matrix::mcompare(Matrix &B, double eps);
+// bool Matrix::mcompare(Matrix &B, int r, double eps);
+
 /*
  * MAIN - RUN ALL TESTS
  */

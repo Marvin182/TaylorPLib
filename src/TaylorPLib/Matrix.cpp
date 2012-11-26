@@ -1944,6 +1944,12 @@ Matrix Matrix::transpose() const
  */
 bool Matrix::isId() const
 {
+	// identity matrices must be also sqare matrices
+	if (_rows != _cols)
+	{
+		return false;
+	}
+
 	for( int i = 0; i < _rows; i++ )
 	{
 		for ( int j = 0; j < _cols; j++ )
@@ -2090,6 +2096,11 @@ bool Matrix::isZero() const
  */
 void Matrix::set2Id()
 {
+	if (_rows != _cols)
+	{
+		throw CustomException("Only square matrices can be set to an identity matrix."); // TODO add error code
+	}
+
 	for( int i = 0; i < _rows; i++ )
 	{
 		for( int j = 0; j < _cols; j++ )
