@@ -1066,8 +1066,6 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
  */
 
-/* TODO write test */
-
 void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (r > A._rows)
@@ -1151,7 +1149,7 @@ void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 		else												// last columns from I are zeroed
 		{
 			for( int i = 0; i < _rows; i++ )					// C has no more row!!
-				for( int j = 0; j < B._rows; j++ )
+				for( int j = 0; j < _cols; j++ )
 					_data[i][j] = B._data[i][j]*alpha + _data[i][j]*beta;			
 		}
 }
