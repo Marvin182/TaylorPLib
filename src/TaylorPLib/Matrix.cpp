@@ -18,9 +18,10 @@ using namespace LibMatrix;
 Matrix::Matrix():
 	_rows(1),
 	_cols(1),
-	_dimT(0)
+	_dimT(0),
+	_data(0)
 {
-	allocateMemory(true);
+	allocateDataMemory(true);
 }
 
 /**
@@ -34,9 +35,10 @@ Matrix::Matrix():
 Matrix::Matrix(int rows, int cols, bool initialize): 
 	_rows(rows), 
 	_cols(cols),
-	_dimT(0)
+	_dimT(0),
+	_data(0)
 {
-	allocateMemory(initialize);
+	allocateDataMemory(initialize);
 }
 
 /**
@@ -52,9 +54,10 @@ Matrix::Matrix(int rows, int cols, bool initialize):
 Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
 	_rows(rows),
 	_cols(cols),
-	_dimT(dimT)
+	_dimT(dimT),
+	_data(0)
 {
-	allocateMemory(initialize);
+	allocateDataMemory(initialize);
 }
 
 /**
@@ -65,7 +68,11 @@ Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
  * \param[in] m A pointer to the \a Matrix object to copy from.
  * 
  */
-Matrix::Matrix(const Matrix &m)
+Matrix::Matrix(const Matrix &m):
+	_rows(0),
+	_cols(0),
+	_dimT(0),
+	_data(0)
 {
 	copyFrom(m);
 }
@@ -77,9 +84,10 @@ Matrix::Matrix(const Matrix &m)
 Matrix::Matrix(int rows, int cols, double *values):
 	_rows(rows),
 	_cols(cols),
-	_dimT(0)
+	_dimT(0),
+	_data(0)
 {
-	allocateMemory(false);
+	allocateDataMemory(false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -100,7 +108,7 @@ Matrix::Matrix(int rows, int cols, double *values):
  */
 Matrix::~Matrix()
 {
-	deallocateMemory();
+	deallocateDataMemory();
 }
 
 //
@@ -163,7 +171,6 @@ Matrix Matrix::operator=(const Matrix &m)
 {
 	if(this != &m)
 	{
-		deallocateMemory();
 	 	copyFrom(m);
 	}
 
@@ -1140,7 +1147,7 @@ void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*I*B + beta * C
+ *     C = alpha * I * B + beta * C
  * 
  * with I : m-by-p matrix; identity matrix permuted according to a vector of permutations, piv
  * 		B : p-by-n matrix
@@ -1154,9 +1161,6 @@ void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
  * 		should be permuted (= 0, the rows; = 1, the columns).
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  */
-
-/* TODO write test */
-
 void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix &B)
 {
 		// Matrix Id( _rows, B._rows, dimT() );			// Id[m][p][nTcoeff]
@@ -1202,7 +1206,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*A*I + beta * C
+ *     C = alpha * A * I + beta * C
  * 
  * with A : m-by-p matrix
  * 		I : p-by-n matrix; identity matrix permuted according to a vector of permutations, piv
@@ -1217,9 +1221,6 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
  * 		should be permuted (= 0, the rows; = 1, the columns).
  * 
  */
-
-/* TODO write test */
-
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows)
 {
 		// Matrix Id( A._cols, _cols, dimT() );			// Id[p][n][nTcoeff]
@@ -1751,43 +1752,52 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	return 0;
 // }
 
-// /**
-//  * Permutes the columns of a matrix given a vector of permutations. 
-//  * 
-//  * For example, in case a matrix A is permuted after a QR decomposition with column pivoting,
-//  * then the resulting matrix in the upper triangular matrix R. 
-//  * 
-//  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::cpermutem( int *piv )
-// {
-// 	int i, j;
-// 	Matrix aux( _rows, _cols, _dimT );					// auxiliary matrix
-	
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			aux( i, j ) = _data[ i ][ piv[ j ] ];
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			_data[i][j] = aux( i, j );
-// 	return 0;
-// }
+/**
+ * Permutes the columns of a matrix given a vector of permutations. 
+ * 
+ * For example, in case a matrix A is permuted after a QR decomposition with column pivoting,
+ * then the resulting matrix in the upper triangular matrix R. 
+ * 
+ * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
+ * 
+ */
+void Matrix::cpermutem(int *piv)
+{
+	for( int j = 0; j < _cols; j++ )
+	{
+		if (piv[j] < 0 || piv[j] >= _cols)
+		{
+			throw CustomException("Invalid row permutation."); // TODO add error code
+		}
+	}
 
-// /**
-//  * Permutes the columns of a matrix given a vector of permutations. 
-//  * 
-//  * For example, in case a matrix A is permuted after a QR decomposition with column pivoting,
-//  * then the resulting matrix in the upper triangular matrix R. 
-//  * 
-//  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
-//  * \param[in] trans The \a boolean parameter to indicate whether to transpose the vector
-//  * 		of permutations \a piv or not (=1, transpose; =0, otherwise).
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::cpermutem( int *piv, bool trans )
+	double **newData;
+	Matrix::allocateMemory(newData, _rows, _cols, false);
+
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			newData[i][j] = _data[i][piv[j]];
+		}
+	}
+
+	Matrix::deallocateMemory(_data, _rows, _cols);
+	_data = newData;
+}
+
+/**
+ * Permutes the columns of a matrix given a vector of permutations. 
+ * 
+ * For example, in case a matrix A is permuted after a QR decomposition with column pivoting,
+ * then the resulting matrix in the upper triangular matrix R. 
+ * 
+ * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
+ * \param[in] trans The \a boolean parameter to indicate whether to transpose the vector
+ * 		of permutations \a piv or not (=1, transpose; =0, otherwise).
+ * 
+ */
+// void Matrix::cpermutem(int *piv, bool trans)
 // {
 // 	int i, j;
 // 	Matrix aux( _rows, _cols, _dimT );						// auxiliary matrix
@@ -1810,27 +1820,40 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	return 0;
 // }
 
-// /**
-//  * Permutes the rows of a matrix given a vector of permutations. 
-//  * 
-//  * \param[in] piv The pointer to \a piv, a vector of permutations on the rows of \a A.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::rpermutem( int *piv )
-// {
-// 	int i, j;
-// 	Matrix aux( _rows, _cols, _dimT );						// auxiliary matrix
-	
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			//aux( i, j ) = _data[ piv[ i ] ][ j ];
-// 			aux( piv[ i ], j ) = _data[i][j];
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			_data[i][j] = aux( i, j );
-// 	return 0;
-// }
+/**
+ * Permutes the rows of a matrix given a vector of permutations. 
+ * 
+ * \param[in] piv The pointer to \a piv, a vector of permutations on the rows of \a A.
+ * 
+ */
+void Matrix::rpermutem(int *piv)
+{
+	for( int i = 0; i < _rows; i++ )
+	{
+		if (piv[i] < 0 || piv[i] >= _rows)
+		{
+			throw CustomException("Invalid row permutation."); // TODO add error code
+		}
+	}
+
+	double **newData;
+	Matrix::allocateMemory(newData, _rows, _cols, false);
+
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			// mein Weg (bei Monett ausgeklamert
+			newData[i][j] = _data[ piv[i] ][j];
+			
+			// Monetts Weg
+			// newData[ piv[i] ][j] = _data[i][j];
+		}
+	}
+
+	Matrix::deallocateMemory(_data, _rows, _cols);
+	_data = newData;
+}
 
 /**
  * Transposes a given matrix. 
@@ -1840,7 +1863,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
  */
 Matrix Matrix::transpose() const
 {
- 	Matrix aux( _cols, _rows);
+ 	Matrix aux(_cols, _rows);
 
  	for( int i = 0; i < _rows; i++ )
  	{
@@ -2936,67 +2959,68 @@ void Matrix::print(const char *name)
   P R I V A T E
   **************/
 
-void Matrix::allocateMemory(bool initialize)
+void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 {
 	try
 	{
 		// bounds checking
-		if( _rows <= 0 || _cols <= 0 )
+		if (rows <= 0 || cols <= 0)
 		{
-			// TDOD: should be an invalid_argument exception
 			throw CustomException( "Matrix invalid matrix size", 35);
 		}
 
-		_data = new double*[_rows];
-		if( _data == 0 || _data == NULL )
+		data = new double*[rows];
+		if (data == 0 || data == NULL)
 		{
 			throw CustomException("Memory allocation failure.", 3);
 		}
 
-		for( int i = 0; i < _rows; i++ )
+		for( int i = 0; i < rows; i++ )
 		{
-			_data[i] = new double[_cols];
-			if( _data[i] == 0 || _data[i] == NULL )
+			data[i] = new double[cols];
+			if (data[i] == 0 || data[i] == NULL)
 			{
 				throw CustomException("Memory allocation failure.", 3);
 			}
 
-			if(initialize)
+			if (initialize)
 			{
-				for( int j = 0; j < _cols; j++)
+				for( int j = 0; j < cols; j++)
 				{
-					_data[i][j] = 0.0;
-					// _data[i][j] = TPoly(_dimT);
+					data[i][j] = 0.0;
+					// data[i][j] = TPoly(_dimT);
 				}
 			}
 		}
 	}
 	catch(bad_alloc e)
 	{
-		throw CustomException(e.what(), 4 );
+		throw CustomException(e.what(), 4);
 	}
 	catch(...)
 	{
-		throw CustomException("Error when allocating a matrix.", 34 );
+		throw CustomException("Error when allocating a matrix.", 34);
 	}
 }
 
-void Matrix::deallocateMemory()
+void Matrix::deallocateMemory(double **&data, int rows, int cols)
 {
-	for( int i = 0; i < _rows; i++ )
+	for( int i = 0; i < rows; i++ )
 	{
-		delete [] _data[i];
+		delete [] data[i];
 	}
-	delete [] _data;
+	delete [] data;
 }
 
 void Matrix::copyFrom(const Matrix &m)
 {
+	deallocateDataMemory();
+
 	_rows = m._rows;
 	_cols = m._cols;
 	_dimT = m._dimT;
 
-	allocateMemory(false);
+	allocateDataMemory(false);
 
 	for( int i = 0; i < _rows; i++ )
 	{

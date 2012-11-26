@@ -194,6 +194,7 @@ TEST(MatrixConstructor, test_and_copy_constructor)
 		5, 6	// third row
 	};
 	Matrix t(3, 2, values); // rows, columns, values
+	t.print("t");
 	ASSERT_EQ(3, t.nrows());
 	ASSERT_EQ(2, t.ncols());
 	ASSERT_EQ(1, t(0, 0));
@@ -568,9 +569,35 @@ TEST_F(MatrixMultiplication, mmCaAIbC)
 // int Matrix::tcfnorm(int nrTC, double *fn);
 // int Matrix::colnorm(double *c);
 // int Matrix::colnormdown(int pos, int *piv, double *c);
-// int Matrix::cpermutem(int *piv);
+
+TEST_F(MatrixMethods, cpermutem)
+{
+	int newOrder[] = {3, 0, 2, 1};
+	double b[] = {
+		 4,  1,  3,  2,
+		 8,  5,  7,  6,
+		12,  9,  11, 10
+	};
+	Matrix newB = Matrix(3, 4, b);
+
+	B.cpermutem((int*) newOrder);
+	ASSERT_EQ(newB, B);	
+}
 // int Matrix::cpermutem(int *piv, bool trans);
-// int Matrix::rpermutem(int *piv);
+
+TEST_F(MatrixMethods, rpermutem)
+{
+	int newOrder[] = {1, 2, 0};
+	double b[] = {
+		5,  6,  7,  8,
+		9, 10, 11, 12,
+		1,  2,  3,  4
+	};
+	Matrix newB = Matrix(3, 4, b);
+
+	B.rpermutem((int*) newOrder);
+	ASSERT_EQ(newB, B);
+}
 
 TEST_F(MatrixMethods, transpose)
 {
