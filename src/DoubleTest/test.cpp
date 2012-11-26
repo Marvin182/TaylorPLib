@@ -2,22 +2,24 @@
 #include <gtest/gtest.h>
 #include "Matrix.h"
 
+using namespace std;
+using namespace LibMatrix;
+
 namespace LibMatrix {
+	// needed by GTest to print matrices if some ASSERT_EQ(matrix1, matrix2) failed
 	std::ostream& operator<<(std::ostream &out, const Matrix &m) {
+		out << setiosflags(ios::fixed) << setprecision(2);
 		for (int i = 0; i < m.nrows(); i++)
 		{
-			for (int j = 0; i < m.ncols(); j++)
+			out << '\n';
+			for (int j = 0; j < m.ncols(); j++)
 			{
-				printf("%3.2f\t", m.get(i, j));
+				out << m.get(i, j) << '\t';
 			}
-			printf("\n");
 		}
 		return out; 
 	}
 }
-
-using namespace std;
-using namespace LibMatrix;
 
 /*
  * FIXTURES
@@ -108,13 +110,13 @@ class MatrixMultiplication: public ::testing::Test
 			alpha(2.0),
 			beta(3.0)
 		{
-			A = Matrix(3, 5);
+			A = Matrix(6, 6);
 			fillWithRandoms(A);
 
-			B = Matrix(5, 4);
+			B = Matrix(6, 6);
 			fillWithRandoms(B);
 
-			C = Matrix(3, 4);
+			C = Matrix(6, 6);
 			fillWithRandoms(C);
 		}
 };
@@ -252,6 +254,25 @@ TEST_F(MatrixMultiplication, mmCaABbC) {
 	C.mmCaABbC(alpha, beta, A, B);
 
 	ASSERT_EQ(expect, C);
+}
+
+
+TEST_F(MatrixMultiplication, bmmCaABbC) {
+	// special form for B
+	double b[] = {
+		1, 2, 3, 0, 0, 0,
+		4, 5, 6, 0, 0, 0,
+		0, 0, 0, 1, 0, 0,
+		0, 0, 0, 0, 1, 0,
+		0, 0, 0, 0, 0, 1
+	};
+	B = Matrix(6, 6, b);
+
+	(A * B).print("A * B");
+	Matrix expect = (A * B * alpha) + (C * beta);
+	C.bmmCaABbC(2, 3, alpha, beta, A, B);
+
+	ASSERT_EQ(expect, C);	
 }
 
 

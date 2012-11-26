@@ -409,7 +409,7 @@ Matrix Matrix::operator*(const Matrix &m) const
 
 	// an auxiliary object
 	Matrix aux( _rows, m._cols, _dimT, true);
-	
+
 	for( int i = 0; i < _rows; i++ )
 	{
 		for( int j = 0; j < m._cols; j++ )
