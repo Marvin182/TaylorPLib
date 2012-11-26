@@ -310,7 +310,42 @@ TEST_F(MatrixMultiplication, mmCaAsBbC)
 
 TEST_F(MatrixMultiplication, mmCaAUTBPbC)
 {
+	// special form for B
+	
+	double b1[] = {
+		1, 3, 2, 4, 5,
+		0, 7, 6, 8, 9,
+		0, 1, 0, 2, 3,
+		0, 0, 0, 4, 5,
+		0, 0, 0, 0, 6
+	};
+	
+	double b2[] = {
+		1, 2, 3, 4, 5,
+		0, 6, 7, 8, 9,
+		0, 0, 1, 2, 3,
+		0, 0, 0, 4, 5,
+		0, 0, 0, 0, 6
+	};
 
+	B = Matrix(5, 5, b2);
+
+	int piv[] = { 0, 2, 1, 3, 4 } ;
+	// int piv[] = { 0, 1, 2, 3, 4 } ;
+	int *pointer = piv;
+
+	Matrix expect = (A * B * alpha) + (C * beta);
+	B = Matrix(5, 5, b1);
+	C.mmCaAUTBPbC(alpha, beta, A, B, pointer);
+	ASSERT_EQ(expect, C);
+}
+
+TEST_F(MatrixMultiplication, mmCaAATbC)
+{
+	Matrix at = A.transpm();
+    Matrix expect = (A * at * alpha) + (C * beta);
+	C.mmCaAATbC(alpha, beta, A);
+	ASSERT_EQ(expect, C);
 }
 
 /*

@@ -703,7 +703,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 {
 	if (A._cols != B._rows)	
 	{
-		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
+		throw CustomException("Error in matrix multiplication. A and B cannot be multiplied.", 10);
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
@@ -760,7 +760,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 
 			for( int k = 0; k < _rows; k++ )
 			{
-				h += A._data[i][k] * A._data[i][k];
+				h += A._data[i][k] * A._data[j][k];
 			}
 
 			_data[i][j] = h * alpha + _data[i][j] * beta;
@@ -1832,21 +1832,21 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	return 0;
 // }
 
-// /**
-//  * Transposes a given matrix. 
-//  * 
-//  * \return The error code.
-//  * 
-//  */
-// Matrix Matrix::transpm()
-// {
-// 	Matrix aux( _cols, _rows, _dimT );						// an auxiliary object
+/**
+ * Transposes a given matrix. 
+ * 
+ * \return The error code.
+ * 
+ */
+Matrix Matrix::transpm()
+{
+ 	Matrix aux( _cols, _rows);						// an auxiliary object
 
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			aux( j, i ) = _data[ i ][ j ];
-// 	return aux;
-// }
+ 	for( int i = 0; i < _rows; i++ )
+ 		for( int j = 0; j < _cols; j++ )
+			aux._data[j][i] = _data[i][j];
+ 	return aux;
+}
 
 // /**
 //  * Implements the shift operator to calculate the derivative of Taylor polynomials
