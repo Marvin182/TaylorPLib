@@ -93,7 +93,7 @@ class MatrixOperator: public ::testing::Test
 class MatrixMultiplication: public ::testing::Test
 {
 	protected:
-		Matrix A, B, C;
+		Matrix A, B, C, I;
 		double alpha, beta;
 
 		double getRandomNumber() { return rand() % 10; }
@@ -120,6 +120,9 @@ class MatrixMultiplication: public ::testing::Test
 
 			C = Matrix(5, 5);
 			fillWithRandoms(C);
+
+			I = Matrix(5, 5);
+			I.set2Id();
 		}
 };
 
@@ -540,41 +543,23 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	ASSERT_EQ(expect, C);
 }
 
-TEST_F(MatrixMultiplication, mmCaIBbC1)
+TEST_F(MatrixMultiplication, mmCaIBbC)
 {
-	double i[] = {
-		1, 0, 0, 0, 0,
-		0, 1, 0, 0, 0,
-		0, 0, 1, 0, 0,
-		0, 0, 0, 1, 0,
-		0, 0, 0, 0, 1
-	};
-	Matrix I(5, 5, i);
-	Matrix expect = (( I * B ) * alpha) + (C * beta);
+	Matrix expect = (I * B * alpha) + (C * beta);
 
 	C.mmCaIBbC(alpha, beta, B);
 	ASSERT_EQ(expect, C);
 }
+// void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
 
-// TEST_F(MatrixMultiplication, mmCaAIbC1)
-// {
-// 	double i[] = {
-// 		1, 0, 0, 0, 0,
-// 		0, 1, 0, 0, 0,
-// 		0, 0, 1, 0, 0,
-// 		0, 0, 0, 1, 0,
-// 		0, 0, 0, 0, 1
-// 	};
-// 	Matrix I(5,5,i);
-// 	Matrix expect = ( ( A * I ) * alpha ) + (C * beta);
+TEST_F(MatrixMultiplication, mmCaAIbC)
+{
+	Matrix expect = (A * I * alpha) + (C * beta);
 
-// 	C.mmCaAIbC(alpha, beta, A);
-// 	ASSERT_EQ(expect, C);
-// }
-/*
-void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
-void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
-*/
+	C.mmCaAIbC(alpha, beta, A);
+	ASSERT_EQ(expect, C);
+}
+// void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
 
 /*
  * OTHER MATRIX METHODS

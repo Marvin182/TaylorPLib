@@ -403,13 +403,11 @@ Matrix Matrix::operator*=(double alpha)
  */
 Matrix Matrix::operator*(const Matrix &m) const
 {
-	if(_cols != m._rows) 
+	if (_cols != m._rows) 
 	{
-		// TODO more information?
-		throw CustomException("Cannot multiply the matrices. Operation not allowed.", 40);
+		throw CustomException("Cannot multiply the two matrices. The number of rows in m must match the number of colmuns int this matrix.", 40);
 	}
 
-	// an auxiliary object
 	Matrix aux( _rows, m._cols, _dimT, true);
 
 	for( int i = 0; i < _rows; i++ )
@@ -1062,7 +1060,6 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
  */
-
 void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (r > A._rows)
@@ -1113,7 +1110,7 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*I*B + beta * C
+ *     C = alpha * I * B + beta * C
  * 
  * with I : m-by-p matrix; identity matrix
  * 		B : p-by-n matrix
@@ -1124,31 +1121,20 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  */
-
-/* TODO write test */
-
 void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 {
-			// double h = 0.0;
-			// // TPoly h(_dimT);
-			// _data[i][j] = h * alpha + _data[i][j] * beta;
+	if (B._rows != _rows || B._cols != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix B must match the current matrix.", 10);
+	}	
 
-		for( int i = 0; i < _rows; i++ )						// initialize C
-			for( int j = 0; j < B._cols; j++ )
-				_data[i][j] = 0.0;
-					// _data[i][j].set2zero();				// p(x) = 0, initialization
-		if( _rows >= B._rows )							// last rows from I are zeroed
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
 		{
-			for( int i = 0; i < B._rows; i++ )				// last rows from C are already zeroed!!
-				for( int j = 0; j < B._cols; j++ )
-					_data[i][j] = B._data[i][j]*alpha + _data[i][j]*beta;			
+			_data[i][j] = B._data[i][j] * alpha + _data[i][j] * beta;
 		}
-		else												// last columns from I are zeroed
-		{
-			for( int i = 0; i < _rows; i++ )					// C has no more row!!
-				for( int j = 0; j < _cols; j++ )
-					_data[i][j] = B._data[i][j]*alpha + _data[i][j]*beta;			
-		}
+	}
 }
 
 /**
@@ -1185,7 +1171,7 @@ void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matr
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha*A*I + beta * C
+ *     C = alpha * A * I + beta * C
  * 
  * with A : m-by-p matrix
  * 		I : p-by-n matrix; identity matrix
@@ -1197,34 +1183,20 @@ void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matr
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * 
  */
-
-/* TODO write test */
-
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 {
-	
+	if (A._rows != _rows || A._cols != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix A must match the current matrix.", 10);
+	}	
 
-
-			// double h = 0.0;
-			// // TPoly h(_dimT);
-			// _data[i][j] = h * alpha + _data[i][j] * beta;
-
-		for( int i = 0; i < A._rows; i++ )					// initialize C
-			for( int j = 0; j < _cols; j++ )
-				_data[i][j] = 0.0;
-					// _data[i][j].set2zero();				// p(x) = 0, initialization
-		if( A._rows <= _rows )							// last columns from I are zeroed
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
 		{
-			for( int i = 0; i < A._rows; i++ )				// C has no more row!!
-				for( int j = 0; j < _rows; j++ )
-					_data[i][j] = A._data[i][j]*alpha + _data[i][j]*beta;			
+			_data[i][j] = A._data[i][j] * alpha + _data[i][j] * beta;
 		}
-		else												// last rows from I are zeroed
-		{
-			for( int i = 0; i < A._rows; i++ )				// C has no more column!!
-				for( int j = 0; j < _cols; j++ )
-					_data[i][j] = A._data[i][j]*alpha + _data[i][j]*beta;			
-		}
+	}
 }
 
 /**
