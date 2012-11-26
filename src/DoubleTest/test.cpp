@@ -457,34 +457,9 @@ TEST_F(MatrixMultiplication, mmCaABTbC1)
 	ASSERT_EQ(expect, C);
 }
 
-TEST_F(MatrixMultiplication, mmCaABTbC2)
+TEST_F(MatrixMultiplication, mmCaABTbC_up)
 {
-	// down
-	double a[] = {
-		1, 2, 1, 2, 1,
-		2, 1, 2, 1, 2,
-		1, 2, 1, 2, 1,
-		2, 1, 2, 1, 2,
-		1, 2, 1, 2, 1
-	};
-
-	double b1[] = {
-		0, 0, 0, 1, 6,
-		0, 0, 0, 2, 7,
-		0, 0, 0, 3, 8,
-		0, 0, 0, 4, 9,
-		0, 0, 0, 5, 1
-	};
-
-	A = Matrix(5,5, a);
-	B = Matrix(5,5, b1);
-	Matrix bt = B.transpose();
-    Matrix expect = (A * bt * alpha) + (C * beta);
-
-	C.mmCaABTbC(2, false, alpha, beta, A, B);
-	ASSERT_EQ(expect, C);
-
-	double b2[] = {
+	double b[] = {
 		1, 6, 0, 0, 0,
 		2, 7, 0, 0, 0,
 		3, 8, 0, 0, 0,
@@ -492,13 +467,30 @@ TEST_F(MatrixMultiplication, mmCaABTbC2)
 		5, 1, 0, 0, 0
 	};
 
-	B = Matrix(5,5, b2);
-	bt = B.transpose();
-    expect = (A * bt * alpha) + (C * beta);
+	B = Matrix(5,5, b);
+	Matrix bt = B.transpose();
+    Matrix expect = (A * bt * alpha) + (C * beta);
 
 	C.mmCaABTbC(2, true, alpha, beta, A, B);
 	ASSERT_EQ(expect, C);
+}
 
+TEST_F(MatrixMultiplication, mmCaABTbC_down)
+{
+	double b[] = {
+		0, 0, 0, 1, 6,
+		0, 0, 0, 2, 7,
+		0, 0, 0, 3, 8,
+		0, 0, 0, 4, 9,
+		0, 0, 0, 5, 1
+	};
+
+	B = Matrix(5,5, b);
+	Matrix bt = B.transpose();
+    Matrix expect = (A * bt * alpha) + (C * beta);
+
+	C.mmCaABTbC(2, false, alpha, beta, A, B);
+	ASSERT_EQ(expect, C);
 }
 
 TEST_F(MatrixMultiplication, mmCaABTbC3)

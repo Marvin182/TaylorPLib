@@ -947,7 +947,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 			double h = 0.0;
 			// TPoly h(_dimT);
 
-			for( int k = 0; k < _cols; k++ )
+			for( int k = 0; k < A._cols; k++ )
 			{
 				h += A._data[i][k] * B._data[j][k];
 			}
@@ -1019,15 +1019,15 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 				// first r columns from B are used
 				for( int k = 0; k < r; k++ )
 				{
-					h += A._data[k][i] * B._data[j][k];
+					h += A._data[i][k] * B._data[j][k];
 				}
 			}
 			else
 			{
 				// last r columns from B are used
-				for( int k = B._rows - r; k < B._rows; k++ )
+				for( int k = bRowsR; k < B._rows; k++ )
 				{
-					h += A._data[i][k - bRowsR] * B._data[j][k];
+					h += A._data[i][k] * B._data[j][k];
 				}
 			}
 
