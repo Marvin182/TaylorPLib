@@ -8,7 +8,7 @@ using namespace LibMatrix;
 namespace LibMatrix {
 	// needed by GTest to print matrices if some ASSERT_EQ(matrix1, matrix2) failed
 	std::ostream& operator<<(std::ostream &out, const Matrix &m)
-{
+	{
 		out << setiosflags(ios::fixed) << setprecision(2);
 		for (int i = 0; i < m.nrows(); i++)
 		{
@@ -96,10 +96,9 @@ class MatrixMultiplication: public ::testing::Test
 		Matrix A, B, C;
 		double alpha, beta;
 
-		double getRandomNumber()
-{ return rand() % 10; }
+		double getRandomNumber() { return rand() % 10; }
 		void fillWithRandoms(Matrix &m)
-{
+		{
 			for (int i = 0; i < m.nrows(); i++)
 			{
 				for (int j = 0; j < m.ncols(); j++)
@@ -325,39 +324,34 @@ TEST_F(MatrixMultiplication, mmCaAsBbC)
 
 TEST_F(MatrixMultiplication, mmCaAUTBPbC)
 {
-	// special form for B
-	
-	double b1[] = {
-		1, 3, 2, 4, 5,
-		0, 7, 6, 8, 9,
-		0, 1, 0, 2, 3,
-		0, 0, 0, 4, 5,
-		0, 0, 0, 0, 6
-	};
-	
-	double b2[] = {
+	double bUT[] = {
 		1, 2, 3, 4, 5,
 		0, 6, 7, 8, 9,
 		0, 0, 1, 2, 3,
 		0, 0, 0, 4, 5,
 		0, 0, 0, 0, 6
 	};
-
-	B = Matrix(5, 5, b2);
-
+	Matrix B_UT = Matrix(5, 5, bUT);
+	
+	// special form for B
+	double b[] = {
+		1, 3, 2, 4, 5,
+		0, 7, 6, 8, 9,
+		0, 1, 0, 2, 3,
+		0, 0, 0, 4, 5,
+		0, 0, 0, 0, 6
+	};
+	B = Matrix(5, 5, b);
 	int piv[] = { 0, 2, 1, 3, 4 } ;
-	// int piv[] = { 0, 1, 2, 3, 4 } ;
-	int *pointer = piv;
 
-	Matrix expect = (A * B * alpha) + (C * beta);
-	B = Matrix(5, 5, b1);
-	C.mmCaAUTBPbC(alpha, beta, A, B, pointer);
+	Matrix expect = (A * B_UT * alpha) + (C * beta);
+	C.mmCaAUTBPbC(alpha, beta, A, B, (int*) piv);
 	ASSERT_EQ(expect, C);
 }
 
 TEST_F(MatrixMultiplication, mmCaAATbC)
 {
-	Matrix at = A.transpm();
+	Matrix at = A.transpose();
     Matrix expect = (A * at * alpha) + (C * beta);
 	C.mmCaAATbC(alpha, beta, A);
 	ASSERT_EQ(expect, C);

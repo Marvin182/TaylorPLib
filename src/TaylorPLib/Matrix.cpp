@@ -387,7 +387,7 @@ Matrix Matrix::operator*=(double alpha)
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			_data[ i ][ j ] *= alpha;
+			_data[i][j] *= alpha;
 		}
 	}
 
@@ -455,7 +455,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.", 10);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -518,7 +518,7 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.", 10);
 	}
 
 	int cr = c - r;
@@ -586,7 +586,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.", 10);
 	}
 
 	int n = A._rows - r;
@@ -1052,10 +1052,11 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A * B^T + beta * C
+ *     C = alpha * A * B' + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : n-by-p matrix
+ *		B': p-by-n matrix (B transposed)
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  *
@@ -1080,13 +1081,31 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 
 void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
+	if (r > A._rows)
+	{
+		throw CustomException("Error in matrix multiplication. r cannot be larger than the number of rows of A in total.", 10);
+	}
+	if (c > A._cols)
+	{
+		throw CustomException("Error in matrix multiplication. c cannot be larger than the number of columns of A in total.", 10);
+	}
+	if (A._cols != B._cols)
+	{
+		throw CustomException("Error in matrix multiplication. The matrices A und B' cannot be multiplied because of wrong dimensions.", 10);
+	}
+	if (A._rows != _rows || B._rows != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B' must match the current matrix.", 10);
+	}
+
 	// only first r rows from A interesting
 	for( int i = 0; i < r; i++ )
 	{
 		// only first c col. from A (col. from B)
 		for( int j = 0; j < c; j++ )
 		{
-			double h = 0.0;			// TPoly h(_dimT);
+			double h = 0.0;
+			// TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -1133,18 +1152,18 @@ void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 		for( int i = 0; i < _rows; i++ )						// initialize C
 			for( int j = 0; j < B._cols; j++ )
 				_data[i][j] = 0.0;
-					// _data[ i ][ j ].set2zero();				// p(x) = 0, initialization
+					// _data[i][j].set2zero();				// p(x) = 0, initialization
 		if( _rows >= B._rows )							// last rows from I are zeroed
 		{
 			for( int i = 0; i < B._rows; i++ )				// last rows from C are already zeroed!!
 				for( int j = 0; j < B._cols; j++ )
-					_data[ i ][ j ] = B._data[i][j]*alpha + _data[ i ][ j ]*beta;			
+					_data[i][j] = B._data[i][j]*alpha + _data[i][j]*beta;			
 		}
 		else												// last columns from I are zeroed
 		{
 			for( int i = 0; i < _rows; i++ )					// C has no more row!!
 				for( int j = 0; j < B._rows; j++ )
-					_data[ i ][ j ] = B._data[i][j]*alpha + _data[ i ][ j ]*beta;			
+					_data[i][j] = B._data[i][j]*alpha + _data[i][j]*beta;			
 		}
 }
 
@@ -1209,18 +1228,18 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 		for( int i = 0; i < A._rows; i++ )					// initialize C
 			for( int j = 0; j < _cols; j++ )
 				_data[i][j] = 0.0;
-					// _data[ i ][ j ].set2zero();				// p(x) = 0, initialization
+					// _data[i][j].set2zero();				// p(x) = 0, initialization
 		if( A._rows <= _rows )							// last columns from I are zeroed
 		{
 			for( int i = 0; i < A._rows; i++ )				// C has no more row!!
 				for( int j = 0; j < _rows; j++ )
-					_data[ i ][ j ] = A._data[i][j]*alpha + _data[ i ][ j ]*beta;			
+					_data[i][j] = A._data[i][j]*alpha + _data[i][j]*beta;			
 		}
 		else												// last rows from I are zeroed
 		{
 			for( int i = 0; i < A._rows; i++ )				// C has no more column!!
 				for( int j = 0; j < _cols; j++ )
-					_data[ i ][ j ] = A._data[i][j]*alpha + _data[ i ][ j ]*beta;			
+					_data[i][j] = A._data[i][j]*alpha + _data[i][j]*beta;			
 		}
 }
 
@@ -1292,7 +1311,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		{
 // 				sum.set2zero();								// p(x) = 0, initialization
 // 			for( int j = i + 1; j < _rows; j++ )
-// 				sum += _data[ i ][ j ] * B._data[j][k];
+// 				sum += _data[i][j] * B._data[j][k];
 // 			B._data[i][k] = ( B._data[i][k] - sum ) / _data[ i ][ i ];
 // 		}
 // 	}
@@ -1375,7 +1394,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 			sum.set2zero();									// p(x) = 0, initialization
 // 		//else sum = 0.0;
 // 		for( int j = i + 1; j < _rows; j++ )
-// 			sum += _data[ i ][ j ] * b[ j ];
+// 			sum += _data[i][j] * b[ j ];
 // 		//printf( "\nsum=%.16g", sum );
 // 		b[ i ] = ( b[ i ] - sum ) / _data[ i ][ i ];
 // 		//printf( "\ni=%d  -->  ", i );
@@ -1464,8 +1483,8 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		{
 // 			index[ i ] = i;									// initialize row index list
 // 			for( int j = 0; j < _rows; j++ )
-// 				if( scalemax < fabs( _data[ i ][ j ].feval() ) )// scale[i] = max(|A[i][j][0]|)
-// 					scalemax = fabs( _data[ i ][ j ].feval() );
+// 				if( scalemax < fabs( _data[i][j].feval() ) )// scale[i] = max(|A[i][j][0]|)
+// 					scalemax = fabs( _data[i][j].feval() );
 // 			scale[ i ] = scalemax;
 // 		}
 // 		for( int k = 0; k < _rows - 1; k++ )					// select pivot row...
@@ -1580,8 +1599,8 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		{
 // 			index[ i ] = i;									// initialize row index list
 // 			for( int j = 0; j < _rows; j++ )
-// 				if( scalemax < fabs( _data[ i ][ j ].feval() ) )// scale[i] = max(|A[i][j][0]|)
-// 					scalemax = fabs( _data[ i ][ j ].feval() );
+// 				if( scalemax < fabs( _data[i][j].feval() ) )// scale[i] = max(|A[i][j][0]|)
+// 					scalemax = fabs( _data[i][j].feval() );
 // 			scale[ i ] = scalemax;
 // 		}
 // 		for( int k = 0; k < _rows - 1; k++ )					// select pivot row...
@@ -1674,10 +1693,10 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	for( int i = 0; i < _rows; i++ )
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 			if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 				sum += _data[ i ][ j ].feval() * _data[ i ][ j ].feval();
-// 			//else sum += _data[ i ][ j ] * _data[ i ][ j ];	// e.g. a matrix of doubles
+// 				sum += _data[i][j].feval() * _data[i][j].feval();
+// 			//else sum += _data[i][j] * _data[i][j];	// e.g. a matrix of doubles
 // 		}
 			
 // 	return sqrt( sum );
@@ -1711,9 +1730,9 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		for( int i = 0; i < _rows; i++ )
 // 			for( int j = 0; j < _cols; j++ )
 // 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 																// that both strings are equal
-// 					sum += _data[ i ][ j ][ k ] * _data[ i ][ j ][ k ];
+// 					sum += _data[i][j][ k ] * _data[i][j][ k ];
 // 			}
 // 		fn[ k ] = sqrt( sum );
 // 	}
@@ -1737,7 +1756,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		{
 // 			c[ j ] = 0.0;
 // 			for( int i = 0; i < _rows; i++ )				// column's norm, sum over the rows
-// 				c[ j ] += _data[ i ][ j ].feval() * _data[ i ][ j ].feval();
+// 				c[ j ] += _data[i][j].feval() * _data[i][j].feval();
 // 		}
 // 		//printdv( _cols, c, "c (column norms) = \n", cyan );
 // 	}
@@ -1796,7 +1815,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 			aux( i, j ) = _data[ i ][ piv[ j ] ];
 // 	for( int i = 0; i < _rows; i++ )
 // 		for( int j = 0; j < _cols; j++ )
-// 			_data[ i ][ j ] = aux( i, j );
+// 			_data[i][j] = aux( i, j );
 // 	return 0;
 // }
 
@@ -1831,7 +1850,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		}
 // 	for( int i = 0; i < _rows; i++ )
 // 		for( int j = 0; j < _cols; j++ )
-// 			_data[ i ][ j ] = aux( i, j );
+// 			_data[i][j] = aux( i, j );
 // 	return 0;
 // }
 
@@ -1850,10 +1869,10 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	for( int i = 0; i < _rows; i++ )
 // 		for( int j = 0; j < _cols; j++ )
 // 			//aux( i, j ) = _data[ piv[ i ] ][ j ];
-// 			aux( piv[ i ], j ) = _data[ i ][ j ];
+// 			aux( piv[ i ], j ) = _data[i][j];
 // 	for( int i = 0; i < _rows; i++ )
 // 		for( int j = 0; j < _cols; j++ )
-// 			_data[ i ][ j ] = aux( i, j );
+// 			_data[i][j] = aux( i, j );
 // 	return 0;
 // }
 
@@ -1863,13 +1882,18 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
  * \return The error code.
  * 
  */
-Matrix Matrix::transpm()
+Matrix Matrix::transpose() const
 {
- 	Matrix aux( _cols, _rows);						// an auxiliary object
+ 	Matrix aux( _cols, _rows);
 
  	for( int i = 0; i < _rows; i++ )
+ 	{
  		for( int j = 0; j < _cols; j++ )
+		{
 			aux._data[j][i] = _data[i][j];
+		}	
+ 	}
+
  	return aux;
 }
 
@@ -1900,7 +1924,7 @@ Matrix Matrix::transpm()
 // 		M = *this;
 // 		for( int i = 0; i < _rows; i++ )
 // 			for( int j = 0; j < _cols; j++ )
-// 				M._data[ i ][ j ].shift();
+// 				M._data[i][j].shift();
 // 	}
 // 	catch( IDException e )
 // 	{
@@ -1911,36 +1935,39 @@ Matrix Matrix::transpm()
 // 	return 0;
 // }
 
-// /**
-//  * Returns \a true in case the given matrix is the identity matrix; \a false otherwise.
-//  * 
-//  * \return \a true if the matrix is the identity matrix; \a false otherwise.
-//  * 
-//  */
-// bool Matrix::isId()
-// {
-// 	bool id = true;
-	
-// 	for( int i = 0; i < _rows; i++ )
-// 	{
-// 		for( int j = 0; j < _rows; j++ )
-// 			if( i == j )
-// 				if( !_data[ j ][ i ].isId() )
-// 				{
-// 					id = false;
-// 					break;
-// 				} else;
-// 			else
-// 				if( !_data[ j ][ i ].isZero() )
-// 				{
-// 					id = false;
-// 					break;
-// 				}
-// 		if( !id )
-// 			break;
-// 	}
-// 	return id;
-// }
+/**
+ * Returns \a true in case the given matrix is the identity matrix; \a false otherwise.
+ * 
+ * \return \a true if the matrix is the identity matrix; \a false otherwise.
+ * 
+ */
+bool Matrix::isId() const
+{
+	for( int i = 0; i < _rows; i++ )
+	{
+		for ( int j = 0; j < _cols; j++ )
+		{
+			if (i == j)
+			{
+				if (_data[i][j] != 1.0)
+				// if (!_data[i][j].isId())
+				{
+					return false;
+				}
+			}
+			else
+			{
+				if (_data[i][j] != 0.0)
+				// if (!_data[i][j].isZero())
+				{
+					return false;
+				}
+			}
+		}
+	}
+
+	return true;
+}
 
 // /**
 //  * Returns \a true in case the given matrix is near the identity matrix; \a false otherwise.
@@ -2006,29 +2033,28 @@ Matrix Matrix::transpm()
 // 	return id;
 // }
 
-// /**
-//  * Returns \a true in case the given matrix is the zero matrix; \a false otherwise.
-//  * 
-//  * \return \a true if the matrix is the zero matrix; \a false otherwise.
-//  * 
-//  */
-// bool Matrix::isZero()
-// {
-// 	bool z = true;
+/**
+ * Returns \a true in case the given matrix is the zero matrix; \a false otherwise.
+ * 
+ * \return \a true if the matrix is the zero matrix; \a false otherwise.
+ * 
+ */
+bool Matrix::isZero() const
+{
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			if (_data[i][j] != 0.0)
+			// if(!_data[i][j].isZero())
+			{
+				return false;
+			}
+		}
+	}
 
-// 	for( int i = 0; i < _rows; i++ )
-// 	{
-// 		for( int j = 0; j < _cols; j++ )
-// 			if( !_data[ i ][ j ].isZero() )					// all coeff. from p(x) = 0
-// 			{
-// 				z = false;
-// 				break;
-// 			}
-// 		if( !z )
-// 			break;
-// 	}
-// 	return z;
-// }
+	return true;
+}
 
 // /**
 //  * Returns \a true in case the given matrix is near the zero matrix; \a false otherwise.
@@ -2044,7 +2070,7 @@ Matrix Matrix::transpm()
 // 	for( int i = 0; i < _rows; i++ )
 // 	{
 // 		for( int j = 0; j < _cols; j++ )
-// 			if( !_data[ i ][ j ].isZero( eps ) )			// at least for one coeff. |p(x)| > eps
+// 			if( !_data[i][j].isZero( eps ) )			// at least for one coeff. |p(x)| > eps
 // 			{
 // 				z = false;
 // 				break;
@@ -2055,36 +2081,31 @@ Matrix Matrix::transpm()
 // 	return z;
 // }
 
-// /**
-//  * Sets a matrix to the identity one:
-//  * 
-//  * 		M = I
-//  * 
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2Id()
-// {
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 		{
-// 			if( i == j )
-// 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 )// A zero value indicates 
-// 															// that both strings are equal
-// 				{
-// 					_data[ i ][ j ].set2const( 1.0 );		// p(x) = 1
-// 				}
-// 				//else _data[ i ][ j ] = 1.0;
-// 			}
-// 			else
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0
-// 				//else _data[ i ][ j ] = 0.0;
-// 		}
-// 	return 0;
-// }
+/**
+ * Sets a matrix to the identity one:
+ * 
+ * 		M = I
+ * 
+ */
+void Matrix::set2Id()
+{
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			if (i == j)
+			{
+				_data[i][j] = 1.0;
+				// _data[i][j].set2const(1.0);
+			}
+			else
+			{
+				_data[i][j] = 0.0;
+				// _data[i][j].set2zero();
+			}
+		}
+	}
+}
 
 // /**
 //  * Sets the first submatrix to the identity one:
@@ -2106,16 +2127,16 @@ Matrix Matrix::transpm()
 // 		{
 // 			if( i == j )
 // 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 					_data[ i ][ j ].set2const( 1.0 );		// p(x) = 1
-// 				//else _data[ i ][ j ] = 1.0;
+// 					_data[i][j].set2const( 1.0 );		// p(x) = 1
+// 				//else _data[i][j] = 1.0;
 // 			}
 // 			else
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0
-// 				//else _data[ i ][ j ] = 0.0;
+// 					_data[i][j].set2zero();				// p(x) = 0
+// 				//else _data[i][j] = 0.0;
 // 		}
 // 	return 0;
 // }
@@ -2142,31 +2163,30 @@ Matrix Matrix::transpm()
 // 		{
 // 			if( (i - m1) == (j - n1) )
 // 			{
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 					_data[ i ][ j ].set2const( 1.0 );		// p(x) = 1
-// 				//else _data[ i ][ j ] = 1.0;
+// 					_data[i][j].set2const( 1.0 );		// p(x) = 1
+// 				//else _data[i][j] = 1.0;
 // 			}
 // 			else
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0
-// 				//else _data[ i ][ j ] = 0.0;
+// 					_data[i][j].set2zero();				// p(x) = 0
+// 				//else _data[i][j] = 0.0;
 // 		}
 // 	return 0;
 // }
 
-// /**
-//  * Sets a matrix to zero entries.
-//  * 
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2zero()
-// {
-// 	set2val( 0.0 );
-// 	return 0;
-// }
+/**
+ * Sets a matrix to zero entries.
+ * 
+ * \return The error code.
+ * 
+ */
+void Matrix::set2zero()
+{
+	set2val(0.0);
+}
 
 // /**
 //  * Sets a matrix to zero entries, for especified rows and columns.
@@ -2180,10 +2200,10 @@ Matrix Matrix::transpm()
 // {
 // 	for( int i = 0; i < m; i++ )
 // 		for( int j = 0; j < n; j++ )
-// 			if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 			if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 				_data[ i ][ j ].set2zero();					// p(x) = 0
-// 			//else _data[ i ][ j ] = 0.0;
+// 				_data[i][j].set2zero();					// p(x) = 0
+// 			//else _data[i][j] = 0.0;
 // 	return 0;
 // }
 
@@ -2206,40 +2226,44 @@ Matrix Matrix::transpm()
 // {
 // 	for( int i = m1; i < m2; i++ )
 // 		for( int j = n1; j < n2; j++ )
-// 			if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 			if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 				_data[ i ][ j ].set2zero();					// p(x) = 0
-// 			//else _data[ i ][ j ] = 0.0;
+// 				_data[i][j].set2zero();					// p(x) = 0
+// 			//else _data[i][j] = 0.0;
 // 	return 0;
 // }
 
-// /**
-//  * Sets a matrix to the value given as parameter.
-//  * 
-//  * \param[in] v The double value to set the elements to.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2val( double v )
-// {
-// 	if( v == 0.0 )
-// 	{
-// 		for( int i = 0; i < _rows; i++ )
-// 			for( int j = 0; j < _cols; j++ )
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2zero();				// p(x) = 0
-// 				//else _data[ i ][ j ] = 0.0;
-// 	}
-// 	else
-// 		for( int i = 0; i < _rows; i++ )
-// 			for( int j = 0; j < _cols; j++ )
-// 				if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[ i ][ j ].set2const( v );			// p(x) = v
-// 				//else _data[ i ][ j ] = v;
-// 	return 0;
-// }
+/**
+ * Sets a matrix to the value given as parameter.
+ * 
+ * \param[in] v The double value to set the elements to.
+ * 
+ */
+void Matrix::set2val(double v)
+{
+	if (v == 0.0)
+	{
+		for( int i = 0; i < _rows; i++ )
+		{
+			for( int j = 0; j < _cols; j++ )
+			{
+				_data[i][j] = 0.0;
+				// _data[i][j].set2zero();
+			}
+		}
+	}
+	else
+	{
+		for( int i = 0; i < _rows; i++ )
+		{
+			for( int j = 0; j < _cols; j++ )
+			{
+				_data[i][j] = v;
+				// _data[i][j].set2const(v);
+			}
+		}
+	}
+}
 
 // /**
 //  * Sets a matrix element to the value given as parameter.
@@ -2254,16 +2278,16 @@ Matrix Matrix::transpm()
 // {
 // 	if( v == 0.0 )
 // 	{
-// 		if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 		if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 			_data[ i ][ j ].set2zero();						// p(x) = 0
-// 		//else _data[ i ][ j ] = 0.0;
+// 			_data[i][j].set2zero();						// p(x) = 0
+// 		//else _data[i][j] = 0.0;
 // 	}
 // 	else
-// 		if( strcmp( _data[ i ][ j ].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 		if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
-// 			_data[ i ][ j ].set2const( v );					// p(x) = v
-// 		//else _data[ i ][ j ] = v;
+// 			_data[i][j].set2const( v );					// p(x) = v
+// 		//else _data[i][j] = v;
 // 	return 0;
 // }
 
@@ -2345,7 +2369,7 @@ Matrix Matrix::transpm()
 // 	for( int i = 0; i < _rows; i++ )
 // 	{
 // 		for( int j = 0; j < _cols; j++ )
-// 			if( _data[ i ][ j ] != B._data[i][j] )
+// 			if( _data[i][j] != B._data[i][j] )
 // 			{
 // 				equal = false;
 // 				break;
@@ -2374,7 +2398,7 @@ Matrix Matrix::transpm()
 // 	{
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			diff = _data[ i ][ j ] - B._data[i][j];
+// 			diff = _data[i][j] - B._data[i][j];
 // 			if( !diff.isZero( eps ) )
 // 			{
 // 				equal = false;
@@ -2406,7 +2430,7 @@ Matrix Matrix::transpm()
 // 	{
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			diff = _data[ i ][ j ] - B._data[i][j];
+// 			diff = _data[i][j] - B._data[i][j];
 // 			if( !diff.isZero( eps ) )
 // 			{
 // 				equal = false;
@@ -2465,7 +2489,7 @@ void Matrix::print(const char *name)
 // 	{
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			_data[ i ][ j ].print( fn );
+// 			_data[i][j].print( fn );
 // 			fprintf( fn, "%c", '\t' );
 // 		}
 // 		fprintf( fn, "\n" );
@@ -2487,7 +2511,7 @@ void Matrix::print(const char *name)
 // 	{
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			_data[ i ][ j ].print();
+// 			_data[i][j].print();
 // 			printf( "%c", '\t' );
 // 		}
 // 		printf( "\n" );
@@ -2509,7 +2533,7 @@ void Matrix::print(const char *name)
 // 		printf( "s", "  " );
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			_data[ i ][ j ].print();
+// 			_data[i][j].print();
 // 			printf( "%c", '\t' );
 // 		}
 // 		//printf( ")\n" );
@@ -2533,7 +2557,7 @@ void Matrix::print(const char *name)
 // 		fprintf( fn, "%s", "  " );
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			_data[ i ][ j ].print( fn );
+// 			_data[i][j].print( fn );
 // 			fprintf( fn, "%c", '\t' );
 // 		}
 // 		//fprintf( fn, ")\n" );
@@ -2558,7 +2582,7 @@ void Matrix::print(const char *name)
 // 		printf( "%s", "  " );
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			_data[ i ][ j ].print();
+// 			_data[i][j].print();
 // 			printf( "%c", '\t' );
 // 		}
 // 		//printf( ")\n" );
@@ -2585,11 +2609,11 @@ void Matrix::print(const char *name)
 // 		printf( "%s", "  " );
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			if( _data[ i ][ j ].isZero( eps ) )				//small enough
+// 			if( _data[i][j].isZero( eps ) )				//small enough
 // 				printf( "%.16g%c", 0.0, '\t' );
 // 			else
 // 			{
-// 				_data[ i ][ j ].print();
+// 				_data[i][j].print();
 // 				printf( "%c", '\t' );
 // 			}
 // 		}
@@ -2615,11 +2639,11 @@ void Matrix::print(const char *name)
 // 		fprintf( fn, "%s", "  " );
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			if( _data[ i ][ j ].isZero( eps ) )				//small enough
+// 			if( _data[i][j].isZero( eps ) )				//small enough
 // 				fprintf( fn, "%.16g%c", 0.0, '\t' );
 // 			else
 // 			{
-// 				_data[ i ][ j ].print( fn );
+// 				_data[i][j].print( fn );
 // 				fprintf( fn, "%c", '\t' );
 // 			}
 // 		}
@@ -2756,10 +2780,10 @@ void Matrix::print(const char *name)
 // 			printf( "%s", "  " );
 // 			for( int j = 0; j < _cols; j++ )
 // 			{
-// 				if( abs( _data[ i ][ j ][ k ] ) < eps )		//small enough
+// 				if( abs( _data[i][j][ k ] ) < eps )		//small enough
 // 					printf( "%.16lg%c", 0.0, '\t' );
 // 				else
-// 					printf( "%.16lg%c", _data[ i ][ j ][ k ], '\t' );
+// 					printf( "%.16lg%c", _data[i][j][ k ], '\t' );
 // 			}
 // 			//printf( ")\n" );
 // 			printf( "\n" );
@@ -2789,10 +2813,10 @@ void Matrix::print(const char *name)
 // 			fprintf( fn, "%s", "  " );
 // 			for( int j = 0; j < _cols; j++ )
 // 			{
-// 				if( abs( _data[ i ][ j ][ k ] ) < eps )		//small enough
+// 				if( abs( _data[i][j][ k ] ) < eps )		//small enough
 // 					fprintf( fn, "%.16lg%c", 0.0, '\t' );
 // 				else
-// 					fprintf( fn, "%.16lg%c", _data[ i ][ j ][ k ], '\t' );
+// 					fprintf( fn, "%.16lg%c", _data[i][j][ k ], '\t' );
 // 			}
 // 			//fprintf( fn, ")\n" );
 // 			fprintf( fn, "\n" );
@@ -2823,10 +2847,10 @@ void Matrix::print(const char *name)
 // 			printf( "%s", "  " );
 // 			for( int j = n1; j < n2; j++ )
 // 			{
-// 				if( abs( _data[ i ][ j ][ k ] ) < eps )		//small enough
+// 				if( abs( _data[i][j][ k ] ) < eps )		//small enough
 // 					printf( "%.16lg%c", 0.0, '\t' );
 // 				else
-// 					printf( "%.16lg%c", _data[ i ][ j ][ k ], '\t' );
+// 					printf( "%.16lg%c", _data[i][j][ k ], '\t' );
 // 			}
 // 			//printf( ")\n" );
 // 			printf( "\n" );
@@ -2857,10 +2881,10 @@ void Matrix::print(const char *name)
 // 			fprintf( fn, "%s", "  " );
 // 			for( int j = n1; j < n2; j++ )
 // 			{
-// 				if( abs( _data[ i ][ j ][ k ] ) < eps )		//small enough
+// 				if( abs( _data[i][j][ k ] ) < eps )		//small enough
 // 					fprintf( fn, "%.16lg%c", 0.0, '\t' );
 // 				else
-// 					fprintf( fn, "%.16lg%c", _data[ i ][ j ][ k ], '\t' );
+// 					fprintf( fn, "%.16lg%c", _data[i][j][ k ], '\t' );
 // 			}
 // 			//fprintf( fn, ")\n" );
 // 			fprintf( fn, "\n" );
