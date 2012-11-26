@@ -76,12 +76,12 @@ namespace LibMatrix {
 			void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
 			void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
 			void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
-			// void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
-			// void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
-			// void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
-			// void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
-			// void Matrix::mmCaAIbC(double alpha, double beta, Matrix &A, int *piv, bool rows);
+			void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
+			void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
+			void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
+			void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
 
 			//
 			// Solving systems of equations
