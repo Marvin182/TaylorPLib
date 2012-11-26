@@ -735,7 +735,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A * A' + beta * C
+ *     C = alpha * A * A^T + beta * C
  * 
  * with A, C : m-by-m matrix
  * 		alpha, beta : real numbers
@@ -750,7 +750,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 
 void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 {
-	// if A is a m-by-n matrix A * A' is always a m-by-m matrix and must have the same dimension as this matrix
+	// if A is a m-by-n matrix A * A^T is always a m-by-m matrix and must have the same dimension as this matrix
 	if (A._rows != _rows || A._rows != _cols)
 	{
 		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
@@ -776,7 +776,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A' * A + beta * C
+ *     C = alpha * A^T * A + beta * C
  * 
  * with A, C : m-by-m matrix
  * 		alpha, beta : real numbers
@@ -791,7 +791,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 
 void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 {
-	// if A is a m-by-n matrix A' * A is always a n-by-n matrix and must have the same dimension as this matrix
+	// if A is a m-by-n matrix A^T * A is always a n-by-n matrix and must have the same dimension as this matrix
 	if (A._cols != _rows || _cols != _rows)
 	{
 		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
@@ -817,7 +817,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A' * B + beta * C
+ *     C = alpha * A^T * B + beta * C
  * 
  * with A : p-by-m matrix
  * 		B : p-by-n matrix
@@ -835,16 +835,16 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 
 void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
-	// A' und B can only be multiplied if A and B have the same number of rows
+	// A^T und B can only be multiplied if A and B have the same number of rows
 	if (A._rows != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. Cannot multiply A' and B, A and B must have the same number of rows.", 10);
+		throw CustomException("Error in matrix multiplication. Cannot multiply A^T and B, A and B must have the same number of rows.", 10);
 	}
 
-	// (A' * B) must have the same size as this matrix
+	// (A^T * B) must have the same size as this matrix
 	if (A._cols != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. (A' * B) has not the same dimension as this matrix.", 10);
+		throw CustomException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.", 10);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -867,20 +867,21 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A' * B + beta * C
+ *     C = alpha * A^T * B + beta * C
  * 
  * with A : p-by-m matrix
+ *		A^T: m-by-b matrix (A transposed)
  * 		B : p-by-n matrix
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  *
- * and a column pivoting on A's rows.
+ * and a column pivoting on A^Ts rows.
  * 
  * \param[in] alpha The scalar value that multiplies \a A * B.
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is considered.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
- * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
+ * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a B.
  *
  */
 
@@ -888,16 +889,16 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 
 void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 {
-	// A' und B can only be multiplied if A and B have the same number of rows
+	// A^T und B can only be multiplied if A and B have the same number of rows
 	if (A._rows != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. Cannot multiply A' and B, A and B must have the same number of rows.", 10);
+		throw CustomException("Error in matrix multiplication. Cannot multiply A^T and B, A and B must have the same number of rows.", 10);
 	}
 
-	// (A' * B) must have the same size as this matrix
+	// (A^T * B) must have the same size as this matrix
 	if (A._cols != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. (A' * B) has not the same dimension as this matrix.", 10);
+		throw CustomException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.", 10);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -909,7 +910,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 
 			for( int k = 0; k < B._rows; k++ )
 			{
-				h += A._data[i][piv[i]] * B._data[k][j];
+				h += A._data[i][i] * B._data[k][piv[j]];
 			}
 
 			_data[i][j] = h * alpha + _data[i][j] * beta;
@@ -920,7 +921,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A * B' + beta * C
+ *     C = alpha * A * B^T + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : n-by-p matrix
@@ -938,16 +939,16 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 
 void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
-	// A und B' can only be multiplied if A and B have the same number of columns
+	// A und B^T can only be multiplied if A and B have the same number of columns
 	if (A._cols != B._cols)
 	{
-		throw CustomException("Error in matrix multiplication. Cannot multiply A and B', A and B must have the same number of columns.", 10);
+		throw CustomException("Error in matrix multiplication. Cannot multiply A and B^T, A and B must have the same number of columns.", 10);
 	}
 
-	// (A * B') must have the same size as this matrix
+	// (A * B^T) must have the same size as this matrix
 	if (A._rows != _rows || B._rows != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. (A' * B) has not the same dimension as this matrix.", 10);
+		throw CustomException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.", 10);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -970,7 +971,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A * B' + beta * C
+ *     C = alpha * A * B^T + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : n-by-p matrix
@@ -984,7 +985,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
  * 		(         )				( * ... * )
  * 		(    X    )				( * ... * )
  * 
- * according to A dimensions. I.e., the matrix A has less columns than B' rows has.
+ * according to A dimensions. I.e., the matrix A has less columns than B^T rows has.
  * 
  * \param[in] r The number of rows from \a B that should be considered.
  * \param[in] up The binary parameter to indicate whether the first or the last \a r rows 
@@ -1000,19 +1001,19 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 
 void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
-	// A und B' can only be multiplied if A and B have the same number of columns
+	// A und B^T can only be multiplied if A and B have the same number of columns
 	if (A._cols != B._cols)	
 	{
 		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
 	}
 
-	// (A * B') must have the same size as this matrix
+	// (A * B^T) must have the same size as this matrix
 	if (A._rows != _rows || B._rows != _cols)
 	{
 		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
 	}
 
-	// r <= (colmuns of B'), which is equal to r <= (rows of B)
+	// r <= (colmuns of B^T), which is equal to r <= (rows of B)
 	if (r > B._rows)
 	{
 		throw CustomException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.");
@@ -1052,11 +1053,11 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 /**
  * Matrix multiplication of the form:
  * 
- *     C = alpha * A * B' + beta * C
+ *     C = alpha * A * B^T + beta * C
  * 
  * with A : m-by-p matrix
  * 		B : n-by-p matrix
- *		B': p-by-n matrix (B transposed)
+ *		B^T: p-by-n matrix (B transposed)
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  *
@@ -1091,11 +1092,11 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 	}
 	if (A._cols != B._cols)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices A und B' cannot be multiplied because of wrong dimensions.", 10);
+		throw CustomException("Error in matrix multiplication. The matrices A und B^T cannot be multiplied because of wrong dimensions.", 10);
 	}
 	if (A._rows != _rows || B._rows != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B' must match the current matrix.", 10);
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B^T must match the current matrix.", 10);
 	}
 
 	// only first r rows from A interesting
