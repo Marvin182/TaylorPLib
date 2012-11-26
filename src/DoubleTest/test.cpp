@@ -110,13 +110,13 @@ class MatrixMultiplication: public ::testing::Test
 			alpha(2.0),
 			beta(3.0)
 		{
-			A = Matrix(6, 6);
+			A = Matrix(5, 5);
 			fillWithRandoms(A);
 
-			B = Matrix(6, 6);
+			B = Matrix(5, 5);
 			fillWithRandoms(B);
 
-			C = Matrix(6, 6);
+			C = Matrix(5, 5);
 			fillWithRandoms(C);
 		}
 };
@@ -260,15 +260,14 @@ TEST_F(MatrixMultiplication, mmCaABbC) {
 TEST_F(MatrixMultiplication, bmmCaABbC) {
 	// special form for B
 	double b[] = {
-		1, 2, 3, 0, 0, 0,
-		4, 5, 6, 0, 0, 0,
-		0, 0, 0, 1, 0, 0,
-		0, 0, 0, 0, 1, 0,
-		0, 0, 0, 0, 0, 1
+		1, 2, 3, 0, 0,
+		4, 5, 6, 0, 0,
+		0, 0, 0, 1, 0,
+		0, 0, 0, 0, 1,
+		0, 0, 0, 0, 0
 	};
-	B = Matrix(6, 6, b);
+	B = Matrix(5, 5, b);
 
-	(A * B).print("A * B");
 	Matrix expect = (A * B * alpha) + (C * beta);
 	C.bmmCaABbC(2, 3, alpha, beta, A, B);
 
