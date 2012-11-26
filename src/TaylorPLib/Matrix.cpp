@@ -902,7 +902,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 
 			for( int k = 0; k < B._rows; k++ )
 			{
-				h += A._data[i][i] * B._data[k][piv[j]];
+				h += A._data[k][i] * B._data[k][piv[j]];
 			}
 
 			_data[i][j] = h * alpha + _data[i][j] * beta;
@@ -1021,7 +1021,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 				// first r columns from B are used
 				for( int k = 0; k < r; k++ )
 				{
-					h += A._data[i][k] * B._data[j][k];
+					h += A._data[k][i] * B._data[j][k];
 				}
 			}
 			else
