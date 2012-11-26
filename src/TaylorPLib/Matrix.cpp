@@ -746,8 +746,6 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
  *
  */
 
-/* TODO write test */
-
 void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 {
 	// if A is a m-by-n matrix A * A' is always a m-by-m matrix and must have the same dimension as this matrix
@@ -786,8 +784,6 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
  *
  */
-
-/* TODO write test */
 
 void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 {
@@ -830,8 +826,6 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  *
  */
-
-/* TODO write test */
 
 void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
@@ -884,8 +878,6 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
  *
  */
 
-/* TODO write test */
-
 void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 {
 	// A' und B can only be multiplied if A and B have the same number of rows
@@ -934,8 +926,6 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
  * 
  */
 
-/* TODO write test */
-
 void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	// A und B' can only be multiplied if A and B have the same number of columns
@@ -959,7 +949,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 
 			for( int k = 0; k < _cols; k++ )
 			{
-				h += A._data[i][k] * B._data[i][k];
+				h += A._data[i][k] * B._data[j][k];
 			}
 
 			_data[i][j] = h * alpha + _data[i][j] * beta;
@@ -995,8 +985,6 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
  *
  */
-
-/* TODO write test */
 
 void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
