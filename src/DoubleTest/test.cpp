@@ -124,7 +124,7 @@ class MatrixMultiplication: public ::testing::Test
 /*
  * CONSTRUCTOR TESTS
  */
-TEST(MatrixConstrutor, default_constructor) {
+TEST(MatrixConstructor, default_constructor) {
 	// default constructor should create a zero initialized 1x1 matrix 
 	Matrix d;
 	ASSERT_EQ(1, d.nrows());
@@ -132,7 +132,7 @@ TEST(MatrixConstrutor, default_constructor) {
 	ASSERT_EQ(0, d(0, 0));
 }
 
-TEST(MatrixConstrutor, regular_constructor) {	
+TEST(MatrixConstructor, regular_constructor) {	
 	// regular constructor
 	Matrix r(2, 3);
 	ASSERT_EQ(2, r.nrows());
@@ -141,7 +141,7 @@ TEST(MatrixConstrutor, regular_constructor) {
 	ASSERT_EQ(0, r(1, 2));
 }
 
-TEST(MatrixConstrutor, test_and_copy_constructor) {
+TEST(MatrixConstructor, test_and_copy_constructor) {
 	// test constructor
 	double values[] = {
 		1, 2,	// first row
