@@ -394,18 +394,121 @@ TEST_F(MatrixMultiplication, mmCaAATbC)
 	ASSERT_EQ(expect, C);
 }
 
+TEST_F(MatrixMultiplication, mmCaATAbC)
+{
+	Matrix at = A.transpose();
+    Matrix expect = (at * A * alpha) + (C * beta);
+	C.mmCaATAbC(alpha, beta, A);
+	ASSERT_EQ(expect, C);
+}
+
+TEST_F(MatrixMultiplication, mmCaATBbC)
+{
+	Matrix at = A.transpose();
+    Matrix expect = (at * B * alpha) + (C * beta);
+	C.mmCaATBbC(alpha, beta, A, B);
+	ASSERT_EQ(expect, C);
+}
+
+TEST_F(MatrixMultiplication, mmCaATBPbC)
+{
+	double a1[] = {
+		1, 2, 3, 4, 5,
+		6, 7, 8, 9, 1,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0
+	};
+	
+	double b1[] = {
+		1, 2, 3, 4, 5,
+		6, 7, 8, 9, 1,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0
+	};
+	
+	double b2[] = {
+		1, 2, 3, 5, 4,
+		6, 7, 8, 1, 9,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0
+	};
+
+	A = Matrix(5, 5, a1);
+	B = Matrix(5, 5, b1);
+	Matrix at = A.transpose();
+	Matrix expect = (at * B * alpha) + (C * beta);
+
+	int piv[] = { 0, 1, 2, 4, 3 } ;
+	int *pointer = piv;
+
+	B = Matrix(5, 5, b2);
+	C.mmCaATBPbC(alpha, beta, A, B, pointer);
+	ASSERT_EQ(expect, C);
+}
+
+TEST_F(MatrixMultiplication, mmCaABTbC)
+{
+	Matrix bt = B.transpose();
+    Matrix expect = (A * bt * alpha) + (C * beta);
+	C.mmCaABTbC(alpha, beta, A, B);
+	ASSERT_EQ(expect, C);
+}
+
+TEST_F(MatrixMultiplication, mmCaABTbC2)
+{
+	// down
+	double a[] = {
+		1, 2, 1, 2, 1,
+		2, 1, 2, 1, 2,
+		1, 2, 1, 2, 1,
+		2, 1, 2, 1, 2,
+		1, 2, 1, 2, 1
+	};
+
+	double b1[] = {
+		0, 0, 0, 1, 6,
+		0, 0, 0, 2, 7,
+		0, 0, 0, 3, 8,
+		0, 0, 0, 4, 9,
+		0, 0, 0, 5, 1
+	};
+
+	A = Matrix(5,5, a);
+	B = Matrix(5,5, b1);
+	Matrix bt = B.transpose();
+    Matrix expect = (A * bt * alpha) + (C * beta);
+
+	C.mmCaABTbC(2, false, alpha, beta, A, B);
+	ASSERT_EQ(expect, C);
+
+	double b2[] = {
+		1, 6, 0, 0, 0,
+		2, 7, 0, 0, 0,
+		3, 8, 0, 0, 0,
+		4, 9, 0, 0, 0,
+		5, 1, 0, 0, 0
+	};
+
+	B = Matrix(5,5, b2);
+	bt = B.transpose();
+    expect = (A * bt * alpha) + (C * beta);
+
+	C.mmCaABTbC(2, true, alpha, beta, A, B);
+	ASSERT_EQ(expect, C);
+
+}
 /*
-void Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
-void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
-void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
-void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
-void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+
 void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
 void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
 void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
 void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
+
 */
 
 /*

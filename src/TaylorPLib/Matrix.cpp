@@ -746,8 +746,6 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
  *
  */
 
-/* TODO write test */
-
 void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 {
 	// if A is a m-by-n matrix A * A^T is always a m-by-m matrix and must have the same dimension as this matrix
@@ -786,8 +784,6 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
  * \param[in] A The pointer to \a A, an object of type \type Matrix. Its transpose is also considered.
  *
  */
-
-/* TODO write test */
 
 void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 {
@@ -831,8 +827,6 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
  *
  */
 
-/* TODO write test */
-
 void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	// A^T und B can only be multiplied if A and B have the same number of rows
@@ -870,7 +864,6 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
  *     C = alpha * A^T * B + beta * C
  * 
  * with A : p-by-m matrix
- *		A^T: m-by-b matrix (A transposed)
  * 		B : p-by-n matrix
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
@@ -884,8 +877,6 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a B.
  *
  */
-
-/* TODO write test */
 
 void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 {
@@ -910,7 +901,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 
 			for( int k = 0; k < B._rows; k++ )
 			{
-				h += A._data[i][i] * B._data[k][piv[j]];
+				h += A._data[k][i] * B._data[k][piv[j]];
 			}
 
 			_data[i][j] = h * alpha + _data[i][j] * beta;
@@ -935,8 +926,6 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
  * 
  */
 
-/* TODO write test */
-
 void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	// A und B^T can only be multiplied if A and B have the same number of columns
@@ -960,7 +949,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 
 			for( int k = 0; k < _cols; k++ )
 			{
-				h += A._data[i][k] * B._data[i][k];
+				h += A._data[i][k] * B._data[j][k];
 			}
 
 			_data[i][j] = h * alpha + _data[i][j] * beta;
@@ -996,9 +985,6 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
  * \param[in] B The pointer to \a B, an object of type \type Matrix. Its transpose is considered.
  *
  */
-
-/* TODO write test */
-
 void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	// A und B^T can only be multiplied if A and B have the same number of columns
@@ -1033,7 +1019,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 				// first r columns from B are used
 				for( int k = 0; k < r; k++ )
 				{
-					h += A._data[i][k] * B._data[j][k];
+					h += A._data[k][i] * B._data[j][k];
 				}
 			}
 			else
@@ -1057,7 +1043,6 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
  * 
  * with A : m-by-p matrix
  * 		B : n-by-p matrix
- *		B^T: p-by-n matrix (B transposed)
  * 		C : m-by-n matrix
  * 		alpha, beta : real numbers
  *
