@@ -1015,7 +1015,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 	// r <= (colmuns of B'), which is equal to r <= (rows of B)
 	if (r > B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.")
+		throw CustomException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.");
 	}
 
 	int bRowsR = B._rows - r;
