@@ -256,17 +256,35 @@ TEST_F(MatrixMultiplication, mmCaABbC) {
 	ASSERT_EQ(expect, C);
 }
 
-
 TEST_F(MatrixMultiplication, bmmCaABbC) {
 	// special form for B
-	double b[] = {
-		1, 2, 3, 0, 0,
-		4, 5, 6, 0, 0,
-		0, 0, 0, 1, 0,
-		0, 0, 0, 0, 1,
-		0, 0, 0, 0, 0
+	double a[] = {
+		1, 2, 3, 4, 1,
+		4, 5, 6, 7, 2, 
+		5, 4, 3, 2, 3,
+		8, 7, 6, 5, 4,
+		1, 2, 3, 4, 5
 	};
+
+	double b[] = {
+		1, 2, 0, 0, 0,
+		4, 5, 0, 0, 0,
+		0, 0, 1, 0, 0,
+		0, 0, 0, 1, 0,
+		0, 0, 0, 0, 1
+	};
+
+	double c[] = {
+		1, 1, 1, 1, 1,
+		0, 0, 1, 0, 0,
+		1, 1, 1, 1, 1,
+		0, 0, 1, 0, 0,
+		1, 1, 1, 1, 1
+	};
+
+	A = Matrix(5, 5, a);
 	B = Matrix(5, 5, b);
+	C = Matrix(5, 5, c);
 
 	Matrix expect = (A * B * alpha) + (C * beta);
 	C.bmmCaABbC(2, 3, alpha, beta, A, B);
@@ -274,7 +292,54 @@ TEST_F(MatrixMultiplication, bmmCaABbC) {
 	ASSERT_EQ(expect, C);	
 }
 
+TEST_F(MatrixMultiplication, mmCasABbC)
+{
+   	// special form for A
+	double a[] = {
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		0, 0, 0, 0, 0,
+		1, 2, 3, 4, 5,
+		5, 4, 3, 2, 1
+	};
+	A = Matrix(5, 5, a);
 
+	Matrix expect = (A * B * alpha) + (C * beta);
+	C.mmCasABbC(2, alpha, beta, A, B);
+	ASSERT_EQ(expect, C);	
+}
+
+TEST_F(MatrixMultiplication, mmCaAsBbC)
+{
+   	// special form for B
+	double b[] = {
+		0, 0, 0, 1, 5,
+		0, 0, 0, 2, 4,
+		0, 0, 0, 3, 3,
+		0, 0, 0, 4, 2,
+		0, 0, 0, 5, 1
+	};
+	B = Matrix(5, 5, b);
+
+	Matrix expect = (A * B * alpha) + (C * beta);
+	C.mmCaAsBbC(2, alpha, beta, A, B);
+	ASSERT_EQ(expect, C);	
+}
+
+/*
+void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+void Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
+void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
+void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
+void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
+void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
+void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
+void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
+*/
 /*
  * MAIN - RUN ALL TESTS
  */

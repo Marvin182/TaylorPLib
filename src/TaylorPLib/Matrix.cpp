@@ -641,7 +641,7 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 	{
 		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
 	}
-	if (r <= B._cols)
+	if (r >= B._cols)
 	{
 		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
 	}
