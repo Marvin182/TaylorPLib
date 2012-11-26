@@ -257,37 +257,19 @@ TEST_F(MatrixMultiplication, mmCaABbC) {
 }
 
 TEST_F(MatrixMultiplication, bmmCaABbC) {
-	// special form for B
-	double a[] = {
-		1, 2, 3, 4, 1,
-		4, 5, 6, 7, 2, 
-		5, 4, 3, 2, 3,
-		8, 7, 6, 5, 4,
-		1, 2, 3, 4, 5
-	};
-
+   	// special form for A
 	double b[] = {
-		1, 2, 0, 0, 0,
-		4, 5, 0, 0, 0,
-		0, 0, 1, 0, 0,
+		1, 2, 3, 0, 0,
+		4, 5, 6, 0, 0,
+		7, 8, 9, 0, 0,
 		0, 0, 0, 1, 0,
 		0, 0, 0, 0, 1
 	};
 
-	double c[] = {
-		1, 1, 1, 1, 1,
-		0, 0, 1, 0, 0,
-		1, 1, 1, 1, 1,
-		0, 0, 1, 0, 0,
-		1, 1, 1, 1, 1
-	};
-
-	A = Matrix(5, 5, a);
 	B = Matrix(5, 5, b);
-	C = Matrix(5, 5, c);
 
 	Matrix expect = (A * B * alpha) + (C * beta);
-	C.bmmCaABbC(2, 3, alpha, beta, A, B);
+	C.bmmCaABbC(3, 3, alpha, beta, A, B);
 
 	ASSERT_EQ(expect, C);	
 }
@@ -322,12 +304,16 @@ TEST_F(MatrixMultiplication, mmCaAsBbC)
 	B = Matrix(5, 5, b);
 
 	Matrix expect = (A * B * alpha) + (C * beta);
-	C.mmCaAsBbC(2, alpha, beta, A, B);
+	C.mmCaAsBbC(3, alpha, beta, A, B);
 	ASSERT_EQ(expect, C);	
 }
 
+TEST_F(MatrixMultiplication, mmCaAUTBPbC)
+{
+
+}
+
 /*
-void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
 void Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
 void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
 void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);

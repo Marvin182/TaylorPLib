@@ -573,8 +573,6 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
  *
  */
 
-/* TODO write test */
-
 void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (r > _rows)
@@ -645,8 +643,6 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
  *
  */
 
-/* TODO write test */
-
 void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
 	if (A._cols != B._rows)	
@@ -669,7 +665,9 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 			double h = 0.0;
 			// TPoly h(_dimT);
 
-			for( int k = r; k < B._rows; k++ )
+			int n = B._cols - r;
+
+			for( int k = n; k < B._cols; k++ )
 			{
 				h += A._data[i][k] * B._data[k][j];
 			}
@@ -700,8 +698,6 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a B.
  *
  */
-
-/* TODO write test */
 
 void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matrix &B, int *piv)
 {
