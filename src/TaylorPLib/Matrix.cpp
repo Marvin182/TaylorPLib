@@ -502,10 +502,6 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
  */
 void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
-	if (A._cols != B._rows)
-	{
-		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
-	}
 	if (r > B._rows)
 	{
 		throw CustomException("Error in matrix multiplication. r cannot be larger than the number of rows of B in total.", 10);
@@ -513,6 +509,10 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 	if (c > B._cols)
 	{
 		throw CustomException("Error in matrix multiplication. c cannot be larger than the number of columns of B in total.", 10);
+	}
+	if (A._cols != B._rows)
+	{
+		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
@@ -581,12 +581,24 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 	{
 		throw CustomException("Error in matrix multiplication. r (the number of last rows to use from A) cannot be larger than the number of rows of C", 10);
 	}
-	if (B._cols > _cols) // better != ?
+	if (A._cols != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. B should not have more columns than C.", 10);
+		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
+	}
+	if (A._rows != _rows || B._cols != _cols)
+	{
+		throw CustomException("Error in matrix multiplication. The dimension of the matrix AxB must match the current matrix.", 10);
 	}
 
 	int n = A._rows - r;
+	for( int i = 0; i < n; i++ )
+	{
+		for( int j = 0; j < B._cols; j++ )
+		{
+			_data[i][j] *= beta;
+		}
+	}
+
 	for( int i = n; i < A._rows; i++ )
 	{
 		for( int j = 0; j < B._cols; j++ )
@@ -599,7 +611,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 				h += A._data[i][k] * B._data[k][j];
 			}
 
-			_data[i - n][j] = h * alpha + _data[i - n][j] * beta;
+			_data[i][j] = h * alpha + _data[i][j] * beta;
 		}
 	}
 }
