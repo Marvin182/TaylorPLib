@@ -640,34 +640,37 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
- *
  */
-
 void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const Matrix &B)
 {
+	if (r > B._cols)
+	{
+		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
+	}
 	if (A._cols != B._rows)	
 	{
 		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
-	}
-	if (r >= B._cols)
-	{
-		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
 		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
 	}
 
+	int n = B._cols - r;
 	for( int i = 0; i < _rows; i++ )
 	{
-		for( int j = 0; j < _cols; j++ )
+		// zero columns of B
+		for( int j = 0; j < n; j++ )
+		{
+			_data[i][j] *= beta;
+		}
+
+		for( int j = n; j < _cols; j++ )
 		{
 			double h = 0.0;
 			// TPoly h(_dimT);
 
-			int n = B._cols - r;
-
-			for( int k = n; k < B._cols; k++ )
+			for( int k = 0; k < B._rows; k++ )
 			{
 				h += A._data[i][k] * B._data[k][j];
 			}
