@@ -392,7 +392,7 @@ TEST_F(MatrixMultiplication, mmCaAUTBPbC)
 
 TEST_F(MatrixMultiplication, mmCaAATbC)
 {
-	Matrix at = A.transpose();
+	Matrix at = A.asTranspose();
     Matrix expect = (A * at * alpha) + (C * beta);
 	C.mmCaAATbC(alpha, beta, A);
 	ASSERT_EQ(expect, C);
@@ -400,7 +400,7 @@ TEST_F(MatrixMultiplication, mmCaAATbC)
 
 TEST_F(MatrixMultiplication, mmCaATAbC)
 {
-	Matrix at = A.transpose();
+	Matrix at = A.asTranspose();
     Matrix expect = (at * A * alpha) + (C * beta);
 	C.mmCaATAbC(alpha, beta, A);
 	ASSERT_EQ(expect, C);
@@ -408,7 +408,7 @@ TEST_F(MatrixMultiplication, mmCaATAbC)
 
 TEST_F(MatrixMultiplication, mmCaATBbC)
 {
-	Matrix at = A.transpose();
+	Matrix at = A.asTranspose();
     Matrix expect = (at * B * alpha) + (C * beta);
 	C.mmCaATBbC(alpha, beta, A, B);
 	ASSERT_EQ(expect, C);
@@ -442,7 +442,7 @@ TEST_F(MatrixMultiplication, mmCaATBPbC)
 
 	A = Matrix(5, 5, a1);
 	B = Matrix(5, 5, b1);
-	Matrix at = A.transpose();
+	Matrix at = A.asTranspose();
 	Matrix expect = (at * B * alpha) + (C * beta);
 
 	int piv[] = { 0, 1, 2, 4, 3 } ;
@@ -455,7 +455,7 @@ TEST_F(MatrixMultiplication, mmCaATBPbC)
 
 TEST_F(MatrixMultiplication, mmCaABTbC1)
 {
-	Matrix bt = B.transpose();
+	Matrix bt = B.asTranspose();
     Matrix expect = (A * bt * alpha) + (C * beta);
 	C.mmCaABTbC(alpha, beta, A, B);
 	ASSERT_EQ(expect, C);
@@ -472,7 +472,7 @@ TEST_F(MatrixMultiplication, mmCaABTbC_up)
 	};
 
 	B = Matrix(5,5, b);
-	Matrix bt = B.transpose();
+	Matrix bt = B.asTranspose();
     Matrix expect = (A * bt * alpha) + (C * beta);
 
 	C.mmCaABTbC(2, true, alpha, beta, A, B);
@@ -490,7 +490,7 @@ TEST_F(MatrixMultiplication, mmCaABTbC_down)
 	};
 
 	B = Matrix(5,5, b);
-	Matrix bt = B.transpose();
+	Matrix bt = B.asTranspose();
     Matrix expect = (A * bt * alpha) + (C * beta);
 
 	C.mmCaABTbC(2, false, alpha, beta, A, B);
@@ -522,7 +522,7 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	// };
 	// C = Matrix(4, 3, c);
 
-	// Matrix bt = B.transpose();
+	// Matrix bt = B.asTranspose();
 	// Matrix expect = (A * bt * alpha) + (C * beta);
 
 	// C.bmmCaABTbC(2, 3, alpha, beta, A, B);
@@ -537,7 +537,7 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	};
 	A = Matrix(5, 5, a);
 	
-	Matrix bt = B.transpose();
+	Matrix bt = B.asTranspose();
 	Matrix expect = (A * bt * alpha) + (C * beta);
 
 	C.bmmCaABTbC(2, 3, alpha, beta, A, B);
@@ -615,13 +615,37 @@ TEST_F(MatrixMethods, rpermutem)
 
 TEST_F(MatrixMethods, transpose)
 {
+	// test in place transpose
 	double atrans[] = {
 		1, 4, 7,
 		2, 5, 8,
 		3, 6, 9
 	};
 	Matrix Atranspose(3, 3, atrans);
-	ASSERT_EQ(Atranspose, A.transpose());
+	A.transpose();
+	ASSERT_EQ(Atranspose, A);
+
+	// test normal transpose
+	double btrans[] = {
+		1,  5,  9,
+		2,  6, 10,
+		3,  7, 11,
+		4,  8, 12
+	};
+	Matrix Btranspose(4, 3, btrans);
+	B.transpose();
+	ASSERT_EQ(Btranspose, B);	
+}
+
+TEST_F(MatrixMethods, asTranspose)
+{
+	double atrans[] = {
+		1, 4, 7,
+		2, 5, 8,
+		3, 6, 9
+	};
+	Matrix Atranspose(3, 3, atrans);
+	ASSERT_EQ(Atranspose, A.asTranspose());
 
 	double btrans[] = {
 		1,  5,  9,
@@ -630,7 +654,7 @@ TEST_F(MatrixMethods, transpose)
 		4,  8, 12
 	};
 	Matrix Btranspose(4, 3, btrans);
-	ASSERT_EQ(Btranspose, B.transpose());
+	ASSERT_EQ(Btranspose, B.asTranspose());
 }
 
 // int Matrix::shift(Matrix &M);

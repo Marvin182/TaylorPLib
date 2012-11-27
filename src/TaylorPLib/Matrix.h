@@ -106,7 +106,8 @@ namespace LibMatrix {
 			// int Matrix::colnormdown(int pos, int *piv, double *c);
 			void Matrix::cpermutem(int *piv, bool trans = false);
 			void Matrix::rpermutem(int *piv);
-			Matrix Matrix::transpose() const;
+			void Matrix::transpose();
+			Matrix Matrix::asTranspose() const;
 			// int Matrix::shift(Matrix &M);
 			bool Matrix::isId() const;
 			// bool Matrix::isId(double eps);

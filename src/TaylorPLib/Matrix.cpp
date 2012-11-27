@@ -1837,12 +1837,56 @@ void Matrix::rpermutem(int *piv)
 }
 
 /**
- * Transposes a given matrix. 
- * 
- * \return The error code.
- * 
+ * Transposes this matrix in place.
+ *
  */
-Matrix Matrix::transpose() const
+void Matrix::transpose()
+{
+	if (_rows == _cols)
+	{
+		// square matrix can be swapped in place
+		for( int i = 1; i < _rows; i++ )
+		{
+			for( int j = 0; j < i; j++ )
+			{
+				// std::swap(_data[i][j], _data[j][i]);
+				double h = _data[i][j];
+				_data[i][j] = _data[j][i];
+				_data[j][i] = h;
+			}
+		}
+	}
+	else
+	{
+		// size changes, need to allocate new memomry :(
+		double **newData;
+		Matrix::allocateMemory(newData, _cols, _rows, false);
+
+		for( int i = 0; i < _rows; i++ )
+		{
+			for( int j = 0; j < _cols; j++ )
+			{
+				newData[j][i] = _data[i][j];
+			}
+		}
+
+		Matrix::deallocateMemory(_data, _rows, _cols);
+		_data = newData;
+		
+		// number of rows and columns swapped
+		int r = _rows;
+		_rows = _cols;
+		_cols = r;
+	}
+}
+
+/**
+ * Creata the transposes of this matrix. This matrix opject remains unchanged. 
+ * 
+ * \return The transposed matrix object.
+ *
+ */
+Matrix Matrix::asTranspose() const
 {
  	Matrix aux(_cols, _rows);
 
