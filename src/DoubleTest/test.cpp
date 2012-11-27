@@ -531,7 +531,7 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	double a[] = {
 		1, 2, 3, 0, 0,
 		4, 5, 6, 0, 0,
-		0, 0, 1, 0, 0,
+		7, 8, 9, 0, 0,
 		0, 0, 0, 1, 0,
 		0, 0, 0, 0, 1
 	};
@@ -539,9 +539,32 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	
 	Matrix bt = B.asTranspose();
 	Matrix expect = (A * bt * alpha) + (C * beta);
+	Matrix tempC = C;
 
-	C.bmmCaABTbC(2, 3, alpha, beta, A, B);
+	C.bmmCaABTbC(3, 3, alpha, beta, A, B);
 	ASSERT_EQ(expect, C);
+
+	tempC.bmmCaABTbC(2, 2, alpha, beta, A, B);
+	ASSERT_NE(expect, tempC);
+
+	double a2[] = {
+		1,2,3,0,
+		4,5,6,0,
+		0,0,0,1
+	};
+	double b2[] = {
+		1,2,3,
+		4,5,6,
+		0,0,0,
+		0,0,0
+	};
+
+	A = Matrix(3,4,a2);
+	B = Matrix(4,3,b2);
+	C = Matrix(3,3);
+	// Exception, da B Transposed wird und da die Mulitplikation (3*4) * (3*4) niccht möglich ist
+	// C.bmmCaABTbC(2, 3, alpha, beta, A, B);
+	ASSERT_THROW(C.bmmCaABTbC(2, 3, alpha, beta, A, B),CustomException);
 }
 
 TEST_F(MatrixMultiplication, mmCaIBbC)
@@ -587,6 +610,7 @@ TEST_F(MatrixMethods, cpermutem)
 TEST_F(MatrixMethods, cpermutem_trans)
 {
 	int newOrder[] = {1, 3, 2, 0};
+	// Beim Transpose wird aus dem Pivot Vektor -> { 3, 0, 2, 1 }
 
 	double b[] = {
 		 4,  1,  3,  2,
