@@ -104,8 +104,7 @@ namespace LibMatrix {
 			// int Matrix::tcfnorm(int nrTC, double *fn);		// vector of Frobenius norms
 			// int Matrix::colnorm(double *c);
 			// int Matrix::colnormdown(int pos, int *piv, double *c);
-			void Matrix::cpermutem(int *piv);
-			// void Matrix::cpermutem(int *piv, bool trans);
+			void Matrix::cpermutem(int *piv, bool trans = false);
 			void Matrix::rpermutem(int *piv);
 			Matrix Matrix::transpose() const;
 			// int Matrix::shift(Matrix &M);

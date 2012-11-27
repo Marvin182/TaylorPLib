@@ -583,7 +583,21 @@ TEST_F(MatrixMethods, cpermutem)
 	B.cpermutem((int*) newOrder);
 	ASSERT_EQ(newB, B);	
 }
-// int Matrix::cpermutem(int *piv, bool trans);
+
+TEST_F(MatrixMethods, cpermutem_trans)
+{
+	int newOrder[] = {1, 3, 2, 0};
+
+	double b[] = {
+		 4,  1,  3,  2,
+		 8,  5,  7,  6,
+		12,  9,  11, 10
+	};
+	Matrix newB = Matrix(3, 4, b);
+
+	B.cpermutem((int*) newOrder, true);
+	ASSERT_EQ(newB, B);	
+}
 
 TEST_F(MatrixMethods, rpermutem)
 {

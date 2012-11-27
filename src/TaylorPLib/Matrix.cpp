@@ -1759,9 +1759,11 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
  * then the resulting matrix in the upper triangular matrix R. 
  * 
  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
+ * \param[in] trans The \a boolean parameter to indicate whether to transpose the vector
+ * 		of permutations \a piv or not (=1, transpose; =0, otherwise). Default is false.
  * 
  */
-void Matrix::cpermutem(int *piv)
+void Matrix::cpermutem(int *piv, bool trans)
 {
 	for( int j = 0; j < _cols; j++ )
 	{
@@ -1774,6 +1776,17 @@ void Matrix::cpermutem(int *piv)
 	double **newData;
 	Matrix::allocateMemory(newData, _rows, _cols, false);
 
+	int *pivT = 0;
+	if (trans)
+	{
+		pivT = new int[_cols];
+		for( int i = 0; i < _cols; i++ )
+		{
+			pivT[ piv[i] ] = i;
+		}
+		piv = pivT;
+	}
+
 	for( int i = 0; i < _rows; i++ )
 	{
 		for( int j = 0; j < _cols; j++ )
@@ -1782,43 +1795,11 @@ void Matrix::cpermutem(int *piv)
 		}
 	}
 
+	delete pivT;
+
 	Matrix::deallocateMemory(_data, _rows, _cols);
 	_data = newData;
 }
-
-/**
- * Permutes the columns of a matrix given a vector of permutations. 
- * 
- * For example, in case a matrix A is permuted after a QR decomposition with column pivoting,
- * then the resulting matrix in the upper triangular matrix R. 
- * 
- * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
- * \param[in] trans The \a boolean parameter to indicate whether to transpose the vector
- * 		of permutations \a piv or not (=1, transpose; =0, otherwise).
- * 
- */
-// void Matrix::cpermutem(int *piv, bool trans)
-// {
-// 	int i, j;
-// 	Matrix aux( _rows, _cols, _dimT );						// auxiliary matrix
-// 	int *pivT = new int[ _cols ];								// auxiliary vector
-	
-// 	if( trans )
-// 		for( int i = 0; i < _cols; i++ )							// compute piv^T
-// 			pivT[ piv[ i ] ] = i;
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 		{
-// 			if( trans )
-// 				aux( i, j ) = _data[ i ][ pivT[ j ] ];
-// 			else
-// 				aux( i, j ) = _data[ i ][ piv[ j ] ];
-// 		}
-// 	for( int i = 0; i < _rows; i++ )
-// 		for( int j = 0; j < _cols; j++ )
-// 			_data[i][j] = aux( i, j );
-// 	return 0;
-// }
 
 /**
  * Permutes the rows of a matrix given a vector of permutations. 
