@@ -1901,43 +1901,31 @@ Matrix Matrix::asTranspose() const
  	return aux;
 }
 
-// /**
-//  * Implements the shift operator to calculate the derivative of Taylor polynomials
-//  * in case the elements of the matrix are such, like in:
-//  * 
-//  * y(t) = sum_{j=0}^{d} y_j * t^j + O(t^d+1)
-//  * 		= y_0 + y_1*t + y_2*t^2 + ... + y_d*t^d
-//  * 
-//  * y'(t) = y_1 + 2*y_2*t + 3*y_3*t^2 + ... + d*y_d*t^d-1
-//  * 
-//  * Internally, the coefficients are shifted to the left and the last one is zeroed.
-//  * 
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::shift( Matrix &M )
-// {	
-// 	try
-// 	{
-// 		if( _rows != M._rows  ||  _cols != M._cols  || _dimT != M._dimT )// dimensions checking
-// 			throw IDException( "Cannot shift the matrix.", 39 );
-// 		if( strcmp( _data[ 0 ][ 0 ].typeName(), "TPolyn" ) != 0  ||
-// 			strcmp( M._data[ 0 ][ 0 ].typeName(), "TPolyn" ) != 0 )// both are matrices of...
-// 															// ...Taylor polynomials
-// 			throw IDException( "It is not a matrix of Taylor polynomials.", 40 );
-// 		M = *this;
-// 		for( int i = 0; i < _rows; i++ )
-// 			for( int j = 0; j < _cols; j++ )
-// 				M._data[i][j].shift();
-// 	}
-// 	catch( IDException e )
-// 	{
-//         e.report();
-// 		throw e.getErrCode();
-// 	}
-
-// 	return 0;
-// }
+/**
+ * Implements the shift operator to calculate the derivative of Taylor polynomials
+ * in case the elements of the matrix are such, like in:
+ * 
+ * y(t) = sum_{j=0}^{d} y_j * t^j + O(t^d+1)
+ * 		= y_0 + y_1*t + y_2*t^2 + ... + y_d*t^d
+ * 
+ * y'(t) = y_1 + 2*y_2*t + 3*y_3*t^2 + ... + d*y_d*t^d-1
+ * 
+ * Internally, the coefficients are shifted to the left and the last one is zeroed.
+ * 
+ * \return The error code.
+ * 
+ */
+void Matrix::shift()
+{	
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			_data[i][j] *= 10.0;
+			// _data[i][j].shift();
+		}
+	}
+}
 
 /**
  * Returns \a true in case the given matrix is the identity matrix; \a false otherwise.

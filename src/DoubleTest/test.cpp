@@ -499,35 +499,7 @@ TEST_F(MatrixMultiplication, mmCaABTbC_down)
 
 TEST_F(MatrixMultiplication, bmmCaABTbC)
 {
-	// double a[] = {
-	// 	1, 2, 3, 0, 0,
-	// 	4, 5, 6, 0, 0,
-	// 	0, 0, 0, 1, 0,
-	// 	0, 0, 0, 0, 1
-	// };
-	// A = Matrix(4, 5, a);
-
-	// double b[] = {
-	// 	1, 2, 3, 4, 5,
-	// 	2, 1, 3, 2, 1,
-	// 	4, 2, 1, 2, 3
-	// };
-	// B = Matrix(3, 5, b);
-
-	// double c[] = {
-	// 	 1,  2,  3,
-	// 	 4,  5,  6,
-	// 	 7,  8,  9,
-	// 	10, 11, 12
-	// };
-	// C = Matrix(4, 3, c);
-
-	// Matrix bt = B.asTranspose();
-	// Matrix expect = (A * bt * alpha) + (C * beta);
-
-	// C.bmmCaABTbC(2, 3, alpha, beta, A, B);
-	// ASSERT_EQ(expect, C);
-
+	// case 1
 	double a[] = {
 		1, 2, 3, 0, 0,
 		4, 5, 6, 0, 0,
@@ -547,6 +519,7 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	tempC.bmmCaABTbC(2, 2, alpha, beta, A, B);
 	ASSERT_NE(expect, tempC);
 
+	// case 2
 	double a2[] = {
 		1,2,3,0,
 		4,5,6,0,
@@ -559,12 +532,11 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 		0,0,0
 	};
 
-	A = Matrix(3,4,a2);
-	B = Matrix(4,3,b2);
-	C = Matrix(3,3);
-	// Exception, da B Transposed wird und da die Mulitplikation (3*4) * (3*4) niccht möglich ist
-	// C.bmmCaABTbC(2, 3, alpha, beta, A, B);
-	ASSERT_THROW(C.bmmCaABTbC(2, 3, alpha, beta, A, B),CustomException);
+	A = Matrix(3, 4, a2);
+	B = Matrix(4, 3, b2);
+	C = Matrix(3, 3);
+	// Exception, da B transposed wird und da die Mulitplikation (3 x 4) * (3 x 4) nicht möglich ist
+	ASSERT_THROW(C.bmmCaABTbC(2, 3, alpha, beta, A, B), CustomException);
 }
 
 TEST_F(MatrixMultiplication, mmCaIBbC)
@@ -681,7 +653,10 @@ TEST_F(MatrixMethods, asTranspose)
 	ASSERT_EQ(Btranspose, B.asTranspose());
 }
 
-// int Matrix::shift(Matrix &M);
+TEST_F(MatrixMethods, shift)
+{
+	// shift would be senseless for double matrices
+}
 
 TEST_F(MatrixMethods, isId)
 {
