@@ -1128,8 +1128,6 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  */
 
-/* TODO write test */
-
 void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 {
 			// double h = 0.0;
@@ -1200,8 +1198,6 @@ void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matr
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * 
  */
-
-/* TODO write test */
 
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 {
