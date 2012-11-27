@@ -33,14 +33,14 @@ namespace LibMatrix {
 			//
 			// Constructors, destructor
 			//
-			Matrix::Matrix();														// Default constructor
-			Matrix::Matrix(int rows, int cols, bool initialize = true);				// Regular constructor
-			Matrix::Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
-			Matrix::Matrix(const Matrix &m);										// Copy constructor
+			Matrix();														// Default constructor
+			Matrix(int rows, int cols, bool initialize = true);				// Regular constructor
+			Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
+			Matrix(const Matrix &m);										// Copy constructor
 
-			Matrix::Matrix(int rows, int cols, double *values);						// Test construtor		
+			Matrix(int rows, int cols, double *values);						// Test construtor		
 
-			Matrix::~Matrix();														// Destructor
+			~Matrix();														// Destructor
 
 			//
 			// Accessing properties
@@ -54,104 +54,104 @@ namespace LibMatrix {
 			//
 			// Overloaded operators
 			//
-			double & Matrix::operator()(int row, int col);			// Element
-			Matrix Matrix::operator=(const Matrix &m);				// Assignment operators
-			bool Matrix::operator==(const Matrix &m) const;			// Comparison operators
-			bool Matrix::operator!=(const Matrix &m) const;
-			Matrix Matrix::operator+(const Matrix &m) const;		// Arithmetic operators
-			Matrix Matrix::operator+=(const Matrix &m);
-			Matrix Matrix::operator-(const Matrix &m) const;
-			Matrix Matrix::operator-=(const Matrix &m);
-			Matrix Matrix::operator-();
-			Matrix Matrix::operator*(double alpha) const;
-			Matrix Matrix::operator*=(double alpha);
-			Matrix Matrix::operator*(const Matrix &m) const;		// simple matrix multiplication
+			double & operator()(int row, int col);			// Element
+			Matrix operator=(const Matrix &m);				// Assignment operators
+			bool operator==(const Matrix &m) const;			// Comparison operators
+			bool operator!=(const Matrix &m) const;
+			Matrix operator+(const Matrix &m) const;		// Arithmetic operators
+			Matrix operator+=(const Matrix &m);
+			Matrix operator-(const Matrix &m) const;
+			Matrix operator-=(const Matrix &m);
+			Matrix operator-();
+			Matrix operator*(double alpha) const;
+			Matrix operator*=(double alpha);
+			Matrix operator*(const Matrix &m) const;		// simple matrix multiplication
 
 			//
 			// Especial matrix multiplications
 			//
-			void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &B);
-			void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
-			void Matrix::mmCaAATbC(double alpha, double beta, const Matrix&A);
-			void Matrix::mmCaATAbC(double alpha, double beta, const Matrix&A);
-			void Matrix::mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
-			void Matrix::mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
-			void Matrix::mmCaIBbC(double alpha, double beta, const Matrix&B);
-			void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
-			void Matrix::mmCaAIbC(double alpha, double beta, const Matrix&A);
-			void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
+			void mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &B);
+			void bmmCaABbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void mmCasABbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void mmCaAsBbC(int r, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void mmCaAUTBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+			void mmCaAATbC(double alpha, double beta, const Matrix&A);
+			void mmCaATAbC(double alpha, double beta, const Matrix&A);
+			void mmCaATBbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			void mmCaATBPbC(double alpha, double beta, const Matrix&A, const Matrix&B, int *piv);
+			void mmCaABTbC(double alpha, double beta, const Matrix&A, const Matrix&B);
+			void mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix&A, const Matrix&B);
+			void mmCaIBbC(double alpha, double beta, const Matrix&B);
+			void mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix&B);
+			void mmCaAIbC(double alpha, double beta, const Matrix&A);
+			void mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
 
 			//
 			// Solving systems of equations
 			//
-			// int Matrix::utsolve(Matrix &B);					// U X = B, back-substitution
-			// int Matrix::utsolve(Matrix &B, Matrix &X, int *piv);// U X = B, back-substitution, pivoting
-			// int Matrix::utsolve(T *b);						// U x = b, back-substitution
-			// int Matrix::utxsolve(Matrix &B);					// X U = B, back-substitution
-			// int Matrix::gsolve(Matrix &B);					// A X = B, Gaussian elimination
-			// int Matrix::gsolve(T *b);							// A x = b, Gaussian elimination
+			// int utsolve(Matrix &B);					// U X = B, back-substitution
+			// int utsolve(Matrix &B, Matrix &X, int *piv);// U X = B, back-substitution, pivoting
+			// int utsolve(T *b);						// U x = b, back-substitution
+			// int utxsolve(Matrix &B);					// X U = B, back-substitution
+			// int gsolve(Matrix &B);					// A X = B, Gaussian elimination
+			// int gsolve(T *b);							// A x = b, Gaussian elimination
 
 			//
 			// Other functions
 			//
-			// double Matrix::fnorm();								// Frobenius norm
-			// int Matrix::tcfnorm(int nrTC, double *fn);		// vector of Frobenius norms
-			// int Matrix::colnorm(double *c);
-			// int Matrix::colnormdown(int pos, int *piv, double *c);
-			void Matrix::cpermutem(int *piv, bool trans = false);
-			void Matrix::rpermutem(int *piv);
-			void Matrix::transpose();
-			Matrix Matrix::asTranspose() const;
-			void Matrix::shift();
-			bool Matrix::isId() const;
-			// bool Matrix::isId(double eps);
-			// bool Matrix::isId(int m1, int m2, int n1, int n2, double eps);
-			bool Matrix::isZero() const;
-			// bool Matrix::isZero(double eps);
-			void Matrix::set2Id();
-			// int Matrix::set2Id(int m, int n);
-			// int Matrix::set2Id(int m1, int m2, int n1, int n2);
-			void Matrix::set2zero();
-			// int Matrix::set2zero(int m, int n);
-			// int Matrix::set2zero(int m1, int m2, int n1, int n2);
-			void Matrix::set2val(double v);
-			// int Matrix::set2val(int i, int j, double val);
-			// int Matrix::trinvm(Matrix &Am);
-			// int Matrix::trinvm(int r, Matrix &Am);
-			// bool Matrix::mcompare(Matrix &B);
-			// bool Matrix::mcompare(Matrix &B, double eps);
-			// bool Matrix::mcompare(Matrix &B, int r, double eps);
+			// double fnorm();								// Frobenius norm
+			// int tcfnorm(int nrTC, double *fn);		// vector of Frobenius norms
+			// int colnorm(double *c);
+			// int colnormdown(int pos, int *piv, double *c);
+			void cpermutem(int *piv, bool trans = false);
+			void rpermutem(int *piv);
+			void transpose();
+			Matrix asTranspose() const;
+			void shift();
+			bool isId() const;
+			// bool isId(double eps);
+			// bool isId(int m1, int m2, int n1, int n2, double eps);
+			bool isZero() const;
+			// bool isZero(double eps);
+			void set2Id();
+			// int set2Id(int m, int n);
+			// int set2Id(int m1, int m2, int n1, int n2);
+			void set2zero();
+			// int set2zero(int m, int n);
+			// int set2zero(int m1, int m2, int n1, int n2);
+			void set2val(double v);
+			// int set2val(int i, int j, double val);
+			// int trinvm(Matrix &Am);
+			// int trinvm(int r, Matrix &Am);
+			// bool mcompare(Matrix &B);
+			// bool mcompare(Matrix &B, double eps);
+			// bool mcompare(Matrix &B, int r, double eps);
 
 			//
 			// Print out functions
 			//
-			void Matrix::print();
-			void Matrix::print(const char *name);
-			// void Matrix::fprintm(FILE * fn, char *str);
-			// void Matrix::printm(char *str, const char *const color);
-			// void Matrix::printdm(char *str);
-			// void Matrix::fprintdm(FILE * fn, char *str);
-			// void Matrix::printdm(char *str, const char *const color);
-			// void Matrix::printdm(char *str, const char *const color, double eps);
-			// void Matrix::fprintdm(FILE * fn, char *str, double eps);
-			// void Matrix::printm(int *piv, char *str, const char *const color);
-			// void Matrix::printdm(int *piv, char *str, const char *const color, double eps);
-			// void Matrix::fprintm(FILE * fn, int *piv, char *str);
-			// void Matrix::fprintdm(FILE * fn, int *piv, char *str, double eps);
-			// void Matrix::printtpm(char *str, const char *const color, double eps);
-			// void Matrix::fprinttpm(FILE * fn, char *str, double eps);
-			// void Matrix::printtpm(int m1, int m2, int n1, int n2,
+			void print();
+			void print(const char *name);
+			// void fprintm(FILE * fn, char *str);
+			// void printm(char *str, const char *const color);
+			// void printdm(char *str);
+			// void fprintdm(FILE * fn, char *str);
+			// void printdm(char *str, const char *const color);
+			// void printdm(char *str, const char *const color, double eps);
+			// void fprintdm(FILE * fn, char *str, double eps);
+			// void printm(int *piv, char *str, const char *const color);
+			// void printdm(int *piv, char *str, const char *const color, double eps);
+			// void fprintm(FILE * fn, int *piv, char *str);
+			// void fprintdm(FILE * fn, int *piv, char *str, double eps);
+			// void printtpm(char *str, const char *const color, double eps);
+			// void fprinttpm(FILE * fn, char *str, double eps);
+			// void printtpm(int m1, int m2, int n1, int n2,
 			// 		char *str, const char *const color, double eps);
-			// void Matrix::fprinttpm(FILE * fn, int m1, int m2, int n1, int n2,
+			// void fprinttpm(FILE * fn, int m1, int m2, int n1, int n2,
 			// 		char *str, double eps);
-			// void Matrix::printtpm(int *piv, char *str, const char *const color, double eps);
-			// void Matrix::fprinttpm(FILE * fn, int *piv, char *str, double eps);
+			// void printtpm(int *piv, char *str, const char *const color, double eps);
+			// void fprinttpm(FILE * fn, int *piv, char *str, double eps);
 	};
 };
 
