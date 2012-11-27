@@ -21,8 +21,12 @@ namespace LibMatrix {
 				_dimT;											// The dimension of the Taylor polynomials 
     		double **_data;										// The pointer to the allocated memory
 
-    		void allocateMemory(bool initialize);
-	    	void deallocateMemory();
+    		void allocateDataMemory(bool initialize)
+    			{ Matrix::allocateMemory(_data, _rows, _cols, initialize); }
+    		static void allocateMemory(double **&data, int rows, int cols, bool initialize);
+	    	void deallocateDataMemory()
+	    		{ Matrix::deallocateMemory(_data, _rows, _cols); }
+	    	static void deallocateMemory(double **&data, int rows, int cols);
 			void copyFrom(const Matrix &m);
 
 	public:
@@ -100,9 +104,9 @@ namespace LibMatrix {
 			// int Matrix::tcfnorm(int nrTC, double *fn);		// vector of Frobenius norms
 			// int Matrix::colnorm(double *c);
 			// int Matrix::colnormdown(int pos, int *piv, double *c);
-			// int Matrix::cpermutem(int *piv);
-			// int Matrix::cpermutem(int *piv, bool trans);
-			// int Matrix::rpermutem(int *piv);
+			void Matrix::cpermutem(int *piv);
+			// void Matrix::cpermutem(int *piv, bool trans);
+			void Matrix::rpermutem(int *piv);
 			Matrix Matrix::transpose() const;
 			// int Matrix::shift(Matrix &M);
 			bool Matrix::isId() const;
@@ -149,6 +153,6 @@ namespace LibMatrix {
 			// void Matrix::printtpm(int *piv, char *str, const char *const color, double eps);
 			// void Matrix::fprinttpm(FILE * fn, int *piv, char *str, double eps);
 	};
-}
+};
 
 #endif /* _MATRIX_H_ */
