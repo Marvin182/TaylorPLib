@@ -730,8 +730,18 @@ TEST_F(MatrixMethods, set2Id)
 	A.set2Id();
 	ASSERT_EQ(I, A);
 }
-// int Matrix::set2Id(int m, int n);
-// int Matrix::set2Id(int m1, int m2, int n1, int n2);
+
+TEST_F(MatrixMethods, set2Id2)
+{
+	C.set2Id(1, 3, 2, 1);
+	ASSERT_EQ(CId, C);
+}
+
+TEST_F(MatrixMethods, set2IdFromIndices)
+{
+	C.set2IdFromIndices(1, 4, 2, 5);
+	ASSERT_EQ(CId, C);
+}
 
 TEST_F(MatrixMethods, set2Zero)
 {

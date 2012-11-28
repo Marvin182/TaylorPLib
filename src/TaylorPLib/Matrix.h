@@ -115,6 +115,8 @@ namespace LibMatrix {
 			bool isZero() const;
 			// bool isZero(double eps);
 			void set2Id();
+			void set2Id(int top, int bottom, int left, int right);
+			void set2IdFromIndices(int firstRow, int lastRow, int firstCol, int lastCol);
 			// int set2Id(int m, int n);
 			// int set2Id(int m1, int m2, int n1, int n2);
 			void set2Zero();

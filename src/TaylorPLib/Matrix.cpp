@@ -2099,7 +2099,7 @@ void Matrix::set2Id()
 			if (i == j)
 			{
 				_data[i][j] = 1.0;
-				// _data[i][j].set2const(1.0);
+				// _data[i][j].set2Id();
 			}
 			else
 			{
@@ -2110,75 +2110,78 @@ void Matrix::set2Id()
 	}
 }
 
-// /**
-//  * Sets the first submatrix to the identity one:
-//  * 
-//  * 		e.g. M = ( 1 0 0 |   )
-//  * 				 ( 0 1 0 | X )
-//  * 				 ( 0 0 1 |   )
-//  * 				 (    Y  |   )
-//  * 
-//  * \param[in] m The number of rows that should be considered.
-//  * \param[in] n The number of columns that should be considered.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2Id( int m, int n )
-// {
-// 	for( int i = 0; i < m; i++ )
-// 		for( int j = 0; j < n; j++ )
-// 		{
-// 			if( i == j )
-// 			{
-// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[i][j].set2const( 1.0 );		// p(x) = 1
-// 				//else _data[i][j] = 1.0;
-// 			}
-// 			else
-// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[i][j].set2zero();				// p(x) = 0
-// 				//else _data[i][j] = 0.0;
-// 		}
-// 	return 0;
-// }
 
-// /**
-//  * Sets a submatrix to the identity one:
-//  * 
-//  * 		e.g. M = (    | 1 0 0 |    )
-//  * 				 ( M1 | 0 1 0 | M2 )
-//  * 				 (    | 0 0 1 |    )
-//  * 				 (        M3       )
-//  * 
-//  * \param[in] m1 The row from which to start on.
-//  * \param[in] m2 The last row that should be considered.
-//  * \param[in] n1 The column from which to start on.
-//  * \param[in] n2 The last column that should be considered.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2Id( int m1, int m2, int n1, int n2 )
-// {
-// 	for( int i = m1; i < m2; i++ )
-// 		for( int j = n1; j < n2; j++ )
-// 		{
-// 			if( (i - m1) == (j - n1) )
-// 			{
-// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[i][j].set2const( 1.0 );		// p(x) = 1
-// 				//else _data[i][j] = 1.0;
-// 			}
-// 			else
-// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 					_data[i][j].set2zero();				// p(x) = 0
-// 				//else _data[i][j] = 0.0;
-// 		}
-// 	return 0;
-// }
+/**
+ * Sets a submatrix to the identity one:
+ * 
+ * 		e.g. M = (    | 1 0 0 |    )
+ * 				 ( M1 | 0 1 0 | M2 )
+ * 				 (    | 0 0 1 |    )
+ * 				 (        M3       )
+ * 
+ * \param[in] top The number of rows at the top to keep unchanged.
+ * \param[in] bottom The number of rows at the bottom to keep unchanged.
+ * \param[in] left The number of columns on the left to keep unchanged.
+ * \param[in] right The number of columns on the right to keep unchanged.
+ * 
+ */
+void Matrix::set2Id(int top, int bottom, int left, int right)
+{
+	int lastRow = _rows - bottom - 1;
+	int lastCol = _cols - right - 1;
+	set2IdFromIndices(top, lastRow, left, lastCol);
+}
+
+/**
+ * Sets a submatrix to the identity one:
+ * 
+ * 		e.g. M = (    | 1 0 0 |    )
+ * 				 ( M1 | 0 1 0 | M2 )
+ * 				 (    | 0 0 1 |    )
+ * 				 (        M3       )
+ * 
+ * \param[in] firstRow The row from which to start on.
+ * \param[in] lastRow The last row that should be considered.
+ * \param[in] firstCol The column from which to start on.
+ * \param[in] lastCol The last column that should be considered.
+ * 
+ */
+void Matrix::set2IdFromIndices(int firstRow, int lastRow, int firstCol, int lastCol)
+{
+	if (firstRow < 0 || lastRow >= _rows)
+	{
+		throw CustomException("Error in set2Id, row bounds are wrong."); // TODO add error code
+	}
+	if (firstCol < 0 || lastCol >= _cols)
+	{
+		throw CustomException("Error in set2Id, column bounds are wrong"); // TODO add error code
+	}
+
+	int rows = lastRow - firstRow + 1;
+	int cols = lastCol - firstCol + 1;
+
+	if (rows != cols)
+	{
+		throw CustomException("Error in set2Id, submatrix must be a square matrix in order to become a identity matrix."); // TODO add error code
+	}
+
+	for( int i = firstRow; i <= lastRow; i++ )
+	{
+		for( int j = firstCol; j <= lastCol; j++ )
+		{
+			if (i - firstRow == j - firstCol)
+			{
+				_data[i][j] = 1.0;
+				// _data[i][j].set2Id();
+			}
+			else
+			{
+				_data[i][j] = 0.0;
+				// _data[i][j].set2zero();
+			}
+		}
+	}
+}
 
 /**
  * Sets a matrix to zero entries.
@@ -2192,25 +2195,6 @@ void Matrix::set2Zero()
 }
 
 /**
- * Sets a matrix to zero entries, for especified rows and columns.
- * 
- * \param[in] m The number of rows to be set to zero.
- * \param[in] n The number of columns to be set to zero.
- * 
- */
-// void Matrix::set2zero(int m, int n)
-// {
-// 	for( int i = 0; i < m; i++ )
-// 	{
-// 		for( int j = 0; j < n; j++ )
-// 		{
-// 			// _data[i][j].set2zero();
-// 			_data[i][j] = 0.0;
-// 		}
-// 	}
-// }
-
-/**
  * Sets a submatrix to zero:
  * 
  * 		e.g. M = (    | 0 0 0 |    )
@@ -2218,10 +2202,10 @@ void Matrix::set2Zero()
  * 				 (    | 0 0 0 |    )
  * 				 (        M3       )
  * 
- * \param[in] rowStart The row from which to start on.
- * \param[in] colStart The column from which to start on.
- * \param[in] rowEnd The last row that should be considered.
- * \param[in] colEnd The last column that should be considered.
+ * \param[in] top The number of rows at the top to keep unchanged.
+ * \param[in] bottom The number of rows at the bottom to keep unchanged.
+ * \param[in] left The number of columns on the left to keep unchanged.
+ * \param[in] right The number of columns on the right to keep unchanged.
  * 
  */
 void Matrix::set2Zero(int top, int bottom, int left, int right)
@@ -2240,8 +2224,8 @@ void Matrix::set2Zero(int top, int bottom, int left, int right)
  * 				 (        M3       )
  * 
  * \param[in] firstRow The row from which to start on.
- * \param[in] firstCol The column from which to start on.
  * \param[in] lastRow The last row that should be considered.
+ * \param[in] firstCol The column from which to start on.
  * \param[in] lastCol The last column that should be considered.
  * 
  */
