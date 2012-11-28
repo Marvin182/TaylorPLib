@@ -129,7 +129,7 @@ class MatrixMultiplication: public ::testing::Test
 class MatrixMethods: public ::testing::Test
 {
 	protected:
-		Matrix I, Z, A, B;
+		Matrix I, Z, A, B, C, CZ, CId, C3;
 
 		MatrixMethods()
 		{
@@ -160,6 +160,54 @@ class MatrixMethods: public ::testing::Test
 				9, 10, 11, 12
 			};
 			B = Matrix(3, 4, b);
+
+			double c[] = {
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5
+			};
+			C = Matrix(8, 7, c);
+
+			double cz[] = {
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 0, 0, 5, 5, 5,
+				5, 5, 0, 0, 5, 5, 5,
+				5, 5, 0, 0, 5, 5, 5,
+				5, 5, 0, 0, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5
+			};
+			CZ = Matrix(8, 7, cz);
+
+			double cid[] = {
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 1, 0, 0, 0, 5,
+				5, 5, 0, 1, 0, 0, 5,
+				5, 5, 0, 0, 1, 0, 5,
+				5, 5, 0, 0, 0, 1, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5
+			};
+			CId = Matrix(8, 7, cid);
+
+			double c3[] = {
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 3, 3, 3, 3, 5,
+				5, 5, 3, 3, 3, 3, 5,
+				5, 5, 3, 3, 3, 3, 5,
+				5, 5, 3, 3, 3, 3, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 5, 5, 5, 5, 5, 5
+			};
+			C3 = Matrix(8, 7, c3);
 		}
 };
 
@@ -685,9 +733,9 @@ TEST_F(MatrixMethods, set2Id)
 // int Matrix::set2Id(int m, int n);
 // int Matrix::set2Id(int m1, int m2, int n1, int n2);
 
-TEST_F(MatrixMethods, set2zero)
+TEST_F(MatrixMethods, set2Zero)
 {
-	A.set2zero();
+	A.set2Zero();
 	ASSERT_EQ(Z, A);
 
 	double zeros[] = {
@@ -697,11 +745,21 @@ TEST_F(MatrixMethods, set2zero)
 	};
 	Matrix Zeros(3, 4, zeros);
 	
-	B.set2zero();
+	B.set2Zero();
 	ASSERT_EQ(Zeros, B);
 }
-// int Matrix::set2zero(int m, int n);
-// int Matrix::set2zero(int m1, int m2, int n1, int n2);
+
+TEST_F(MatrixMethods, set2Zero2)
+{
+	C.set2Zero(1, 3, 2, 3);
+	ASSERT_EQ(CZ, C);
+}
+
+TEST_F(MatrixMethods, set2ZeroFromIndices)
+{
+	C.set2ZeroFromIndices(1, 4, 2, 3);
+	ASSERT_EQ(CZ, C);
+}
 
 TEST_F(MatrixMethods, set2Val)
 {
@@ -712,7 +770,7 @@ TEST_F(MatrixMethods, set2Val)
 	};
 	Matrix B42(3, 4, b42);
 
-	B.set2val(42.0);
+	B.set2Val(42.0);
 	ASSERT_EQ(B42, B);
 }
 

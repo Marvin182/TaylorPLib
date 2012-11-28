@@ -2186,55 +2186,85 @@ void Matrix::set2Id()
  * \return The error code.
  * 
  */
-void Matrix::set2zero()
+void Matrix::set2Zero()
 {
-	set2val(0.0);
+	set2Val(0.0);
 }
 
-// /**
-//  * Sets a matrix to zero entries, for especified rows and columns.
-//  * 
-//  * \param[in] m The number of rows to be set to zero.
-//  * \param[in] n The number of columns to be set to zero.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2zero( int m, int n )
+/**
+ * Sets a matrix to zero entries, for especified rows and columns.
+ * 
+ * \param[in] m The number of rows to be set to zero.
+ * \param[in] n The number of columns to be set to zero.
+ * 
+ */
+// void Matrix::set2zero(int m, int n)
 // {
 // 	for( int i = 0; i < m; i++ )
+// 	{
 // 		for( int j = 0; j < n; j++ )
-// 			if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 				_data[i][j].set2zero();					// p(x) = 0
-// 			//else _data[i][j] = 0.0;
-// 	return 0;
+// 		{
+// 			// _data[i][j].set2zero();
+// 			_data[i][j] = 0.0;
+// 		}
+// 	}
 // }
 
-// /**
-//  * Sets a submatrix to zero:
-//  * 
-//  * 		e.g. M = (    | 0 0 0 |    )
-//  * 				 ( M1 | 0 0 0 | M2 )
-//  * 				 (    | 0 0 0 |    )
-//  * 				 (        M3       )
-//  * 
-//  * \param[in] m1 The row from which to start on.
-//  * \param[in] m2 The last row that should be considered.
-//  * \param[in] n1 The column from which to start on.
-//  * \param[in] n2 The last column that should be considered.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2zero( int m1, int m2, int n1, int n2 )
-// {
-// 	for( int i = m1; i < m2; i++ )
-// 		for( int j = n1; j < n2; j++ )
-// 			if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 				_data[i][j].set2zero();					// p(x) = 0
-// 			//else _data[i][j] = 0.0;
-// 	return 0;
-// }
+/**
+ * Sets a submatrix to zero:
+ * 
+ * 		e.g. M = (    | 0 0 0 |    )
+ * 				 ( M1 | 0 0 0 | M2 )
+ * 				 (    | 0 0 0 |    )
+ * 				 (        M3       )
+ * 
+ * \param[in] rowStart The row from which to start on.
+ * \param[in] colStart The column from which to start on.
+ * \param[in] rowEnd The last row that should be considered.
+ * \param[in] colEnd The last column that should be considered.
+ * 
+ */
+void Matrix::set2Zero(int top, int bottom, int left, int right)
+{
+	int lastRow = _rows - bottom - 1;
+	int lastCol = _cols - right - 1;
+	set2ZeroFromIndices(top, lastRow, left, lastCol);
+}
+
+/**
+ * Sets a submatrix to zero:
+ * 
+ * 		e.g. M = (    | 0 0 0 |    )
+ * 				 ( M1 | 0 0 0 | M2 )
+ * 				 (    | 0 0 0 |    )
+ * 				 (        M3       )
+ * 
+ * \param[in] firstRow The row from which to start on.
+ * \param[in] firstCol The column from which to start on.
+ * \param[in] lastRow The last row that should be considered.
+ * \param[in] lastCol The last column that should be considered.
+ * 
+ */
+void Matrix::set2ZeroFromIndices(int firstRow, int lastRow, int firstCol, int lastCol)
+{
+	if (firstRow < 0 || lastRow >= _rows)
+	{
+		throw CustomException("Error in set2Zero, row bounds are wrong."); // TODO add error code
+	}
+	if (firstCol < 0 || lastCol >= _cols)
+	{
+		throw CustomException("Error in set2Zero, column bounds are wrong"); // TODO add error code
+	}
+
+	for( int i = firstRow; i <= lastRow; i++ )
+	{
+		for( int j = firstCol; j <= lastCol; j++ )
+		{
+			_data[i][j] = 0.0;
+			// _data[i][j].set2zero();
+		}
+	}
+}
 
 /**
  * Sets a matrix to the value given as parameter.
@@ -2242,7 +2272,7 @@ void Matrix::set2zero()
  * \param[in] v The double value to set the elements to.
  * 
  */
-void Matrix::set2val(double v)
+void Matrix::set2Val(double v)
 {
 	if (v == 0.0)
 	{
@@ -2277,7 +2307,7 @@ void Matrix::set2val(double v)
 //  * \return The error code.
 //  * 
 //  */
-// int Matrix::set2val( int i, int j, double v )
+// int Matrix::set2Val( int i, int j, double v )
 // {
 // 	if( v == 0.0 )
 // 	{
