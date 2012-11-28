@@ -199,10 +199,10 @@ class MatrixMethods: public ::testing::Test
 
 			double c3[] = {
 				5, 5, 5, 5, 5, 5, 5,
-				5, 5, 3, 3, 3, 3, 5,
-				5, 5, 3, 3, 3, 3, 5,
-				5, 5, 3, 3, 3, 3, 5,
-				5, 5, 3, 3, 3, 3, 5,
+				5, 5, 5, 5, 5, 5, 5,
+				5, 3, 3, 3, 3, 5, 5,
+				5, 3, 3, 3, 3, 5, 5,
+				5, 3, 3, 3, 3, 5, 5,
 				5, 5, 5, 5, 5, 5, 5,
 				5, 5, 5, 5, 5, 5, 5,
 				5, 5, 5, 5, 5, 5, 5
@@ -784,7 +784,18 @@ TEST_F(MatrixMethods, set2Val)
 	ASSERT_EQ(B42, B);
 }
 
-// int Matrix::set2val(int i, int j, double val);
+TEST_F(MatrixMethods, set2Val2)
+{
+	C.set2Val(2, 3, 1, 2, 3.0);
+	ASSERT_EQ(C3, C);
+}
+
+TEST_F(MatrixMethods, set2ValFromIndices)
+{
+	C.set2ValFromIndices(2, 4, 1, 4, 3.0);
+	ASSERT_EQ(C3, C);
+}
+
 // int Matrix::trinvm(Matrix &Am);
 // int Matrix::trinvm(int r, Matrix &Am);
 // bool Matrix::mcompare(Matrix &B);

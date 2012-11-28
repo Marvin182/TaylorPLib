@@ -117,13 +117,12 @@ namespace LibMatrix {
 			void set2Id();
 			void set2Id(int top, int bottom, int left, int right);
 			void set2IdFromIndices(int firstRow, int lastRow, int firstCol, int lastCol);
-			// int set2Id(int m, int n);
-			// int set2Id(int m1, int m2, int n1, int n2);
 			void set2Zero();
 			void set2Zero(int top, int bottom, int left, int right);
 			void set2ZeroFromIndices(int firstRow, int lastRow, int firstCol, int lastCol);
 			void set2Val(double v);
-			// int set2Val(int i, int j, double val);
+			void set2Val(int top, int bottom, int left, int right, double v);
+			void set2ValFromIndices(int firstRow, int lastRow, int firstCol, int lastCol, double v);
 			// int trinvm(Matrix &Am);
 			// int trinvm(int r, Matrix &Am);
 			// bool mcompare(Matrix &B);

@@ -2231,23 +2231,7 @@ void Matrix::set2Zero(int top, int bottom, int left, int right)
  */
 void Matrix::set2ZeroFromIndices(int firstRow, int lastRow, int firstCol, int lastCol)
 {
-	if (firstRow < 0 || lastRow >= _rows)
-	{
-		throw CustomException("Error in set2Zero, row bounds are wrong."); // TODO add error code
-	}
-	if (firstCol < 0 || lastCol >= _cols)
-	{
-		throw CustomException("Error in set2Zero, column bounds are wrong"); // TODO add error code
-	}
-
-	for( int i = firstRow; i <= lastRow; i++ )
-	{
-		for( int j = firstCol; j <= lastCol; j++ )
-		{
-			_data[i][j] = 0.0;
-			// _data[i][j].set2zero();
-		}
-	}
+	set2ValFromIndices(firstRow, lastRow, firstCol, lastCol, 0.0);
 }
 
 /**
@@ -2258,55 +2242,80 @@ void Matrix::set2ZeroFromIndices(int firstRow, int lastRow, int firstCol, int la
  */
 void Matrix::set2Val(double v)
 {
+	set2ValFromIndices(0, _rows - 1, 0, _cols - 1, v);
+}
+
+/**
+ * Sets a submatrix to the value given as parameter:
+ * 
+ * 		e.g. M = (    | v v v |    )
+ * 				 ( M1 | v v v | M2 )
+ * 				 (    | v v v |    )
+ * 				 (        M3       )
+ * 
+ * \param[in] top The number of rows at the top to keep unchanged.
+ * \param[in] bottom The number of rows at the bottom to keep unchanged.
+ * \param[in] left The number of columns on the left to keep unchanged.
+ * \param[in] right The number of columns on the right to keep unchanged.
+ * \param[in] v The double value to set the elements to.
+ * 
+ */
+void Matrix::set2Val(int top, int bottom, int left, int right, double v)
+{
+	int lastRow = _rows - bottom - 1;
+	int lastCol = _cols - right - 1;
+	set2ValFromIndices(top, lastRow, left, lastCol, v);
+}
+
+/**
+ * Sets a submatrix to the value given as parameter:
+ * 
+ * 		e.g. M = (    | v v v |    )
+ * 				 ( M1 | v v v | M2 )
+ * 				 (    | v v v |    )
+ * 				 (        M3       )
+ * 
+ * \param[in] firstRow The row from which to start on.
+ * \param[in] lastRow The last row that should be considered.
+ * \param[in] firstCol The column from which to start on.
+ * \param[in] lastCol The last column that should be considered.
+ * \param[in] v The double value to set the elements to.
+ * 
+ */
+void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int lastCol, double v)
+{
+	if (firstRow < 0 || lastRow >= _rows)
+	{
+		throw CustomException("Invalid row bounds."); // TODO add error code
+	}
+	if (firstCol < 0 || lastCol >= _cols)
+	{
+		throw CustomException("Invalid column bounds."); // TODO add error code
+	}
+
 	if (v == 0.0)
 	{
-		for( int i = 0; i < _rows; i++ )
+		for( int i = firstRow; i <= lastRow; i++ )
 		{
-			for( int j = 0; j < _cols; j++ )
+			for( int j = firstCol; j <= lastCol; j++ )
 			{
 				_data[i][j] = 0.0;
-				// _data[i][j].set2zero();
+				// _data[i][j].set2Zero();
 			}
 		}
 	}
 	else
 	{
-		for( int i = 0; i < _rows; i++ )
+		for( int i = firstRow; i <= lastRow; i++ )
 		{
-			for( int j = 0; j < _cols; j++ )
+			for( int j = firstCol; j <= lastCol; j++ )
 			{
 				_data[i][j] = v;
-				// _data[i][j].set2const(v);
+				// _data[i][j].set2Const(v);
 			}
 		}
 	}
 }
-
-// /**
-//  * Sets a matrix element to the value given as parameter.
-//  * 
-//  * \param[in] i The row position.
-//  * \param[in] j The column position.
-//  * \param[in] v The type \type T value to set the elements to.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::set2Val( int i, int j, double v )
-// {
-// 	if( v == 0.0 )
-// 	{
-// 		if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 			_data[i][j].set2zero();						// p(x) = 0
-// 		//else _data[i][j] = 0.0;
-// 	}
-// 	else
-// 		if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
-// 															// that both strings are equal
-// 			_data[i][j].set2const( v );					// p(x) = v
-// 		//else _data[i][j] = v;
-// 	return 0;
-// }
 
 // /**
 //  * Calculates the inverse (triangular inverse) of a regular, upper triangular matrix.
