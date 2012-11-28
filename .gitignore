@@ -1,6 +1,4 @@
-# Sublime Text 2 project filei
-
-*.sublime-project
+# Sublime Text 2 workspace file
 *.sublime-workspace
 
 # Build and Object Folders
