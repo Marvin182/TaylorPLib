@@ -21,10 +21,10 @@ namespace LibMatrix {
 				_dimT;											// The dimension of the Taylor polynomials 
     		double **_data;										// The pointer to the allocated memory
 
-    		void allocateDataMemory(bool initialize)
+    		void allocateMemory(bool initialize)
     			{ Matrix::allocateMemory(_data, _rows, _cols, initialize); }
     		static void allocateMemory(double **&data, int rows, int cols, bool initialize);
-	    	void deallocateDataMemory()
+	    	void deallocateMemory()
 	    		{ Matrix::deallocateMemory(_data, _rows, _cols); }
 	    	static void deallocateMemory(double **&data, int rows, int cols);
 			void copyFrom(const Matrix &m);

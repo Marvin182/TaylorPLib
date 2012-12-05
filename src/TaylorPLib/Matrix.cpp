@@ -21,7 +21,7 @@ Matrix::Matrix():
 	_dimT(0),
 	_data(0)
 {
-	allocateDataMemory(true);
+	allocateMemory(true);
 }
 
 /**
@@ -38,7 +38,7 @@ Matrix::Matrix(int rows, int cols, bool initialize):
 	_dimT(0),
 	_data(0)
 {
-	allocateDataMemory(initialize);
+	allocateMemory(initialize);
 }
 
 /**
@@ -57,7 +57,7 @@ Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
 	_dimT(dimT),
 	_data(0)
 {
-	allocateDataMemory(initialize);
+	allocateMemory(initialize);
 }
 
 /**
@@ -87,7 +87,7 @@ Matrix::Matrix(int rows, int cols, double *values):
 	_dimT(0),
 	_data(0)
 {
-	allocateDataMemory(false);
+	allocateMemory(false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -108,7 +108,7 @@ Matrix::Matrix(int rows, int cols, double *values):
  */
 Matrix::~Matrix()
 {
-	deallocateDataMemory();
+	deallocateMemory();
 }
 
 //
@@ -3050,13 +3050,13 @@ void Matrix::deallocateMemory(double **&data, int rows, int cols)
 
 void Matrix::copyFrom(const Matrix &m)
 {
-	deallocateDataMemory();
+	deallocateMemory();
 
 	_rows = m._rows;
 	_cols = m._cols;
 	_dimT = m._dimT;
 
-	allocateDataMemory(false);
+	allocateMemory(false);
 
 	for( int i = 0; i < _rows; i++ )
 	{

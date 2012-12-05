@@ -3,6 +3,17 @@
 using namespace std;
 using namespace LibMatrix;
 
+int Polynomial::unsetConstCount = 0;
+int Polynomial::isConstCount = 0;
+
+double fabs(double d)
+{
+	if (d < 0)
+		return -d;
+	return d;
+}
+
+
 /**
  * Default constructor for the class. Creates the object.
  * 
@@ -11,36 +22,13 @@ using namespace LibMatrix;
  * 		p(x) = 1
  * 
  */
-Polynomial::Polynomial()
+Polynomial::Polynomial():
+	_constant(1),
+	_order(0),
+	_coeffs(0)
 {
-	try
-	{
-		itsOrder = 0;
-		_constant = false;
-		itsCoeff = new double[nrcoeff()];					// coefficients
-		if ((itsCoeff == 0)  ||  (itsCoeff == NULL))
-			throw IDException("Memory allocation failure.", 3);
-		itsCoeff[0] = 1;									// some initialization
-	}
-	catch (bad_alloc e)
-	{
-		printf(red);
-		printf("\n***Exception bad_alloc found:");
-        printf("\n***%s" , e.what());
-		printf(normal);
-        throw 4;
-	}
-	catch (IDException e)
-	{
-        e.report();
-		throw e.getErrCode();
-	}
-	catch (...)												// other exceptions
-	{
-		IDException e("Error when allocating a polynomial.", 32);
-        e.report();
-		throw e.getErrCode();
-	}
+	allocateMemory(false);
+	_coeffs[0] = 1.0;
 }
 
 /**
@@ -53,37 +41,12 @@ Polynomial::Polynomial()
  * \param[in] order The derivative order of the Taylor polynomial.
  * 
  */
-Polynomial::Polynomial(int order)
+Polynomial::Polynomial(int order, bool initialize):
+	_constant(-1),
+	_order(order),
+	_coeffs(0)
 {
-	try
-	{
-		itsOrder = order;
-		_constant = false;
-		itsCoeff = new double[nrcoeff()];					// coefficients
-		if ((itsCoeff == 0)  ||  (itsCoeff == NULL))
-			throw IDException("Memory allocation failure.", 3);
-		for (int i = 0; i < nrcoeff(); i++)
-			itsCoeff[i] = 0.0;							// some initialization
-	}
-	catch (bad_alloc e)
-	{
-		printf(red);
-		printf("\n***Exception bad_alloc found:");
-        printf("\n***%s" , e.what());
-		printf(normal);
-        throw 4;
-	}
-	catch (IDException e)
-	{
-        e.report();
-		throw e.getErrCode();
-	}
-	catch (...)												// other exceptions
-	{
-		IDException e("Error when allocating a polynomial.", 32);
-        e.report();
-		throw e.getErrCode();
-	}
+	allocateMemory(initialize);
 }
 
 /**
@@ -94,37 +57,12 @@ Polynomial::Polynomial(int order)
  * \param[in] tp The Taylor polynomial object to copy from.
  * 
  */
-Polynomial::Polynomial(const Polynomial &p)
+Polynomial::Polynomial(const Polynomial &p):
+	_constant(p._constant),
+	_order(p._order),
+	_coeffs(0)
 {
-	try
-	{
-		itsOrder = tp.itsOrder;								// derivative order
-		_constant = tp._constant;
-		itsCoeff = new double[nrcoeff()];					// coefficients
-		if ((itsCoeff == 0)  ||  (itsCoeff == NULL))
-			throw IDException("Memory allocation failure.", 3);
-		for (int i = 0; i < nrcoeff(); i++)
-			itsCoeff[i] = tp.itsCoeff[i];
-	}
-	catch (bad_alloc e)
-	{
-		printf(red);
-		printf("\n***Exception bad_alloc found:");
-        printf("\n***%s" , e.what());
-		printf(normal);
-        throw 4;
-	}
-	catch (IDException e)
-	{
-        e.report();
-		throw e.getErrCode();
-	}
-	catch (...)												// other exceptions
-	{
-		IDException e("Error when allocating a polynomial.", 32);
-        e.report();
-		throw e.getErrCode();
-	}
+	copyFrom(p);
 }
 
 /**
@@ -133,86 +71,9 @@ Polynomial::Polynomial(const Polynomial &p)
  */
 Polynomial::~Polynomial()
 {
-	delete [] itsCoeff;
+	deallocateMemory();
 }
 
-/**
- * Prints out the coefficients of a Taylor polynomial, starting by the independent term.
- * 
- */
-void Polynomial::print()
-{
-	for (int i = 0; i < order(); i++)
-		printf("%.16lg%c", itsCoeff[i], '\t');
-		//printf(" %.16lg%s%d %c", itsCoeff[i], "*x^", i, '+');
-	printf("%.16lg", itsCoeff[order()]);
-	//printf(" %.16lg%s%d", itsCoeff[order()], "*x^", order());
-}
-
-/**
- * Prints out to a file the coefficients of a Taylor polynomial, starting by the 
- * independent term.
- * 
- * \param[in] fn The output file to write the polynomial to.
- * 
- */
-void Polynomial::print(FILE * fn)
-{
-	for (int i = 0; i < order(); i++)
-		fprintf(fn, "%.16lg%c", itsCoeff[i], '\t');
-		//fprintf(fn, " %.16lg%s%d %c", itsCoeff[i], "*x^", i, '+');
-	fprintf(fn, "%.16lg", itsCoeff[order()]);
-	//fprintf(fn, " %.16lg%s%d", itsCoeff[order()], "*x^", order());
-}
-
-/**
- * Evaluates a Taylor polynomial at a given value with a point of expansion.
- * 
- * \param[in] x The value to evaluate the polynomial at.
- * \param[in] alpha The point of expansion.
- * \return The result of the evaluation.
- * 
- */
-double Polynomial::eval(double x, double alpha)
-{
-	double result = itsCoeff[order()],
-		t = x - alpha;
-	
-	for (int i = order() - 1; i >= 0; i--)
-		result = t * result + itsCoeff[i];
-	
-	return result;
-}
-
-/**
- * Returns the first coefficient of the Taylor polynomial, i.e., the evaluation of the function.
- * 
- * \return The evaluation of the function at the initial point.
- * 
- */
-double Polynomial::feval()
-{
-	return itsCoeff[0];
-}
-
-/**
- * Implements the SHIFT operator to calculate the derivative of a Taylor polynomial.
- * 
- * The new coefficients are shifted to the left and the last one is zeroed.
- * 
- * E.g.:
- * 		y(t) = sum_{j=0}^{d} y_j * t^j + O(t^d+1)
- * 			 = y_0 + y_1*t + y_2*t^2 + ... + y_d*t^d
- * 
- * 		y'(t) = y_1 + 2*y_2*t + 3*y_3*t^2 + ... + d*y_d*t^d-1 + 0
- * 
- */
-void Polynomial::shift()
-{
-	for (int i = 1; i < nrcoeff(); i++)
-		itsCoeff[i - 1] = itsCoeff[i] * i; 
-	itsCoeff[nrcoeff() - 1] = 0.0;						// new last coeff. is zeroed
-}
 
 /**
  * Implements the [] operator (subscript operator).
@@ -225,7 +86,12 @@ void Polynomial::shift()
  */
 double & Polynomial::operator[](int index)
 { 
-	return itsCoeff[index];
+	if (index < 1 || index > _order)
+	{
+		throw CustomException("Invalid coefficient index of polynomial."); // TODO add error code
+	}
+
+	return _coeffs[index];
 }
 
 /**
@@ -239,17 +105,8 @@ double & Polynomial::operator[](int index)
  */
 Polynomial Polynomial::operator=(const Polynomial &p)
 {
-	int i;
-	
-	if (this == &p)
-  		return *this;
-	delete [] itsCoeff;										// deallocate the old Taylor polynomial
-	itsOrder = tp.itsOrder;									// derivative order
-	_constant = tp._constant;
-	itsCoeff = new double[nrcoeff()];						// coefficients
-	for (i = 0; i < nrcoeff(); i++)
-		itsCoeff[i] = tp.itsCoeff[i]; 
-	
+	copyFrom(p);
+
 	return *this;
 }
 
@@ -263,14 +120,14 @@ Polynomial Polynomial::operator=(const Polynomial &p)
  */
 bool Polynomial::operator==(const Polynomial &p) const
 {
-	if (itsOrder != tp.itsOrder)
+	if (_order != p._order)
 	{
 		return false;
 	}
 
-	for (int i = 0; i < nrcoeff(); i++)
+	for (int i = 0; i <= _order; i++)
 	{
-		if (itsCoeff[i] != tp.itsCoeff[i])
+		if (_coeffs[i] != p._coeffs[i])
 		{
 			return false;
 		}
@@ -287,9 +144,9 @@ bool Polynomial::operator==(const Polynomial &p) const
  * \return 1 if the Taylor polynomials are different; 0 if they are equal.
  * 
  */
-bool Polynomial::operator!=(const Polynomial &p)
+bool Polynomial::operator!=(const Polynomial &p) const
 {
-	return !(*this == tp);
+	return !(*this == p);
 }
 
 /**
@@ -300,9 +157,9 @@ bool Polynomial::operator!=(const Polynomial &p)
  * \return 1 if the inequation holds; 0 otherwise.
  * 
  */
-int Polynomial::operator<(const Polynomial &p)
+bool Polynomial::operator<(const Polynomial &p)
 {
-	return(itsCoeff[0] < tp.itsCoeff[0]);
+	return _coeffs[0] < p._coeffs[0];
 }
 
 /**
@@ -313,9 +170,9 @@ int Polynomial::operator<(const Polynomial &p)
  * \return 1 if the inequation holds; 0 otherwise.
  * 
  */
-int Polynomial::operator<=(const Polynomial &p)
+bool Polynomial::operator<=(const Polynomial &p)
 {
-	return(itsCoeff[0] <= tp.itsCoeff[0]);
+	return _coeffs[0] <= p._coeffs[0];
 }
 
 /**
@@ -326,9 +183,9 @@ int Polynomial::operator<=(const Polynomial &p)
  * \return 1 if the inequation holds; 0 otherwise.
  * 
  */
-int Polynomial::operator>(const Polynomial &p)
+bool Polynomial::operator>(const Polynomial &p)
 {
-	return(itsCoeff[0] > tp.itsCoeff[0]);
+	return _coeffs[0] > p._coeffs[0];
 }
 
 /**
@@ -339,9 +196,9 @@ int Polynomial::operator>(const Polynomial &p)
  * \return 1 if the inequation holds; 0 otherwise.
  * 
  */
-int Polynomial::operator>=(const Polynomial &p)
+bool Polynomial::operator>=(const Polynomial &p)
 {
-	return(itsCoeff[0] >= tp.itsCoeff[0]);
+	return _coeffs[0] >= p._coeffs[0];
 }
 
 /**
@@ -366,25 +223,25 @@ int Polynomial::operator>=(const Polynomial &p)
  */
 Polynomial Polynomial::operator+(const Polynomial &w)
 {
-	Polynomial v(itsOrder), aux(itsOrder);
+	Polynomial v(_order), aux(_order);
 
 	aux = w;
 	if (isConst())											// 'this' is a constant polynomial
 	{
-		v.itsCoeff[0] = itsCoeff[0] + w.itsCoeff[0];
-		for (int k = 1; k < nrcoeff(); k++)
-			v.itsCoeff[k] = w.itsCoeff[k];
+		v._coeffs[0] = _coeffs[0] + w._coeffs[0];
+		for (int k = 1; k <= _order; k++)
+			v._coeffs[k] = w._coeffs[k];
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
-		v.itsCoeff[0] = itsCoeff[0] + w.itsCoeff[0];
-		for (int k = 1; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[k];
+		v._coeffs[0] = _coeffs[0] + w._coeffs[0];
+		for (int k = 1; k <= _order; k++)
+			v._coeffs[k] = _coeffs[k];
 	}
 	else													// general case
 	{
-		for (int k = 0; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[k] + w.itsCoeff[k];
+		for (int k = 0; k <= _order; k++)
+			v._coeffs[k] = _coeffs[k] + w._coeffs[k];
 	}
 
 	return v;
@@ -401,14 +258,11 @@ Polynomial Polynomial::operator+(const Polynomial &w)
  */
 Polynomial Polynomial::operator+=(const Polynomial &w)
 {
-	Polynomial aux(itsOrder);
-
-	aux = w;
-	if (aux.isConst())										// 'w' is a constant polynomial
-		itsCoeff[0] += w.itsCoeff[0];
+	if (w.isConst())										// 'w' is a constant polynomial
+		_coeffs[0] += w._coeffs[0];
 	else													// 'this' is a constant polynomial...
-		for (int k = 0; k < nrcoeff(); k++)				// ...or general case
-			itsCoeff[k] += w.itsCoeff[k];
+		for (int k = 0; k <= _order; k++)				// ...or general case
+			_coeffs[k] += w._coeffs[k];
 
 	return *this;
 }
@@ -435,25 +289,25 @@ Polynomial Polynomial::operator+=(const Polynomial &w)
  */
 Polynomial Polynomial::operator-(const Polynomial &w)
 {
-	Polynomial v(itsOrder), aux(itsOrder);
+	Polynomial v(_order), aux(_order);
 
 	aux = w;
 	if (isConst())											// 'this' is a constant polynomial
 	{
-		v.itsCoeff[0] = itsCoeff[0] - w.itsCoeff[0];
-		for (int k = 1; k < nrcoeff(); k++)
-			v.itsCoeff[k] = - w.itsCoeff[k];
+		v._coeffs[0] = _coeffs[0] - w._coeffs[0];
+		for (int k = 1; k <= _order; k++)
+			v._coeffs[k] = - w._coeffs[k];
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
-		v.itsCoeff[0] = itsCoeff[0] - w.itsCoeff[0];
-		for (int k = 1; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[k];
+		v._coeffs[0] = _coeffs[0] - w._coeffs[0];
+		for (int k = 1; k <= _order; k++)
+			v._coeffs[k] = _coeffs[k];
 	}
 	else													// general case
 	{
-		for (int k = 0; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[k] - w.itsCoeff[k];
+		for (int k = 0; k <= _order; k++)
+			v._coeffs[k] = _coeffs[k] - w._coeffs[k];
 	}
 	
 	return v;
@@ -470,14 +324,14 @@ Polynomial Polynomial::operator-(const Polynomial &w)
  */
 Polynomial Polynomial::operator-=(const Polynomial &w)
 {
-	Polynomial aux(itsOrder);
+	Polynomial aux(_order);
 	
 	aux = w;
 	if (aux.isConst())										// 'w' is a constant polynomial
-		itsCoeff[0] -= w.itsCoeff[0];
+		_coeffs[0] -= w._coeffs[0];
 	else													// 'this' is a constant polynomial...
-		for (int k = 0; k < nrcoeff(); k++)				// ...or general case
-			itsCoeff[k] -= w.itsCoeff[k];
+		for (int k = 0; k <= _order; k++)				// ...or general case
+			_coeffs[k] -= w._coeffs[k];
 
 	return *this;
 }
@@ -490,9 +344,12 @@ Polynomial Polynomial::operator-=(const Polynomial &w)
  */
 Polynomial Polynomial::operator-()
 {
-	Polynomial v(itsOrder);
-	for (int k = 0; k < nrcoeff(); k++)
-		v.itsCoeff[k] = - itsCoeff[k];
+	Polynomial v(_order, false);
+
+	for (int i = 0; i <= _order; i++)
+	{
+		v._coeffs[i] = - _coeffs[i];
+	}
 	
 	return v;
 }
@@ -522,26 +379,26 @@ Polynomial Polynomial::operator-()
  */
 Polynomial Polynomial::operator*(const Polynomial &w)
 {
-	Polynomial v(itsOrder), aux(itsOrder);
+	Polynomial v(_order), aux(_order);
 	
 	aux = w;
 	if (isConst())											// 'this' is a constant polynomial
 	{
-		for (int k = 0; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[0] * w.itsCoeff[k];
+		for (int k = 0; k <= _order; k++)
+			v._coeffs[k] = _coeffs[0] * w._coeffs[k];
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
-		for (int k = 0; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[k] * w.itsCoeff[0];
+		for (int k = 0; k <= _order; k++)
+			v._coeffs[k] = _coeffs[k] * w._coeffs[0];
 	}
 	else													// general case
 	{
-		for (int k = 0; k < nrcoeff(); k++)
+		for (int k = 0; k <= _order; k++)
 		{
-			v.itsCoeff[k] = 0.0;
+			v._coeffs[k] = 0.0;
 			for (int j = 0; j < k + 1; j++)
-				v.itsCoeff[k] += itsCoeff[j] * w.itsCoeff[k - j];
+				v._coeffs[k] += _coeffs[j] * w._coeffs[k - j];
 		}
 	}
 	
@@ -558,27 +415,27 @@ Polynomial Polynomial::operator*(const Polynomial &w)
  */
 Polynomial Polynomial::operator*=(const Polynomial &w)
 {
-	Polynomial v(itsOrder), aux(itsOrder);
+	Polynomial v(_order), aux(_order);
 
 	aux = w;
 	if (isConst())											// 'this' is a constant polynomial
 	{
-		for (int k = 0; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[0] * w.itsCoeff[k];
+		for (int k = 0; k <= _order; k++)
+			v._coeffs[k] = _coeffs[0] * w._coeffs[k];
 		_constant = false;
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
-		for (int k = 0; k < nrcoeff(); k++)
-			v.itsCoeff[k] = itsCoeff[k] * w.itsCoeff[0];
+		for (int k = 0; k <= _order; k++)
+			v._coeffs[k] = _coeffs[k] * w._coeffs[0];
 	}
 	else													// general case
 	{
-		for (int k = 0; k < nrcoeff(); k++)
+		for (int k = 0; k <= _order; k++)
 		{
-			v.itsCoeff[k] = 0.0;
+			v._coeffs[k] = 0.0;
 			for (int j = 0; j < k + 1; j++)
-				v.itsCoeff[k] += itsCoeff[j] * w.itsCoeff[k - j];
+				v._coeffs[k] += _coeffs[j] * w._coeffs[k - j];
 		}
 	}
 	*this = v;
@@ -596,9 +453,9 @@ Polynomial Polynomial::operator*=(const Polynomial &w)
  */
 Polynomial Polynomial::operator*(double alpha)
 {
-	Polynomial v(itsOrder);
-	for (int j = 0; j < nrcoeff(); j++)
-		v.itsCoeff[j] = itsCoeff[j] * alpha;
+	Polynomial v(_order);
+	for (int j = 0; j <= _order; j++)
+		v._coeffs[j] = _coeffs[j] * alpha;
 	
 	return v;
 }
@@ -627,13 +484,13 @@ Polynomial Polynomial::operator*(double alpha)
 Polynomial Polynomial::operator/(const Polynomial &w)
 {
 	double sum;
-	Polynomial v(itsOrder);
-	for (int k = 0; k < nrcoeff(); k++)
+	Polynomial v(_order);
+	for (int k = 0; k <= _order; k++)
 	{
 		sum = 0.0;
 		for (int j = 0; j < k; j++)
-			sum += v.itsCoeff[j] * w.itsCoeff[k - j];
-		v.itsCoeff[k] = (itsCoeff[k] - sum) / w.itsCoeff[0];
+			sum += v._coeffs[j] * w._coeffs[k - j];
+		v._coeffs[k] = (_coeffs[k] - sum) / w._coeffs[0];
 	}
 	
 	return v;
@@ -650,14 +507,14 @@ Polynomial Polynomial::operator/(const Polynomial &w)
 Polynomial Polynomial::operator/=(const Polynomial &w)
 {
 	double sum;
-	Polynomial v(itsOrder);
+	Polynomial v(_order);
 	
-	for (int k = 0; k < nrcoeff(); k++)
+	for (int k = 0; k <= _order; k++)
 	{
 		sum = 0.0;
 		for (int j = 0; j < k; j++)
-			sum += v.itsCoeff[j] * w.itsCoeff[k - j];
-		v.itsCoeff[k] = (itsCoeff[k] - sum) / w.itsCoeff[0];
+			sum += v._coeffs[j] * w._coeffs[k - j];
+		v._coeffs[k] = (_coeffs[k] - sum) / w._coeffs[0];
 	}
 	*this = v;
 
@@ -684,12 +541,12 @@ Polynomial Polynomial::operator/=(const Polynomial &w)
  */
 Polynomial Polynomial::sqr()
 {
-	Polynomial v(itsOrder);
-	for (int k = 0; k < nrcoeff(); k++)
+	Polynomial v(_order);
+	for (int k = 0; k <= _order; k++)
 	{
-		v.itsCoeff[k] = 0.0;
+		v._coeffs[k] = 0.0;
 		for (int j = 0; j < k + 1; j++)
-			v.itsCoeff[k] += itsCoeff[j] * itsCoeff[k - j];
+			v._coeffs[k] += _coeffs[j] * _coeffs[k - j];
 	}
 	*this = v;
 	
@@ -717,18 +574,102 @@ Polynomial Polynomial::sqr()
 Polynomial Polynomial::sqrt()
 {
 	double sum;
-	Polynomial v(itsOrder);
-	v.itsCoeff[0] = ::sqrt(itsCoeff[0]);				// '::' to use sqrt of math.h
-	for (int k = 1; k < nrcoeff(); k++)
+	Polynomial v(_order);
+	v._coeffs[0] = ::sqrt(_coeffs[0]);				// '::' to use sqrt of math.h
+	for (int k = 1; k <= _order; k++)
 	{
 		sum = 0.0;
 		for (int j = 1; j < k; j++)
-			sum += v.itsCoeff[j] * v.itsCoeff[k - j];
-		v.itsCoeff[k] = (itsCoeff[k] - sum) / (2*v.itsCoeff[0]);
+			sum += v._coeffs[j] * v._coeffs[k - j];
+		v._coeffs[k] = (_coeffs[k] - sum) / (2*v._coeffs[0]);
 	}
 	*this = v;
 
 	return *this;
+}
+
+/**
+ * Prints out the coefficients of a Taylor polynomial, starting by the independent term.
+ * 
+ */
+void Polynomial::print()
+{
+	for (int i = 0; i < _order; i++)
+	{
+		printf("%.16lg\t", _coeffs[i]);
+	}
+	printf("%.16lg", _coeffs[_order]);
+}
+
+/**
+ * Prints out to a file the coefficients of a Taylor polynomial, starting by the 
+ * independent term.
+ * 
+ * \param[in] fn The output file to write the polynomial to.
+ * 
+ */
+void Polynomial::print(FILE * fn)
+{
+	for (int i = 0; i < _order; i++)
+	{
+		fprintf(fn, "%.16lg\t", _coeffs[i]);
+	}	
+	fprintf(fn, "%.16lg", _coeffs[_order]);
+}
+
+/**
+ * Evaluates a Taylor polynomial at a given value with a point of expansion.
+ * 
+ * \param[in] x The value to evaluate the polynomial at.
+ * \param[in] alpha The point of expansion.
+ * \return The result of the evaluation.
+ * 
+ */
+double Polynomial::eval(double x, double alpha)
+{
+	double result = _coeffs[_order];
+	double t = x - alpha;
+	
+	for (int i = _order - 1; i >= 0; i--)
+	{
+		result = t * result + _coeffs[i];
+	}
+
+	return result;
+}
+
+/**
+ * Returns the first coefficient of the Taylor polynomial, i.e., the evaluation of the function.
+ * 
+ * \return The evaluation of the function at the initial point.
+ * 
+ */
+double Polynomial::feval()
+{
+	return _coeffs[0];
+}
+
+/**
+ * Implements the SHIFT operator to calculate the derivative of a Taylor polynomial.
+ * 
+ * The new coefficients are shifted to the left and the last one is zeroed.
+ * 
+ * E.g.:
+ * 		y(t) = sum_{j=0}^{d} y_j * t^j + O(t^d+1)
+ * 			 = y_0 + y_1*t + y_2*t^2 + ... + y_d*t^d
+ * 
+ * 		y'(t) = y_1 + 2*y_2*t + 3*y_3*t^2 + ... + d*y_d*t^d-1 + 0
+ * 
+ */
+void Polynomial::shift()
+{
+	for (int i = 1; i <= _order; i++)
+	{
+		_coeffs[i - 1] = i + _coeffs[i]; 
+	}
+
+	// set last coefficient to zero
+	_coeffs[_order] = 0.0;
 }
 
 /**
@@ -738,25 +679,24 @@ Polynomial Polynomial::sqrt()
  * \return \a true if it is a constant Taylor polynomial; \a false otherwise.
  * 
  */
-bool Polynomial::isConst()
+bool Polynomial::isConst() const
 {
-	bool c = true;
+	isConstCount++;
 
-	for (int i = 1; i < nrcoeff(); i++)
+	if (_constant == -1)
 	{
-		if (itsCoeff[i] != 0.0)							// at least for one coefficient
-		{													// holds p_i <> 0
-			c = false;
-			break;
+		_constant = 1;
+		for (int i = 1; i <= _order; i++)
+		{
+			if (_coeffs[i] != 0.0)
+			{
+				_constant = 0;
+				return false;				
+			}
 		}
-		if (!c)
-			break;
 	}
-	if (c)													// it is constant!
-		if (!_constant)
-			_constant = true;
-			
-	return (c);
+
+	return _constant == 1;
 }
 
 /**
@@ -769,23 +709,15 @@ bool Polynomial::isConst()
  */
 bool Polynomial::isConst(double eps)
 {
-	bool c = true;
-
-	for (int i = 1; i < nrcoeff(); i++)
+	for (int i = 1; i <= _order; i++)
 	{
-		if (fabs(itsCoeff[i]) > eps)					// at least for one coefficient
-		{													// holds p_i <> 0
-			c = false;
-			break;
+		if (fabs(_coeffs[i]) > eps)
+		{
+			return false;
 		}
-		if (!c)
-			break;
 	}
-	if (c)													// it is constant!
-		if (!_constant)
-			_constant = true;
-			
-	return (c);
+
+	return true;
 }
 
 /**
@@ -795,9 +727,9 @@ bool Polynomial::isConst(double eps)
  * \return \a true if it is a constant Taylor polynomial with value 1; \a false otherwise.
  * 
  */
-bool Polynomial::isId()
+bool Polynomial::isId() const
 {
-	return (isConst()  &&  itsCoeff[0] == 1.0);
+	return (isConst()  &&  _coeffs[0] == 1.0);
 }
 
 /**
@@ -810,7 +742,7 @@ bool Polynomial::isId()
  */
 bool Polynomial::isId(double eps)
 {
-	return (isConst(eps)  &&  fabs(itsCoeff[0] - 1.0) < eps);
+	return (isConst(eps)  &&  fabs(_coeffs[0] - 1.0) < eps);
 }
 
 /**
@@ -820,22 +752,9 @@ bool Polynomial::isId(double eps)
  * \return \a true if all coefficients are zeroed; \a false otherwise.
  * 
  */
-bool Polynomial::isZero()
+bool Polynomial::isZero() const
 {
-	bool z = true;
-
-	for (int i = 0; i < nrcoeff(); i++)
-	{
-		if (itsCoeff[i] != 0.0)							// at least for one coefficient
-		{													// holds p_i <> 0
-			z = false;
-			break;
-		}
-		if (!z)
-			break;
-	}
-	
-	return z;
+	return _coeffs[0] == 0 && isConst();
 }
 
 /**
@@ -848,79 +767,138 @@ bool Polynomial::isZero()
  */
 bool Polynomial::isZero(double eps)
 {
-	bool z = true;
-
-	for (int i = 0; i < nrcoeff(); i++)
+	for (int i = 0; i <= _order; i++)
 	{
-		if (fabs(itsCoeff[i]) > eps)					// at least for one coefficient
-		{													// holds |p_i| > eps
-			z = false;
-			break;
+		if (fabs(_coeffs[i]) > eps)
+		{
+			return false;
 		}
-	if (!z)
-		break;
 	}
 	
-	return z;
+	return true;
 }
 
 /**
  * Sets all coefficients of a Taylor polynomial to zero.
  * 
- * \return The error code.
- * 
  */
-int Polynomial::set2zero()
+void Polynomial::set2zero()
 {
-	for (int i = 0; i < nrcoeff(); i++)					// p(x) = 0
-		itsCoeff[i] = 0.0;
-	_constant = true;
-	
-	return 0;
+	for (int i = 0; i <= _order; i++)	
+	{
+		_coeffs[i] = 0.0;
+	}
+
+	_constant = 1;
 }
 
 /**
  * Sets the coefficients of a Taylor polynomial to zero, from the order given as parameter on.
  * 
  * \param[in] ord Derivative order from which to start on (increasingly).
- * \return The error code.
  * 
  */
-int Polynomial::set2zero(int ord)
+void Polynomial::set2zero(int ord)
 {
-	for (int i = ord; i < nrcoeff(); i++)
-		itsCoeff[i] = 0.0;								// p_i = 0, for i >= ord
+	for (int i = ord; i <= _order; i++)
+	{
+		_coeffs[i] = 0.0;
+	}
 	
-	return 0;
+	_constant = -1;
 }
 
 /**
  * Sets a Taylor polynomial to the constant given as parameter.
  * 
  * \param[in] c The constant value of type \a double to set the Taylor polynomial to.
- * \return The error code.
  * 
  */
-int Polynomial::set2const(double c)
+void Polynomial::set2const(double c)
 {
-	itsCoeff[0] = c;										// p(x) = c
-	set2zero(1);											// set to zero the resting coefficients
-	_constant = true;
-	
-	return 0;
+	_coeffs[0] = c;
+
+	for (int i = 1; i <= _order; i++)
+	{
+		_coeffs[i] = 0.0;
+	}
+
+	_constant = 1;
 }
 
 /**
  * Sets the coefficients of a Taylor polynomial to the ones given as parameter.
  * 
  * \param[in] c A vector of coefficients of type \type double.
- * \return The error code.
  * 
  */
-int Polynomial::setCoeffs(double *c)
+void Polynomial::setCoeffs(double *c)
 {
-	for (int i = 0; i < nrcoeff(); i++)
-		itsCoeff[i] = c [i];
+	for (int i = 0; i <= _order; i++)
+	{
+		_coeffs[i] = c[i];
+	}
+}
 
-	return 0;
+
+/***************
+  P R I V A T E
+  **************/
+
+void Polynomial::allocateMemory(double *&coeffs, int order, bool initialize)
+{
+	if (order < 0)
+	{
+		throw CustomException("The order of a polynomial cannot be negative.", 35);
+	}
+
+	try
+	{
+		coeffs = new double[order + 1];
+		if (coeffs == 0  ||  coeffs == NULL)
+		{
+			throw CustomException("Memory allocation failure.", 3);
+		}
+		if (initialize)
+		{
+			for (int i = 0; i <= order; i++)
+			{
+				coeffs[i] = 0.0;
+			}
+		}
+	}
+	catch (bad_alloc e)
+	{
+		throw CustomException(e.what(), 4);
+	}
+	catch (...)
+	{
+		throw CustomException("Error when allocating memory for a polynomial.", 32);
+	}
+}
+
+void Polynomial::deallocateMemory(double *&coeffs)
+{
+	delete [] coeffs;
+}
+
+void Polynomial::copyFrom(const Polynomial &p)
+{
+	deallocateMemory();
+
+	_order = p._order;
+	_constant = p._constant;
+
+	allocateMemory(false);
+
+	for (int i = 0; i <= _order; i++)
+	{
+		_coeffs[i] = p._coeffs[i];
+	}
+}
+
+void Polynomial::unsetConst()
+{
+	unsetConstCount++;
+	_constant = false;
 }

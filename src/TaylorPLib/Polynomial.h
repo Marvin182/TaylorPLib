@@ -3,11 +3,11 @@
 
 #include <stdexcept>
 #include <math.h>
-#include "IDException.h"
+#include "CustomException.h"
 
 namespace LibMatrix {
 
-	class __declspec(dllexport) class Polynomial
+	class __declspec(dllexport) Polynomial
 	{
 	//
 	// (Taylor) Polynomial with derivate degree n (n+1 coefficients):
@@ -31,27 +31,37 @@ namespace LibMatrix {
 	//			+ ... + h^n*f^{(n)}(x0)/n!
 	//
 	private:
-		int itsOrder;				// The derivative order of the Taylor polynomial
-									// Nr. of coeff = itsGrade + 1
-    	double *itsCoeff;			// The coefficients
-    	bool _constant;				// whether it is a constant Taylor polynomial or not
+    	mutable char _constant;		// whether it is a constant (Taylor) polynomial or not
+    								//  0 = not constant
+    								//  1 = constant
+    								// -1 = unkown
+		int _order;					// the derivative order of the (Taylor) polynomial
+    	double *_coeffs;			// coefficients, number of coeffientk = order + 1
+
+    	void allocateMemory(bool initialize) { allocateMemory(_coeffs, _order, initialize); }
+    	void allocateMemory(double *&coeffs, int order, bool initialize);
+    	void deallocateMemory() { deallocateMemory(_coeffs); }
+    	void deallocateMemory(double *&coeffs);
+    	void copyFrom(const Polynomial &p);
+
+    	static int unsetConstCount;
+    	static int isConstCount;
+    	void unsetConst();
 
 	public:
 		//
 		// Constructors, destructor
 		//
 		Polynomial();
-		Polynomial(int order);
+		Polynomial(int order, bool initialize = true);
 		Polynomial(const Polynomial &p);
 		~Polynomial();
 
 		//
 		// Accessing properties
 		//
-		double* coeffs() { return itsCoeff; }
-		int order() { return itsOrder; }
-		int nrcoeff() { return itsOrder + 1; }
-		char* typeName() { return "Polynomial"; }
+		int order() const { return _order; }
+		int ncoeff() const { return _order + 1; }
 
 		//
 		// Overloaded operators for Taylor arithmetic
@@ -60,10 +70,10 @@ namespace LibMatrix {
 		Polynomial operator=(const Polynomial &p);
 		bool operator==(const Polynomial &p) const;
 		bool operator!=(const Polynomial &p) const;
-		int operator<(const Polynomial &p);
-		int operator<=(const Polynomial &p);
-		int operator>(const Polynomial &p);
-		int operator>=(const Polynomial &p);
+		bool operator<(const Polynomial &p);
+		bool operator<=(const Polynomial &p);
+		bool operator>(const Polynomial &p);
+		bool operator>=(const Polynomial &p);
 		Polynomial operator+(const Polynomial &w);
 		Polynomial operator+=(const Polynomial &w);
 		Polynomial operator-(const Polynomial &w);
@@ -89,16 +99,16 @@ namespace LibMatrix {
 		double eval(double x, double alpha);
 		double feval();
 		void shift();
-		bool isConst();
+		bool isConst() const;
 		bool isConst(double eps);
-		bool isId();
+		bool isId() const;
 		bool isId(double eps);
-		bool isZero();
+		bool isZero() const;
 		bool isZero(double eps);
-		int set2zero();
-		int set2zero(int ord);
-		int set2const(double c);
-		int setCoeffs(double *c);
+		void set2zero();
+		void set2zero(int ord);
+		void set2const(double c);
+		void setCoeffs(double *c);
 	};
 };
 

@@ -21,12 +21,18 @@
     <ClInclude Include="CustomException.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="Polynomial.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Matrix.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="CustomException.cpp">
+      <Filter>Quelldateien</Filter>
+    </ClCompile>
+    <ClCompile Include="Polynomial.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
