@@ -6,13 +6,6 @@ using namespace LibMatrix;
 int Polynomial::unsetConstCount = 0;
 int Polynomial::isConstCount = 0;
 
-double fabs(double d)
-{
-	if (d < 0)
-		return -d;
-	return d;
-}
-
 
 /**
  * Default constructor for the class. Creates the object.

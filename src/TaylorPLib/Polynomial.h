@@ -5,6 +5,8 @@
 #include <math.h>
 #include "CustomException.h"
 
+#define fabs(x) ((x) > 0 ? (x) : -(x))
+
 namespace LibMatrix {
 
 	class __declspec(dllexport) Polynomial
