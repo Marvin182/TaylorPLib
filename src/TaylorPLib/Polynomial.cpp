@@ -214,29 +214,34 @@ bool Polynomial::operator>=(const Polynomial &p)
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator+(const Polynomial &w)
+Polynomial Polynomial::operator+(const Polynomial &p)
 {
-	Polynomial v(_order), aux(_order);
-
-	aux = w;
-	if (isConst())											// 'this' is a constant polynomial
+	if (_order != p._order)
 	{
-		v._coeffs[0] = _coeffs[0] + w._coeffs[0];
-		for (int k = 1; k <= _order; k++)
-			v._coeffs[k] = w._coeffs[k];
-	}
-	else if (aux.isConst())								// 'w' is a constant polynomial
-	{
-		v._coeffs[0] = _coeffs[0] + w._coeffs[0];
-		for (int k = 1; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k];
-	}
-	else													// general case
-	{
-		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] + w._coeffs[k];
+		throw CustomException("The order of both Taylor Polynoms should match.");
 	}
 
+	// if one of the polynomial is constant we can optimize a bit
+	Polynomial v(_order, false);
+	if (isConst())
+	{
+		v = p;
+		v._coeffs[0] += _coeffs[0];
+	}
+	else if (p.isConst())
+	{
+		v = *this;
+		v._coeffs[0] += p._coeffs[0];
+	}
+	else
+	{
+		// normal case
+		for (int i = 0; i < _order; i++)
+		{
+			v._coeffs[i] = _coeffs[i] + p._coeffs[i];
+		}
+	}
+	
 	return v;
 }
 
@@ -249,15 +254,43 @@ Polynomial Polynomial::operator+(const Polynomial &w)
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator+=(const Polynomial &w)
+Polynomial Polynomial::operator+=(const Polynomial &p)
 {
-	if (w.isConst())										// 'w' is a constant polynomial
-		_coeffs[0] += w._coeffs[0];
-	else													// 'this' is a constant polynomial...
-		for (int k = 0; k <= _order; k++)				// ...or general case
-			_coeffs[k] += w._coeffs[k];
+	if (_order != p._order)
+	{
+		throw CustomException("The order of both Taylor Polynoms should match.");
+	}
 
+	if (p.isConst())
+	{
+		_coeffs[0] += p._coeffs[0];
+	}
+	else
+	{
+		for (int i = 0; i <= _order; i++)
+		{
+			_coeffs[i] += p._coeffs[i];
+		}
+	}
 	return *this;
+}
+
+/**
+ * Implements the unary - operator.
+ * 
+ * \return A pointer to the resulting polynomial.
+ * 
+ */
+Polynomial Polynomial::operator-()
+{
+	Polynomial p(_order, false);
+
+	for (int i = 0; i <= _order; i++)
+	{
+		p._coeffs[i] = - _coeffs[i];
+	}
+	
+	return p;
 }
 
 /**
@@ -280,27 +313,30 @@ Polynomial Polynomial::operator+=(const Polynomial &w)
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator-(const Polynomial &w)
+Polynomial Polynomial::operator-(const Polynomial &p)
 {
-	Polynomial v(_order), aux(_order);
+	if (_order != p._order)
+	{
+		throw CustomException("The order of both Taylor Polynoms should match.");
+	}
 
-	aux = w;
 	if (isConst())											// 'this' is a constant polynomial
 	{
-		v._coeffs[0] = _coeffs[0] - w._coeffs[0];
+
+		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
 		for (int k = 1; k <= _order; k++)
-			v._coeffs[k] = - w._coeffs[k];
+			v._coeffs[k] = - p._coeffs[k];
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
-		v._coeffs[0] = _coeffs[0] - w._coeffs[0];
+		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
 		for (int k = 1; k <= _order; k++)
 			v._coeffs[k] = _coeffs[k];
 	}
 	else													// general case
 	{
 		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] - w._coeffs[k];
+			v._coeffs[k] = _coeffs[k] - p._coeffs[k];
 	}
 	
 	return v;
@@ -315,36 +351,37 @@ Polynomial Polynomial::operator-(const Polynomial &w)
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator-=(const Polynomial &w)
+Polynomial Polynomial::operator-=(const Polynomial &p)
 {
 	Polynomial aux(_order);
 	
-	aux = w;
+	aux = p;
 	if (aux.isConst())										// 'w' is a constant polynomial
-		_coeffs[0] -= w._coeffs[0];
+		_coeffs[0] -= p._coeffs[0];
 	else													// 'this' is a constant polynomial...
 		for (int k = 0; k <= _order; k++)				// ...or general case
-			_coeffs[k] -= w._coeffs[k];
+			_coeffs[k] -= p._coeffs[k];
 
 	return *this;
 }
 
 /**
- * Implements the unary - operator.
+ * Implements the * operator.
+ * Multiplies a Taylor polynomial by a scalar.
  * 
- * \return A pointer to the resulting polynomial.
+ * \param[in] d The scalar value to multiply by.
+ * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator-()
+Polynomial Polynomial::operator*(double d)
 {
-	Polynomial v(_order, false);
-
+	Polynomial aux(_order, false);
 	for (int i = 0; i <= _order; i++)
 	{
-		v._coeffs[i] = - _coeffs[i];
+		aux._coeffs[i] = d * _coeffs[i];
 	}
-	
-	return v;
+
+	return aux;
 }
 
 /**
@@ -367,23 +404,23 @@ Polynomial Polynomial::operator-()
  * Philadelphia, PA, 2000)
  * 
  * \param[in] w The pointer to the Taylor polynomial to be multiplied by.
- * \return A pointer to the resulting polynomial.
+ * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator*(const Polynomial &w)
+Polynomial Polynomial::operator*(const Polynomial &p)
 {
 	Polynomial v(_order), aux(_order);
 	
-	aux = w;
+	aux = p;
 	if (isConst())											// 'this' is a constant polynomial
 	{
 		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[0] * w._coeffs[k];
+			v._coeffs[k] = _coeffs[0] * p._coeffs[k];
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
 		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] * w._coeffs[0];
+			v._coeffs[k] = _coeffs[k] * p._coeffs[0];
 	}
 	else													// general case
 	{
@@ -391,7 +428,7 @@ Polynomial Polynomial::operator*(const Polynomial &w)
 		{
 			v._coeffs[k] = 0.0;
 			for (int j = 0; j < k + 1; j++)
-				v._coeffs[k] += _coeffs[j] * w._coeffs[k - j];
+				v._coeffs[k] += _coeffs[j] * p._coeffs[k - j];
 		}
 	}
 	
@@ -400,27 +437,45 @@ Polynomial Polynomial::operator*(const Polynomial &w)
 
 /**
  * Implements the *= operator.
+ * Multiplies a Taylor polynomial by a scalar.
+ * 
+ * \param[in] d The scalar value to multiply by.
+ * \return A pointer to the resulting Taylor polynomial.
+ * 
+ */
+Polynomial Polynomial::operator*=(double d)
+{
+	for (int i = 0; i <= _order; i++)
+	{
+		_coeffs[i] *= d;
+	}
+
+	return *this;
+}
+
+/**
+ * Implements the *= operator.
  * Multiplies two Taylor polynomials.
  * 
  * \param[in] w The pointer to the polynomial to be multiplied by.
- * \return A pointer to the resulting polynomial.
+ * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator*=(const Polynomial &w)
+Polynomial Polynomial::operator*=(const Polynomial &p)
 {
 	Polynomial v(_order), aux(_order);
 
-	aux = w;
+	aux = p;
 	if (isConst())											// 'this' is a constant polynomial
 	{
 		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[0] * w._coeffs[k];
+			v._coeffs[k] = _coeffs[0] * p._coeffs[k];
 		_constant = false;
 	}
 	else if (aux.isConst())								// 'w' is a constant polynomial
 	{
 		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] * w._coeffs[0];
+			v._coeffs[k] = _coeffs[k] * p._coeffs[0];
 	}
 	else													// general case
 	{
@@ -428,29 +483,12 @@ Polynomial Polynomial::operator*=(const Polynomial &w)
 		{
 			v._coeffs[k] = 0.0;
 			for (int j = 0; j < k + 1; j++)
-				v._coeffs[k] += _coeffs[j] * w._coeffs[k - j];
+				v._coeffs[k] += _coeffs[j] * p._coeffs[k - j];
 		}
 	}
 	*this = v;
 	
 	return *this;
-}
-
-/**
- * Implements the * operator.
- * Multiplies a Taylor polynomial by a scalar.
- * 
- * \param[in] alpha The scalar value to multiply by.
- * \return A pointer to the resulting Taylor polynomial.
- * 
- */
-Polynomial Polynomial::operator*(double alpha)
-{
-	Polynomial v(_order);
-	for (int j = 0; j <= _order; j++)
-		v._coeffs[j] = _coeffs[j] * alpha;
-	
-	return v;
 }
 
 /**
@@ -474,7 +512,7 @@ Polynomial Polynomial::operator*(double alpha)
  * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator/(const Polynomial &w)
+Polynomial Polynomial::operator/(const Polynomial &p)
 {
 	double sum;
 	Polynomial v(_order);
@@ -482,8 +520,8 @@ Polynomial Polynomial::operator/(const Polynomial &w)
 	{
 		sum = 0.0;
 		for (int j = 0; j < k; j++)
-			sum += v._coeffs[j] * w._coeffs[k - j];
-		v._coeffs[k] = (_coeffs[k] - sum) / w._coeffs[0];
+			sum += v._coeffs[j] * p._coeffs[k - j];
+		v._coeffs[k] = (_coeffs[k] - sum) / p._coeffs[0];
 	}
 	
 	return v;
@@ -497,7 +535,7 @@ Polynomial Polynomial::operator/(const Polynomial &w)
  * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator/=(const Polynomial &w)
+Polynomial Polynomial::operator/=(const Polynomial &p)
 {
 	double sum;
 	Polynomial v(_order);
@@ -506,8 +544,8 @@ Polynomial Polynomial::operator/=(const Polynomial &w)
 	{
 		sum = 0.0;
 		for (int j = 0; j < k; j++)
-			sum += v._coeffs[j] * w._coeffs[k - j];
-		v._coeffs[k] = (_coeffs[k] - sum) / w._coeffs[0];
+			sum += v._coeffs[j] * p._coeffs[k - j];
+		v._coeffs[k] = (_coeffs[k] - sum) / p._coeffs[0];
 	}
 	*this = v;
 
@@ -704,7 +742,7 @@ bool Polynomial::isConst(double eps)
 {
 	for (int i = 1; i <= _order; i++)
 	{
-		if (fabs(_coeffs[i]) > eps)
+		if (abs(_coeffs[i]) > eps)
 		{
 			return false;
 		}
@@ -735,7 +773,7 @@ bool Polynomial::isId() const
  */
 bool Polynomial::isId(double eps)
 {
-	return (isConst(eps)  &&  fabs(_coeffs[0] - 1.0) < eps);
+	return (isConst(eps)  &&  abs(_coeffs[0] - 1.0) < eps);
 }
 
 /**
@@ -762,7 +800,7 @@ bool Polynomial::isZero(double eps)
 {
 	for (int i = 0; i <= _order; i++)
 	{
-		if (fabs(_coeffs[i]) > eps)
+		if (abs(_coeffs[i]) > eps)
 		{
 			return false;
 		}
@@ -877,16 +915,43 @@ void Polynomial::deallocateMemory(double *&coeffs)
 
 void Polynomial::copyFrom(const Polynomial &p)
 {
-	deallocateMemory();
-
-	_order = p._order;
-	_constant = p._constant;
-
-	allocateMemory(false);
-
-	for (int i = 0; i <= _order; i++)
+	if (p._order == _order)
 	{
-		_coeffs[i] = p._coeffs[i];
+		// if p constant is defined (0 or 1) we can copy, otherwise it has to be undefined anyway
+		_constant = p._constant;
+		
+		for (int i = 0; i <= order; i++)
+		{
+			coeffs[i] = p._coeffs[i];
+		}
+	}
+	else
+	{
+		deallocateMemory();
+
+		_order = p._order;
+		_constant = p._constant;
+
+		try
+		{
+			coeffs = new double[order + 1];
+			if (coeffs == 0  ||  coeffs == NULL)
+			{
+				throw CustomException("Memory allocation failure.", 3);
+			}
+			for (int i = 0; i <= order; i++)
+			{
+				coeffs[i] = p._coeffs[i];
+			}
+		}
+		catch (bad_alloc e)
+		{
+			throw CustomException(e.what(), 4);
+		}
+		catch (...)
+		{
+			throw CustomException("Error when allocating memory for a polynomial.", 32);
+		}
 	}
 }
 
@@ -894,4 +959,3 @@ void Polynomial::unsetConst()
 {
 	unsetConstCount++;
 	_constant = false;
-}

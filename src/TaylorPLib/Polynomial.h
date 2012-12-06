@@ -5,7 +5,7 @@
 #include <math.h>
 #include "CustomException.h"
 
-#define fabs(x) ((x) > 0 ? (x) : -(x))
+#define abs(x) ((x) > 0 ? (x) : -(x))
 
 namespace LibMatrix {
 
@@ -76,16 +76,21 @@ namespace LibMatrix {
 		bool operator<=(const Polynomial &p);
 		bool operator>(const Polynomial &p);
 		bool operator>=(const Polynomial &p);
-		Polynomial operator+(const Polynomial &w);
-		Polynomial operator+=(const Polynomial &w);
-		Polynomial operator-(const Polynomial &w);
-		Polynomial operator-=(const Polynomial &w);
-		Polynomial operator-();
-		Polynomial operator*(const Polynomial &w);
-		Polynomial operator*=(const Polynomial &w);
-		Polynomial operator*(double alpha);
-		Polynomial operator/(const Polynomial &w);
-		Polynomial operator/=(const Polynomial &w);
+		
+		Polynomial operator+(const Polynomial &p) const;
+		Polynomial operator+=(const Polynomial &p);
+		
+		Polynomial operator-() const;
+		Polynomial operator-(const Polynomial &p) const;
+		Polynomial operator-=(const Polynomial &p);
+		
+		Polynomial operator*(const double d) const;
+		Polynomial operator*(const Polynomial &p) const;
+		Polynomial operator*=(const double d);
+		Polynomial operator*=(const Polynomial &p);
+
+		Polynomial operator/(const Polynomial &p) const;
+		Polynomial operator/=(const Polynomial &p);
 
 		//
 		// Special operators
