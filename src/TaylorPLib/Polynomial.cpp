@@ -235,13 +235,13 @@ Polynomial Polynomial::operator+(const Polynomial &p)
 	}
 	else
 	{
-		// normal case
+		// general case
 		for (int i = 0; i < _order; i++)
 		{
 			v._coeffs[i] = _coeffs[i] + p._coeffs[i];
 		}
 	}
-	
+
 	return v;
 }
 
@@ -320,23 +320,25 @@ Polynomial Polynomial::operator-(const Polynomial &p)
 		throw CustomException("The order of both Taylor Polynoms should match.");
 	}
 
-	if (isConst())											// 'this' is a constant polynomial
+	// if one of the polynomial is constant we can optimize a bit
+	Polynomial v(_order, false);
+	if (isConst())
 	{
-
-		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
-		for (int k = 1; k <= _order; k++)
-			v._coeffs[k] = - p._coeffs[k];
+		v = p;
+		v._coeffs[0] -= _coeffs[0];
 	}
-	else if (aux.isConst())								// 'w' is a constant polynomial
+	else if (p.isConst())
 	{
-		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
-		for (int k = 1; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k];
+		v = *this;
+		v._coeffs[0] -= p._coeffs[0];
 	}
-	else													// general case
+	else
 	{
-		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] - p._coeffs[k];
+		// general case
+		for (int i = 0; i < _order; i++)
+		{
+			v._coeffs[i] = _coeffs[i] - p._coeffs[i];
+		}
 	}
 	
 	return v;
@@ -353,15 +355,17 @@ Polynomial Polynomial::operator-(const Polynomial &p)
  */
 Polynomial Polynomial::operator-=(const Polynomial &p)
 {
-	Polynomial aux(_order);
-	
-	aux = p;
-	if (aux.isConst())										// 'w' is a constant polynomial
+	if (aux.isConst())
+	{
 		_coeffs[0] -= p._coeffs[0];
-	else													// 'this' is a constant polynomial...
-		for (int k = 0; k <= _order; k++)				// ...or general case
+	}
+	else
+	{
+		for (int k = 0; k <= _order; k++)
+		{
 			_coeffs[k] -= p._coeffs[k];
-
+		}
+	}
 	return *this;
 }
 
@@ -375,13 +379,14 @@ Polynomial Polynomial::operator-=(const Polynomial &p)
  */
 Polynomial Polynomial::operator*(double d)
 {
-	Polynomial aux(_order, false);
+	Polynomial v(_order, false);
+	
 	for (int i = 0; i <= _order; i++)
 	{
-		aux._coeffs[i] = d * _coeffs[i];
+		v._coeffs[i] = d * _coeffs[i];
 	}
 
-	return aux;
+	return v;
 }
 
 /**
@@ -409,26 +414,39 @@ Polynomial Polynomial::operator*(double d)
  */
 Polynomial Polynomial::operator*(const Polynomial &p)
 {
-	Polynomial v(_order), aux(_order);
-	
-	aux = p;
-	if (isConst())											// 'this' is a constant polynomial
+	if (_order != p._order)
 	{
-		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[0] * p._coeffs[k];
+		throw CustomException("The order of both Taylor Polynoms should match.");
 	}
-	else if (aux.isConst())								// 'w' is a constant polynomial
+
+	// if one of the polynomial is constant we can optimize a bit
+	// _coeffs[0] is the term with x^0
+	Polynomial v(_order, false);
+	if (isConst())
 	{
-		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] * p._coeffs[0];
-	}
-	else													// general case
-	{
-		for (int k = 0; k <= _order; k++)
+		v = p;
+		for (int i = 0; i < _order; i++)
 		{
-			v._coeffs[k] = 0.0;
-			for (int j = 0; j < k + 1; j++)
-				v._coeffs[k] += _coeffs[j] * p._coeffs[k - j];
+			v._coeffs[i] *= _coeffs[0];
+		}
+	}
+	else if (p.isConst())
+	{
+		v = *this;
+		for (int i = 0; i < _order; i++)
+		{
+			v._coeffs[i] *= p._coeffs[0];
+		}
+	}
+	else
+	{
+		for (int i = 0; i <= _order; i++)
+		{
+			v._coeffs[i] = 0.0;
+			for (int j = 0; j < i + 1; j++)
+			{
+				v._coeffs[i] += _coeffs[j] * p._coeffs[k - j];
+			}
 		}
 	}
 	
@@ -463,29 +481,40 @@ Polynomial Polynomial::operator*=(double d)
  */
 Polynomial Polynomial::operator*=(const Polynomial &p)
 {
-	Polynomial v(_order), aux(_order);
+	if (_order != p._order)
+	{
+		throw CustomException("The order of both Taylor Polynoms should match.");
+	}
 
-	aux = p;
-	if (isConst())											// 'this' is a constant polynomial
+	// if one of the polynomial is constant we can optimize a bit
+	Polynomial v(_order, false);
+	if (isConst())
 	{
-		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[0] * p._coeffs[k];
-		_constant = false;
-	}
-	else if (aux.isConst())								// 'w' is a constant polynomial
-	{
-		for (int k = 0; k <= _order; k++)
-			v._coeffs[k] = _coeffs[k] * p._coeffs[0];
-	}
-	else													// general case
-	{
-		for (int k = 0; k <= _order; k++)
+		for (int i = 0; i <= _order; i++)
 		{
-			v._coeffs[k] = 0.0;
-			for (int j = 0; j < k + 1; j++)
-				v._coeffs[k] += _coeffs[j] * p._coeffs[k - j];
+			v._coeffs[i] = _coeffs[0] * p._coeffs[i];
 		}
 	}
+	else if (p.isConst())
+	{
+		for (int i = 0; i <= _order; i++)
+		{
+			v._coeffs[i] = _coeffs[i] * p._coeffs[0];
+		}
+	}
+	else
+	{
+		// general case
+		for (int i = 0; i <= _order; i++)
+		{
+			v._coeffs[i] = 0.0;
+			for (int j = 0; j < i + 1; j++)
+			{
+				v._coeffs[i] += _coeffs[j] * p._coeffs[i - j];
+			}	
+		}
+	}
+	
 	*this = v;
 	
 	return *this;
