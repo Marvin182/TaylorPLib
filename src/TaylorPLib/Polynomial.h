@@ -95,8 +95,10 @@ namespace LibMatrix {
 		//
 		// Special operators
 		//
-		Polynomial sqr();
-		Polynomial sqrt();
+		Polynomial sqr() const;
+		void setSqr();
+		Polynomial sqrt() const;
+		void setSqrt();
 
 		//
 		// Other functions

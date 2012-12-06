@@ -214,7 +214,7 @@ bool Polynomial::operator>=(const Polynomial &p)
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator+(const Polynomial &p)
+Polynomial Polynomial::operator+(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
@@ -281,7 +281,7 @@ Polynomial Polynomial::operator+=(const Polynomial &p)
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator-()
+Polynomial Polynomial::operator-() const
 {
 	Polynomial p(_order, false);
 
@@ -313,7 +313,7 @@ Polynomial Polynomial::operator-()
  * \return A pointer to the resulting polynomial.
  * 
  */
-Polynomial Polynomial::operator-(const Polynomial &p)
+Polynomial Polynomial::operator-(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
@@ -355,7 +355,12 @@ Polynomial Polynomial::operator-(const Polynomial &p)
  */
 Polynomial Polynomial::operator-=(const Polynomial &p)
 {
-	if (aux.isConst())
+	if (_order != p._order)
+	{
+		throw CustomException("The order of both Taylor Polynoms should match.");
+	}
+
+	if (p.isConst())
 	{
 		_coeffs[0] -= p._coeffs[0];
 	}
@@ -377,7 +382,7 @@ Polynomial Polynomial::operator-=(const Polynomial &p)
  * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator*(double d)
+Polynomial Polynomial::operator*(double d) const
 {
 	Polynomial v(_order, false);
 	
@@ -412,7 +417,7 @@ Polynomial Polynomial::operator*(double d)
  * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator*(const Polynomial &p)
+Polynomial Polynomial::operator*(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
@@ -445,7 +450,7 @@ Polynomial Polynomial::operator*(const Polynomial &p)
 			v._coeffs[i] = 0.0;
 			for (int j = 0; j < i + 1; j++)
 			{
-				v._coeffs[i] += _coeffs[j] * p._coeffs[k - j];
+				v._coeffs[i] += _coeffs[j] * p._coeffs[i - j];
 			}
 		}
 	}
@@ -541,16 +546,23 @@ Polynomial Polynomial::operator*=(const Polynomial &p)
  * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::operator/(const Polynomial &p)
+Polynomial Polynomial::operator/(const Polynomial &p) const
 {
-	double sum;
-	Polynomial v(_order);
-	for (int k = 0; k <= _order; k++)
+	if (_order != p._order)
 	{
-		sum = 0.0;
-		for (int j = 0; j < k; j++)
-			sum += v._coeffs[j] * p._coeffs[k - j];
-		v._coeffs[k] = (_coeffs[k] - sum) / p._coeffs[0];
+		throw CustomException("The order of both Taylor Polynoms should match.");
+	}
+
+	Polynomial v(_order, false);
+
+	for (int i = 0; i <= _order; i++)
+	{
+		double sum = 0.0;
+		for (int j = 0; j < i; j++)
+		{
+			sum += v._coeffs[j] * p._coeffs[i - j];
+		}
+		v._coeffs[i] = (_coeffs[i] - sum) / p._coeffs[0];
 	}
 	
 	return v;
@@ -566,18 +578,23 @@ Polynomial Polynomial::operator/(const Polynomial &p)
  */
 Polynomial Polynomial::operator/=(const Polynomial &p)
 {
-	double sum;
-	Polynomial v(_order);
-	
-	for (int k = 0; k <= _order; k++)
+	if (_order != p._order)
 	{
-		sum = 0.0;
-		for (int j = 0; j < k; j++)
-			sum += v._coeffs[j] * p._coeffs[k - j];
-		v._coeffs[k] = (_coeffs[k] - sum) / p._coeffs[0];
+		throw CustomException("The order of both Taylor Polynoms should match.");
 	}
-	*this = v;
 
+	Polynomial v(_order, false);
+	for (int i = 0; i <= _order; i++)
+	{
+		double sum = 0.0;
+		for (int j = 0; j < i; j++)
+		{
+			sum += v._coeffs[j] * p._coeffs[i - j];
+		}
+		v._coeffs[i] = (_coeffs[i] - sum) / p._coeffs[0];
+	}
+
+	*this = v;
 	return *this;
 }
 
@@ -596,21 +613,54 @@ Polynomial Polynomial::operator/=(const Polynomial &p)
  * of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, 
  * Philadelphia, PA, 2000)
  * 
- * \return A pointer to the resulting Taylor polynomial.
+ * \return The resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::sqr()
+Polynomial Polynomial::sqr() const
 {
-	Polynomial v(_order);
-	for (int k = 0; k <= _order; k++)
-	{
-		v._coeffs[k] = 0.0;
-		for (int j = 0; j < k + 1; j++)
-			v._coeffs[k] += _coeffs[j] * _coeffs[k - j];
-	}
-	*this = v;
+	Polynomial v(_order, false);
 	
-	return *this;
+	for (int i = 0; i <= _order; i++)
+	{
+		v._coeffs[i] = 0.0;
+		for (int j = 0; j < i + 1; j++)
+		{
+			v._coeffs[i] += _coeffs[j] * _coeffs[i - j];
+		}
+	}
+
+	return v;
+}
+
+/**
+ * Sets this Taylor polynomial to its square.
+ * 
+ * The following coefficient propagation rule is applied:
+ * 
+ * 		v_k = sum_{j=0}{k}  u_j * u_{k-j}
+ * 
+ * for k = 1...d and v(t) = u(t)^2, u and v being a Taylor polynomials, and d being 
+ * the derivative degree.
+ * 
+ * (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques
+ * of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, 
+ * Philadelphia, PA, 2000)
+ * 
+ */
+void Polynomial::setSqr()
+{
+	Polynomial v(_order, false);
+	
+	for (int i = 0; i <= _order; i++)
+	{
+		v._coeffs[i] = 0.0;
+		for (int j = 0; j < i + 1; j++)
+		{
+			v._coeffs[i] += _coeffs[j] * _coeffs[i - j];
+		}
+	}
+
+	*this = v;
 }
 
 /**
@@ -631,21 +681,57 @@ Polynomial Polynomial::sqr()
  * \return A pointer to the resulting Taylor polynomial.
  * 
  */
-Polynomial Polynomial::sqrt()
+Polynomial Polynomial::sqrt() const
 {
-	double sum;
-	Polynomial v(_order);
-	v._coeffs[0] = ::sqrt(_coeffs[0]);				// '::' to use sqrt of math.h
-	for (int k = 1; k <= _order; k++)
+	Polynomial v(_order, false);
+	
+	v._coeffs[0] = ::sqrt(_coeffs[0]);
+	
+	for (int i = 1; i <= _order; i++)
 	{
-		sum = 0.0;
-		for (int j = 1; j < k; j++)
-			sum += v._coeffs[j] * v._coeffs[k - j];
-		v._coeffs[k] = (_coeffs[k] - sum) / (2*v._coeffs[0]);
+		double sum = 0.0;
+		for (int j = 1; j < i; j++)
+		{
+			sum += v._coeffs[j] * v._coeffs[i - j];
+		}
+		v._coeffs[i] = (_coeffs[i] - sum) / (2 * v._coeffs[0]);
 	}
-	*this = v;
 
 	return *this;
+}
+
+/**
+ * Sets this Taylor polynomial to its square root.
+ * 
+ * The following coefficient propagation rule is applied:
+ * 
+ * 		v_k = 1 / 2*v_0 * [u_k - sum_{j=1}{k-1}  v_j * v_{k-j}]
+ * 
+ * for k = 1...d and v(t) = sqrt(u(t)), u and v being a Taylor polynomials, and d being 
+ * the derivative degree. In particular, v_0 = sqrt(u_0).
+ * 
+ * (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques
+ * of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, 
+ * Philadelphia, PA, 2000)
+ * 
+ */
+void Polynomial::setSqrt()
+{
+	Polynomial v(_order, false);
+	
+	v._coeffs[0] = ::sqrt(_coeffs[0]);
+	
+	for (int i = 1; i <= _order; i++)
+	{
+		double sum = 0.0;
+		for (int j = 1; j < i; j++)
+		{
+			sum += v._coeffs[j] * v._coeffs[i - j];
+		}
+		v._coeffs[i] = (_coeffs[i] - sum) / (2 * v._coeffs[0]);
+	}
+
+	*this = v;
 }
 
 /**
@@ -949,9 +1035,9 @@ void Polynomial::copyFrom(const Polynomial &p)
 		// if p constant is defined (0 or 1) we can copy, otherwise it has to be undefined anyway
 		_constant = p._constant;
 		
-		for (int i = 0; i <= order; i++)
+		for (int i = 0; i <= _order; i++)
 		{
-			coeffs[i] = p._coeffs[i];
+			_coeffs[i] = p._coeffs[i];
 		}
 	}
 	else
@@ -963,14 +1049,14 @@ void Polynomial::copyFrom(const Polynomial &p)
 
 		try
 		{
-			coeffs = new double[order + 1];
-			if (coeffs == 0  ||  coeffs == NULL)
+			_coeffs = new double[_order + 1];
+			if (_coeffs == 0  ||  _coeffs == NULL)
 			{
 				throw CustomException("Memory allocation failure.", 3);
 			}
-			for (int i = 0; i <= order; i++)
+			for (int i = 0; i <= _order; i++)
 			{
-				coeffs[i] = p._coeffs[i];
+				_coeffs[i] = p._coeffs[i];
 			}
 		}
 		catch (bad_alloc e)
@@ -988,3 +1074,4 @@ void Polynomial::unsetConst()
 {
 	unsetConstCount++;
 	_constant = false;
+}
