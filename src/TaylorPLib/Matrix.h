@@ -6,11 +6,10 @@
 #include <math.h>
 #include <typeinfo>
 #include <stdarg.h> // only used by the test constructor
-#include "CustomException.h"
 #include "MathException.h"
-// #include "esccolors.h"
-// #include "ioutil.h"
-// #include "TPolyn.h"
+#include "Polynomial.h"
+
+#define MSIZE(m) m._rows, m._cols
 
 namespace LibMatrix {
 
@@ -46,7 +45,7 @@ namespace LibMatrix {
 			//
 			// Accessing properties
 			//
-			double** data() { return _data; }			// Returns the ptr to the alloc. memory
+			// double** data() { return _data; }			// Returns the ptr to the alloc. memory
 			int nrows() const { return _rows; }			// Returns the number of rows
 			int ncols() const { return _cols; }			// Returns the number of columns
 			int dimT() const { return _dimT; }			// Returns the dimension of the type T

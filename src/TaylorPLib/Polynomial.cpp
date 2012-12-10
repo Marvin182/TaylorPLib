@@ -81,7 +81,7 @@ double & Polynomial::operator[](int index)
 { 
 	if (index < 0 || index > _order)
 	{
-		throw CustomException("Invalid coefficient index of polynomial."); // TODO add error code
+		throw MathException("Invalid coefficient index of polynomial."); // TODO add error code
 	}
 
 	return _coeffs[index];
@@ -218,7 +218,7 @@ Polynomial Polynomial::operator+(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	// if one of the polynomial is constant we can optimize a bit
@@ -259,7 +259,7 @@ Polynomial Polynomial::operator+=(const Polynomial &p)
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	if (p.isConst())
@@ -318,7 +318,7 @@ Polynomial Polynomial::operator-(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	// if one of the polynomial is constant we can optimize a bit
@@ -358,7 +358,7 @@ Polynomial Polynomial::operator-=(const Polynomial &p)
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	if (p.isConst())
@@ -422,7 +422,7 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	// if one of the polynomial is constant we can optimize a bit
@@ -496,7 +496,7 @@ Polynomial Polynomial::operator*=(const Polynomial &p)
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	*this = *this * p;
@@ -561,7 +561,7 @@ Polynomial Polynomial::operator/(const Polynomial &p) const
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	Polynomial v(_order, false);
@@ -591,7 +591,7 @@ Polynomial Polynomial::operator/=(const Polynomial &p)
 {
 	if (_order != p._order)
 	{
-		throw CustomException("The order of both Taylor Polynoms should match.");
+		throw MathException("The order of both Taylor Polynoms should match.");
 	}
 
 	Polynomial v(_order, false);
@@ -1006,7 +1006,7 @@ void Polynomial::allocateMemory(double *&coeffs, int order, bool initialize)
 {
 	if (order < 0)
 	{
-		throw CustomException("The order of a polynomial cannot be negative.", 35);
+		throw MathException("The order of a polynomial cannot be negative.");
 	}
 
 	try
@@ -1014,7 +1014,7 @@ void Polynomial::allocateMemory(double *&coeffs, int order, bool initialize)
 		coeffs = new double[order + 1];
 		if (coeffs == 0  ||  coeffs == NULL)
 		{
-			throw CustomException("Memory allocation failure.", 3);
+			throw MathException("Memory allocation failure.");
 		}
 		if (initialize)
 		{
@@ -1026,11 +1026,11 @@ void Polynomial::allocateMemory(double *&coeffs, int order, bool initialize)
 	}
 	catch (bad_alloc e)
 	{
-		throw CustomException(e.what(), 4);
+		throw MathException(e.what(), 4);
 	}
 	catch (...)
 	{
-		throw CustomException("Error when allocating memory for a polynomial.", 32);
+		throw MathException("Error when allocating memory for a polynomial.");
 	}
 }
 
@@ -1063,7 +1063,7 @@ void Polynomial::copyFrom(const Polynomial &p)
 			_coeffs = new double[_order + 1];
 			if (_coeffs == 0  ||  _coeffs == NULL)
 			{
-				throw CustomException("Memory allocation failure.", 3);
+				throw MathException("Memory allocation failure.");
 			}
 			for (int i = 0; i <= _order; i++)
 			{
@@ -1072,11 +1072,11 @@ void Polynomial::copyFrom(const Polynomial &p)
 		}
 		catch (bad_alloc e)
 		{
-			throw CustomException(e.what(), 4);
+			throw MathException(e.what(), 4);
 		}
 		catch (...)
 		{
-			throw CustomException("Error when allocating memory for a polynomial.", 32);
+			throw MathException("Error when allocating memory for a polynomial.");
 		}
 	}
 }

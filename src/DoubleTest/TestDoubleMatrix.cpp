@@ -584,7 +584,7 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 	B = Matrix(4, 3, b2);
 	C = Matrix(3, 3);
 	// Exception, da B transposed wird und da die Mulitplikation (3 x 4) * (3 x 4) nicht möglich ist
-	ASSERT_THROW(C.bmmCaABTbC(2, 3, alpha, beta, A, B), CustomException);
+	ASSERT_THROW(C.bmmCaABTbC(2, 3, alpha, beta, A, B), MathException);
 }
 
 TEST_F(MatrixMultiplication, mmCaIBbC)
