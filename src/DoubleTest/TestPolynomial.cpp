@@ -147,3 +147,41 @@ TEST_F(PolynomialOperator, plus)
 	A += B;
 	ASSERT_EQ(AplusB, A);
 }
+
+TEST_F(PolynomialOperator, unary)
+{
+	ASSERT_EQ(minusA, -A);
+}
+
+TEST_F(PolynomialOperator, minus)
+{
+	ASSERT_EQ(AminusB, A - B);
+
+	A -= B;
+	ASSERT_EQ(AminusB, A);
+}
+
+TEST_F(PolynomialOperator, timesScalar)
+{
+	ASSERT_EQ(twoA, A * 2.0);
+	A *= 2.0;
+	ASSERT_EQ(twoA, A);
+}
+
+TEST_F(PolynomialOperator, timesPolynomial)
+{
+	ASSERT_EQ(AB, A * B);
+	Polynomial P1(2);
+	Polynomial P2(2);
+	Polynomial PExpect(4);
+	double x1[] = {1,2,3};
+	double x2[] = {2,3,4};
+	double expect[] = {2, 7, 16, 17, 12};
+	P1.setCoeffs(x1);
+	P2.setCoeffs(x2);
+	PExpect.setCoeffs(expect);
+	ASSERT_EQ(PExpect, P1 * P2);
+
+	A *= B;
+	ASSERT_EQ(AB, A);
+}
