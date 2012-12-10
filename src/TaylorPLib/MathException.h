@@ -4,28 +4,37 @@
 #include <stdio.h>
 #include <stdarg.h>
 
-// this should also work, but Visual Studio doen't like the ... in tha macro parameter list
-// #define MATH_ERROR(format,x...) MathException("%s(%d): " format, __FILE__, __LINE__, x)
+#define MATH_ERROR(format, ...) MathException("%s(%d): " format, __FILE__, __LINE__, __VA_ARGS__)
+
+#define MAX_MESSAGE_SIZE 256
 
 class MathException
 {
 	private:
-		char* msg;
+		char* _message;
+	
 	public:
 		MathException(const char* format, ...): 
-			msg(0)
+			_message(0)
 		{
-			int msgSize = 256;
-			msg = (char*) malloc(msgSize);
-			
 			va_list args;
 			va_start(args, format);
-			vsnprintf_s(msg, msgSize, _TRUNCATE, format, args);
+
+			// format message
+			_message = (char*) malloc(MAX_MESSAGE_SIZE);
+			vsnprintf_s(_message, MAX_MESSAGE_SIZE, _TRUNCATE, format, args);
+			
 			va_end(args);
 		}
-		// ~MathException() { free(msg); }
+		MathException(const MathException &me)
+		{
+			// copy message
+			_message = (char*) malloc(MAX_MESSAGE_SIZE);
+			memcpy(_message, me._message, MAX_MESSAGE_SIZE);
+		}
+		~MathException() { free(_message); }
 
-		const char* what() const { return msg; }
+		const char* what() const { return _message; }
 };
 
 #endif

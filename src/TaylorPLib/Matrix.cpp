@@ -128,7 +128,7 @@ double Matrix::get(int row, int col) const
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
-		throw CustomException("Wrong matrix indexing.", 36);
+		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, MSIZE(this));
 	}
 	return _data[row][col];
 }
@@ -153,8 +153,7 @@ double &Matrix::operator()(int row, int col)
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
-		throw MathException("Index %d, %d is not a valid matrix index in a %d x %d matrix.", row, col, _rows, _cols);
-		// throw CustomException("Wrong matrix indexing.", 36);
+		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, MSIZE(this));
 	}
 	return _data[row][col];
 }
@@ -234,9 +233,7 @@ Matrix Matrix::operator+(const Matrix &m) const
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		// CustomException ce("Cannot substract the matrices. Operation not allowed.", 37);
-		// exception("Cannot substract the matrices. Operation not allowed.", 37).what();
-		throw CustomException("Cannot add up the matrices. Operation not allowed.", 37);
+		throw MathException("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", MSIZE(this), MSIZE(m));
 	}
 
 	// an auxiliary object
@@ -265,9 +262,7 @@ Matrix Matrix::operator+=(const Matrix &m)
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		// TODO more information?
-		// exception( "Cannot add up the matrices. Operation not allowed.", 37 ).what();
-		throw CustomException("Cannot add up the matrices. Operation not allowed.", 37);
+		throw MathException("Cannot add up a %d x %d matrix to a %d x %d matrix.", MSIZE(m), MSIZE(this));
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -293,7 +288,7 @@ Matrix Matrix::operator-(const Matrix &m) const
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		throw CustomException("Cannot substract the matrices. Operation not allowed.", 38 );
+		throw MathException("Cannot subtract a %d x %d from a %d x %d matrix.", MSIZE(m), MSIZE(this));
 	}
 
 	// an auxiliary object
@@ -323,7 +318,7 @@ Matrix Matrix::operator-=(const Matrix &m)
 	if(_rows != m._rows || _cols != m._cols)
 	{
 		// TODO more information?
-		throw CustomException( "Cannot substract the matrices. Operation not allowed.", 38 );
+		throw MathException("Cannot substract a %d x %d matrix from a %d x %d matrix.", MSIZE(m), MSIZE(this));
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -413,7 +408,7 @@ Matrix Matrix::operator*(const Matrix &m) const
 {
 	if (_cols != m._rows) 
 	{
-		throw CustomException("Cannot multiply the two matrices. The number of rows in m must match the number of colmuns int this matrix.", 40);
+		throw MathException("Cannot multiply a %d x %d with a %d x %d matrix. The number of rows in m must match the number of colmuns in this matrix.", MSIZE(this), MSIZE(m));
 	}
 
 	Matrix aux( _rows, m._cols, _dimT, true);
@@ -457,11 +452,11 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 {
 	if (A._cols != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
+		throw MathException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.");
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.", 10);
+		throw MathException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.");
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -512,19 +507,19 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 {
 	if (r > B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. r cannot be larger than the number of rows of B in total.", 10);
+		throw MathException("Error in matrix multiplication. r cannot be larger than the number of rows of B in total.");
 	}
 	if (c > B._cols)
 	{
-		throw CustomException("Error in matrix multiplication. c cannot be larger than the number of columns of B in total.", 10);
+		throw MathException("Error in matrix multiplication. c cannot be larger than the number of columns of B in total.");
 	}
 	if (A._cols != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
+		throw MathException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.");
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.", 10);
+		throw MathException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.");
 	}
 
 	int cr = c - r;
@@ -584,15 +579,15 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 {
 	if (r > _rows)
 	{
-		throw CustomException("Error in matrix multiplication. r (the number of last rows to use from A) cannot be larger than the number of rows of C", 10);
+		throw MathException("Error in matrix multiplication. r (the number of last rows to use from A) cannot be larger than the number of rows of C");
 	}
 	if (A._cols != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.", 10);
+		throw MathException("Error in matrix multiplication. The matrices A und B cannot be multiplied because of wrong dimensions.");
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.", 10);
+		throw MathException("Error in matrix multiplication. The dimension of the matrix A * B must match the current matrix.");
 	}
 
 	int n = A._rows - r;
@@ -653,15 +648,15 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 {
 	if (r > B._cols)
 	{
-		throw CustomException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.", 10);
+		throw MathException("Error in matrix multiplication. r (the number of last columns to use from B) cannot be larger than the number of columns of B.");
 	}
 	if (A._cols != B._rows)	
 	{
-		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
+		throw MathException("Errer in matrix multiplication. A and B cannot be multiplied.");
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
+		throw MathException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).");
 	}
 
 	int n = B._cols - r;
@@ -714,11 +709,11 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 {
 	if (A._cols != B._rows)	
 	{
-		throw CustomException("Error in matrix multiplication. A and B cannot be multiplied.", 10);
+		throw MathException("Error in matrix multiplication. A and B cannot be multiplied.");
 	}
 	if (A._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
+		throw MathException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).");
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -757,7 +752,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 	// if A is a m-by-n matrix A * A^T is always a m-by-m matrix and must have the same dimension as this matrix
 	if (A._rows != _rows || A._rows != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
+		throw MathException("Error in matrix multiplication. The matrices dimensions are probably wrong.");
 	}
 	
 	for( int i = 0; i < _rows; i++ )
@@ -796,7 +791,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 	// if A is a m-by-n matrix A^T * A is always a n-by-n matrix and must have the same dimension as this matrix
 	if (A._cols != _rows || _cols != _rows)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices dimensions are probably wrong.", 10);
+		throw MathException("Error in matrix multiplication. The matrices dimensions are probably wrong.");
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -838,13 +833,13 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 	// A^T und B can only be multiplied if A and B have the same number of rows
 	if (A._rows != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. Cannot multiply A^T and B, A and B must have the same number of rows.", 10);
+		throw MathException("Error in matrix multiplication. Cannot multiply A^T and B, A and B must have the same number of rows.");
 	}
 
 	// (A^T * B) must have the same size as this matrix
 	if (A._cols != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.", 10);
+		throw MathException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.");
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -889,13 +884,13 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 	// A^T und B can only be multiplied if A and B have the same number of rows
 	if (A._rows != B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. Cannot multiply A^T and B, A and B must have the same number of rows.", 10);
+		throw MathException("Error in matrix multiplication. Cannot multiply A^T and B, A and B must have the same number of rows.");
 	}
 
 	// (A^T * B) must have the same size as this matrix
 	if (A._cols != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.", 10);
+		throw MathException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.");
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -937,13 +932,13 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 	// A und B^T can only be multiplied if A and B have the same number of columns
 	if (A._cols != B._cols)
 	{
-		throw CustomException("Error in matrix multiplication. Cannot multiply A and B^T, A and B must have the same number of columns.", 10);
+		throw MathException("Error in matrix multiplication. Cannot multiply A and B^T, A and B must have the same number of columns.");
 	}
 
 	// (A * B^T) must have the same size as this matrix
 	if (A._rows != _rows || B._rows != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.", 10);
+		throw MathException("Error in matrix multiplication. (A^T * B) has not the same dimension as this matrix.");
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -996,19 +991,19 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 	// A und B^T can only be multiplied if A and B have the same number of columns
 	if (A._cols != B._cols)	
 	{
-		throw CustomException("Errer in matrix multiplication. A and B cannot be multiplied.", 10);
+		throw MathException("Errer in matrix multiplication. A and B cannot be multiplied.");
 	}
 
 	// (A * B^T) must have the same size as this matrix
 	if (A._rows != _rows || B._rows != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).", 10);
+		throw MathException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).");
 	}
 
 	// r <= (colmuns of B^T), which is equal to r <= (rows of B)
 	if (r > B._rows)
 	{
-		throw CustomException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.");
+		throw MathException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.");
 	}
 
 	int bRowsR = B._rows - r;
@@ -1072,19 +1067,19 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 {
 	if (r > A._rows)
 	{
-		throw CustomException("Error in matrix multiplication. r cannot be larger than the number of rows of A in total.", 10);
+		throw MathException("Error in matrix multiplication. r cannot be larger than the number of rows of A in total.");
 	}
 	if (c > A._cols)
 	{
-		throw CustomException("Error in matrix multiplication. c cannot be larger than the number of columns of A in total.", 10);
+		throw MathException("Error in matrix multiplication. c cannot be larger than the number of columns of A in total.");
 	}
 	if (A._cols != B._cols)
 	{
-		throw CustomException("Error in matrix multiplication. The matrices A und B^T cannot be multiplied because of wrong dimensions.", 10);
+		throw MathException("Error in matrix multiplication. The matrices A und B^T cannot be multiplied because of wrong dimensions.");
 	}
 	if (A._rows != _rows || B._rows != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix A * B^T must match the current matrix.", 10);
+		throw MathException("Error in matrix multiplication. The dimension of the matrix A * B^T must match the current matrix.");
 	}
 
 	// only the first r rows from A are interesting
@@ -1133,7 +1128,7 @@ void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
 {
 	if (B._rows != _rows || B._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix B must match the current matrix.", 10);
+		throw MathException("Error in matrix multiplication. The dimension of the matrix B must match the current matrix.");
 	}	
 
 	for( int i = 0; i < _rows; i++ )
@@ -1192,7 +1187,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
 {
 	if (A._rows != _rows || A._cols != _cols)
 	{
-		throw CustomException("Error in matrix multiplication. The dimension of the matrix A must match the current matrix.", 10);
+		throw MathException("Error in matrix multiplication. The dimension of the matrix A must match the current matrix.");
 	}	
 
 	for( int i = 0; i < _rows; i++ )
@@ -1770,7 +1765,7 @@ void Matrix::cpermutem(int *piv, bool trans)
 	{
 		if (piv[j] < 0 || piv[j] >= _cols)
 		{
-			throw CustomException("Invalid row permutation."); // TODO add error code
+			throw MathException("Invalid row permutation."); // TODO add error code
 		}
 	}
 
@@ -1814,7 +1809,7 @@ void Matrix::rpermutem(int *piv)
 	{
 		if (piv[i] < 0 || piv[i] >= _rows)
 		{
-			throw CustomException("Invalid row permutation."); // TODO add error code
+			throw MathException("Invalid row permutation."); // TODO add error code
 		}
 	}
 
@@ -2090,7 +2085,7 @@ void Matrix::set2Id()
 {
 	if (_rows != _cols)
 	{
-		throw CustomException("Only square matrices can be set to an identity matrix."); // TODO add error code
+		throw MathException("Only square matrices can be set to an identity matrix."); // TODO add error code
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -2151,11 +2146,11 @@ void Matrix::set2IdFromIndices(int firstRow, int lastRow, int firstCol, int last
 {
 	if (firstRow < 0 || lastRow >= _rows)
 	{
-		throw CustomException("Error in set2Id, row bounds are wrong."); // TODO add error code
+		throw MathException("Error in set2Id, row bounds are wrong."); // TODO add error code
 	}
 	if (firstCol < 0 || lastCol >= _cols)
 	{
-		throw CustomException("Error in set2Id, column bounds are wrong"); // TODO add error code
+		throw MathException("Error in set2Id, column bounds are wrong"); // TODO add error code
 	}
 
 	int rows = lastRow - firstRow + 1;
@@ -2163,7 +2158,7 @@ void Matrix::set2IdFromIndices(int firstRow, int lastRow, int firstCol, int last
 
 	if (rows != cols)
 	{
-		throw CustomException("Error in set2Id, submatrix must be a square matrix in order to become a identity matrix."); // TODO add error code
+		throw MathException("Error in set2Id, submatrix must be a square matrix in order to become a identity matrix."); // TODO add error code
 	}
 
 	for( int i = firstRow; i <= lastRow; i++ )
@@ -2287,11 +2282,11 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 {
 	if (firstRow < 0 || lastRow >= _rows)
 	{
-		throw CustomException("Invalid row bounds."); // TODO add error code
+		throw MathException("Invalid row bounds."); // TODO add error code
 	}
 	if (firstCol < 0 || lastCol >= _cols)
 	{
-		throw CustomException("Invalid column bounds."); // TODO add error code
+		throw MathException("Invalid column bounds."); // TODO add error code
 	}
 
 	if (v == 0.0)
@@ -3003,13 +2998,13 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 		// bounds checking
 		if (rows <= 0 || cols <= 0)
 		{
-			throw CustomException( "Matrix invalid matrix size", 35);
+			throw MathException("Matrix invalid matrix size");
 		}
 
 		data = new double*[rows];
 		if (data == 0 || data == NULL)
 		{
-			throw CustomException("Memory allocation failure.", 3);
+			throw MathException("Memory allocation failure.");
 		}
 
 		for( int i = 0; i < rows; i++ )
@@ -3017,7 +3012,7 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 			data[i] = new double[cols];
 			if (data[i] == 0 || data[i] == NULL)
 			{
-				throw CustomException("Memory allocation failure.", 3);
+				throw MathException("Memory allocation failure.");
 			}
 
 			if (initialize)
@@ -3032,11 +3027,11 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 	}
 	catch(bad_alloc e)
 	{
-		throw CustomException(e.what(), 4);
+		throw MathException(e.what(), 4);
 	}
 	catch(...)
 	{
-		throw CustomException("Error when allocating a matrix.", 34);
+		throw MathException("Error when allocating a matrix.");
 	}
 }
 

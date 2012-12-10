@@ -3,7 +3,7 @@
 
 #include <stdexcept>
 #include <math.h>
-#include "CustomException.h"
+#include "MathException.h"
 
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
