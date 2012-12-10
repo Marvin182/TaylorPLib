@@ -222,7 +222,8 @@ Polynomial Polynomial::operator+(const Polynomial &p) const
 	}
 
 	// if one of the polynomial is constant we can optimize a bit
-	Polynomial v(_order, false);
+	// Polynomial v(_order, false);
+	Polynomial v(_order);
 	if (isConst())
 	{
 		v = p;
@@ -236,7 +237,7 @@ Polynomial Polynomial::operator+(const Polynomial &p) const
 	else
 	{
 		// general case
-		for (int i = 0; i < _order; i++)
+		for (int i = 0; i <= _order; i++)
 		{
 			v._coeffs[i] = _coeffs[i] + p._coeffs[i];
 		}

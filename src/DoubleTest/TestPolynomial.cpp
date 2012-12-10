@@ -6,7 +6,7 @@ using namespace std;
 using namespace LibMatrix;
 
 namespace LibMatrix {
-	// needed by GTest to print matrices if some ASSERT_EQ(Polynomial1, Polynomial2) failed
+	// needed by GTest to print polynomials if some ASSERT_EQ(Polynomial1, Polynomial2) failed
 	std::ostream& operator<<(std::ostream &out, Polynomial &p)
 	{
 		out << setiosflags(ios::fixed) << setprecision(2);
@@ -18,6 +18,53 @@ namespace LibMatrix {
 		return out; 
 	}
 }
+
+/*
+ * FIXTURES
+ */
+class PolynomialOperator: public ::testing::Test
+{
+protected:
+	Polynomial A, B, AplusB, minusA, AminusB, twoA, AB;
+	PolynomialOperator()
+	{
+		A = Polynomial(1);
+		B = Polynomial(1);
+		AplusB = Polynomial(1);
+		minusA = Polynomial(1);
+		AminusB = Polynomial(1);
+		twoA = Polynomial(1);
+		AB = Polynomial(2);
+
+		// A
+		double a[] = { 1, 2 };
+		A.setCoeffs(a);
+
+		// B
+		double b[] = { 5, 2 };
+		B.setCoeffs(b);
+
+		// A + B
+		double aplusb[] = { 6, 4 };
+		AplusB.setCoeffs(aplusb);
+
+		// - A
+		double minusa[] = { -1, -2 };
+		minusA.setCoeffs(minusa);
+
+		// A - B
+		double aminusb[] = { -4, 0 };
+		AminusB.setCoeffs(aminusb);
+
+		// 2 * A
+		double twoa[] = { 2, 4 };
+		twoA.setCoeffs(twoa);
+
+		// A * B
+		double ab[] = { 5, 12, 4 };
+		AB.setCoeffs(ab);
+	}
+};
 
 TEST(PolynomialConstructor, default_constructor)
 {
@@ -50,4 +97,53 @@ TEST(PolynomialConstructor, test_and_copy_constructor)
 
 	Polynomial clone(p);
 	ASSERT_EQ(p,clone);
+}
+
+TEST_F(PolynomialOperator, assignment)
+{
+	B = A;
+	ASSERT_EQ(A,B);
+
+	for (int i = 0; i < A.ncoeff(); i++)
+	{
+		ASSERT_EQ(A[i], B[i]);
+	}
+}
+
+TEST_F(PolynomialOperator, comparsion)
+{
+	ASSERT_TRUE(A == A);	
+	ASSERT_FALSE(A == B);
+
+	ASSERT_FALSE(A != A);
+	ASSERT_TRUE(A != B);
+
+	Polynomial asA(A);
+	ASSERT_TRUE(A == asA);
+
+	Polynomial biggerA(2);
+	for (int i = 0; i < A.ncoeff(); i++)
+	{
+		biggerA[i] = A[i];
+	}
+	// biggerA.print();
+	ASSERT_FALSE(A == biggerA);
+
+	// ASSERT_EQ and ASSERT_EQ should use the comparision operators
+	ASSERT_EQ(A, asA);
+	ASSERT_NE(A, B);
+
+	ASSERT_TRUE( A < B );
+	ASSERT_FALSE( A < asA );
+	ASSERT_TRUE( A <= asA );
+	ASSERT_TRUE( B > A );
+	ASSERT_FALSE( asA > A );
+	ASSERT_TRUE( asA >= A );
+}
+
+TEST_F(PolynomialOperator, plus)
+{
+	ASSERT_EQ(AplusB, A + B);
+	A += B;
+	ASSERT_EQ(AplusB, A);
 }
