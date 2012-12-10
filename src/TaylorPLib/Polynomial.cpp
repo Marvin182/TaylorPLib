@@ -427,7 +427,10 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 
 	// if one of the polynomial is constant we can optimize a bit
 	// _coeffs[0] is the term with x^0
-	Polynomial v(_order * 2);
+
+	// to calculate the real values incomment the lines with numbers in front
+	// 1. Polynomial v(_order * 2);
+	Polynomial v(_order);
 
 	if (isConst())
 	{
@@ -447,7 +450,8 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 	}
 	else
 	{
-		for (int i = 0; i < _order * 2; i++)
+		// 2. for (int i = 0; i < _order * 2; i++)
+		for (int i = 0; i <= _order; i++)
 		{
 			v._coeffs[i] = 0.0;
 
@@ -457,7 +461,7 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 			}
 
 		}
-		v._coeffs[_order*2] = _coeffs[_order] * p._coeffs[_order];
+		// 3. v._coeffs[_order*2] = _coeffs[_order] * p._coeffs[_order];
 	}
 	return v;
 }

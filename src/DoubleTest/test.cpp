@@ -3,6 +3,7 @@
 
 #include "MathException.h"
 #include "Matrix.h"
+
 using namespace LibMatrix;
 
 using namespace std;
@@ -30,7 +31,7 @@ int main(int argc, char **argv)
  	catch (MathException me)
  	{
  		printf("MathException.what() = %s\n", me.what());
- 		return RUN_ALL_TESTS();
+ 		// return -1;
  	}
 
 	return RUN_ALL_TESTS();
