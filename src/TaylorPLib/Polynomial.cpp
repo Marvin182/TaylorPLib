@@ -51,8 +51,8 @@ Polynomial::Polynomial(int order, bool initialize):
  * 
  */
 Polynomial::Polynomial(const Polynomial &p):
-	_constant(p._constant),
-	_order(p._order),
+	_constant(0),
+	_order(0),
 	_coeffs(0)
 {
 	copyFrom(p);

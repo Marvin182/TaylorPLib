@@ -47,6 +47,6 @@ TEST(PolynomialConstructor, test_and_copy_constructor)
 	ASSERT_EQ(3, p[1]);
 	ASSERT_EQ(4, p[2]);
 
-	// Polynomial clone(p);
-	// ASSERT_EQ(p,clone);
+	Polynomial clone(p);
+	ASSERT_EQ(p,clone);
 }
