@@ -7,6 +7,7 @@
 #include <typeinfo>
 #include <stdarg.h> // only used by the test constructor
 #include "CustomException.h"
+#include "MathException.h"
 // #include "esccolors.h"
 // #include "ioutil.h"
 // #include "TPolyn.h"

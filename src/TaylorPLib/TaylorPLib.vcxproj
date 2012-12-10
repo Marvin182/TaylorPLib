@@ -74,6 +74,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="MathException.h" />
     <ClInclude Include="Matrix.h" />
     <ClInclude Include="CustomException.h" />
     <ClInclude Include="Polynomial.h" />
