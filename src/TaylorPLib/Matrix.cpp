@@ -153,7 +153,8 @@ double &Matrix::operator()(int row, int col)
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
-		throw CustomException("Wrong matrix indexing.", 36);
+		throw MathException("Index %d, %d is not a valid matrix index in a %d x %d matrix.", row, col, _rows, _cols);
+		// throw CustomException("Wrong matrix indexing.", 36);
 	}
 	return _data[row][col];
 }

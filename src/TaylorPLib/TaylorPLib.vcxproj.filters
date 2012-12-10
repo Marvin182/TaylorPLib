@@ -24,6 +24,9 @@
     <ClInclude Include="Polynomial.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
+    <ClInclude Include="MathException.h">
+      <Filter>Headerdateien</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Matrix.cpp">
