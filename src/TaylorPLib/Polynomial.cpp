@@ -77,7 +77,7 @@ Polynomial::~Polynomial()
  * \return The coefficient at that index.
  * 
  */
-double & Polynomial::operator[](int index)
+double & Polynomial::operator[](int index) const
 { 
 	if (index < 0 || index > _order)
 	{
@@ -660,6 +660,8 @@ Polynomial Polynomial::sqr() const
  */
 void Polynomial::setSqr()
 {
+	*this = sqr();
+	/*
 	Polynomial v(_order, false);
 	
 	for (int i = 0; i <= _order; i++)
@@ -672,6 +674,7 @@ void Polynomial::setSqr()
 	}
 
 	*this = v;
+	*/
 }
 
 /**
@@ -708,7 +711,7 @@ Polynomial Polynomial::sqrt() const
 		v._coeffs[i] = (_coeffs[i] - sum) / (2 * v._coeffs[0]);
 	}
 
-	return *this;
+	return v;
 }
 
 /**
@@ -728,6 +731,8 @@ Polynomial Polynomial::sqrt() const
  */
 void Polynomial::setSqrt()
 {
+	*this = sqrt();
+	/*
 	Polynomial v(_order, false);
 	
 	v._coeffs[0] = ::sqrt(_coeffs[0]);
@@ -743,6 +748,7 @@ void Polynomial::setSqrt()
 	}
 
 	*this = v;
+	*/
 }
 
 /**
@@ -822,7 +828,7 @@ void Polynomial::shift()
 {
 	for (int i = 1; i <= _order; i++)
 	{
-		_coeffs[i - 1] = i + _coeffs[i]; 
+		_coeffs[i - 1] = i * _coeffs[i]; 
 	}
 
 	// set last coefficient to zero

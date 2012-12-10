@@ -68,7 +68,7 @@ namespace LibMatrix {
 		//
 		// Overloaded operators for Taylor arithmetic
 		//
-		double & operator[](int index);
+		double & operator[](int index) const;
 		Polynomial operator=(const Polynomial &p);
 		bool operator==(const Polynomial &p) const;
 		bool operator!=(const Polynomial &p) const;
