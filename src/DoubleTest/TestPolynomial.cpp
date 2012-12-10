@@ -23,7 +23,7 @@ TEST(PolynomialConstructor, default_constructor)
 {
 	// like Polynomial (const=1,order=0,nrcoeffs=order + 1);
 	Polynomial p;
-	ASSERT_EQ(true, p.isConst());
+	ASSERT_TRUE(p.isConst());
 	ASSERT_EQ(0,p.order());
 	ASSERT_EQ(1,p.ncoeff());
 }
@@ -32,7 +32,7 @@ TEST(PolynomialConstructor, order_constructor)
 {
 	Polynomial p(2);
 	// should also be constant, because all values are zero initialized
-	ASSERT_EQ(true, p.isConst());
+	ASSERT_TRUE(p.isConst());
 	ASSERT_EQ(2,p.order());
 	ASSERT_EQ(3,p.ncoeff());
 }
@@ -43,6 +43,7 @@ TEST(PolynomialConstructor, test_and_copy_constructor)
 	Polynomial p(2);
 	p.setCoeffs(c);
 
+	ASSERT_FALSE(p.isConst());
 	ASSERT_EQ(2, p[0]);
 	ASSERT_EQ(3, p[1]);
 	ASSERT_EQ(4, p[2]);
