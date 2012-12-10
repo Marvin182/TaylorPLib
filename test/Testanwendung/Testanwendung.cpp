@@ -1,6 +1,6 @@
 #include <time.h>
 #include "Matrix.h"
-#include "CustomException.h"
+#include "MathException.h"
 #include <iostream>
 
 using namespace std;
@@ -38,38 +38,41 @@ int main (int argc, char* argv[])
 
 void createSimpleMatrixAndPrint()
 {
-	Matrix m(3,4);
-	Matrix m2(3,4);
 
-	fillMatrixRandom(m);
-	fillMatrixRandom(m2);
+	double a1[] = {1,2,3,4,5,6,7,8,9,0,1,2};
+	double a2[] = {2,1,0,9,8,7,6,5,4,3,2,1};
+	Matrix m(3,4,a1);
+	Matrix m2(3,4,a2);
+
+	// fillMatrixRandom(m);
+	// fillMatrixRandom(m2);
 
 	printf("M1: \n");
-	m.printm("");
+	m.print("");
 	printf("\n\nMatrix 2: \n");
-	m2.printm("");
+	m2.print("");
 
 	m+=m2;
 
 	printf("\n\nMatrix 1 + Matrix 2: \n");
-	m.printm("");
+	m.print("");
 
 	printf("\n\nAddierte Matrix - Matrix 2 (= Matrix1): \n");
 	m-=m2;
-	m.printm("");
+	m.print("");
 
 	printf("\n\nMatrix 1 * 2 : \n");
 	m *= 2;
 
-	m.printm("");
+	m.print("");
 
 	printf("\n\nMatrix 3 = m * 2: \n");
 	Matrix m3 = m*2;
-	m3.printm("");
+	m3.print("");
 
 	printf("\n\nMatrix 4 = m4(m3): \n");
 	Matrix m4(m3);
-	m4.printm("");
+	m4.print("");
 
 	printf("\n\nMatrix 4 = Matrix 3 ??: \n");
 	if (m4 == m3)
@@ -97,15 +100,15 @@ void createSimpleMatrixAndPrint()
 
 	printf("\n\n (-) Matrix 4: \n");
 	Matrix m5(-m4);
-	m5.printm("");
+	m5.print("");
 
 }
 
 void matrixMultiplication()
 {
 	double a[] = {1,2,3,4};
-	Matrix testA(a);
-	testA.printm("Test Matrix A with easy Constructor...\n");
+	Matrix testA(2,2,a);
+	testA.print("Test Matrix A with easy Constructor...\n");
 
 	Matrix mA(2,2);
 	Matrix mB(2,2);
@@ -115,47 +118,47 @@ void matrixMultiplication()
 
 	printf("Matrixmultiplikation!!! ");
 
-	mA.printm("\nMatrix A: \n");
-	mB.printm("\nMatrix B: \n");
-	mC.printm("\nMatrix C: \n");
+	mA.print("\nMatrix A: \n");
+	mB.print("\nMatrix B: \n");
+	mC.print("\nMatrix C: \n");
 
 	printf("\n\nMatrix C' = alpha*A*B + beta*C: \n");
 	printf("mmCaABbC\n");
 	mC.mmCaABbC(3,4,mA,mB);
-	mC.printm("\nMatrix C' = 3*A*B + 4*C: \n");
+	mC.print("\nMatrix C' = 3*A*B + 4*C: \n");
 
 	initializeMatricesABC(mA,mB,mC);
 	printf("\n\nMatrix C' = alpha*A' *A + beta*C: \n");
 	printf("mmCaAATbC\n");
 	mC.mmCaAATbC(2,3,mA);
-	mC.printm("");
+	mC.print("");
 
 	initializeMatricesABC(mA,mB,mC);
 
 	printf("\n\nMatrix C' = alpha*A' *A + beta*C: \n");
 	printf("mmCaATAbC\n");
 	mC.mmCaATAbC(2,3,mA);
-	mC.printm("\nMatrix C' = 3*A' *A + 4*C: \n");
+	mC.print("\nMatrix C' = 3*A' *A + 4*C: \n");
 
 	initializeMatricesABC(mA,mB,mC);
 
 	printf("\nmmCaATBbC\n");
 	mC.mmCaATBbC(2,3,mA, mB);
-	mC.printm("");
+	mC.print("");
 
 	initializeMatricesABC(mA,mB,mC);
 
 	printf("\nmmCaABTbC\n");
 	mC.mmCaABTbC(2,3,mA, mB);
-	mC.printm("");
+	mC.print("");
 
 	initializeMatricesABC(mA,mB,mC);
 	mA = mA * mB;
 
-	mA.printm("\nMatrix A * Matrix B: \n");
+	mA.print("\nMatrix A * Matrix B: \n");
 
 	mB *= 3;
-	mB.printm("\nMatrix B * 3: \n");
+	mB.print("\nMatrix B * 3: \n");
 
 }
 
@@ -164,9 +167,9 @@ void initializeMatricesABC(Matrix &mA, Matrix &mB, Matrix &mC)
 	double a[] = {1,2,3,4};
 	double b[] = {2,5,1,3};
 	double c[] = {2,3,4,1};
-	mA = Matrix(a);
-	mB = Matrix(b);
-	mC = Matrix(c);
+	mA = Matrix(2,2,a);
+	mB = Matrix(2,2,b);
+	mC = Matrix(2,2,c);
 	// double ** data = mA.data();
 	/*
 	data[0][0] = 1;
@@ -193,28 +196,29 @@ void checkError()
 
 	try 
 	{
-		mA.printm("Matrix A: \n");
-		mB.printm("Matrix B: \n");
+		mA.print("Matrix A: \n");
+		mB.print("Matrix B: \n");
 		printf("\nMatrix A + Matrix B:\n");
 		mA + mB;
 	}
-	catch (CustomException e) 
+	catch (MathException e) 
 	{
 		// cout << e.what();
-		printf(e.what().c_str());
+		printf(e.what());
 	}
 	try 
 	{
 		printf("\nMatrix A - Matrix B:\n");
 		mA - mB;
 	}
-	catch (CustomException e) 
+	catch (MathException e) 
 	{
 		// cout << e.what();
-		printf(e.what().c_str());
+		printf(e.what());
 	}
 }
 
+/*
 void fillMatrixRandom(Matrix &m) 
 {
 	double **data = m.data();
@@ -222,4 +226,4 @@ void fillMatrixRandom(Matrix &m)
 		for (int j = 0; j < m.ncols(); j++)
 			data[i][j] = rand() % 10;
 }
-
+*/
