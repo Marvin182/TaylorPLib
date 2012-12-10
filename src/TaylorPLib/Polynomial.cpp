@@ -447,51 +447,18 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 	}
 	else
 	{
-		for (int i = 0; i <= _order * 2; i++)
+		for (int i = 0; i < _order * 2; i++)
 		{
 			v._coeffs[i] = 0.0;
 
-			if ( ( i % 2 ) == 0) 
-			{
-				int middleValue = i / 2;
-
-				if ( middleValue != _order && i != 0) {
-  					v._coeffs[i] += _coeffs[middleValue - 1] * p._coeffs[middleValue + 1];
-  					v._coeffs[i] += _coeffs[middleValue + 1] * p._coeffs[middleValue - 1];
-				}
-
-				v._coeffs[i] += _coeffs[middleValue]     * p._coeffs[middleValue];
-			} else {
-				int higherValue = ( i + 1 ) / 2;
-  				v._coeffs[i] += _coeffs[higherValue - 1] * p._coeffs[higherValue];
-  				v._coeffs[i] += _coeffs[higherValue]     * p._coeffs[higherValue - 1];
-			}
-			/*
 			for (int j = 0; j < i + 1; j++)
 			{
   				v._coeffs[i] += _coeffs[j] * p._coeffs[i - j];
 			}
-			*/
-			/*
-			// sonderfall
-			if (i == 0) {
-				v._coeffs[i] += _coeffs[i] * p._coeffs[i];
 
-			} else {
-
-				if (i % 2 == 0) {
-  					v._coeffs[i] += _coeffs[i - 1] * p._coeffs[i + 1];
-  					v._coeffs[i] += _coeffs[i] * p._coeffs[i];
-  					v._coeffs[i] += _coeffs[i + 1] * p._coeffs[i - 1];
-				} else {
-  					v._coeffs[i] += _coeffs[i] * p._coeffs[i - 1];
-  					v._coeffs[i] += _coeffs[i - 1] * p._coeffs[i];
-				}
-			}
-			*/
 		}
+		v._coeffs[_order*2] = _coeffs[_order] * p._coeffs[_order];
 	}
-	
 	return v;
 }
 

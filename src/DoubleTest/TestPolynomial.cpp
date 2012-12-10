@@ -170,6 +170,9 @@ TEST_F(PolynomialOperator, timesScalar)
 
 TEST_F(PolynomialOperator, timesPolynomial)
 {
+	printf("\n");
+	(A*B).print();
+	printf("\n");
 	ASSERT_EQ(AB, A * B);
 	Polynomial P1(2);
 	Polynomial P2(2);
@@ -193,6 +196,15 @@ TEST_F(PolynomialOperator, timesPolynomial)
 
 	A *= B;
 	ASSERT_EQ(AB, A);
+
+	double testX1[] = {2,3,4,5};
+	double testX2[] = {4,5,6,7};
+
+	Polynomial TestX1(3);
+	Polynomial TestX2(3);
+	TestX1.setCoeffs(testX1);
+	TestX2.setCoeffs(testX2);
+	(TestX1 * TestX2).print();
 }
 
 TEST_F(PolynomialOperator, divPolynomial)
