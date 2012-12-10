@@ -177,6 +177,15 @@ TEST_F(PolynomialOperator, timesPolynomial)
 	double x1[] = {1,2,3};
 	double x2[] = {2,3,4};
 	double expect[] = {2, 7, 16, 17, 12};
+	/*
+	printf("\nP1: \n");
+	P1.print();
+	printf("\nP2: \n");
+	P2.print();
+	printf("\nP1 * P2: \n");
+	(P1 * P2).print();
+	printf("\n");
+	*/
 	P1.setCoeffs(x1);
 	P2.setCoeffs(x2);
 	PExpect.setCoeffs(expect);
