@@ -432,7 +432,7 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 	if (isConst())
 	{
 		v = p;
-		for (int i = 0; i < _order; i++)
+		for (int i = 0; i <= _order; i++)
 		{
 			v._coeffs[i] *= _coeffs[0];
 		}
@@ -440,7 +440,7 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 	else if (p.isConst())
 	{
 		v = *this;
-		for (int i = 0; i < _order; i++)
+		for (int i = 0; i <= _order; i++)
 		{
 			v._coeffs[i] *= p._coeffs[0];
 		}
@@ -450,15 +450,16 @@ Polynomial Polynomial::operator*(const Polynomial &p) const
 		for (int i = 0; i <= _order * 2; i++)
 		{
 			v._coeffs[i] = 0.0;
-			if (i == 0) {
-				v._coeffs[i] += _coeffs[i] * p._coeffs[i];
-			} else if ( ( i % 2 ) == 0) 
+
+			if ( ( i % 2 ) == 0) 
 			{
 				int middleValue = i / 2;
-				if ( middleValue != _order) {
+
+				if ( middleValue != _order && i != 0) {
   					v._coeffs[i] += _coeffs[middleValue - 1] * p._coeffs[middleValue + 1];
   					v._coeffs[i] += _coeffs[middleValue + 1] * p._coeffs[middleValue - 1];
 				}
+
 				v._coeffs[i] += _coeffs[middleValue]     * p._coeffs[middleValue];
 			} else {
 				int higherValue = ( i + 1 ) / 2;

@@ -194,3 +194,36 @@ TEST_F(PolynomialOperator, timesPolynomial)
 	A *= B;
 	ASSERT_EQ(AB, A);
 }
+
+TEST_F(PolynomialOperator, divPolynomial)
+{
+	Polynomial P1(2);
+	Polynomial P2(2);
+
+	double x1[] = {2,4,6};
+	double x2[] = {1,2,3};
+
+	P1.setCoeffs(x1);
+	P2.setCoeffs(x2);
+
+	Polynomial P3 = P1 / P2;
+	Polynomial P4 = P2 * P3;
+	ASSERT_EQ(P1, P4);
+
+	/*
+	printf("\nP1: \n");
+	P1.print();
+	printf("\nP2: \n");
+	P2.print();
+	printf("\nP3 = P1 / P2: \n");
+	P3.print();
+	printf("\nP4 = P1 = P3 * P2: \n");
+	P4.print();
+	printf("\n");
+	*/
+	P1 /= P2;
+	Polynomial PExpect(2);
+	double expect[] = {2,0,0};
+	PExpect.setCoeffs(expect);
+	ASSERT_EQ(PExpect, P1);
+}
