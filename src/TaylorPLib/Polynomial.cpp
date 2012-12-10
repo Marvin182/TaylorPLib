@@ -79,7 +79,7 @@ Polynomial::~Polynomial()
  */
 double & Polynomial::operator[](int index)
 { 
-	if (index < 1 || index > _order)
+	if (index < 0 || index > _order)
 	{
 		throw CustomException("Invalid coefficient index of polynomial."); // TODO add error code
 	}

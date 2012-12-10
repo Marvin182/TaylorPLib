@@ -242,7 +242,7 @@ TEST(MatrixConstructor, test_and_copy_constructor)
 		5, 6	// third row
 	};
 	Matrix t(3, 2, values); // rows, columns, values
-	t.print("t");
+	// t.print("t");
 	ASSERT_EQ(3, t.nrows());
 	ASSERT_EQ(2, t.ncols());
 	ASSERT_EQ(1, t(0, 0));
