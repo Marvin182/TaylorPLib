@@ -70,6 +70,24 @@ protected:
 	}
 };
 
+class PolynomialMethods: public ::testing::Test
+{
+protected:
+	Polynomial ID, Zero;
+	PolynomialMethods() {
+
+		Zero = Polynomial(2);
+
+		// ID 
+		double id[] = {1};
+		ID.setCoeffs(id);
+
+		// Zero
+		double zero[] = {0,0,0};
+		Zero.setCoeffs(zero);
+	}
+};
+
 /*
  * Constructor Tests
  */
@@ -261,3 +279,59 @@ TEST_F(PolynomialOperator, divPolynomial)
 /*
  * Function Tests
  */
+TEST_F(PolynomialMethods, isConst)
+{
+	Polynomial P1;
+	Polynomial P2(2);
+	Polynomial P3(2);
+
+	double p2[] = {5,0,0};
+	P2.setCoeffs(p2);
+
+	double p3[] = {5,3,1};
+	P3.setCoeffs(p3);
+
+	ASSERT_TRUE(P1.isConst());
+	ASSERT_TRUE(P2.isConst());
+	ASSERT_FALSE(P3.isConst());
+}
+
+TEST_F(PolynomialMethods, isConstWithEps)
+{
+	Polynomial P1(2);
+	Polynomial P2(2);
+
+	double p1[] = {4,2,3};
+	P1.setCoeffs(p1);
+
+	double p2[] = {5,3,1};
+	P2.setCoeffs(p2);
+
+	ASSERT_TRUE(P1.isConst(3));
+	ASSERT_FALSE(P2.isConst(2));
+}
+
+TEST_F(PolynomialMethods, isId)
+{
+	ASSERT_TRUE(ID.isId());
+	Polynomial P1(4);
+	Polynomial P2(3);
+	double p1[] = {1,0,0,0,0};
+	P1.setCoeffs(p1);
+	double p2[] = {1,2,1,3,2};
+	P2.setCoeffs(p2);
+
+	ASSERT_TRUE(P1.isId());
+	ASSERT_FALSE(P2.isId());
+}
+
+TEST_F(PolynomialMethods, isIdWithEps)
+{
+	ASSERT_TRUE(ID.isId());
+	Polynomial P1(4);
+	double p1[] = {1,2,3,4,3};
+	P1.setCoeffs(p1);
+
+	ASSERT_TRUE(P1.isId(4));
+	ASSERT_FALSE(P1.isId(3));
+}
