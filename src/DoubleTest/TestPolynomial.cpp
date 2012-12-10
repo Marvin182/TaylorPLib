@@ -7,7 +7,7 @@ using namespace LibMatrix;
 
 namespace LibMatrix {
 	// needed by GTest to print polynomials if some ASSERT_EQ(Polynomial1, Polynomial2) failed
-	std::ostream& operator<<(std::ostream &out, Polynomial &p)
+	std::ostream& operator<<(std::ostream &out, const Polynomial &p)
 	{
 		out << setiosflags(ios::fixed) << setprecision(2);
 
@@ -334,4 +334,141 @@ TEST_F(PolynomialMethods, isIdWithEps)
 
 	ASSERT_TRUE(P1.isId(4));
 	ASSERT_FALSE(P1.isId(3));
+}
+
+TEST_F(PolynomialMethods, sqr)
+{
+	Polynomial P1(3);
+	double p1[] = {1,2,3,4};
+	P1.setCoeffs(p1);
+	Polynomial P2 = P1.sqr();
+	Polynomial PExpect(3);
+	double pexpect[] = {1,4,10,20};
+	PExpect.setCoeffs(pexpect);
+	ASSERT_EQ(P2,PExpect);
+	double pnotexpect[] = {1,4,10,30};
+	PExpect.setCoeffs(pnotexpect);
+	ASSERT_NE(P2,PExpect);
+}
+
+TEST_F(PolynomialMethods, setsqr)
+{
+	Polynomial P1(3);
+	double p1[] = {1,2,3,4};
+	P1.setCoeffs(p1);
+	Polynomial P2 = P1.sqr();
+	P1.setSqr();
+	ASSERT_EQ(P1,P2);
+}
+
+TEST_F(PolynomialMethods, sqrt)
+{
+	Polynomial P1(3);
+	double p1[] = {1,4,10,20};
+	P1.setCoeffs(p1);
+	Polynomial P2 = P1.sqrt();
+	Polynomial PExpect(3);
+	double pexpect[] = {1,2,3,4};
+	PExpect.setCoeffs(pexpect);
+	ASSERT_EQ(P2,PExpect);
+
+	double pnotexpect[] = {1,2,3,5};
+	PExpect.setCoeffs(pnotexpect);
+	ASSERT_NE(P2,PExpect);
+}
+
+TEST_F(PolynomialMethods, setsqrt)
+{
+	Polynomial P1(3);
+	double p1[] = {1,4,10,20};
+	P1.setCoeffs(p1);
+	Polynomial P2 = P1.sqrt();
+	P1.setSqrt();
+	ASSERT_EQ(P1,P2);
+}
+
+TEST_F(PolynomialMethods, isZero)
+{
+	ASSERT_TRUE(Zero.isZero());
+}
+
+TEST_F(PolynomialMethods, isZeroWithEps)
+{
+	Polynomial P1(3);
+	double p1[] = {1,1,2,1};
+	P1.setCoeffs(p1);
+
+	ASSERT_TRUE(P1.isZero(2));
+	ASSERT_FALSE(P1.isZero(1));
+}
+
+TEST_F(PolynomialMethods, set2Zero)
+{
+	Polynomial P1(3);
+	double p1[] = {1,1,2,1};
+	P1.setCoeffs(p1);
+	ASSERT_FALSE(P1.isZero(1));
+	P1.set2zero();
+	ASSERT_TRUE(P1.isZero(1));
+	P1.setCoeffs(p1);
+	ASSERT_FALSE(P1.isZero(1));
+	P1.set2zero(2);
+	ASSERT_TRUE(P1.isZero(1));
+}
+
+TEST_F(PolynomialMethods, set2Const)
+{
+	Polynomial P1(3);
+	double p1[] = {1,1,2,1};
+	P1.setCoeffs(p1);
+
+	ASSERT_FALSE(P1.isConst());
+	P1.set2const(6);
+	ASSERT_TRUE(P1.isConst());
+
+	Polynomial P2(3);
+	double p2[] = {6,0,0,0};
+	P2.setCoeffs(p2);
+
+	ASSERT_EQ(P1, P2);
+}
+
+TEST_F(PolynomialMethods, feval)
+{
+	Polynomial P1(3);
+	double p1[] = {4,3,2,1};
+	P1.setCoeffs(p1);
+
+	ASSERT_EQ(4,P1.feval());
+}
+
+TEST_F(PolynomialMethods, eval)
+{
+	Polynomial P1(3);
+	double p1[] = {1,2,3,4};
+	P1.setCoeffs(p1);
+
+	ASSERT_EQ(10,P1.eval(2,1));
+	ASSERT_NE(10,P1.eval(2,0.5));
+}
+
+TEST_F(PolynomialMethods, shift)
+{
+	Polynomial P1(3);
+	double p1[] = {1,2,3,4};
+	P1.setCoeffs(p1);
+
+	Polynomial P2(3);
+	double p2[] = {2,6,12,0};
+	P2.setCoeffs(p2);
+
+	P1.shift();
+	ASSERT_EQ(P1, P2);
+
+	Polynomial P3(3);
+	double p3[] = {6,24,0,0};
+	P3.setCoeffs(p3);
+	P1.shift();
+	ASSERT_EQ(P1, P3);
+
 }
