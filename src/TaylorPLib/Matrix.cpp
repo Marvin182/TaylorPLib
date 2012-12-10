@@ -128,7 +128,7 @@ double Matrix::get(int row, int col) const
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
-		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, MSIZE(this));
+		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, MSIZE);
 	}
 	return _data[row][col];
 }
@@ -153,7 +153,7 @@ double &Matrix::operator()(int row, int col)
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
-		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, MSIZE(this));
+		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, MSIZE);
 	}
 	return _data[row][col];
 }
@@ -233,7 +233,7 @@ Matrix Matrix::operator+(const Matrix &m) const
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		throw MathException("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", MSIZE(this), MSIZE(m));
+		throw MathException("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", MSIZE, MSIZE_M);
 	}
 
 	// an auxiliary object
@@ -262,7 +262,7 @@ Matrix Matrix::operator+=(const Matrix &m)
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		throw MathException("Cannot add up a %d x %d matrix to a %d x %d matrix.", MSIZE(m), MSIZE(this));
+		throw MathException("Cannot add up a %d x %d matrix to a %d x %d matrix.", MSIZE_M, MSIZE);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -288,7 +288,7 @@ Matrix Matrix::operator-(const Matrix &m) const
 	// dimensions checking
 	if(_rows != m._rows || _cols != m._cols)
 	{
-		throw MathException("Cannot subtract a %d x %d from a %d x %d matrix.", MSIZE(m), MSIZE(this));
+		throw MathException("Cannot subtract a %d x %d from a %d x %d matrix.", MSIZE_M, MSIZE);
 	}
 
 	// an auxiliary object
@@ -318,7 +318,7 @@ Matrix Matrix::operator-=(const Matrix &m)
 	if(_rows != m._rows || _cols != m._cols)
 	{
 		// TODO more information?
-		throw MathException("Cannot substract a %d x %d matrix from a %d x %d matrix.", MSIZE(m), MSIZE(this));
+		throw MathException("Cannot substract a %d x %d matrix from a %d x %d matrix.", MSIZE_M, MSIZE);
 	}
 
 	for( int i = 0; i < _rows; i++ )
@@ -408,7 +408,7 @@ Matrix Matrix::operator*(const Matrix &m) const
 {
 	if (_cols != m._rows) 
 	{
-		throw MathException("Cannot multiply a %d x %d with a %d x %d matrix. The number of rows in m must match the number of colmuns in this matrix.", MSIZE(this), MSIZE(m));
+		throw MathException("Cannot multiply a %d x %d with a %d x %d matrix. The number of rows in m must match the number of colmuns in this matrix.", MSIZE, MSIZE_M);
 	}
 
 	Matrix aux( _rows, m._cols, _dimT, true);

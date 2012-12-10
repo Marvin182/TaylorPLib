@@ -9,7 +9,8 @@
 #include "MathException.h"
 #include "Polynomial.h"
 
-#define MSIZE(m) m._rows, m._cols
+#define MSIZE _rows, _cols
+#define MSIZE_M m._rows, m._cols
 
 namespace LibMatrix {
 
