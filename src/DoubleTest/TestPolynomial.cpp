@@ -504,5 +504,5 @@ TEST_F(PolynomialExceptions, OperatorExceptions)
 
 TEST_F(PolynomialExceptions, FunctionExceptions)
 {
-	ASSERT_THROW(Polynomial(-1),MathException);
+	ASSERT_THROW(Polynomial(-1),MathException); 
 }
