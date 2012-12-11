@@ -1,7 +1,6 @@
 #include <time.h>
-#include "Matrix.h"
-#include "MathException.h"
 #include <iostream>
+#include "TaylorPLib.h"
 
 using namespace std;
 using namespace LibMatrix;

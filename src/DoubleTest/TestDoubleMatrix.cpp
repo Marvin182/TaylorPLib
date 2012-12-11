@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <gtest/gtest.h>
-#include "Matrix.h"
+#include "TaylorPLib.h"
 
 using namespace std;
 using namespace LibMatrix;
@@ -209,6 +209,29 @@ class MatrixMethods: public ::testing::Test
 			};
 			C3 = Matrix(8, 7, c3);
 		}
+};
+
+class MatrixExceptions: public ::testing::Test
+{
+protected:
+	Matrix A,B;
+
+	MatrixExceptions()
+	{
+		double a[] = {
+			1, 6, 0,
+			2, 7, 0,
+			3, 8, 0
+		};
+		double b[] = {
+			1, 6,
+			2, 7,
+			3, 8
+		};
+
+		A = Matrix(3,3, a);
+		B = Matrix(3,2, b);
+	}
 };
 
 /*
@@ -801,3 +824,37 @@ TEST_F(MatrixMethods, set2ValFromIndices)
 // bool Matrix::mcompare(Matrix &B);
 // bool Matrix::mcompare(Matrix &B, double eps);
 // bool Matrix::mcompare(Matrix &B, int r, double eps);
+
+TEST_F(MatrixExceptions, OperatorExceptions)
+{
+	ASSERT_THROW(A.get(4,3), MathException);
+	ASSERT_THROW(A(4,3), MathException);
+	ASSERT_THROW(A + B, MathException);
+	ASSERT_THROW(A += B, MathException);
+	ASSERT_THROW(A - B, MathException);
+	ASSERT_THROW(A -= B, MathException);
+	ASSERT_THROW(B * A, MathException);
+}
+
+TEST_F(MatrixExceptions, FunctionExceptions)
+{
+	// mmCaABbC
+	// Wrong Dimension of receiving Matrix
+	Matrix C(3,3);
+	ASSERT_THROW(C.mmCaABbC(1, 1, A, B),MathException);
+	C = Matrix(3,2);
+	C.mmCaABbC(1, 1, A, B); // should be okay
+	// Wrong Multiplication Dimensions
+	ASSERT_THROW(C.mmCaABbC(1, 1, B, A),MathException);
+
+	// bmmCaABbC
+	// rows > rows of B
+	ASSERT_THROW(C.bmmCaABbC(5,2,1,1,A,B),MathException);
+	// cols > cols of B
+	ASSERT_THROW(C.bmmCaABbC(2,5,1,1,A,B),MathException);
+	// A.cols != B.rows
+	ASSERT_THROW(C.bmmCaABbC(1,1,1,1,B,A),MathException);
+	C = Matrix(1,2);
+	// A.rows != C.rows || A.cols != C.cols
+	ASSERT_THROW(C.bmmCaABbC(1,1,1,1,A,B),MathException);
+}

@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <gtest/gtest.h>
-#include "Polynomial.h"
+#include "TaylorPLib.h"
 
 using namespace std;
 using namespace LibMatrix;
@@ -85,6 +85,21 @@ protected:
 		// Zero
 		double zero[] = {0,0,0};
 		Zero.setCoeffs(zero);
+	}
+};
+
+class PolynomialExceptions: public ::testing::Test
+{
+protected:
+	Polynomial A, B;
+	PolynomialExceptions()
+	{
+		double a[] = {0,1,2};
+		double b[] = {2,1,2,4};
+		A = Polynomial(2);
+		B = Polynomial(3);
+		A.setCoeffs(a);
+		B.setCoeffs(b);
 	}
 };
 
@@ -471,4 +486,23 @@ TEST_F(PolynomialMethods, shift)
 	P1.shift();
 	ASSERT_EQ(P1, P3);
 
+}
+
+TEST_F(PolynomialExceptions, OperatorExceptions)
+{
+	ASSERT_THROW(A[-1],MathException);
+	ASSERT_THROW(A[5],MathException);
+	ASSERT_THROW(A + B,MathException);
+	ASSERT_THROW(A += B,MathException);
+	ASSERT_THROW(A - B,MathException);
+	ASSERT_THROW(A -= B,MathException);
+	ASSERT_THROW(A * B,MathException);
+	ASSERT_THROW(A *= B,MathException);
+	ASSERT_THROW(A / B,MathException);
+	ASSERT_THROW(A /= B,MathException);
+}
+
+TEST_F(PolynomialExceptions, FunctionExceptions)
+{
+	ASSERT_THROW(Polynomial(-1),MathException);
 }
