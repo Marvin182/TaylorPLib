@@ -27,11 +27,11 @@
 
   <div id="impress">
   
-    <div class="step" data-x="3000" data-y="-700" data-scale="5"> 
-      <h1><b>Matrizen mit Taylorpolynomen</b></h1>
+    <div class="step" data-x="2500" data-y="-500" data-scale="3"> 
+      <h1>Matrizen mit Taylorpolynomen</h1>
     </div>
     
-    <div id="overview" class="step" data-x="1750" data-y="1000" data-scale="5">
+    <div id="overview" class="step" data-x="2000" data-y="1000" data-scale="4">
     </div>
 
     <div class="step" data-x="0" data-y="0" data-z="-500" data-rotate-y="-45">
@@ -69,8 +69,7 @@
       </a>
     </div>
     
-    <div id="overview" class="step" data-x="1750" data-y="1000" data-scale="5">
-    </div>
+    <div class="ov"></div>
 
     <div class="step" data-x="0" data-y="1000" data-z="-500" data-rotate-y="-45">
       <h1><b>Aufgabenstellung</b></h1>
@@ -184,8 +183,7 @@
       <h1><b>Optimierungen</b></h1>
     </div>
 
-    <div id="overview" class="step" data-x="1750" data-y="1000" data-scale="5">
-    </div>
+    <div class="ov"></div>
 
     <div class="step" data-x="0" data-y="2000" data-z="-500" data-rotate-y="-45" data-scale="0.5">
       <h1><b>Klassendiagramm</b></h1>
@@ -230,8 +228,7 @@
       <h1><b>Portierungen</b></h1>
     </div>
 
-    <div id="overview" class="step" data-x="1750" data-y="1000" data-scale="5">
-    </div>
+    <div class="ov"></div>
 
     <div class="step" data-x="16000" data-y="1000" data-z="2000" data-scale="15"> 
       <p style="font-size:500px"><b>?</b></p>
@@ -239,17 +236,22 @@
     
   </div>
   
+  <script src="js/jquery.js"></script>
   <script src="js/impress.js"></script>
-  <script>impress().init();</script>
-  <script type="text/javascript" language="JavaScript">
-    function set_body_height()
-    {
-        var wh = $(window).height();
-        $('body').attr('style', 'height:' + wh + 'px;');
-    }
+  <script>
     $(document).ready(function() {
-        set_body_height();
-        $(window).bind('resize', function() { set_body_height(); });
+      var overview = $('#overview');
+      var copy = ['data-x', 'data-y', 'data-scale'];
+      $('.ov').each(function(i, e) {
+        var e = $(e).addClass('step');
+        for (i in copy) {
+          e.attr(copy[i], overview.attr(copy[i]));
+        }
+      });
+
+      window.setTimeout(function() {
+        impress().init();
+      },100);
     });
   </script>
 
