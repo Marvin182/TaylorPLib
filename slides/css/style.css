@@ -119,6 +119,10 @@ li {
     transition:         opacity 1s;
 }
 
+.step img {
+    opacity: 0.1;
+}
+
 #start *,
 .step h1, .step h2,
 .step.active * {
