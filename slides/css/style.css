@@ -13,7 +13,17 @@ body {
 
 b, strong { font-weight: bold }
 i, em { font-style: italic }
+r { color: rgb(255, 0, 0) }
+g { color: rgb(0, 255, 0) }
 
+.fit {
+  max-width: 100%;
+  max-height: 100%;
+}
+.center {
+  display: block;
+  margin: auto;
+}
 
 /*
     Links
