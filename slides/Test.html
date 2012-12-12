@@ -85,128 +85,72 @@
 
     <div class="step" data-x="0" data-y="1000">
       <h2>Vorgehensweise</h2>
-      <p>
-        <ul>
-          <li>Analyse des vorhandenen Quellcodes</li>
-          <li>Erstellung eines DLL-Projektes</li>
-          <li>Implementation von GTest</li>
-          <li>Schreiben von Unittests</li> 
-          <li>Implementation der Funktionalität</li>
-          <li>Erstellung eines Projektes zum Test der DLL</li> 
-        </ul>
-      </p>
+      <ul>
+        <li>Analyse des vorhandenen Quellcodes</li>
+        <li>Erstellung eines DLL-Projektes</li>
+        <li>Implementation von GTest</li>
+        <li>Schreiben von Unittests</li> 
+        <li>Implementation der Funktionalität</li>
+        <li>Erstellung eines Projektes zum Test der DLL</li> 
+      </ul>
     </div>
 
-    <div class="step" data-x="2000" data-y="1000">
-      <h2>Testdriven Development</h2>
-      <p>
-        <ul>
-          <li>Wiederholung</li>
-          <li></br></li>
-        </ul>
-      </p>
-    </div>
-    
-    <div class="step" data-x="2100" data-y="1150" data-scale="0.1">
-      <h1><b>Testdriven Development</b></h1>
-      <p>
-        <ul>
-          <li>Test schreiben</li>
-          <li>kompilieren -> Test <r>rot</r></li>
-          <li>Funktionalität implementieren</li>
-          <li>kompilieren -> Test sollt <g>grün</g> sein</li>
-        </ul>
-      </p>
-    </div>
-
-    <div class="step" data-x="2000" data-y="1000">
-      <h2>Testdriven Development</h2>
-      <p>
-        <ul>
-          <li>Wiederholung</li>
-          <li>Google Test Framework</li>
-        </ul>
-      </p>
-    </div>
-    
-    <div class="step" data-x="2100" data-y="1220" data-scale="0.1">
-      <h1><b>Google Test Framework</b></h1>
-      <p>
-        <li>Einfaches Testen von C++ Code</li>
-        <li>Plattformunabhängig</li>
-        <li>built-in Assertions</li>
-      </p>
-    </div>
-
-    <div class="step" data-x="2110" data-y="1230" data-scale="0.01">
-      <h1><b>gtest Assertions</b></h1>
-      <p>
-        <ul>
-          <li>ASSERT_EQ(condition,value)</li>
-          <li>ASSERT_NE(condition,value)</li>
-          <li>ASSERT_THROW(function,exception)</li>
-          <li>ASSERT_NO_THROW(function,exception)</li>
-          <li>ASSERT_TRUE(value)</li>
-          <li>ASSERT_FALSE(value)</li>
-        </ul>
-      </p>
-    </div>
-
-    <div class="step" data-x="2100" data-y="1220" data-scale="0.1">
-      <h1><b>Google Test Framework</b></h1>
-      <p>
-        <li>Einfaches Testen von C++ Code</li>
-        <li>Plattformunabhängig</li>
-        <li>built-in Assertions</li>
-      </p>
-    </div>
 
     <!--
-    <div class="step" data-x="2000" data-y="1700" data-z="-50000">
-      <h1>Google Test Framework</h1>
+      Test Driven Development
+    -->
+
+    <div id="tdd" class="step" data-x="2000" data-y="1000">
+      <h2>Test Driven Development</h2>
+    </div>
+    
+    <div class="step" data-x="2000" data-y="920" data-scale="0.1">
+      <h3>Test Driven Development</h3>
+      <ol>
+        <li>Test schreiben</li>
+        <li>kompilieren -> Test <span class="r">rot</span></li>
+        <li>Funktionalität implementieren</li>
+        <li>kompilieren -> Test sollt <span class="g">grün</span> sein</li>
+      </ol>
+    </div>
+
+    <div class="step" data-x="1800" data-y="1250" data-scale="0.5">
+      <h3>Google C++ Testing Framework</h3>
       <p>
         <li>Einfaches Testen von C++ Code</li>
         <li>Plattformunabhängig</li>
         <li>built-in Assertions</li>
       </p>
     </div>
-    -->
-    <div class="step" data-x="2100" data-y="1270" data-scale="0.01">
-      <h1>Test passed</h1>
-      <a title="GTEST">
-        <img src="res/gtest.png" title="GTEST"/>
-      </a>
+
+    <div class="step" data-x="2100" data-y="1240" data-scale="0.1">
+      <h3>GTest Assertions</h3>
+      <ul>
+        <li>ASSERT_EQ(condition, value)</li>
+        <li>ASSERT_NE(condition, value)</li>
+        <li>ASSERT_THROW(function, exception)</li>
+        <li>ASSERT_NO_THROW(function, exception)</li>
+        <li>ASSERT_TRUE(value)</li>
+        <li>ASSERT_FALSE(value)</li>
+      </ul>
     </div>
 
-    <div class="step" data-x="2100" data-y="1300" data-scale="0.01">
-      <h1>Test failed</h1>
-      <a title="GTEST_ERROR">
-        <img src="res/gtest_error.png" title="GTEST_ERROR"/>
-      </a>
+    <!-- wenn du eine Folie nochmal haben willst reicht es die Ansicht nochmal als step zu definieren
+    <div class="step" data-x="1800" data-y="1250" data-scale="0.5"></div>
+    -->
+
+    <div class="step" data-x="2250" data-y="1240" data-scale="0.1">
+      <h3 class="g">Test passed</h3>
+      <img src="res/gtest.png" title="GTEST"/>
+    </div>
+
+    <div class="step" data-x="2400" data-y="1240" data-scale="0.1">
+      <h3 class="r">Test failed</h3>
+      <img src="res/gtest_error.png" title="GTEST_ERROR"/>
     </div>
     
-    <!--
-    <div id="gtest" class="step" data-x="-26000" data-y="1700" data-z="12000" data-scale="3">
-      <a title="GTEST">
-        <img src="res/gtest.png" title="GTEST"/>
-      </a>
-    </div>
 
-    <div id="gtest_error" class="step" data-x="-20000" data-y="1700" data-z="12000" data-scale="3">
-      <a title="GTEST_ERROR">
-        <img src="res/gtest_error.png" title="GTEST_ERROR"/>
-      </a>
-    </div>
-    -->
-    <div class="step" data-x="2000" data-y="1000">
-      <h2>Testdriven Development</h2>
-      <p>
-        <ul>
-          <li>Wiederholung</li>
-          <li>Google Test Framework</li>
-        </ul>
-      </p>
-    </div>
+
     
     <div class="step" data-x="4000" data-y="1000">
       <h2>Klassendiagramm</h2>

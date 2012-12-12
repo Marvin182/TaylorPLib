@@ -69,11 +69,24 @@ h2 {
     text-align: center;
     position: relative;
     top: -100px;
-    opacity: 1.0;
+}
+
+h3 {
+    position: relative;
+    top: -100px;
+    text-align: center;
+    font-weight: bold;
+
 }
 
 ul {
     list-style-type: circle;
+}
+ol {
+    list-style-type: decimal;
+}
+li {
+    margin-left: 1.5em;
 }
 
 .step {
@@ -93,9 +106,8 @@ ul {
     line-height: 1.5;
 }
 
-.step p,
-.step img, .step {
-    opacity: 0.5;
+.step * {
+    opacity: 0.25;
 
     -webkit-transition: opacity 1s;
     -moz-transition:    opacity 1s;
@@ -103,8 +115,9 @@ ul {
     -o-transition:      opacity 1s;
     transition:         opacity 1s;
 }
-.step.active {
-    opacity: 1
+.step h2,
+.step.active * {
+    opacity: 1;
 }
 
 
