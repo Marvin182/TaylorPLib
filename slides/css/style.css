@@ -57,11 +57,15 @@ a:focus {
 .g { color: rgb(0, 255, 0) }
 .b { color: rgb(0, 0, 255) }
 
+p.formula {
+    font-size: 80%;
+}
+
 h2 {
-    font-size: 110px;
-    text-align: center;
     position: relative;
     top: -100px;
+    text-align: center;
+    font-size: 110px;
 }
 
 h3 {
@@ -127,4 +131,10 @@ li {
 #start p {
     text-align: center;
     font-size: 70px;
+}
+
+.questions p {
+    text-align: center;
+    font-size: 500px;
+    font-style: italic;
 }

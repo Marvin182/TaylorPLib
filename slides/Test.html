@@ -29,6 +29,10 @@
 
   <div id="impress">
   
+    <!--
+      Start
+    -->
+
     <div id="start" class="step" data-x="0" data-y="0" >
       <h2>Matrizen mit Taylorpolynomen</h2>
       <p class="names">
@@ -39,32 +43,64 @@
     
     <div id="overview" class="step" data-x="2000" data-y="1000" data-scale="4"></div>
 
+
+    <!--
+      Problembeschreibung
+    -->
+
+   
     <div class="step" data-x="2000" data-y="0" >
       <h2>Problembeschreibung</h2>
       <ul>
-        <li>Wiederholung Taylor Polynom</li>
-        <li>Automatisierte Berechnung von Matrizen</li>
-        <li>Existente Mathe-Bibliotheken unterstützen Matrizen nur mit reelen/komplexen Zahlen</li>
+        <li>Händisches Rechnen mit großen Matrizen sehr aufwändig</li>
+        <li>Existente Mathe-Bibliotheken unterstützen keine Matrizen aus Taylorpolynomen</li>
       </ul>
     </div>
 
-    <div class="step" data-x="2300" data-y="-100" data-z="-500" data-scale="0.2">
-      <h1>Taylorreihe</h1>
-      <p>
-        <a title="Taylorreihe">
-          <img class="center fit" src="res/Taylorreihe.jpeg" title="Taylorreihe"/>
-        </a>
-      </p>
-    </div>
-    
-    <div class="step" data-x="2000" data-y="0" >
-      <h2>Problembeschreibung</h2>
+    <div class="step" data-x="1500" data-y="350" data-scale="0.1">
+      <h3>Taylorreihe</h3>
       <ul>
-        <li>Wiederholung Taylor Polynom</li>
-        <li>Automatisierte Berechnung von Matrizen</li>
-        <li>Existente Mathe-Bibliotheken unterstützen Matrizen nur mit reelen/komplexen Zahlen</li>
+        <li>komplizierte Funktion durch Potenzreihe annähren</li>
+        <li>Annährung ist gut im festgelegten Punkt</li>
+        <li>Ausrechnen des Polynoms leichter und schneller</li>
       </ul>
     </div>
+
+    <div class="step" data-x="1700" data-y="350" data-scale="0.1">
+      <h3>Taylorreihe</h3>
+      <p class="formula">
+        \[ \begin{aligned}
+          T_n(a) = f(a) + \frac{f'(a)}{1!} (x-a) + ... + \frac{f^{(n)}(a)}{n!} (x-a)^n
+        \end{aligned} \]
+        \[ \begin{aligned}
+          \lim\limits_{x \rightarrow a}{ \frac{f(x) - T_n(x)}{(x-a)^n} } = 0
+        \end{aligned} \]
+      </p>
+    </div>
+
+    <!--
+      Taylor Polynome 1-3 für Wurzelfunktion:
+      https://www.google.de/search?q=sqrt(x)%2C2%2B0.25*(x-4)&oq=sqrt(x)%2C2%2B0.25*(x-4)&aqs=chrome.0.57.24349&sourceid=chrome&ie=UTF-8#hl=de&tbo=d&sclient=psy-ab&q=sqrt(x)%2C2%2B(x-4)%2F4%2C2%2B(x-4)%2F4-(x-4)%5E2%2F64%2C2%2B(x-4)%2F4-(x-4)%5E2%2F64%2B(x-4)%5E3%2F512&oq=sqrt(x)%2C2%2B(x-4)%2F4%2C2%2B(x-4)%2F4-(x-4)%5E2%2F64%2C2%2B(x-4)%2F4-(x-4)%5E2%2F64%2B(x-4)%5E3%2F512&gs_l=serp.3...8250.9624.3.10014.2.2.0.0.0.0.122.237.0j2.2.0...0.0...1c.1.L5VhXf6W0BY&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&bvm=bv.1354675689,d.Yms&fp=1b52c79b077988b6&bpcl=39650382&biw=764&bih=451
+    -->
+
+    <div class="step" data-x="1900" data-y="350" data-scale="0.1">
+      <h3>Taylorreihe</h3>
+      <p class="formula">
+        \[ \begin{aligned}
+          f(x) &= \sqrt(x) = x^\frac{1}{2} \\
+          a &= 4 \\
+          T_1(4) &= 2 + \frac{1}{2} x^{-\frac{1}{2}} (x - 4) \\
+          T_2(4) &= 2 + \frac{1}{2} x^{-\frac{1}{2}} (x - 4) - \frac{1}{32} \frac{(x-4)^2}{2} \\
+          T_3(4) &= 2 + \frac{1}{2} x^{-\frac{1}{2}} (x - 4) - \frac{1}{32} \frac{(x-4)^2}{2} + \frac{3}{256} \frac{(x-4)^3}{6} \\
+        \end{aligned} \]
+      </p>
+    </div>
+
+    <div class="step" data-x="2100" data-y="350" data-scale="0.1">
+      <h3>Taylorreihe</h3>
+      <img src="images/wurzel-polynom.png"/>
+    </div>
+
 
     <div class="step" data-x="4000" data-y="0">
       <h2>Aufgabenstellung</h2>
@@ -75,7 +111,22 @@
       </ul>
     </div>
 
+    <div class="step" data-x="3800" data-y="500" data-scale="0.1">
+      <h3>Funktionalitäten</h3>
+      <ul>
+        <li>Wichtigsten Rechenoperationen von Taylorpolynomen (addieren, multiplizieren, quadrieren, ableiten etc.)</li>
+        <li>Wichtige Funktionen für Matrizen (Matrizenaddition, -multiplikation, Matrizen transponieren, etc.)</li>
+        <li>Optimierte Matrizenmultiplikationen</li>
+        <li>ein paar Hilfsfunktionen</li>
+      </ul>
+    <div>
+
     <div class="ov" id="overview"></div>
+
+
+    <!--
+      Vorgehensweise
+    -->
 
     <div class="step" data-x="0" data-y="1000">
       <h2>Vorgehensweise</h2>
@@ -166,7 +217,7 @@
     </div>
 
     <div class="step" data-x="4200" data-y="1000" data-z="-1000" data-scale="0.1">
-      <h1><b>Klassendiagramm Polynomial</b></h1>
+      <h3>Klassendiagramm Polynomial</h3>
       <p>
         <a title="Klassendiagramm">
           <img class="center" src="res/Klassendiagramm_Polynomial.png" title="Klassendiagramm"/>
@@ -175,7 +226,7 @@
     </div>
 
     <div class="step" data-x="4350" data-y="1000" data-z="-1000" data-scale="0.1">
-      <h1><b>Klassendiagramm Matrix</b></h1>
+      <h3>Klassendiagramm Matrix</h3>
       <p>
         <a title="Klassendiagramm">
           <img class="center" src="res/Klassendiagramm_Matrix.png" title="Klassendiagramm"/>
@@ -184,7 +235,7 @@
     </div>
 
     <div class="step" data-x="4500" data-y="1000" data-z="-1000" data-scale="0.1">
-      <h1><b>Klassendiagramm MathException</b></h1>
+      <h3>Klassendiagramm MathException</h3>
       <p>
         <a title="Klassendiagramm">
           <img class="center" src="res/Klassendiagramm_MathException.png" title="Klassendiagramm"/>
@@ -193,7 +244,7 @@
     </div>
 
     <div class="step" data-x="4000" data-y="1000">
-      <h2>Klassendiagramm</h2>
+      <h3>Klassendiagramm</h3>
       <p>
         <a title="Klassendiagramm">
           <img class="center fit" src="res/Klassendiagramm.png" title="Klassendiagramm"/>
@@ -220,14 +271,22 @@
       <h2>Beispielanwendung</h2>
     </div>
 
-    <div class="ov" id="overview"></div>
 
-    <div class="step" data-x="16000" data-y="1000" data-z="2000" data-scale="15"> 
-      <p style="font-size:500px"><b>?</b></p>
+    <!--
+      Fragen
+    -->
+
+    <div id="questions" class="step" data-x="4000" data-y="2000" data-z="20000" data-scale="5"> 
+      <p>?</p>
     </div>
     
   </div>
   
+
+  <!--
+    Javascript
+  -->
+
   <script src="js/jquery.js"></script>
   <script src="js/impress.js"></script>
   <script>
@@ -246,6 +305,9 @@
       },100);
     });
   </script>
+
+  <!-- MathJax for LaTeX Rendering -->
+  <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
 </body>
 </html>
