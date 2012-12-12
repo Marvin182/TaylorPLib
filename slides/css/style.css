@@ -133,7 +133,7 @@ li {
     font-size: 70px;
 }
 
-.questions p {
+#questions p {
     text-align: center;
     font-size: 500px;
     font-style: italic;
