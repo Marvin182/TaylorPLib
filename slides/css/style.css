@@ -137,6 +137,13 @@ li {
     font-size: 70px;
 }
 
+
+#questions {
+    display: none;
+}
+#questions.active {
+    display: block;
+}
 #questions p {
     text-align: center;
     font-size: 500px;
