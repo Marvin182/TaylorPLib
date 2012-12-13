@@ -130,13 +130,10 @@ li {
 }
 
 
-
-
 #start p {
     text-align: center;
     font-size: 70px;
 }
-
 
 #questions {
     display: none;
@@ -148,4 +145,34 @@ li {
     text-align: center;
     font-size: 500px;
     font-style: italic;
+}
+
+.syntaxhighlighter {
+    font-size: 0.5em !important;
+    overflow-y: hidden !important;
+}
+
+footer {
+    position: fixed;
+    bottom: 25px;
+
+    -webkit-transition: bottom 0.25s;
+    -moz-transition:    bottom 0.25s;
+    -ms-transition:     bottom 0.25s;
+    -o-transition:      bottom 0.25s;
+    transition:         bottom 0.25s;
+}
+.impress-on-start footer {
+    bottom: -25px;
+}
+footer.left {
+    left: 50px;
+}
+footer.center {
+    width: 100%;
+    text-align: center;
+}
+footer.right {
+    right: 50px;
+    text-align: right;
 }
