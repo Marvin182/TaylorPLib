@@ -130,15 +130,34 @@ li {
 }
 
 
-
-
 #start p {
     text-align: center;
     font-size: 70px;
 }
-
+#questions {
+    display: none;
+}
+#questions.active {
+    display: block;
+}
 #questions p {
     text-align: center;
     font-size: 500px;
     font-style: italic;
+}
+
+footer {
+    position: fixed;
+    bottom: 25px;
+}
+footer.left {
+    left: 50px;
+}
+footer.center {
+    width: 100%;
+    text-align: center;
+}
+footer.right {
+    right: 50px;
+    text-align: right;
 }
