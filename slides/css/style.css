@@ -134,6 +134,7 @@ li {
     text-align: center;
     font-size: 70px;
 }
+
 #questions {
     display: none;
 }
@@ -154,6 +155,15 @@ li {
 footer {
     position: fixed;
     bottom: 25px;
+
+    -webkit-transition: bottom 0.25s;
+    -moz-transition:    bottom 0.25s;
+    -ms-transition:     bottom 0.25s;
+    -o-transition:      bottom 0.25s;
+    transition:         bottom 0.25s;
+}
+.impress-on-start footer {
+    bottom: -25px;
 }
 footer.left {
     left: 50px;
