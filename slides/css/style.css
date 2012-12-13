@@ -146,6 +146,11 @@ li {
     font-style: italic;
 }
 
+.syntaxhighlighter {
+    font-size: 0.5em !important;
+    overflow-y: hidden !important;
+}
+
 footer {
     position: fixed;
     bottom: 25px;

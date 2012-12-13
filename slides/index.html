@@ -11,8 +11,12 @@
 
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />
 
-    <link href="css/reset.css" rel="stylesheet" />
-    <link href="css/style.css" rel="stylesheet" />
+    <link type="text/css" rel="stylesheet" href="css/reset.css" />
+
+    <link type="text/css" rel="stylesheet" href="syntaxhighlighter/css/shCore.css"/>
+    <link type="text/css" rel="stylesheet" href="syntaxhighlighter/css/shThemeMidnight.css"/>
+    
+    <link type="text/css" rel="stylesheet" href="css/style.css" />
     
     <link rel="shortcut icon" href="favicon.png" />
     <link rel="apple-touch-icon" href="apple-touch-icon.png" />
@@ -236,6 +240,46 @@
       <h2>Optimierungen</h2>
     </div>
 
+    <div class="step" data-x="-2400" data-y="1600" data-scale="0.1">
+      <p class="formula">
+        \[
+        C' = 
+        \alpha
+        \begin{pmatrix} a_{00} & \dots & a_{0n} \\ \vdots & \ddots & \vdots \\ a_{r0} & \dots & a_{rn} \\
+            0 & \dots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \dots & 0 \end{pmatrix} 
+        \begin{pmatrix} b_{00} & \dots & b_{0n} \\ \vdots & \ddots & \vdots \\ b_{m0} & \dots & b_{mn} \end{pmatrix} 
+        + \beta C 
+        \]
+      </p>
+    </div>
+
+    <div class="step" data-x="-2200" data-y="1600" data-scale="0.1">
+      <script type="syntaxhighlighter" class="brush: cpp">
+        void Matrix::mmCasABbC(int r, double alpha, double beta,
+                                const Matrix &A, const Matrix &B)
+        {
+            // Fehler abfangen
+
+            int n = A._rows - r;
+            for( int i = 0; i < n; i++ )
+                for( int j = 0; j < B._cols; j++ )
+                    _data[i][j] *= beta;
+
+            for( int i = n; i < A._rows; i++ )
+                for( int j = 0; j < B._cols; j++ )
+                {
+                    Polynomial h(_dimT);
+
+                    for( int k = 0; k < B._rows; k++ )
+                        h += A._data[i][k] * B._data[k][j];
+
+                    _data[i][j] = h * alpha + _data[i][j] * beta;
+                }
+        }
+
+      </script>
+    </div>
+
 
     <!--
       Portierungen
@@ -290,9 +334,11 @@
     Javascript
   -->
 
-  <script src="js/jquery.js"></script>
-  <script src="js/impress.js"></script>
-  <script>
+  <script type="text/javascript" src="js/jquery.js"></script>
+  <script type="text/javascript" src="syntaxhighlighter/js/shCore.js"></script>
+  <script type="text/javascript" src="syntaxhighlighter/js/shAutoloader.js"></script>
+  <script type="text/javascript" src="js/impress.js"></script>
+  <script type="text/javascript">
     $(document).ready(function() {
       var overview = $('#overview');
       var copy = ['data-x', 'data-y', 'data-scale'];
@@ -305,6 +351,13 @@
 
       window.setTimeout(function() {
         impress().init();
+
+        SyntaxHighlighter.autoloader(
+          'cpp c                  syntaxhighlighter/js/shBrushCpp.js',
+          'c# c-sharp csharp      syntaxhighlighter/js/shBrushCSharp.js',
+          'py python              syntaxhighlighter/js/shBrushPython.js'
+        );
+        SyntaxHighlighter.all();
       },100);
     });
   </script>
