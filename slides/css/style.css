@@ -156,13 +156,14 @@ footer {
     position: fixed;
     bottom: 25px;
 
-    -webkit-transition: bottom 0.25s;
-    -moz-transition:    bottom 0.25s;
-    -ms-transition:     bottom 0.25s;
-    -o-transition:      bottom 0.25s;
-    transition:         bottom 0.25s;
+    -webkit-delay:      bottom 1s;
+    -moz-delay:         bottom 1s;
+    -ms-delay:          bottom 1s;
+    -o-delay:           bottom 1s;
+    delay:              bottom 1s;
 }
-.impress-on-start footer {
+.impress-on-start footer,
+.impress-on-questions footer {
     bottom: -25px;
 }
 footer.left {

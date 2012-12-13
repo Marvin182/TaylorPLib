@@ -91,11 +91,10 @@
       <h3>Taylorreihe</h3>
       <p class="formula">
         \[ \begin{aligned}
-          f(x) &= \sqrt(x) = x^\frac{1}{2} \\
-          a &= 4 \\
-          T_1(4) &= 2 + \frac{1}{2} x^{-\frac{1}{2}} (x - 4) \\
-          T_2(4) &= 2 + \frac{1}{2} x^{-\frac{1}{2}} (x - 4) - \frac{1}{32} \frac{(x-4)^2}{2} \\
-          T_3(4) &= 2 + \frac{1}{2} x^{-\frac{1}{2}} (x - 4) - \frac{1}{32} \frac{(x-4)^2}{2} + \frac{3}{256} \frac{(x-4)^3}{6} \\
+          f(x) &= \sqrt{x} = x^\frac{1}{2} \quad \quad \quad a = 4 \\
+          T_1(4) &= 2 + \frac{1}{4} \frac{(x - 4)}{1!} \\
+          T_2(4) &= 2 + \frac{1}{4} \frac{(x - 4)}{1!} - \frac{1}{32} \frac{(x-4)^2}{2!} \\
+          T_3(4) &= 2 + \frac{1}{4} \frac{(x - 4)}{1!} - \frac{1}{32} \frac{(x-4)^2}{2!} + \frac{3}{256} \frac{(x-4)^3}{3!} \\
         \end{aligned} \]
       </p>
     </div>
@@ -121,7 +120,7 @@
         <li>Wichtigsten Rechenoperationen von Taylorpolynomen (addieren, multiplizieren, quadrieren, ableiten etc.)</li>
         <li>Wichtige Funktionen für Matrizen (Matrizenaddition, -multiplikation, Matrizen transponieren, etc.)</li>
         <li>Optimierte Matrizenmultiplikationen</li>
-        <li>ein paar Hilfsfunktionen</li>
+        <li>Hilfsfunktionen</li>
       </ul>
     </div>
 
@@ -238,22 +237,27 @@
 
     <div id="optimierungen" class="step" data-x="-2000" data-y="1500">
       <h2>Optimierungen</h2>
+      <ul>
+        <li>Matrizenmultiplikationen sehr aufwendig => \( \Omega(n^3) \)</li>
+        <li>für spezielle Formen aus Matrizen lassen sich viele Rechenoperationen einsparen</li>
+      </ul>
     </div>
 
-    <div class="step" data-x="-2400" data-y="1600" data-scale="0.1">
+    <div class="step" data-x="-2400" data-y="1900" data-scale="0.5">
       <p class="formula">
-        \[
-        C' = 
+        \[ \begin{aligned}
+        C' &= \alpha A B + \beta C \\
+        C' &= 
         \alpha
         \begin{pmatrix} a_{00} & \dots & a_{0n} \\ \vdots & \ddots & \vdots \\ a_{r0} & \dots & a_{rn} \\
             0 & \dots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \dots & 0 \end{pmatrix} 
         \begin{pmatrix} b_{00} & \dots & b_{0n} \\ \vdots & \ddots & \vdots \\ b_{m0} & \dots & b_{mn} \end{pmatrix} 
         + \beta C 
-        \]
+        \end{aligned} \]
       </p>
     </div>
 
-    <div class="step" data-x="-2200" data-y="1600" data-scale="0.1">
+    <div class="step" data-x="-2200" data-y="1900" data-scale="0.5">
       <script type="syntaxhighlighter" class="brush: cpp">
         void Matrix::mmCasABbC(int r, double alpha, double beta,
                                 const Matrix &A, const Matrix &B)
