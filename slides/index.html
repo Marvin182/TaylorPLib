@@ -238,7 +238,7 @@
     <div id="optimierungen" class="step no-opacity" data-x="-2000" data-y="1500">
       <h2>Optimierungen</h2>
       <ul>
-        <li>Matrizenmultiplikationen sehr aufwendig => \( \Omega(n^3) \)</li>
+        <li>Matrizenmultiplikationen sehr aufwendig => \( \operatorname{O}(n^3) \)</li>
         <li>für spezielle Formen aus Matrizen lassen sich <span class="">viele Rechenoperationen einsparen</span></li>
       </ul>
     </div>
@@ -249,11 +249,12 @@
         C' &= \alpha A B + \beta C \\
         C' &= 
         \alpha
-        \begin{pmatrix} a_{00} & \dots & a_{0n} \\ \vdots & \ddots & \vdots \\ a_{r0} & \dots & a_{rn} \\
-            0 & \dots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \dots & 0 \end{pmatrix} 
+        \begin{pmatrix} 0 & \dots & 0 \\ \vdots & \ddots & \vdots \\ 0 & \dots & 0 \\
+                      a_{(a-r)0} & \dots & a_{(a-r)m} \\ \vdots & \ddots & \vdots \\ a_{a0} & \dots & a_{am} \end{pmatrix} 
         \begin{pmatrix} b_{00} & \dots & b_{0n} \\ \vdots & \ddots & \vdots \\ b_{m0} & \dots & b_{mn} \end{pmatrix} 
         + \beta C 
         \end{aligned} \]
+        Where \( C \) is an a x n Matrix.
       </p>
     </div>
 
