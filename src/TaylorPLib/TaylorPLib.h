@@ -7,11 +7,10 @@
 #include <math.h>
 #include <typeinfo>
 
-#define MSIZE _rows, _cols
-#define MSIZE_M m._rows, m._cols
 #define abs(x) ((x) > 0 ? (x) : -(x))
-#define MATH_ERROR(format, ...) MathException("%s(%d): " format, __FILE__, __LINE__, __VA_ARGS__)
+
 #define MAX_MESSAGE_SIZE 256
+// #define MATH_ERROR(format, ...) MathException("%s(%d): " format, __FILE__, __LINE__, __VA_ARGS__)
 
 namespace LibMatrix {
 
