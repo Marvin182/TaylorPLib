@@ -20,14 +20,14 @@ namespace LibMatrix {
 		int _rows,											// The number of rows
 			_cols,											// The number of columns
 			_dimT;											// The dimension of the Taylor polynomials 
-    	double **_data;										// The pointer to the allocated memory
+    	Polynomial **_data;										// The pointer to the allocated memory
 
     	void allocateMemory(bool initialize)
     		{ Matrix::allocateMemory(_data, _rows, _cols, initialize); }
-    	static void allocateMemory(double **&data, int rows, int cols, bool initialize);
+    	static void allocateMemory(Polynomial **&data, int rows, int cols, bool initialize);
 	    void deallocateMemory()
 	    	{ Matrix::deallocateMemory(_data, _rows, _cols); }
-	    static void deallocateMemory(double **&data, int rows, int cols);
+	    static void deallocateMemory(Polynomial **&data, int rows, int cols);
 		void copyFrom(const Matrix &m);
 
 	public:
@@ -39,7 +39,7 @@ namespace LibMatrix {
 		Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
 		Matrix(const Matrix &m);										// Copy constructor
 
-		Matrix(int rows, int cols, double *values);						// Test construtor		
+		Matrix(int rows, int cols, Polynomial *values);						// Test construtor		
 
 		~Matrix();														// Destructor
 
@@ -50,12 +50,12 @@ namespace LibMatrix {
 		int nrows() const { return _rows; }			// Returns the number of rows
 		int ncols() const { return _cols; }			// Returns the number of columns
 		int dimT() const { return _dimT; }			// Returns the dimension of the type T
-		double get(int row, int col) const;			// Returns a single element from the matrix
+		Polynomial get(int row, int col) const;			// Returns a single element from the matrix
 
 		//
 		// Overloaded operators
 		//
-		double & operator()(int row, int col);			// Element
+		Polynomial & operator()(int row, int col);			// Element
 		Matrix operator=(const Matrix &m);				// Assignment operators
 		bool operator==(const Matrix &m) const;			// Comparison operators
 		bool operator!=(const Matrix &m) const;

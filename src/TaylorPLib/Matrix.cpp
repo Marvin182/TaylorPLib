@@ -81,7 +81,7 @@ Matrix::Matrix(const Matrix &m):
  * Easy constructor for testing.
  *
  */
-Matrix::Matrix(int rows, int cols, double *values):
+Matrix::Matrix(int rows, int cols, Polynomial *values):
 	_rows(rows),
 	_cols(cols),
 	_dimT(0),
@@ -123,7 +123,7 @@ Matrix::~Matrix()
  * \return The value of the desired element.
  *
  */
-double Matrix::get(int row, int col) const
+Polynomial Matrix::get(int row, int col) const
 { 
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
@@ -148,7 +148,7 @@ double Matrix::get(int row, int col) const
  * \return The value of the desired element.
  *
  */
-double &Matrix::operator()(int row, int col)
+Polynomial &Matrix::operator()(int row, int col)
 { 
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
@@ -463,8 +463,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 			
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -530,8 +529,7 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 	{
 		for( int j = 0; j < c; j++ ) 
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < r; k++ )
 			{
@@ -603,8 +601,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 	{
 		for( int j = 0; j < B._cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -671,8 +668,7 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 		// non-zero-columns of B
 		for( int j = n; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -720,8 +716,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPolyn h(_dimT);
+			TPolyn h(_dimT);
 
 			for( int k = 0; k <= j; k++ )
 			{
@@ -759,8 +754,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 	{
 		for( int j = 0; j < _rows; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < _rows; k++ )
 			{
@@ -798,8 +792,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 	{
 		for( int j = 0; j < _rows; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < A._rows; k++ )
 			{
@@ -846,8 +839,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -897,8 +889,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -945,8 +936,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < A._cols; k++ )
 			{
@@ -1012,8 +1002,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 	{
 		for( int j = 0; j < B._cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			if (up)
 			{
@@ -1087,8 +1076,7 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			double h = 0.0;
-			// TPoly h(_dimT);
+			TPoly h(_dimT);
 
 			for( int k = 0; k < c; k++ )
 			{
