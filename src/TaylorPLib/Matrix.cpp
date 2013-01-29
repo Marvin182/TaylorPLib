@@ -1142,18 +1142,28 @@ void Matrix::mmCaIBbC(double alpha, double beta, const Matrix &B)
  * \param[in] beta The scalar value that multiplies \a C.
  * \param[in] piv The pointer to \a piv, a vector of permutations on \a I, of type \type int.
  * \param[in] rows The binary parameter to indicate whether the rows or the columns of I
- * 		should be permuted (= 0, the rows; = 1, the columns).
+ * 		should be permuted (0 for the rows; 1 for the columns).
  * \param[in] B The pointer to \a B, an object of type \type Matrix.
  */
 void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matrix &B)
 {
-		// Matrix Id( _rows, B._rows, dimT() );			// Id[m][p][nTcoeff]
-		// Id.set2Id();										// set to the identity
-		// if( rows )											// permute its columns
-		// 	Id.cpermutem( piv );
-		// else												// permute its rows
-		// 	Id.rpermutem( piv );
-		// mmCaABbC( alpha, beta, Id, B );
+	// TODO implement a faster version without identity matrix
+
+	Matrix Id(_rows, B._rows, _dimT);
+	Id.set2Id();				
+
+	if (rows)
+	{
+		// permute its columns
+		Id.cpermutem(piv);
+	}
+	else
+	{
+		// permute its rows
+		Id.rpermutem(piv);
+	}
+
+	mmCaABbC(alpha, beta, Id, B);
 }
 
 /**
@@ -1202,18 +1212,28 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A)
  * \param[in] A The pointer to \a A, an object of type \type Matrix.
  * \param[in] piv The pointer to \a piv, a vector of permutations on \a I, of type \type int.
  * \param[in] rows The binary parameter to indicate whether the rows or the columns of I
- * 		should be permuted (= 0, the rows; = 1, the columns).
+ * 		should be permuted (0 for the rows; 1 for the columns).
  * 
  */
 void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows)
 {
-		// Matrix Id( A._cols, _cols, dimT() );			// Id[p][n][nTcoeff]
-		// Id.set2Id();										// set to the identity
-		// if( rows )											// permute its columns
-		// 	Id.cpermutem( piv );
-		// else												// permute its rows
-		// 	Id.rpermutem( piv );
-		// mmCaABbC( alpha, beta, A, Id );
+	// TODO implement a faster version without identity matrix
+	
+	Matrix Id( A._cols, _cols, _dimT);
+	Id.set2Id();
+
+	if(rows)
+	{
+		// permute its columns
+		Id.cpermutem(piv);
+	}
+	else
+	{
+		// permute its rows
+		Id.rpermutem(piv);
+	}
+
+	mmCaABbC(alpha, beta, A, Id);
 }
 
 //
