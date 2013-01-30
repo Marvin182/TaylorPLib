@@ -942,10 +942,28 @@ bool Polynomial::isZero(double eps)
 }
 
 /**
+ * Sets a Taylor polynomial to the constant given as parameter.
+ * 
+ * \param[in] c The constant value of type \a double to set the Taylor polynomial to.
+ * 
+ */
+void Polynomial::set2Const(double c)
+{
+	_coeffs[0] = c;
+
+	for (int i = 1; i <= _order; i++)
+	{
+		_coeffs[i] = 0.0;
+	}
+
+	_constant = 1;
+}
+
+/**
  * Sets all coefficients of a Taylor polynomial to zero.
  * 
  */
-void Polynomial::set2zero()
+void Polynomial::set2Zero()
 {
 	for (int i = 0; i <= _order; i++)	
 	{
@@ -961,32 +979,14 @@ void Polynomial::set2zero()
  * \param[in] ord Derivative order from which to start on (increasingly).
  * 
  */
-void Polynomial::set2zero(int ord)
+void Polynomial::set2Zero(int ord)
 {
 	for (int i = ord; i <= _order; i++)
 	{
 		_coeffs[i] = 0.0;
 	}
 	
-	_constant = -1;
-}
-
-/**
- * Sets a Taylor polynomial to the constant given as parameter.
- * 
- * \param[in] c The constant value of type \a double to set the Taylor polynomial to.
- * 
- */
-void Polynomial::set2const(double c)
-{
-	_coeffs[0] = c;
-
-	for (int i = 1; i <= _order; i++)
-	{
-		_coeffs[i] = 0.0;
-	}
-
-	_constant = 1;
+	_constant = ord < 2 ? 1 : -1;
 }
 
 /**

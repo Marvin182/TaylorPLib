@@ -123,14 +123,14 @@ Matrix::~Matrix()
  * \return The value of the desired element.
  *
  */
-Polynomial Matrix::get(int row, int col) const
+const Polynomial* Matrix::get(int row, int col) const
 { 
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
 	{
 		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, _rows, _cols);
 	}
-	return _data[row][col];
+	return &_data[row][col];
 }
 
 
@@ -463,7 +463,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 			
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -529,7 +529,7 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 	{
 		for( int j = 0; j < c; j++ ) 
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < r; k++ )
 			{
@@ -601,7 +601,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 	{
 		for( int j = 0; j < B._cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -668,7 +668,7 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 		// non-zero-columns of B
 		for( int j = n; j < _cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -716,7 +716,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			TPolyn h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k <= j; k++ )
 			{
@@ -754,7 +754,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 	{
 		for( int j = 0; j < _rows; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < _rows; k++ )
 			{
@@ -792,7 +792,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 	{
 		for( int j = 0; j < _rows; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < A._rows; k++ )
 			{
@@ -839,7 +839,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -889,7 +889,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -936,7 +936,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < A._cols; k++ )
 			{
@@ -1002,7 +1002,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 	{
 		for( int j = 0; j < B._cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			if (up)
 			{
@@ -1076,7 +1076,7 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			TPoly h(_dimT);
+			Polynomial h(_dimT);
 
 			for( int k = 0; k < c; k++ )
 			{
@@ -1270,7 +1270,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		B( _rows - 1, k ) /= _data[ _rows - 1 ][ _rows - 1 ];
 // 		for( int i = _rows - 2; i > -1; i-- )
 // 		{
-// 				sum.set2zero();								// p(x) = 0, initialization
+// 				sum.set2Zero();								// p(x) = 0, initialization
 // 			for( int j = i + 1; j < _rows; j++ )
 // 				sum += _data[i][j] * B._data[j][k];
 // 			B._data[i][k] = ( B._data[i][k] - sum ) / _data[ i ][ i ];
@@ -1309,9 +1309,9 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		X( _rows - 1, k ) = B( piv[ _rows - 1 ], k ) / _data[ piv[ _rows - 1 ] ][ _rows - 1 ];
 // 		for( int i = _rows - 2; i > -1; i-- )
 // 		{
-// 			if( strcmp( sum.typeName(), "TPolyn" ) == 0 ) 	// A zero value indicates 
+// 			if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 	// A zero value indicates 
 // 															// that both strings are equal
-// 				sum.set2zero();								// p(x) = 0, initialization
+// 				sum.set2Zero();								// p(x) = 0, initialization
 // 			//else sum = 0.0;
 // 			for( int j = i + 1; j < _rows; j++ )
 // 				sum += _data[ piv[ i ] ][ j ] * X( j, k );
@@ -1350,9 +1350,9 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	//printf( "\nb[ n - 1 ]=%.16g", b[ n - 1 ] );
 // 	for( int i = _rows - 2; i > -1; i-- )
 // 	{
-// 		if( strcmp( sum.typeName(), "TPolyn" ) == 0 ) 		// A zero value indicates 
+// 		if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 		// A zero value indicates 
 // 															// that both strings are equal
-// 			sum.set2zero();									// p(x) = 0, initialization
+// 			sum.set2Zero();									// p(x) = 0, initialization
 // 		//else sum = 0.0;
 // 		for( int j = i + 1; j < _rows; j++ )
 // 			sum += _data[i][j] * b[ j ];
@@ -1395,9 +1395,9 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		B._data[k][0] /= _data[ 0 ][ 0 ];
 // 		for( int i = 1; i < B._cols; i++ )
 // 		{
-// 			if( strcmp( sum.typeName(), "TPolyn" ) == 0 ) 	// A zero value indicates 
+// 			if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 	// A zero value indicates 
 // 															// that both strings are equal
-// 				sum.set2zero();								// p(x) = 0, initialization
+// 				sum.set2Zero();								// p(x) = 0, initialization
 // 			//else sum = 0.0;
 // 			for( int j = 0; j < i; j++ )
 // 				sum += _data[ j ][ i ] * B._data[k][j];
@@ -1654,7 +1654,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 	for( int i = 0; i < _rows; i++ )
 // 		for( int j = 0; j < _cols; j++ )
 // 		{
-// 			if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 			if( strcmp( _data[i][j].typeName(), "Polynomialn" ) == 0 ) // A zero value indicates 
 // 															// that both strings are equal
 // 				sum += _data[i][j].feval() * _data[i][j].feval();
 // 			//else sum += _data[i][j] * _data[i][j];	// e.g. a matrix of doubles
@@ -1691,7 +1691,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // 		for( int i = 0; i < _rows; i++ )
 // 			for( int j = 0; j < _cols; j++ )
 // 			{
-// 				if( strcmp( _data[i][j].typeName(), "TPolyn" ) == 0 ) // A zero value indicates 
+// 				if( strcmp( _data[i][j].typeName(), "Polynomialn" ) == 0 ) // A zero value indicates 
 // 																// that both strings are equal
 // 					sum += _data[i][j][ k ] * _data[i][j][ k ];
 // 			}
@@ -1764,12 +1764,12 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
  * 
  * \param[in] piv The pointer to \a piv, a vector of permutations on the columns of \a A.
  * \param[in] trans The \a boolean parameter to indicate whether to transpose the vector
- * 		of permutations \a piv or not (=1, transpose; =0, otherwise). Default is false.
+  * 		of permutations \a piv or not (=1, transpose; =0, otherwise). Default is false.
  * 
  */
 void Matrix::cpermutem(int *piv, bool trans)
 {
-	for( int j = 0; j < _cols; j++ )
+	for(int j = 0; j < _cols; j++)
 	{
 		if (piv[j] < 0 || piv[j] >= _cols)
 		{
@@ -1777,14 +1777,14 @@ void Matrix::cpermutem(int *piv, bool trans)
 		}
 	}
 
-	double **newData;
-	Matrix::allocateMemory(newData, _rows, _cols, false);
+	Polynomial **newData;
+	Matrix::allocateMemory(newData, _rows, _cols, _dimT, false);
 
 	int *pivT = 0;
 	if (trans)
 	{
 		pivT = new int[_cols];
-		for( int i = 0; i < _cols; i++ )
+		for(int i = 0; i < _cols; i++)
 		{
 			pivT[ piv[i] ] = i;
 		}
@@ -1821,8 +1821,8 @@ void Matrix::rpermutem(int *piv)
 		}
 	}
 
-	double **newData;
-	Matrix::allocateMemory(newData, _rows, _cols, false);
+	Polynomial **newData;
+	Matrix::allocateMemory(newData, _rows, _cols, _dimT, false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -1853,18 +1853,18 @@ void Matrix::transpose()
 		{
 			for( int j = 0; j < i; j++ )
 			{
-				// std::swap(_data[i][j], _data[j][i]);
-				double h = _data[i][j];
-				_data[i][j] = _data[j][i];
-				_data[j][i] = h;
+				std::swap(_data[i][j], _data[j][i]);
+				// double h = _data[i][j];
+				// _data[i][j] = _data[j][i];
+				// _data[j][i] = h;
 			}
 		}
 	}
 	else
 	{
 		// size changes, need to allocate new memomry :(
-		double **newData;
-		Matrix::allocateMemory(newData, _cols, _rows, false);
+		Polynomial **newData;
+		Matrix::allocateMemory(newData, _cols, _rows, _dimT, false);
 
 		for( int i = 0; i < _rows; i++ )
 		{
@@ -1925,8 +1925,7 @@ void Matrix::shift()
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			_data[i][j] *= 10.0;
-			// _data[i][j].shift();
+			_data[i][j].shift();
 		}
 	}
 }
@@ -1951,16 +1950,14 @@ bool Matrix::isId() const
 		{
 			if (i == j)
 			{
-				if (_data[i][j] != 1.0)
-				// if (!_data[i][j].isId())
+				if (!_data[i][j].isId())
 				{
 					return false;
 				}
 			}
 			else
 			{
-				if (_data[i][j] != 0.0)
-				// if (!_data[i][j].isZero())
+				if (!_data[i][j].isZero())
 				{
 					return false;
 				}
@@ -2047,8 +2044,7 @@ bool Matrix::isZero() const
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			if (_data[i][j] != 0.0)
-			// if(!_data[i][j].isZero())
+			if(!_data[i][j].isZero())
 			{
 				return false;
 			}
@@ -2102,13 +2098,11 @@ void Matrix::set2Id()
 		{
 			if (i == j)
 			{
-				_data[i][j] = 1.0;
-				// _data[i][j].set2Id();
+				_data[i][j].set2Id();
 			}
 			else
 			{
-				_data[i][j] = 0.0;
-				// _data[i][j].set2zero();
+				_data[i][j].set2Zero();
 			}
 		}
 	}
@@ -2175,13 +2169,11 @@ void Matrix::set2IdFromIndices(int firstRow, int lastRow, int firstCol, int last
 		{
 			if (i - firstRow == j - firstCol)
 			{
-				_data[i][j] = 1.0;
-				// _data[i][j].set2Id();
+				_data[i][j].set2Id();
 			}
 			else
 			{
-				_data[i][j] = 0.0;
-				// _data[i][j].set2zero();
+				_data[i][j].set2Zero();
 			}
 		}
 	}
@@ -2303,8 +2295,7 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 		{
 			for( int j = firstCol; j <= lastCol; j++ )
 			{
-				_data[i][j] = 0.0;
-				// _data[i][j].set2Zero();
+				_data[i][j].set2Zero();
 			}
 		}
 	}
@@ -2314,8 +2305,7 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 		{
 			for( int j = firstCol; j <= lastCol; j++ )
 			{
-				_data[i][j] = v;
-				// _data[i][j].set2Const(v);
+				_data[i][j].set2Const(v);
 			}
 		}
 	}
@@ -2333,8 +2323,8 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // 	int i, j, k;
 // 	T sum( dimT() ), p( dimT() );
 	
-// 	Am.set2zero();											// some initialization
-// 	p.set2const( 1.0 );
+// 	Am.set2Zero();											// some initialization
+// 	p.set2Const( 1.0 );
 // 	for( int i = 0; i < _rows; i++ )
 // 	{
 // 		Am( i, i ) = p / _data[ i ][ i ];					// elements of the diagonal
@@ -2342,9 +2332,9 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // 	for( int j = _rows - 2; j > -1; j-- )
 // 		for( int i = j + 1; i < _rows; i++ )
 // 		{
-// 			if( strcmp( sum.typeName(), "TPolyn" ) == 0 ) 	// A zero value indicates 
+// 			if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 	// A zero value indicates 
 // 															// that both strings are equal
-// 				sum.set2zero();								// p(x) = 0
+// 				sum.set2Zero();								// p(x) = 0
 // 			//else sum = 0.0;
 // 			for( int k = j + 1; k < _rows; k++ )
 // 				sum += _data[ j ][ k ] * Am( k, i );
@@ -2367,15 +2357,15 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // 	int i, j, k;
 // 	T sum( dimT() ), p( dimT() );
 	
-// 	p.set2const( 1.0 );
+// 	p.set2Const( 1.0 );
 // 	for( int i = 0; i < r; i++ )
 // 		Am( i, i ) = p / _data[ i ][ i ];					// elements of the diagonal
 // 	for( int j = r - 2; j > -1; j-- )
 // 		for( int i = j + 1; i < r; i++ )
 // 		{
-// 			if( strcmp( sum.typeName(), "TPolyn" ) == 0 ) 	// A zero value indicates 
+// 			if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 	// A zero value indicates 
 // 															// that both strings are equal
-// 				sum.set2zero();								// p(x) = 0
+// 				sum.set2Zero();								// p(x) = 0
 // 			//else sum = 0.0;
 // 			for( int k = j + 1; k < r; k++ )
 // 				sum += _data[ j ][ k ] * Am( k, i );
@@ -2999,7 +2989,7 @@ void Matrix::print(const char *name)
   P R I V A T E
   **************/
 
-void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
+void Matrix::allocateMemory(Polynomial **&data, int rows, int cols, int dimT, bool initialize)
 {
 	try
 	{
@@ -3009,7 +2999,7 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 			throw MathException("Matrix invalid matrix size");
 		}
 
-		data = new double*[rows];
+		data = new Polynomial*[rows];
 		if (data == 0 || data == NULL)
 		{
 			throw MathException("Memory allocation failure.");
@@ -3017,7 +3007,7 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 
 		for( int i = 0; i < rows; i++ )
 		{
-			data[i] = new double[cols];
+			data[i] = new Polynomial[cols];
 			if (data[i] == 0 || data[i] == NULL)
 			{
 				throw MathException("Memory allocation failure.");
@@ -3027,8 +3017,7 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 			{
 				for( int j = 0; j < cols; j++)
 				{
-					data[i][j] = 0.0;
-					// data[i][j] = TPoly(_dimT);
+					data[i][j] = Polynomial(dimT);
 				}
 			}
 		}
@@ -3043,7 +3032,7 @@ void Matrix::allocateMemory(double **&data, int rows, int cols, bool initialize)
 	}
 }
 
-void Matrix::deallocateMemory(double **&data, int rows, int cols)
+void Matrix::deallocateMemory(Polynomial **&data, int rows, int cols)
 {
 	for( int i = 0; i < rows; i++ )
 	{
