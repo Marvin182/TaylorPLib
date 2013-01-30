@@ -7,26 +7,26 @@ namespace LibMatrix
 {
     /// <summary>
     ///
-    /// (Taylor) Polynomial with derivate degree n (n+1 coefficients):
-    ///
-    /// P_n(x) = f(a) + (x-a)*f'(a)/1! + (x-a)^2*f''(a)/2! + (x-a)^3*f'''(a)/3! 
-    ///			+ ... + (x-a)^n*f^{(n)}(a)/n!
-    ///
-    ///		  = sum{k=0}{n} (x-a)^k*f^{(k)}(a)/k!
-    ///
-    /// being 'f' the function to be approximated by P_n(x) at point 'a', with its
-    /// first n derivatives existing on a closed interval I, so that
-    ///
-    /// f(x) = P_n(x) + R_n(x)
-    ///
-    /// the remainder term being R_n(x) = (x-a)^{n+1}*f^{(n+1)}(c)/(n+1)! for some
-    /// 'c' between 'x' and 'a'.
-    ///
-    /// Another often used form:
-    ///
-    /// f(x0+h) = f(x0) + h*f'(x0)/1! + h^2*f''(x0)/2! + h^3*f'''(x0)/3! 
-    ///			+ ... + h^n*f^{(n)}(x0)/n!
-    /// 
+    /// (Taylor) Polynomial with derivate degree n (n+1 coefficients):<para/>
+    /// <para/>
+    /// P_n(x) = f(a) + (x-a)*f'(a)/1! + (x-a)^2*f''(a)/2! + (x-a)^3*f'''(a)/3! <para/>
+    ///			+ ... + (x-a)^n*f^{(n)}(a)/n!<para/>
+    /// <para/>
+    ///		  = sum{k=0}{n} (x-a)^k*f^{(k)}(a)/k!<para/>
+    /// <para/>
+    /// being 'f' the function to be approximated by P_n(x) at point 'a', with its<para/>
+    /// first n derivatives existing on a closed interval I, so that<para/>
+    /// <para/>
+    /// f(x) = P_n(x) + R_n(x)<para/>
+    /// <para/>
+    /// the remainder term being R_n(x) = (x-a)^{n+1}*f^{(n+1)}(c)/(n+1)! for some<para/>
+    /// 'c' between 'x' and 'a'.<para/>
+    /// <para/>
+    /// Another often used form:<para/>
+    /// <para/>
+    /// f(x0+h) = f(x0) + h*f'(x0)/1! + h^2*f''(x0)/2! + h^3*f'''(x0)/3! <para/>
+    ///			+ ... + h^n*f^{(n)}(x0)/n!<para/>
+    /// <para/>
     /// </summary>
     public class Polynomial
     {
