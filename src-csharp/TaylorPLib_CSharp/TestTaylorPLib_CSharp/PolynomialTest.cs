@@ -5,7 +5,6 @@ using System;
 namespace TestTaylorPLib_CSharp
 {
     
-    
     /// <summary>
     ///Dies ist eine Testklasse für "PolynomialTest" und soll
     ///alle PolynomialTest Komponententests enthalten.
