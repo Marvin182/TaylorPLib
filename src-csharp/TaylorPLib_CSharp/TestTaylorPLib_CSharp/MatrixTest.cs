@@ -60,6 +60,7 @@ namespace TestTaylorPLib_CSharp
         #endregion
 
         #region Constructor Tests
+        
         /// <summary>
         ///Ein Test für "Matrix-Konstruktor"
         ///</summary>
@@ -112,6 +113,58 @@ namespace TestTaylorPLib_CSharp
             Assert.AreEqual(target2._cols, expected._cols);
             Assert.AreEqual(target2._dimT, expected._dimT);
         }
+        
         #endregion
+
+        #region Getter Tests
+
+        /// <summary>
+        ///Ein Test für "Getter"
+        ///</summary>
+        [TestMethod()]
+        public void MatrixGetterTest()
+        {
+            Polynomial[,] p = new Polynomial[2, 3];
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 3; j++)
+                    p[i, j] = new Polynomial(i);
+
+            Matrix_Accessor initM = new Matrix_Accessor(2, 3, p);
+            Assert.AreEqual(initM.nrows(), 2);
+            Assert.AreEqual(initM.ncols(), 3);
+            CollectionAssert.AreEqual(initM._data, p);
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 3; j++)
+                    Assert.AreEqual(p[i, j], initM.get(i, j));
+
+            Assert.AreEqual(initM.dimT(), 0);
+            try
+            {
+                initM.get(-1, 1);
+                Assert.Fail(); // If it gets to this line, no exception was thrown
+            }
+            catch (MathException) { }
+            try
+            {
+                initM.get( 1,-1);
+                Assert.Fail(); // If it gets to this line, no exception was thrown
+            }
+            catch (MathException) { }
+            try
+            {
+                initM.get( 5, 1);
+                Assert.Fail(); // If it gets to this line, no exception was thrown
+            }
+            catch (MathException) { }
+            try
+            {
+                initM.get( 1, 51);
+                Assert.Fail(); // If it gets to this line, no exception was thrown
+            }
+            catch (MathException) { }
+        }
+
+        #endregion
+
     }
 }

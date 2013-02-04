@@ -1,6 +1,7 @@
 ﻿using LibMatrix;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using System.IO;
 
 namespace TestTaylorPLib_CSharp
 {
@@ -108,7 +109,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für den []-Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorSquareBracketsTest()
+        public void PolynomialOperatorSquareBracketsTest()
         {
             Polynomial target = new Polynomial(3, new double[] {3,2,1,0});
             double expected = target[2];
@@ -123,7 +124,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für den ==-Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorEqualsTest()
+        public void PolynomialOperatorEqualsTest()
         {
             Polynomial target = new Polynomial(3, new double[] { 3, 2, 1, 0 });
             Polynomial expected = new Polynomial(3, new double[] { 3, 2, 1, 0 });
@@ -141,7 +142,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für den < und <= und > und >= -Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorLtGtTest()
+        public void PolynomialOperatorLtGtTest()
         {
             Polynomial target = new Polynomial(3, new double[] { 3, 2, 1, 0 });
             Polynomial expected = new Polynomial(3, new double[] { 3, 2, 1, 0 });
@@ -166,6 +167,14 @@ namespace TestTaylorPLib_CSharp
             Assert.IsFalse(muchGreater < greater);
             Assert.IsFalse(muchGreater <= greater);
 
+            Assert.IsFalse(greater > muchGreater);
+            Assert.IsFalse(greater >= muchGreater);
+            Assert.IsFalse(expected >= greater);
+
+            Assert.IsTrue(greater < muchGreater);
+            Assert.IsTrue(greater <= muchGreater);
+            Assert.IsFalse(greater <= expected);
+
 
         }
 
@@ -173,7 +182,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für den +-Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorPlusTest()
+        public void PolynomialOperatorPlusTest()
         {
             Polynomial a1 = new Polynomial(3, new double[] { 3, 2, 1, 0 });
             Polynomial a2 = new Polynomial(3, new double[] { 3, 2, 1, 0 });
@@ -185,14 +194,26 @@ namespace TestTaylorPLib_CSharp
             Polynomial expectedA3 = new Polynomial(3, new double[] { 12, 4, 2, 0 });
             Assert.IsTrue(a1 + a3 == expectedA3);
             a1 += a3;
-            Assert.AreEqual(a1, expectedA3);            
+            Assert.AreEqual(a1, expectedA3);
+
+            Polynomial a4 = new Polynomial(2, new double[] { 3, 2, 1 });
+            try
+            {
+                a1 += a4;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            Polynomial a5 = new Polynomial(2, new double[] { 1, 0, 0 });
+            a5 += a4;
+
         }
 
         /// <summary>
         ///Ein Test für den unary - -Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorUnaryMinusTest()
+        public void PolynomialOperatorUnaryMinusTest()
         {
             Polynomial a1 = new Polynomial(3, new double[] { 3, 2, 1, 0 });
             Polynomial a2 = new Polynomial(3, new double[] { -3, -2, -1, 0 });
@@ -204,7 +225,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für den - -Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorMinusTest()
+        public void PolynomialOperatorMinusTest()
         {
             Polynomial a1 = new Polynomial(3, new double[] { 6, 4, 2, 0 });
             Polynomial a2 = new Polynomial(3, new double[] { 3, 2, 1, 0 });
@@ -215,15 +236,25 @@ namespace TestTaylorPLib_CSharp
             Polynomial a3 = new Polynomial(3, new double[] { 6, 0, 0, 0 });
             Polynomial expectedA3 = new Polynomial(3, new double[] { -3, 2, 1, 0 });
             Assert.IsTrue(a1 - a3 == expectedA3);
+            Assert.IsTrue(a3 - a1 == expectedA3);
             a1 -= a3;
             Assert.AreEqual(a1, expectedA3);
+
+            Polynomial a4 = new Polynomial(2, new double[] { 6, 0, 0 });
+            try
+            {
+                a3 -= a4;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
         }
 
         /// <summary>
         ///Ein Test für den *-Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorMultiplyTest()
+        public void PolynomialOperatorMultiplyTest()
         {
             Polynomial a1 = new Polynomial(2, new double[] { 1, 2, 3 });
             Polynomial a2 = new Polynomial(2, new double[] { 2, 3, 4 });
@@ -235,6 +266,7 @@ namespace TestTaylorPLib_CSharp
             Polynomial a3 = new Polynomial(2, new double[] { 2, 0, 0 });
             Polynomial expectedA3 = new Polynomial(2, new double[] { 4, 14, 32 });
             Assert.IsTrue(a1 * a3 == expectedA3);
+            Assert.IsTrue(a3 * a1 == expectedA3);
             a1 *= a3;
             Assert.AreEqual(a1, expectedA3);
 
@@ -244,13 +276,22 @@ namespace TestTaylorPLib_CSharp
             Assert.IsTrue((a4 * d ) == expectedA4);
             a4 *= d;
             Assert.AreEqual(a4, expectedA4);
+
+            Polynomial a5 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
+            try
+            {
+                a5 *= a4; 
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
         }
 
         /// <summary>
         ///Ein Test für den /-Operator
         ///</summary>
         [TestMethod()]
-        public void OperatorDivTest()
+        public void PolynomialOperatorDivTest()
         {
             Polynomial a1 = new Polynomial(2, new double[] { 2, 4, 6 });
             Polynomial a2 = new Polynomial(2, new double[] { 1, 2, 3 });
@@ -264,16 +305,35 @@ namespace TestTaylorPLib_CSharp
 
             Polynomial expected = new Polynomial(2, new double[] { 2, 0, 0 });
             Assert.AreEqual(a1, expected);
+            Polynomial a5 = new Polynomial(3, new double[] {4, 3, 2, 1 });
+            try
+            {
+                a5 /= a4;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
         }
         #endregion
 
         #region Function Tests
 
         /// <summary>
+        ///Ein Test für "setSqrt()"
+        ///</summary>
+        [TestMethod()]
+        public void PolynomialGetterTest()
+        {
+            Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
+            Assert.AreEqual(P1.ncoeff, 4);
+        }
+
+        /// <summary>
         ///Ein Test für "sqr()"
         ///</summary>
         [TestMethod()]
-        public void SqrTest()
+        public void PolynomialSqrTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
             Polynomial P2 = P1.sqr();
@@ -287,7 +347,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "setSqr()"
         ///</summary>
         [TestMethod()]
-        public void SetSqrTest()
+        public void PolynomialSetSqrTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
             Polynomial P2 = P1.sqr();
@@ -299,7 +359,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "sqrt()"
         ///</summary>
         [TestMethod()]
-        public void SqrtTest()
+        public void PolynomialSqrtTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 4, 10, 20 });
             Polynomial PExpect = new Polynomial(3, new double[] { 1, 2, 3, 4 });
@@ -309,13 +369,11 @@ namespace TestTaylorPLib_CSharp
             Assert.AreNotEqual(P2, PNotExpect);
         }
 
-        // here should the functions print() and print(file) be tested
-
         /// <summary>
         ///Ein Test für "setSqrt()"
         ///</summary>
         [TestMethod()]
-        public void SetSqrtTest()
+        public void PolynomialSetSqrtTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 4, 10, 20 });
             Polynomial P2 = P1.sqrt();
@@ -327,7 +385,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "eval()"
         ///</summary>
         [TestMethod()]
-        public void EvalTest()
+        public void PolynomialEvalTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
             Assert.AreEqual(10, P1.eval(2,1));
@@ -338,7 +396,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "feval()"
         ///</summary>
         [TestMethod()]
-        public void FEvalTest()
+        public void PolynomialFEvalTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 4, 3, 2, 1});
             Assert.AreEqual(4, P1.feval());
@@ -349,7 +407,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "shift()"
         ///</summary>
         [TestMethod()]
-        public void ShiftTest()
+        public void PolynomialShiftTest()
         {
 
             Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
@@ -365,19 +423,21 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "isConst"
         ///</summary>
         [TestMethod()]
-        public void IsConstTest()
+        public void PolynomialIsConstTest()
         {
             Polynomial target = new Polynomial();
             Assert.IsTrue(target.isConst());
             Polynomial_Accessor target2 = new Polynomial_Accessor(2, new double[] { 0, 1, 2 });
             Assert.IsFalse(target2.isConst());
+            target2.unsetConst();
+            Assert.AreEqual(target2._constant, 0);
         }
 
         /// <summary>
         ///Ein Test für "isConst(eps)"
         ///</summary>
         [TestMethod()]
-        public void IsConstEpsTest()
+        public void PolynomialIsConstEpsTest()
         {
             Polynomial P1 = new Polynomial(2, new double[] { 4, 2, 3 });
             Polynomial P2 = new Polynomial(2, new double[] { 5, 3, 1 });
@@ -390,7 +450,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "isId()"
         ///</summary>
         [TestMethod()]
-        public void IsIdTest()
+        public void PolynomialIsIdTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 0, 0, 0 });
             Polynomial P2 = new Polynomial(3, new double[] { 1, 2, 1, 2 });
@@ -403,7 +463,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "isId(eps)"
         ///</summary>
         [TestMethod()]
-        public void IsIdEpsTest()
+        public void PolynomialIsIdEpsTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
 
@@ -415,7 +475,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "isZero()"
         ///</summary>
         [TestMethod()]
-        public void IsZeroTest()
+        public void PolynomialIsZeroTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 0, 0, 0, 0 });
             Polynomial P2 = new Polynomial(3, new double[] { 0, 0, 4, 0 });
@@ -430,7 +490,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "isZero(eps)"
         ///</summary>
         [TestMethod()]
-        public void IsZeroEpsTest()
+        public void PolynomialIsZeroEpsTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 2, 3, 4 });
             Assert.IsTrue(P1.isZero(4));
@@ -441,7 +501,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "set2Zero() and set2zero(int)"
         ///</summary>
         [TestMethod()]
-        public void Set2zeroTest()
+        public void PolynomialSet2zeroTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 1, 2, 1 });
             Assert.IsFalse(P1.isZero());
@@ -458,7 +518,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "set2const()"
         ///</summary>
         [TestMethod()]
-        public void Set2ConstTest()
+        public void PolynomialSet2ConstTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 1, 2, 1 });
             Assert.IsFalse(P1.isConst());
@@ -472,7 +532,7 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "setCoeffs(double[])"
         ///</summary>
         [TestMethod()]
-        public void SetCoeffsTest()
+        public void PolynomialSetCoeffsTest()
         {
             Polynomial P1 = new Polynomial(3, new double[] { 1, 1, 2, 1 });
             double[] d;
@@ -500,19 +560,61 @@ namespace TestTaylorPLib_CSharp
         ///Ein Test für "GetValue()"
         ///</summary>
         [TestMethod()]
-        public void GetValueTest()
+        public void PolynomialGetValueTest()
         {
             Polynomial target = new Polynomial(3, new double[] { 3, 2, 1, 0 });
             Assert.IsTrue(target[2] == target.getValueAt(2));
             Assert.IsTrue(target.getValueAt(0) == (double)3);
             Assert.IsFalse(target.getValueAt(0) == target[2]);
+            try
+            {
+                target.getValueAt(-1);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                target.getValueAt(6);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                double temp = target[-1];
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                target[-1] = 6;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                double temp = target[6];
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                target[6] = 6; 
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
         }
 
         /// <summary>
         ///Ein Test für "ToString"
         ///</summary>
         [TestMethod()]
-        public void ToStringTest()
+        public void PolynomialToStringTest()
         {
             Polynomial target = new Polynomial(3);
             string expected = "0x^3\t + 0x^2\t + 0x^1\t + 0";
@@ -521,6 +623,55 @@ namespace TestTaylorPLib_CSharp
             actual = target.ToString();
             Assert.AreEqual(expected, actual);
             Assert.AreNotEqual(notExpected, actual);
+            
+            Polynomial target2 = new Polynomial();
+            expected = "1";
+            notExpected = "\t1";
+            actual = target2.ToString();
+            Assert.AreEqual(expected, actual);
+            Assert.AreNotEqual(notExpected, actual);
+
+        }
+
+        /// <summary>
+        ///Ein Test für "Equals and GetHashCode"
+        ///</summary>
+        [TestMethod()]
+        public void PolynomialEqualsHashTest()
+        {
+            double[] d = new double[] { 1, 1, 2, 1 };
+            Polynomial_Accessor P1 = new Polynomial_Accessor(3, d);
+            Assert.IsFalse(P1.Equals(null));
+            Assert.AreEqual(P1._coeffs.GetHashCode(), P1.GetHashCode());
+
+        }
+
+        /// <summary>
+        ///Ein Test für "Print"
+        ///</summary>
+        [TestMethod()]
+        public void PolynomialPrintTest()
+        {
+            Polynomial P1 = new Polynomial(3, new double[] { 1, 1, 2, 1 });
+
+            string file = Path.GetTempFileName();
+            FileStream fs = new FileStream(file, FileMode.Create);
+            TextWriter tmp = Console.Out;
+            StreamWriter sw = new StreamWriter(fs);
+            Console.SetOut(sw);
+            P1.print();
+            Console.SetOut(tmp);
+            sw.Close();
+            string actual = File.ReadAllText(file);
+            string expected = "1\t1\t2\t1\t" + System.Environment.NewLine;
+
+            Assert.AreEqual(actual, expected);
+
+            File.Delete(file);
+
+            P1.print(file);
+            actual = File.ReadAllText(file);
+            Assert.AreEqual(actual, expected);
         }
 
         #endregion

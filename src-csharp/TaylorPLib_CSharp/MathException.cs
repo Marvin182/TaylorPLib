@@ -18,7 +18,7 @@ namespace LibMatrix
         /// <summary>
         /// Base Constructor with initializing the Message
         /// </summary>
-        /// <param name="message"></param>
+        /// <param name="message">Message the Exception should throw</param>
         public MathException(string message) : base(message) { }
 
         /// <summary>

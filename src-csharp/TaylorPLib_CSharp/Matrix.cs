@@ -13,15 +13,33 @@ namespace LibMatrix
     {
         #region private vars
         
-        private int _rows,
-                    _cols,
-                    _dimT;
+        /// <summary>
+        /// Number of rows
+        /// </summary>
+        private int _rows;
+        
+        /// <summary>
+        /// Number of columns
+        /// </summary>
+        private int _cols;
+
+        /// <summary>
+        /// The dimension of the Taylor polynomials
+        /// </summary>
+        private int _dimT;
+
+        /// <summary>
+        /// The Taylor Polynomials in an 2 dimensional Matrix Array
+        /// </summary>
         private Polynomial[,] _data;
 
         #endregion
 
         #region public getter and setter 
 
+        public int nrows() { return _rows; }
+        public int ncols() { return _cols; }
+        public int dimT() { return _dimT; }
         public Polynomial get(int row, int col)
         {
             if (row >= _rows || row < 0 || col >= _cols || col < 0)
@@ -101,6 +119,18 @@ namespace LibMatrix
             _data = new Polynomial[1,1];
         }
         
+        #endregion
+
+        #region public functions
+
+        #region operators
+
+        #endregion
+
+        #region functions
+
+        #endregion
+
         #endregion
 
         #region private functions

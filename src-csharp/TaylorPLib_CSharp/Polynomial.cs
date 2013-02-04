@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.IO;
 
 namespace LibMatrix
 {
@@ -652,8 +653,11 @@ namespace LibMatrix
         /// <param name="filenameWithPath">The output file to write the polynomial to.</param>
         public void print(String filenameWithPath)
         {
-            //TODO: should be implemented
-            throw new NotImplementedException("Not yet implemented...");
+            String output = String.Empty;
+            for (int i = 0; i <= _order; i++)
+                output += this[i] + "\t";
+
+            File.WriteAllText(filenameWithPath, output + System.Environment.NewLine);
         }
 
         /// <summary>
