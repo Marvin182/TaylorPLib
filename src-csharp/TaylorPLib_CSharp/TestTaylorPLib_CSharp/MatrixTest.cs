@@ -144,24 +144,313 @@ namespace TestTaylorPLib_CSharp
                 Assert.Fail(); // If it gets to this line, no exception was thrown
             }
             catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
             try
             {
                 initM.get( 1,-1);
                 Assert.Fail(); // If it gets to this line, no exception was thrown
             }
             catch (MathException) { }
+            catch (Exception) { Assert.Fail(); } 
             try
             {
                 initM.get( 5, 1);
                 Assert.Fail(); // If it gets to this line, no exception was thrown
             }
             catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
             try
             {
                 initM.get( 1, 51);
                 Assert.Fail(); // If it gets to this line, no exception was thrown
             }
             catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        #endregion
+
+        #region Operator Tests
+
+        /// <summary>
+        ///Ein Test für den []-Operator
+        ///</summary>
+        [TestMethod()]
+        public void MatrixOperatorSquareBracketsTest()
+        {
+            Polynomial[,] P1 = new Polynomial[2,2];
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                    P1[i,j] = new Polynomial(i);
+
+            Matrix m1 = new Matrix(2, 2, P1);
+            Polynomial actual = m1[1, 1];
+            Polynomial expected = new Polynomial(1);
+            Assert.AreEqual(actual, expected);
+
+            m1 = new Matrix(2, 2);
+            m1[1, 1] = expected;
+            Assert.AreEqual(m1.get(1, 1), expected);
+            Assert.AreEqual(m1[1,1], expected);
+
+            #region Exception Catching
+
+            try
+            {
+                Polynomial p = m1[-1, 1];
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                Polynomial p = m1[ 1,-1];
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                Polynomial p = m1[ 6, 1];
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                Polynomial p = m1[ 1, 6];
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                m1[-1, 1] = new Polynomial();
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                m1[ 1,-1] = new Polynomial();
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                m1[ 6, 1] = new Polynomial();
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                m1[ 1, 6] = new Polynomial();
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            #endregion
+        }
+
+        /// <summary>
+        ///Ein Test für den == und != -Operator
+        ///</summary>
+        [TestMethod()]
+        public void MatrixOperatorEqualsTest()
+        {
+            Matrix target = new Matrix(2,2);
+            Matrix expected = new Matrix(2, 2);
+            Matrix notExpected = new Matrix(3,3);
+
+            Assert.AreEqual(expected.ToString(), target.ToString());
+            Assert.IsTrue(target == expected);
+            Assert.IsFalse(target != expected);
+
+            Assert.AreNotEqual(notExpected.ToString(), target.ToString());
+            Assert.IsFalse(target == notExpected);
+            Assert.IsTrue(target != notExpected);
+
+            expected[1, 1] = new Polynomial(4);
+            Assert.IsFalse(target == expected);
+        }
+
+        /// <summary>
+        ///Ein Test für den + -Operator
+        ///</summary>
+        [TestMethod()]
+        public void MatrixOperatorPlusTest()
+        {
+            Polynomial[,] P1 = new Polynomial[2, 2];
+            Polynomial[,] P2 = new Polynomial[2, 2];
+            Polynomial[,] P3 = new Polynomial[2, 2];
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                {
+                    P1[i, j] = new Polynomial(3);
+                    P2[i, j] = new Polynomial(3);
+                    P3[i, j] = P1[i, j] + P2[i, j];
+                }
+
+            Matrix a = new Matrix(2, 2, P1);
+            Matrix b = new Matrix(2, 2, P2);
+
+            Matrix c = a + b;
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                    Assert.AreEqual(c[i,j], P3[i,j]);
+
+            a += b;
+
+            string aS = a.ToString();
+            string cS = c.ToString();
+            Assert.AreEqual(aS, cS);
+            Assert.IsTrue(a == c);
+
+            
+            try
+            {
+                Matrix d = new Matrix(2, 4);
+                d += a;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                Matrix d = new Matrix(4, 2);
+                d += a;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        ///Ein Test für den - -Operator
+        ///</summary>
+        [TestMethod()]
+        public void MatrixOperatorMinusTest()
+        {
+            Polynomial[,] P1 = new Polynomial[2, 2];
+            Polynomial[,] P2 = new Polynomial[2, 2];
+            Polynomial[,] P3 = new Polynomial[2, 2];
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                {
+                    P1[i, j] = new Polynomial(3);
+                    P2[i, j] = new Polynomial(3);
+                    P3[i, j] = P1[i, j] - P2[i, j];
+                }
+
+            Matrix a = new Matrix(2, 2, P1);
+            Matrix b = new Matrix(2, 2, P2);
+
+            Matrix c = a - b;
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                    Assert.AreEqual(c[i, j], P3[i, j]);
+
+            a -= b;
+
+            string aS = a.ToString();
+            string cS = c.ToString();
+            Assert.AreEqual(aS, cS);
+            Assert.IsTrue(a == c);
+
+
+            try
+            {
+                Matrix d = new Matrix(2, 4);
+                d -= a;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                Matrix d = new Matrix(4, 2);
+                d -= a;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        ///Ein Test für den unary - -Operator
+        ///</summary>
+        [TestMethod()]
+        public void MatrixOperatorUnaryMinusTest()
+        {
+            Polynomial[,] P1 = new Polynomial[1,1];
+            Polynomial[,] P2 = new Polynomial[1,1];
+
+            P1[0, 0] = new Polynomial(2, new double[] { 1, 2, 3 });
+            P2[0, 0] = new Polynomial(2, new double[] { -1, -2, -3 });
+
+            Matrix M1 = new Matrix(1, 1, P1);
+            Matrix M2 = new Matrix(1, 1, P2);
+
+            Matrix M3 = -M1;
+            string m2S = M2.ToString();
+            string m3S = M3.ToString();
+            Assert.AreEqual(m2S, m3S);
+            Assert.IsTrue(M2 == M3);
+        }
+
+        /// <summary>
+        ///Ein Test für den unary - -Operator
+        ///</summary>
+        [TestMethod()]
+        public void MatrixOperatorMultiplyTest()
+        {
+
+            Polynomial[,] P1 = new Polynomial[1, 1];
+            Polynomial[,] P2 = new Polynomial[1, 1];
+
+            P1[0, 0] = new Polynomial(2, new double[] { 1, 2, -3 });
+            P2[0, 0] = new Polynomial(2, new double[] { 4, 8, -12 });
+
+            Matrix target = new Matrix(1, 1, P1);
+            Matrix expected = new Matrix(1, 1, P2);
+
+            Assert.AreEqual((target * 4).ToString(), expected.ToString());
+
+            target *= 4;
+
+            Assert.AreEqual(target.ToString(), expected.ToString());
+
+            Polynomial[,] P3 = new Polynomial[1, 2];
+            Polynomial[,] P4 = new Polynomial[2, 1];
+            Polynomial[,] P5 = new Polynomial[1, 1];
+
+            P3[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P3[0, 1] = new Polynomial(1, new double[] { 1, 2 });
+            P4[0, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P4[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P5[0, 0] = new Polynomial(1, new double[] { 4, 14 });
+
+            Matrix M1 = new Matrix(1, 2, P3);
+            Matrix M2 = new Matrix(2, 1, P4);
+
+            Matrix expectedByMultiply = new Matrix(1, 1, P5);
+
+            Assert.AreEqual((M1 * M2).ToString(), expectedByMultiply.ToString());
+            M1 *= M2;
+            Assert.AreEqual(M1.ToString(), expectedByMultiply.ToString());
+
+            try
+            {
+                M1 = new Matrix(1, 2, P3);
+                M1 *= expectedByMultiply;
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
         }
 
         #endregion

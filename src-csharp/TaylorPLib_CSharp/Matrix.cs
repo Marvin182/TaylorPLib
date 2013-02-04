@@ -125,9 +125,204 @@ namespace LibMatrix
 
         #region operators
 
+        /// <summary>
+        /// Implements the [] operator.
+        /// </summary>
+        /// <param name="row">The row index</param>
+        /// <param name="col">The column index</param>
+        /// <returns>The value of the desired element.</returns>
+        public Polynomial this[int row, int col]
+        {
+            get
+            {
+                if (row >= _rows || row < 0 || col >= _cols || col < 0)
+                    throw new MathException(String.Format("(%d, %d) is not a alid index of %d x %d matrix", row, col, _rows, _cols));
+
+                return _data[row, col];
+            }
+            set
+            {
+                if (row >= _rows || row < 0 || col >= _cols || col < 0)
+                    throw new MathException(String.Format("(%d, %d) is not a alid index of %d x %d matrix", row, col, _rows, _cols));
+
+                _data[row, col] = value;
+            }
+        }
+
+        /// <summary>
+        /// Implements the == operator. It compares two matrices.
+        /// </summary>
+        /// <param name="a">Matrix on the left side</param>
+        /// <param name="b">Matrix on the right side</param>
+        /// <returns>true if the matrices are equal. Otherwise it returns false.</returns>
+        public static bool operator ==(Matrix a, Matrix b)
+        {
+            if (a._rows != b._rows || a._cols != b._cols || a._dimT != b._dimT) // TODO _dimT ?
+            {
+                return false;
+            }
+
+            for (int i = 0; i < a._rows; i++)
+            {
+                for (int j = 0; j < a._cols; j++)
+                {
+                    if (a._data[i,j] != b._data[i,j])
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Implements the != operator.<para/>
+        /// Compares two matrices.<para/>
+        /// </summary>
+        /// <param name="a">Matrix on the left side</param>
+        /// <param name="b">Matrix on the right side</param>
+        /// <returns>true if not equal</returns>
+        public static bool operator !=(Matrix a, Matrix b) { return !(a == b); }
+
+        /// <summary>
+        /// Implements the + operator. It adds up two matrices.
+        /// </summary>
+        /// <param name="a">Matrix on the left side</param>
+        /// <param name="b">Matrix on the right side</param>
+        /// <returns>the resulting Matrix object.</returns>
+        public static Matrix operator +(Matrix a, Matrix b)
+        {
+	        // dimensions checking
+	        if(a._rows != b._rows || a._cols != b._cols)
+	        {
+		        throw new MathException(String.Format("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", a._rows, a._cols, b._rows, b._cols));
+	        }
+
+	        // an auxiliary object
+	        Matrix aux = new Matrix(a._rows, a._cols, a._dimT);
+
+	        for( int i = 0; i < a._rows; i++ )
+	        {
+		        for( int j = 0; j < a._cols; j++ )
+		        {
+			        aux._data[i,j] = a._data[i,j] + b._data[i,j];
+		        }
+	        }
+
+	        return aux;
+        }
+
+        /// <summary>
+        /// Implements the - operator. It substracts two matrices.
+        /// </summary>
+        /// <param name="a">Matrix on the left side</param>
+        /// <param name="b">Matrix on the right side</param>
+        /// <returns>the resulting Matrix object.</returns>
+        public static Matrix operator -(Matrix a, Matrix b)
+        {
+            // dimensions checking
+            if (a._rows != b._rows || a._cols != b._cols)
+            {
+                throw new MathException(String.Format("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", a._rows, a._cols, b._rows, b._cols));
+            }
+
+            // an auxiliary object
+            Matrix aux = new Matrix(a._rows, a._cols, a._dimT);
+
+            for (int i = 0; i < a._rows; i++)
+            {
+                for (int j = 0; j < a._cols; j++)
+                {
+                    aux._data[i, j] = a._data[i, j] - b._data[i, j];
+                }
+            }
+
+            return aux;
+        }
+
+        /// <summary>
+        /// Implements the unary - operator.
+        /// </summary>
+        /// <param name="a">Matrix to operate on</param>
+        /// <returns>the resulting Matrix object.</returns>
+        public static Matrix operator -(Matrix a)
+        {
+            Matrix retval = new Matrix(a._rows, a._cols, a._dimT);
+            for (int i = 0; i < a._rows; i++)
+                for (int j = 0; j < a._cols; j++)
+                    retval[i, j] = -a[i, j];
+
+            return retval;
+        }
+
+        /// <summary>
+        /// Implements the * operator. It multiplies a matrix by a scalar.
+        /// </summary>
+        /// <param name="a">The Matrix to multiply with.</param>
+        /// <param name="alpha">The scalar to multiply by.</param>
+        /// <returns>the resulting Matrix object.</returns>
+        public static Matrix operator *(Matrix a, double alpha)
+        {
+        	Matrix aux = new Matrix(a._rows, a._cols, a._dimT);
+
+	        for( int i = 0; i < a._rows; i++ )
+	        {
+                for (int j = 0; j < a._cols; j++)
+		        {
+                    aux._data[i, j] = a._data[i,j] * alpha;
+		        }
+	        }
+
+	        return aux;
+        }
+
+        /// <summary>
+        /// Implements the * operator. It multiplies the matrix with another matrix.
+        /// </summary>
+        /// <param name="a">Matrix on the left side</param>
+        /// <param name="b">Matrix on the right side</param>
+        /// <returns>the resulting Matrix object.</returns>
+        public static Matrix operator *(Matrix a, Matrix b)
+        {
+            if (a._cols != b._rows)
+                throw new MathException(String.Format("Cannot multiply a %d x %d with a %d x %d matrix. The number of rows in m must match the number of colmuns in this matrix.", a._rows, a._cols, b._rows, b._cols));
+
+            Matrix aux = new Matrix(a._rows, b._cols, a._dimT);
+
+            for (int i = 0; i < a._rows; i++)
+                for (int j = 0; j < b._cols; j++)
+                    for (int k = 0; k < a._cols; k++)
+                    {
+                        if ( k == 0 )
+                            aux._data[i, j] = a._data[i, k] * b._data[k, j];
+                        else
+                            aux._data[i, j] += a._data[i, k] * b._data[k, j];
+                    }
+
+            return aux;
+        }
+
         #endregion
 
         #region functions
+
+        /// <summary>
+        /// Returns a String of the Matrix
+        /// </summary>
+        /// <returns>String of matrix</returns>
+        override public String ToString()
+        {
+            String retval = String.Empty;
+            for (int i = 0; i < _rows; i++)
+            {
+                for (int j = 0; j < _cols; j++)
+                    retval += _data[i, j].ToString() + "\t";
+
+                retval += System.Environment.NewLine;
+            }
+
+            return retval;
+        }
 
         #endregion
 

@@ -105,6 +105,7 @@ namespace TestTaylorPLib_CSharp
         #endregion
 
         #region Operator Tests
+
         /// <summary>
         ///Ein Test für den []-Operator
         ///</summary>
