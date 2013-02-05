@@ -455,5 +455,133 @@ namespace TestTaylorPLib_CSharp
 
         #endregion
 
+        #region Function Tests
+
+        ///<summary>
+        ///Ein Test für mmCaABbC(double alpha, double beta, Matrix A, Matrix B) 
+        ///</summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaABbC()
+        {
+            Polynomial[,] p = new Polynomial[2, 2];
+            for (int i = 0; i < 2; i++)
+                for (int j = 0; j < 2; j++)
+                {
+                    p[i, j] = new Polynomial(2, new double[] { 1, 2, 3 });
+                }
+
+            Matrix A = new Matrix(2, 2, p);
+            Matrix B = new Matrix(2, 2, p);
+            Matrix C = new Matrix(2, 2, 2);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * B * alpha) + (C * beta);
+            C.mmCaABbC(alpha, beta, A, B);
+            Assert.AreEqual(C.ToString(), expect.ToString());
+
+            try
+            {
+                Matrix M1 = new Matrix(1, 2, 2);
+                M1.mmCaABbC(alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix M1 = new Matrix(2, 1, 2);
+                C.mmCaABbC(alpha, beta, M1, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        ///<summary>
+        ///Ein Test für bmmCaABbC(int r, int c, double alpha, double beta, Matrix A, Matrix B)
+        ///</summary>
+        [TestMethod()]
+        public void MatrixFunction_bmmCaABbC()
+        {
+            Polynomial[,] P1 = new Polynomial[5, 5];
+            P1[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            P1[0, 1] = new Polynomial(1, new double[] { 2, 2 });
+            P1[0, 2] = new Polynomial(1, new double[] { 2, 2 });
+            P1[0, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P1[0, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P1[1, 0] = new Polynomial(1, new double[] { 2, 2 });
+            P1[1, 1] = new Polynomial(1, new double[] { 2, 2 });
+            P1[1, 2] = new Polynomial(1, new double[] { 2, 2 });
+            P1[1, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P1[1, 4] = new Polynomial(1, new double[] { 0, 0 });
+            
+            P1[2, 0] = new Polynomial(1, new double[] { 2, 2 });
+            P1[2, 1] = new Polynomial(1, new double[] { 2, 2 });
+            P1[2, 2] = new Polynomial(1, new double[] { 2, 2 });
+            P1[2, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P1[2, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P1[3, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P1[3, 1] = new Polynomial(1, new double[] { 0, 0 });
+            P1[3, 2] = new Polynomial(1, new double[] { 0, 0 });
+            P1[3, 3] = new Polynomial(1, new double[] { 0, 1 });
+            P1[3, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P1[4, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P1[4, 1] = new Polynomial(1, new double[] { 0, 0 });
+            P1[4, 2] = new Polynomial(1, new double[] { 0, 0 });
+            P1[4, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P1[4, 4] = new Polynomial(1, new double[] { 0, 1 });
+
+            Matrix A = new Matrix(5, 5, P1);
+            Matrix B = new Matrix(5, 5, P1);
+            Matrix C = new Matrix(5, 5, 1);
+            Matrix D = new Matrix(5, 5, 1);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * B * alpha) + (C * beta);
+            D.mmCaABbC(alpha, beta, A, B);
+            C.bmmCaABbC(3, 3, alpha, beta, A, B);
+            Assert.AreEqual(C.ToString(), expect.ToString());
+
+            try
+            {
+                C.bmmCaABbC(7, 3, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                C.bmmCaABbC(3, 7, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+            try
+            {
+                Matrix E = new Matrix(4, 5, 1);
+                E.bmmCaABbC(3, 3, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix E = new Matrix(4, 5, 1);
+                A.bmmCaABbC(3, 3, alpha, beta, A, E);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        #endregion
+
     }
 }

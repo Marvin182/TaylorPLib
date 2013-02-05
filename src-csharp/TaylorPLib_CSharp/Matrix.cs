@@ -83,7 +83,7 @@ namespace LibMatrix
         /// <param name="dimT">The dimension</param>
 		public Matrix(int rows, int cols, int dimT)
         {
-            initializeMatrix(rows, cols, dimT, initializePolynoms(rows, cols));
+            initializeMatrix(rows, cols, dimT, initializePolynoms(rows, cols, dimT));
         }
 
         /// <summary>
@@ -105,7 +105,12 @@ namespace LibMatrix
         /// <param name="values">an initialised Polynom</param>
         public Matrix(int rows, int cols, Polynomial[,] values)
         {
-            initializeMatrix(rows, cols, 0, values);
+            int dimt = 0;
+
+            if (values[0, 0] != null)
+                dimt = values[0, 0].order;
+
+            initializeMatrix(rows, cols, dimt, values);
         }
 
         /// <summary>
@@ -293,10 +298,7 @@ namespace LibMatrix
                 for (int j = 0; j < b._cols; j++)
                     for (int k = 0; k < a._cols; k++)
                     {
-                        if ( k == 0 )
-                            aux._data[i, j] = a._data[i, k] * b._data[k, j];
-                        else
-                            aux._data[i, j] += a._data[i, k] * b._data[k, j];
+                        aux._data[i, j] += a._data[i, k] * b._data[k, j];
                     }
 
             return aux;
@@ -305,6 +307,121 @@ namespace LibMatrix
         #endregion
 
         #region functions
+
+        #region E S P E C I A L   M A T R I X   M U L T I P L I C A T I O N S
+
+        /// <summary>
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * B + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        /// 	 B : p-by-n matrix<para/>
+        /// 	 C : m-by-n matrix<para/>
+        /// 	 alpha, beta : real numbers<para/>
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * B</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix</param>
+        /// <param name="B">an object of type Matrix</param>
+        public void mmCaABbC(double alpha, double beta, Matrix A, Matrix B)
+        {
+            if (A._cols != B._rows)
+            {
+                throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+            }
+            if (A._rows != _rows || B._cols != _cols)
+            {
+                throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+            }
+
+            for( int i = 0; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+			
+			        for( int k = 0; k < B._rows; k++ )
+			        {
+				        h += A._data[i,k] * B._data[k,j];
+			        }
+
+			        _data[i,j] = h * alpha + _data[i,j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * B + beta * C <para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        /// 	 B : p-by-n matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        /// <para/>
+        /// where the inferior-right block of B is an identity matrix like in:<para/>
+        ///     ( * * * 0 0 )<para/>
+        ///     ( * * * 0 0 )<para/>
+        ///     ( 0 0 0 1 0 )<para/>
+        ///     ( 0 0 0 0 1 )<para/>
+        /// <para/>
+        /// so that a particular block multiplication is needed.<para/>
+        /// </summary>
+        /// <param name="r">The number of rows in B that are of interest (2 in the example above)</param>
+        /// <param name="c">The number of columns in B that are of interest (3 in the example above)</param>
+        /// <param name="alpha">The scalar value that multiplies A * B</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix</param>
+        /// <param name="B">an object of type Matrix</param>
+        public void bmmCaABbC(int r, int c, double alpha, double beta, Matrix A, Matrix B)
+        {
+            if (r > B._rows)
+            {
+                throw new MathException(String.Format("The parameter r (= %d) must be smaller or equal than the number of rows in B (%d x %d).", r, B._rows, B._cols));
+            }
+            if (c > B._cols)
+            {
+                throw new MathException(String.Format("The parameter c (= %d) must be smaller or equal than the number of columns in B (%d x %d).", c, B._rows, B._cols));
+            }
+            if (A._cols != B._rows)
+            {
+                throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+            }
+            if (A._rows != _rows || B._cols != _cols)
+            {
+                throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+            }
+
+            int cr = c - r;
+            // If you wonder why cr = c-r and latter A(i, j-cr)?
+            // I don't know, bit take a sheet of paper the the matrices and you will see ;)
+
+            for (int i = 0; i < r; i++)
+            {
+                for (int j = 0; j < c; j++)
+                {
+                    Polynomial h = new Polynomial(_dimT);
+
+                    for (int k = 0; k < r; k++)
+                    {
+                        h += A._data[i, k] * B._data[k, j];
+                    }
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+                }
+            }
+
+            for (int i = r; i < _rows; i++)
+            {
+                for (int j = c; j < _cols; j++)
+                {
+                    _data[i, j] = A._data[i, j - cr] * B._data[j - cr, i] * alpha + _data[i, j] * beta;
+                }
+            }
+        }
+
+        #endregion
 
         /// <summary>
         /// Returns a String of the Matrix
@@ -342,12 +459,12 @@ namespace LibMatrix
                     _data[i,j] = new Polynomial(p[i,j]);
         }
 
-        private Polynomial[,] initializePolynoms(int rows, int cols)
+        private Polynomial[,] initializePolynoms(int rows, int cols, int dimT)
         {
             Polynomial[,] p = new Polynomial[rows, cols];
             for (int i = 0; i < rows; i++)
                 for (int j = 0; j < cols; j++)
-                    p[i, j] = new Polynomial();
+                    p[i, j] = new Polynomial(dimT);
 
             return p;
         }

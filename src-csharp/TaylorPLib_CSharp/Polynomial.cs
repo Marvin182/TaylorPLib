@@ -188,6 +188,13 @@ namespace LibMatrix
         /// <returns>true if equal</returns>
         public static bool operator ==(Polynomial a, Polynomial b)
         {
+            if ((Object)a == null || (Object)b == null)
+            {
+                if ((Object)a == null && (Object)b == null)
+                    return true;
+                else
+                    return false;
+            }
             return ( ( Enumerable.SequenceEqual<double>(a._coeffs, b._coeffs) ) && (a.isConst() == b.isConst()) && (a._order == b._order));
         }
 

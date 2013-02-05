@@ -137,6 +137,9 @@ namespace TestTaylorPLib_CSharp
             Assert.AreNotEqual(notExpected.ToString(), target.ToString());
             Assert.IsFalse(target == notExpected);
             Assert.IsTrue(target != notExpected);
+
+            Assert.IsTrue((Polynomial)(null) == (Polynomial)(null));
+            Assert.IsFalse(target == null);
         }
 
         /// <summary>
