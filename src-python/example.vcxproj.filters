@@ -27,12 +27,6 @@
     <ClCompile Include="Polynomial_wrap.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="example.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="example_wrap.cxx">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TaylorPLib.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -41,11 +35,11 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="example.i" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="TaylorPLib.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="TaylorPLib.i" />
   </ItemGroup>
 </Project>

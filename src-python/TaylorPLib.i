@@ -1,5 +1,5 @@
-/* File : example.i */
-%module example
+/* File : TaylorPLib.i */
+%module TaylorPLib
 
 %{
 #include "TaylorPLib.h"
