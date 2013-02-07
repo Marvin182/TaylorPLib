@@ -1,5 +1,8 @@
-# Sublime Text 2 workspace file
+# Sublime Text workspace file
 *.sublime-workspace
+
+# Python files
+__pycache__/
 
 # Build and Object Folders
 bin/
