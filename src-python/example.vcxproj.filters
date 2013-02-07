@@ -33,13 +33,19 @@
     <ClCompile Include="example_wrap.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="example.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="TaylorPLib.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TaylorPLib_wrap.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="example.i" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TaylorPLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

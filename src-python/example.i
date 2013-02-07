@@ -2,9 +2,9 @@
 %module example
 
 %{
-#include "example.h"
+#include "TaylorPLib.h"
 %}
 
 /* Let's just grab the original header file here */
-%include "example.h"
+%include "TaylorPLib.h"
 

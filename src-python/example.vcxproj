@@ -253,9 +253,8 @@
     <ClCompile Include="Matrix_wrap.cxx" />
     <ClCompile Include="Polynomial.cxx" />
     <ClCompile Include="Polynomial_wrap.cxx" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="example.h" />
+    <ClCompile Include="TaylorPLib.cxx" />
+    <ClCompile Include="TaylorPLib_wrap.cxx" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="example.i">
@@ -285,6 +284,9 @@ swig.exe -c++ -python %(FullPath) </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(InputName)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(InputName)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="TaylorPLib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
