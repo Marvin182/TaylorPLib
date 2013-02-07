@@ -1,6 +1,7 @@
 #include "TaylorPLib.h"
 
 using namespace std;
+// using namespace LibMatrix;
 
 int Polynomial::unsetConstCount = 0;
 int Polynomial::isConstCount = 0;

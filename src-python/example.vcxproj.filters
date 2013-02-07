@@ -15,22 +15,22 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cxx">
+    <ClCompile Include="Matrix_wrap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Matrix_wrap.cxx">
+    <ClCompile Include="Matrix.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polynomial.cxx">
+    <ClCompile Include="Polynomial_wrap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Polynomial_wrap.cxx">
+    <ClCompile Include="Polynomial.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaylorPLib.cxx">
+    <ClCompile Include="TaylorPLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaylorPLib_wrap.cxx">
+    <ClCompile Include="TaylorPLib_wrap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

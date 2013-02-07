@@ -2981,16 +2981,16 @@ static swig_module_info swig_module = {swig_types, 7, 0, 0, 0, 0};
 #endif
 
 /*-----------------------------------------------
-              @(target):= _example.so
+              @(target):= _TaylorPLib.so
   ------------------------------------------------*/
 #if PY_VERSION_HEX >= 0x03000000
-#  define SWIG_init    PyInit__example
+#  define SWIG_init    PyInit__TaylorPLib
 
 #else
-#  define SWIG_init    init_example
+#  define SWIG_init    init_TaylorPLib
 
 #endif
-#define SWIG_name    "_example"
+#define SWIG_name    "_TaylorPLib"
 
 #define SWIGVERSION 0x020009 
 #define SWIG_VERSION SWIGVERSION

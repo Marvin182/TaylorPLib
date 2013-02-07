@@ -248,12 +248,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cxx" />
-    <ClCompile Include="Matrix_wrap.cxx" />
-    <ClCompile Include="Polynomial.cxx" />
-    <ClCompile Include="Polynomial_wrap.cxx" />
-    <ClCompile Include="TaylorPLib.cxx" />
-    <ClCompile Include="TaylorPLib_wrap.cxx" />
+    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="Matrix_wrap.cpp" />
+    <ClCompile Include="Polynomial.cpp" />
+    <ClCompile Include="Polynomial_wrap.cpp" />
+    <ClCompile Include="TaylorPLib.cpp" />
+    <ClCompile Include="TaylorPLib_wrap.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="TaylorPLib.i">
