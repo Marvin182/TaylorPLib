@@ -14,7 +14,11 @@
 
 namespace LibMatrix {
 
+#ifdef SWIG
+	class Polynomial
+#else
 	class __declspec(dllexport) Polynomial
+#endif
 	{
 	//
 	// (Taylor) Polynomial with derivate degree n (n+1 coefficients):
@@ -126,7 +130,11 @@ namespace LibMatrix {
 		void setCoeffs(double *c);
 	};
 
+#ifdef SWIG
+	class Matrix
+#else
 	class __declspec(dllexport) Matrix
+#endif
 	{
 	private:
 		int _rows,											// The number of rows
@@ -270,7 +278,11 @@ namespace LibMatrix {
 
 };
 
-class __declspec(dllexport) MathException
+#ifdef SWIG
+	class MathException
+#else
+	class __declspec(dllexport) MathException
+#endif
 {
 private:
 	char* _message;
