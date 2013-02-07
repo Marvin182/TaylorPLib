@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix_wrap.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Matrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Polynomial_wrap.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Polynomial.cpp">
@@ -30,7 +24,13 @@
     <ClCompile Include="TaylorPLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="TaylorPLib_wrap.cpp">
+    <ClCompile Include="TaylorPLib_wrap.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Polynomial_wrap.cxx">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Matrix_wrap.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

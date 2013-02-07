@@ -249,11 +249,11 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Matrix.cpp" />
-    <ClCompile Include="Matrix_wrap.cpp" />
+    <ClCompile Include="Matrix_wrap.cxx" />
     <ClCompile Include="Polynomial.cpp" />
-    <ClCompile Include="Polynomial_wrap.cpp" />
+    <ClCompile Include="Polynomial_wrap.cxx" />
     <ClCompile Include="TaylorPLib.cpp" />
-    <ClCompile Include="TaylorPLib_wrap.cpp" />
+    <ClCompile Include="TaylorPLib_wrap.cxx" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="TaylorPLib.i">

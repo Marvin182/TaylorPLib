@@ -3231,14 +3231,14 @@ SWIG_AsVal_bool (PyObject *obj, bool *val)
 }
 
 
-  #define SWIG_From_double   PyFloat_FromDouble 
-
-
 SWIGINTERNINLINE PyObject*
   SWIG_From_bool  (bool value)
 {
   return PyBool_FromLong(value ? 1 : 0);
 }
+
+
+  #define SWIG_From_double   PyFloat_FromDouble 
 
 
 SWIGINTERN swig_type_info*
@@ -3363,6 +3363,1611 @@ SWIG_FromCharPtr(const char *cptr)
 #ifdef __cplusplus
 extern "C" {
 #endif
+SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)":new_Polynomial")) SWIG_fail;
+  result = (Polynomial *)new Polynomial();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  bool arg2 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  bool val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_Polynomial",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_bool(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Polynomial" "', argument " "2"" of type '" "bool""'");
+  } 
+  arg2 = static_cast< bool >(val2);
+  result = (Polynomial *)new Polynomial(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Polynomial *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_Polynomial",&obj0)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  result = (Polynomial *)new Polynomial(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Polynomial *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:new_Polynomial",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp1) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Polynomial" "', argument " "1"" of type '" "Polynomial const &""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (Polynomial *)new Polynomial((Polynomial const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Polynomial(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 0) {
+    return _wrap_new_Polynomial__SWIG_0(self, args);
+  }
+  if (argc == 1) {
+    int _v;
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_new_Polynomial__SWIG_3(self, args);
+    }
+  }
+  if (argc == 1) {
+    int _v;
+    {
+      int res = SWIG_AsVal_int(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      return _wrap_new_Polynomial__SWIG_2(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      int res = SWIG_AsVal_int(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      {
+        int res = SWIG_AsVal_bool(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_new_Polynomial__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Polynomial'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::Polynomial()\n"
+    "    Polynomial::Polynomial(int,bool)\n"
+    "    Polynomial::Polynomial(int)\n"
+    "    Polynomial::Polynomial(Polynomial const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_delete_Polynomial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:delete_Polynomial",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Polynomial" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  delete arg1;
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_order(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_order",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_order" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (int)((Polynomial const *)arg1)->order();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_ncoeff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  int result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_ncoeff",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_ncoeff" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (int)((Polynomial const *)arg1)->ncoeff();
+  resultobj = SWIG_From_int(static_cast< int >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___eq__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___eq__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___eq__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (bool)((Polynomial const *)arg1)->operator ==((Polynomial const &)*arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___ne__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___ne__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ne__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (bool)((Polynomial const *)arg1)->operator !=((Polynomial const &)*arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___lt__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___lt__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___lt__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (bool)(arg1)->operator <((Polynomial const &)*arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___le__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___le__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___le__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___le__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___le__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (bool)(arg1)->operator <=((Polynomial const &)*arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___gt__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___gt__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___gt__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (bool)(arg1)->operator >((Polynomial const &)*arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___ge__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___ge__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ge__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (bool)(arg1)->operator >=((Polynomial const &)*arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___add__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___add__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___add__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___add__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = ((Polynomial const *)arg1)->operator +((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___iadd__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___iadd__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___iadd__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (arg1)->operator +=((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___neg__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial___neg__",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___neg__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = ((Polynomial const *)arg1)->operator -();
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___sub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___sub__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___sub__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = ((Polynomial const *)arg1)->operator -((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___isub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___isub__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___isub__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (arg1)->operator -=((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___mul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = ((Polynomial const *)arg1)->operator *(arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___mul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = ((Polynomial const *)arg1)->operator *((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___mul__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Polynomial, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Polynomial___mul____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_Polynomial___mul____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  Py_INCREF(Py_NotImplemented);
+  return Py_NotImplemented;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___imul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (arg1)->operator *=(arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___imul__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (arg1)->operator *=((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___imul__(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Polynomial, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Polynomial___imul____SWIG_1(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_Polynomial___imul____SWIG_0(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial___imul__'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::operator *=(double const)\n"
+    "    Polynomial::operator *=(Polynomial const &)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___div__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___div__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___div__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___div__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___div__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = ((Polynomial const *)arg1)->operator /((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial___idiv__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  Polynomial *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___idiv__",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___idiv__" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+  }
+  arg2 = reinterpret_cast< Polynomial * >(argp2);
+  result = (arg1)->operator /=((Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_sqr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_sqr",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqr" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = ((Polynomial const *)arg1)->sqr();
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_setSqr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_setSqr",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqr" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  (arg1)->setSqr();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_sqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  Polynomial result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_sqrt",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqrt" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = ((Polynomial const *)arg1)->sqrt();
+  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_setSqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_setSqrt",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqrt" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  (arg1)->setSqrt();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial__print",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  (arg1)->print();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  FILE *arg2 = (FILE *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial__print",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_FILE, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial__print" "', argument " "2"" of type '" "FILE *""'"); 
+  }
+  arg2 = reinterpret_cast< FILE * >(argp2);
+  (arg1)->print(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial__print(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_Polynomial__print__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_FILE, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Polynomial__print__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial__print'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::print()\n"
+    "    Polynomial::print(FILE *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_eval(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  double arg3 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  double val3 ;
+  int ecode3 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOO:Polynomial_eval",&obj0,&obj1,&obj2)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_eval" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_eval" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  ecode3 = SWIG_AsVal_double(obj2, &val3);
+  if (!SWIG_IsOK(ecode3)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Polynomial_eval" "', argument " "3"" of type '" "double""'");
+  } 
+  arg3 = static_cast< double >(val3);
+  result = (double)(arg1)->eval(arg2,arg3);
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_feval(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  double result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_feval",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_feval" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (double)(arg1)->feval();
+  resultobj = SWIG_From_double(static_cast< double >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_shift(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_shift",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_shift" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  (arg1)->shift();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isConst",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (bool)((Polynomial const *)arg1)->isConst();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isConst",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isConst" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (bool)(arg1)->isConst(arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isConst(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_Polynomial_isConst__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_Polynomial_isConst__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isConst'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::isConst() const\n"
+    "    Polynomial::isConst(double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isId",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (bool)((Polynomial const *)arg1)->isId();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isId",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isId" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (bool)(arg1)->isId(arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isId(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_Polynomial_isId__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_Polynomial_isId__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isId'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::isId() const\n"
+    "    Polynomial::isId(double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isZero",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "Polynomial const *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  result = (bool)((Polynomial const *)arg1)->isZero();
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  bool result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isZero",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isZero" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (bool)(arg1)->isZero(arg2);
+  resultobj = SWIG_From_bool(static_cast< bool >(result));
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_isZero(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_Polynomial_isZero__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_Polynomial_isZero__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isZero'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::isZero() const\n"
+    "    Polynomial::isZero(double)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_set2Const(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_set2Const",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Const" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_set2Const" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  (arg1)->set2Const(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_set2Id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_set2Id",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Id" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  (arg1)->set2Id();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_set2Zero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_set2Zero",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Zero" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  (arg1)->set2Zero();
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_set2Zero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  int arg2 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  int val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_set2Zero",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Zero" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  ecode2 = SWIG_AsVal_int(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_set2Zero" "', argument " "2"" of type '" "int""'");
+  } 
+  arg2 = static_cast< int >(val2);
+  (arg1)->set2Zero(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_set2Zero(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[3];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 1) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      return _wrap_Polynomial_set2Zero__SWIG_0(self, args);
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      {
+        int res = SWIG_AsVal_int(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        return _wrap_Polynomial_set2Zero__SWIG_1(self, args);
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_set2Zero'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    Polynomial::set2Zero()\n"
+    "    Polynomial::set2Zero(int)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_setCoeffs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  Polynomial *arg1 = (Polynomial *) 0 ;
+  double *arg2 = (double *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_setCoeffs",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setCoeffs" "', argument " "1"" of type '" "Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_double, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial_setCoeffs" "', argument " "2"" of type '" "double *""'"); 
+  }
+  arg2 = reinterpret_cast< double * >(argp2);
+  (arg1)->setCoeffs(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *Polynomial_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *obj;
+  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
+  SWIG_TypeNewClientData(SWIGTYPE_p_Polynomial, SWIG_NewClientData(obj));
+  return SWIG_Py_Void();
+}
+
 SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   Matrix *result = 0 ;
@@ -3565,7 +5170,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_6(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
-  double *arg3 = (double *) 0 ;
+  Polynomial *arg3 = (Polynomial *) 0 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
@@ -3588,11 +5193,11 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_6(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Matrix" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_double, 0 |  0 );
+  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Matrix" "', argument " "3"" of type '" "double *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Matrix" "', argument " "3"" of type '" "Polynomial *""'"); 
   }
-  arg3 = reinterpret_cast< double * >(argp3);
+  arg3 = reinterpret_cast< Polynomial * >(argp3);
   result = (Matrix *)new Matrix(arg1,arg2,arg3);
   resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
@@ -3651,7 +5256,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix(PyObject *self, PyObject *args) {
       }
       if (_v) {
         void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_double, 0);
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_Polynomial, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_new_Matrix__SWIG_6(self, args);
@@ -3741,7 +5346,7 @@ fail:
     "    Matrix::Matrix(int,int,int,bool)\n"
     "    Matrix::Matrix(int,int,int)\n"
     "    Matrix::Matrix(Matrix const &)\n"
-    "    Matrix::Matrix(int,int,double *)\n");
+    "    Matrix::Matrix(int,int,Polynomial *)\n");
   return 0;
 }
 
@@ -3847,7 +5452,7 @@ SWIGINTERN PyObject *_wrap_Matrix_get(PyObject *SWIGUNUSEDPARM(self), PyObject *
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  double result;
+  Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix_get",&obj0,&obj1,&obj2)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
@@ -3865,8 +5470,8 @@ SWIGINTERN PyObject *_wrap_Matrix_get(PyObject *SWIGUNUSEDPARM(self), PyObject *
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_get" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  result = (double)((Matrix const *)arg1)->get(arg2,arg3);
-  resultobj = SWIG_From_double(static_cast< double >(result));
+  result = (Polynomial *)((Matrix const *)arg1)->get(arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3887,7 +5492,7 @@ SWIGINTERN PyObject *_wrap_Matrix___call__(PyObject *SWIGUNUSEDPARM(self), PyObj
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  double *result = 0 ;
+  Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix___call__",&obj0,&obj1,&obj2)) SWIG_fail;
   res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
@@ -3905,8 +5510,8 @@ SWIGINTERN PyObject *_wrap_Matrix___call__(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix___call__" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  result = (double *) &(arg1)->operator ()(arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_double, 0 |  0 );
+  result = (Polynomial *) &(arg1)->operator ()(arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -6588,1590 +8193,6 @@ SWIGINTERN PyObject *Matrix_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObjec
   return SWIG_Py_Void();
 }
 
-SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)":new_Polynomial")) SWIG_fail;
-  result = (Polynomial *)new Polynomial();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  bool arg2 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  bool val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:new_Polynomial",&obj0,&obj1)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  ecode2 = SWIG_AsVal_bool(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Polynomial" "', argument " "2"" of type '" "bool""'");
-  } 
-  arg2 = static_cast< bool >(val2);
-  result = (Polynomial *)new Polynomial(arg1,arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  int arg1 ;
-  int val1 ;
-  int ecode1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Polynomial *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:new_Polynomial",&obj0)) SWIG_fail;
-  ecode1 = SWIG_AsVal_int(obj0, &val1);
-  if (!SWIG_IsOK(ecode1)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "int""'");
-  } 
-  arg1 = static_cast< int >(val1);
-  result = (Polynomial *)new Polynomial(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Polynomial *result = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:new_Polynomial",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Polynomial" "', argument " "1"" of type '" "Polynomial const &""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (Polynomial *)new Polynomial((Polynomial const &)*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_new_Polynomial(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 0) {
-    return _wrap_new_Polynomial__SWIG_0(self, args);
-  }
-  if (argc == 1) {
-    int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_new_Polynomial__SWIG_3(self, args);
-    }
-  }
-  if (argc == 1) {
-    int _v;
-    {
-      int res = SWIG_AsVal_int(argv[0], NULL);
-      _v = SWIG_CheckState(res);
-    }
-    if (_v) {
-      return _wrap_new_Polynomial__SWIG_2(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    {
-      int res = SWIG_AsVal_int(argv[0], NULL);
-      _v = SWIG_CheckState(res);
-    }
-    if (_v) {
-      {
-        int res = SWIG_AsVal_bool(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_new_Polynomial__SWIG_1(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Polynomial'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::Polynomial()\n"
-    "    Polynomial::Polynomial(int,bool)\n"
-    "    Polynomial::Polynomial(int)\n"
-    "    Polynomial::Polynomial(Polynomial const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_delete_Polynomial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:delete_Polynomial",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Polynomial" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  delete arg1;
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_order(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_order",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_order" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (int)((Polynomial const *)arg1)->order();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_ncoeff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  int result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_ncoeff",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_ncoeff" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (int)((Polynomial const *)arg1)->ncoeff();
-  resultobj = SWIG_From_int(static_cast< int >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___eq__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___eq__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___eq__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)((Polynomial const *)arg1)->operator ==((Polynomial const &)*arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___ne__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___ne__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ne__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)((Polynomial const *)arg1)->operator !=((Polynomial const &)*arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___lt__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___lt__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___lt__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator <((Polynomial const &)*arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___le__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___le__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___le__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___le__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___le__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator <=((Polynomial const &)*arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___gt__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___gt__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___gt__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator >((Polynomial const &)*arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___ge__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___ge__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ge__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator >=((Polynomial const &)*arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___add__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___add__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___add__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___add__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator +((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___iadd__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___iadd__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___iadd__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator +=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___neg__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial___neg__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___neg__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = ((Polynomial const *)arg1)->operator -();
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___sub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___sub__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___sub__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator -((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___isub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___isub__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___isub__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator -=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___mul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  result = ((Polynomial const *)arg1)->operator *(arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___mul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator *((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___mul__(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Polynomial, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Polynomial___mul____SWIG_1(self, args);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Polynomial___mul____SWIG_0(self, args);
-      }
-    }
-  }
-  
-fail:
-  Py_INCREF(Py_NotImplemented);
-  return Py_NotImplemented;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___imul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  result = (arg1)->operator *=(arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___imul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator *=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___imul__(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Polynomial, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Polynomial___imul____SWIG_1(self, args);
-      }
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Polynomial___imul____SWIG_0(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial___imul__'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::operator *=(double const)\n"
-    "    Polynomial::operator *=(Polynomial const &)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___div__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___div__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___div__" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___div__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___div__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator /((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial___idiv__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___idiv__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___idiv__" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "Polynomial const &""'"); 
-  }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator /=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_sqr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_sqr",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqr" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = ((Polynomial const *)arg1)->sqr();
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_setSqr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_setSqr",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqr" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  (arg1)->setSqr();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_sqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  Polynomial result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_sqrt",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqrt" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = ((Polynomial const *)arg1)->sqrt();
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_setSqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_setSqrt",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqrt" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  (arg1)->setSqrt();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial__print",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  (arg1)->print();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  FILE *arg2 = (FILE *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial__print",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_FILE, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial__print" "', argument " "2"" of type '" "FILE *""'"); 
-  }
-  arg2 = reinterpret_cast< FILE * >(argp2);
-  (arg1)->print(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial__print(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_Polynomial__print__SWIG_0(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      void *vptr = 0;
-      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_FILE, 0);
-      _v = SWIG_CheckState(res);
-      if (_v) {
-        return _wrap_Polynomial__print__SWIG_1(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial__print'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::print()\n"
-    "    Polynomial::print(FILE *)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_eval(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  double arg3 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  double val3 ;
-  int ecode3 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  PyObject * obj2 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OOO:Polynomial_eval",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_eval" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_eval" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  ecode3 = SWIG_AsVal_double(obj2, &val3);
-  if (!SWIG_IsOK(ecode3)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Polynomial_eval" "', argument " "3"" of type '" "double""'");
-  } 
-  arg3 = static_cast< double >(val3);
-  result = (double)(arg1)->eval(arg2,arg3);
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_feval(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  double result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_feval",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_feval" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (double)(arg1)->feval();
-  resultobj = SWIG_From_double(static_cast< double >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_shift(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_shift",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_shift" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  (arg1)->shift();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isConst",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (bool)((Polynomial const *)arg1)->isConst();
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isConst",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isConst" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  result = (bool)(arg1)->isConst(arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isConst(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_Polynomial_isConst__SWIG_0(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Polynomial_isConst__SWIG_1(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isConst'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::isConst() const\n"
-    "    Polynomial::isConst(double)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isId",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (bool)((Polynomial const *)arg1)->isId();
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isId",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isId" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  result = (bool)(arg1)->isId(arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isId(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_Polynomial_isId__SWIG_0(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Polynomial_isId__SWIG_1(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isId'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::isId() const\n"
-    "    Polynomial::isId(double)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isZero",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "Polynomial const *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (bool)((Polynomial const *)arg1)->isZero();
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  bool result;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isZero",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isZero" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  result = (bool)(arg1)->isZero(arg2);
-  resultobj = SWIG_From_bool(static_cast< bool >(result));
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_isZero(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_Polynomial_isZero__SWIG_0(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_double(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Polynomial_isZero__SWIG_1(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isZero'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::isZero() const\n"
-    "    Polynomial::isZero(double)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_set2zero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  PyObject * obj0 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_set2zero",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2zero" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  (arg1)->set2zero();
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_set2zero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  int arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  int val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_set2zero",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2zero" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_int(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_set2zero" "', argument " "2"" of type '" "int""'");
-  } 
-  arg2 = static_cast< int >(val2);
-  (arg1)->set2zero(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_set2zero(PyObject *self, PyObject *args) {
-  int argc;
-  PyObject *argv[3];
-  int ii;
-  
-  if (!PyTuple_Check(args)) SWIG_fail;
-  argc = args ? (int)PyObject_Length(args) : 0;
-  for (ii = 0; (ii < 2) && (ii < argc); ii++) {
-    argv[ii] = PyTuple_GET_ITEM(args,ii);
-  }
-  if (argc == 1) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      return _wrap_Polynomial_set2zero__SWIG_0(self, args);
-    }
-  }
-  if (argc == 2) {
-    int _v;
-    void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
-    _v = SWIG_CheckState(res);
-    if (_v) {
-      {
-        int res = SWIG_AsVal_int(argv[1], NULL);
-        _v = SWIG_CheckState(res);
-      }
-      if (_v) {
-        return _wrap_Polynomial_set2zero__SWIG_1(self, args);
-      }
-    }
-  }
-  
-fail:
-  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_set2zero'.\n"
-    "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::set2zero()\n"
-    "    Polynomial::set2zero(int)\n");
-  return 0;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_set2const(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double arg2 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  double val2 ;
-  int ecode2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_set2const",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2const" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  ecode2 = SWIG_AsVal_double(obj1, &val2);
-  if (!SWIG_IsOK(ecode2)) {
-    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_set2const" "', argument " "2"" of type '" "double""'");
-  } 
-  arg2 = static_cast< double >(val2);
-  (arg1)->set2const(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *_wrap_Polynomial_setCoeffs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  double *arg2 = (double *) 0 ;
-  void *argp1 = 0 ;
-  int res1 = 0 ;
-  void *argp2 = 0 ;
-  int res2 = 0 ;
-  PyObject * obj0 = 0 ;
-  PyObject * obj1 = 0 ;
-  
-  if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_setCoeffs",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
-  if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setCoeffs" "', argument " "1"" of type '" "Polynomial *""'"); 
-  }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_double, 0 |  0 );
-  if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial_setCoeffs" "', argument " "2"" of type '" "double *""'"); 
-  }
-  arg2 = reinterpret_cast< double * >(argp2);
-  (arg1)->setCoeffs(arg2);
-  resultobj = SWIG_Py_Void();
-  return resultobj;
-fail:
-  return NULL;
-}
-
-
-SWIGINTERN PyObject *Polynomial_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
-  PyObject *obj;
-  if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Polynomial, SWIG_NewClientData(obj));
-  return SWIG_Py_Void();
-}
-
 SWIGINTERN PyObject *_wrap_new_MathException__SWIG_0__varargs__(PyObject *SWIGUNUSEDPARM(self), PyObject *args, PyObject *varargs) {
   PyObject *resultobj = 0;
   char *arg1 = (char *) 0 ;
@@ -8328,6 +8349,41 @@ SWIGINTERN PyObject *MathException_swigregister(PyObject *SWIGUNUSEDPARM(self), 
 
 static PyMethodDef SwigMethods[] = {
 	 { (char *)"SWIG_PyInstanceMethod_New", (PyCFunction)SWIG_PyInstanceMethod_New, METH_O, NULL},
+	 { (char *)"new_Polynomial", _wrap_new_Polynomial, METH_VARARGS, NULL},
+	 { (char *)"delete_Polynomial", _wrap_delete_Polynomial, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_order", _wrap_Polynomial_order, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_ncoeff", _wrap_Polynomial_ncoeff, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___eq__", _wrap_Polynomial___eq__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___ne__", _wrap_Polynomial___ne__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___lt__", _wrap_Polynomial___lt__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___le__", _wrap_Polynomial___le__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___gt__", _wrap_Polynomial___gt__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___ge__", _wrap_Polynomial___ge__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___add__", _wrap_Polynomial___add__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___iadd__", _wrap_Polynomial___iadd__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___neg__", _wrap_Polynomial___neg__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___sub__", _wrap_Polynomial___sub__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___isub__", _wrap_Polynomial___isub__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___mul__", _wrap_Polynomial___mul__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___imul__", _wrap_Polynomial___imul__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___div__", _wrap_Polynomial___div__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial___idiv__", _wrap_Polynomial___idiv__, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_sqr", _wrap_Polynomial_sqr, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_setSqr", _wrap_Polynomial_setSqr, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_sqrt", _wrap_Polynomial_sqrt, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_setSqrt", _wrap_Polynomial_setSqrt, METH_VARARGS, NULL},
+	 { (char *)"Polynomial__print", _wrap_Polynomial__print, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_eval", _wrap_Polynomial_eval, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_feval", _wrap_Polynomial_feval, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_shift", _wrap_Polynomial_shift, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_isConst", _wrap_Polynomial_isConst, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_isId", _wrap_Polynomial_isId, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_isZero", _wrap_Polynomial_isZero, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_set2Const", _wrap_Polynomial_set2Const, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_set2Id", _wrap_Polynomial_set2Id, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_set2Zero", _wrap_Polynomial_set2Zero, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_setCoeffs", _wrap_Polynomial_setCoeffs, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_swigregister", Polynomial_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Matrix", _wrap_new_Matrix, METH_VARARGS, NULL},
 	 { (char *)"delete_Matrix", _wrap_delete_Matrix, METH_VARARGS, NULL},
 	 { (char *)"Matrix_nrows", _wrap_Matrix_nrows, METH_VARARGS, NULL},
@@ -8372,40 +8428,6 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Matrix_set2ValFromIndices", _wrap_Matrix_set2ValFromIndices, METH_VARARGS, NULL},
 	 { (char *)"Matrix__print", _wrap_Matrix__print, METH_VARARGS, NULL},
 	 { (char *)"Matrix_swigregister", Matrix_swigregister, METH_VARARGS, NULL},
-	 { (char *)"new_Polynomial", _wrap_new_Polynomial, METH_VARARGS, NULL},
-	 { (char *)"delete_Polynomial", _wrap_delete_Polynomial, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_order", _wrap_Polynomial_order, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_ncoeff", _wrap_Polynomial_ncoeff, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___eq__", _wrap_Polynomial___eq__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___ne__", _wrap_Polynomial___ne__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___lt__", _wrap_Polynomial___lt__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___le__", _wrap_Polynomial___le__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___gt__", _wrap_Polynomial___gt__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___ge__", _wrap_Polynomial___ge__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___add__", _wrap_Polynomial___add__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___iadd__", _wrap_Polynomial___iadd__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___neg__", _wrap_Polynomial___neg__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___sub__", _wrap_Polynomial___sub__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___isub__", _wrap_Polynomial___isub__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___mul__", _wrap_Polynomial___mul__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___imul__", _wrap_Polynomial___imul__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___div__", _wrap_Polynomial___div__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial___idiv__", _wrap_Polynomial___idiv__, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_sqr", _wrap_Polynomial_sqr, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_setSqr", _wrap_Polynomial_setSqr, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_sqrt", _wrap_Polynomial_sqrt, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_setSqrt", _wrap_Polynomial_setSqrt, METH_VARARGS, NULL},
-	 { (char *)"Polynomial__print", _wrap_Polynomial__print, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_eval", _wrap_Polynomial_eval, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_feval", _wrap_Polynomial_feval, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_shift", _wrap_Polynomial_shift, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_isConst", _wrap_Polynomial_isConst, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_isId", _wrap_Polynomial_isId, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_isZero", _wrap_Polynomial_isZero, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_set2zero", _wrap_Polynomial_set2zero, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_set2const", _wrap_Polynomial_set2const, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_setCoeffs", _wrap_Polynomial_setCoeffs, METH_VARARGS, NULL},
-	 { (char *)"Polynomial_swigregister", Polynomial_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MathException", _wrap_new_MathException, METH_VARARGS, NULL},
 	 { (char *)"delete_MathException", _wrap_delete_MathException, METH_VARARGS, NULL},
 	 { (char *)"MathException_what", _wrap_MathException_what, METH_VARARGS, NULL},

@@ -68,6 +68,53 @@ except AttributeError:
 
 
 MAX_MESSAGE_SIZE = _TaylorPLib.MAX_MESSAGE_SIZE
+class Polynomial(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Polynomial, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Polynomial, name)
+    __repr__ = _swig_repr
+    def __init__(self, *args): 
+        this = _TaylorPLib.new_Polynomial(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    __swig_destroy__ = _TaylorPLib.delete_Polynomial
+    __del__ = lambda self : None;
+    def order(self): return _TaylorPLib.Polynomial_order(self)
+    def ncoeff(self): return _TaylorPLib.Polynomial_ncoeff(self)
+    def __eq__(self, *args): return _TaylorPLib.Polynomial___eq__(self, *args)
+    def __ne__(self, *args): return _TaylorPLib.Polynomial___ne__(self, *args)
+    def __lt__(self, *args): return _TaylorPLib.Polynomial___lt__(self, *args)
+    def __le__(self, *args): return _TaylorPLib.Polynomial___le__(self, *args)
+    def __gt__(self, *args): return _TaylorPLib.Polynomial___gt__(self, *args)
+    def __ge__(self, *args): return _TaylorPLib.Polynomial___ge__(self, *args)
+    def __add__(self, *args): return _TaylorPLib.Polynomial___add__(self, *args)
+    def __iadd__(self, *args): return _TaylorPLib.Polynomial___iadd__(self, *args)
+    def __neg__(self): return _TaylorPLib.Polynomial___neg__(self)
+    def __sub__(self, *args): return _TaylorPLib.Polynomial___sub__(self, *args)
+    def __isub__(self, *args): return _TaylorPLib.Polynomial___isub__(self, *args)
+    def __mul__(self, *args): return _TaylorPLib.Polynomial___mul__(self, *args)
+    def __imul__(self, *args): return _TaylorPLib.Polynomial___imul__(self, *args)
+    def __div__(self, *args): return _TaylorPLib.Polynomial___div__(self, *args)
+    def __idiv__(self, *args): return _TaylorPLib.Polynomial___idiv__(self, *args)
+    def sqr(self): return _TaylorPLib.Polynomial_sqr(self)
+    def setSqr(self): return _TaylorPLib.Polynomial_setSqr(self)
+    def sqrt(self): return _TaylorPLib.Polynomial_sqrt(self)
+    def setSqrt(self): return _TaylorPLib.Polynomial_setSqrt(self)
+    def _print(self, *args): return _TaylorPLib.Polynomial__print(self, *args)
+    def eval(self, *args): return _TaylorPLib.Polynomial_eval(self, *args)
+    def feval(self): return _TaylorPLib.Polynomial_feval(self)
+    def shift(self): return _TaylorPLib.Polynomial_shift(self)
+    def isConst(self, *args): return _TaylorPLib.Polynomial_isConst(self, *args)
+    def isId(self, *args): return _TaylorPLib.Polynomial_isId(self, *args)
+    def isZero(self, *args): return _TaylorPLib.Polynomial_isZero(self, *args)
+    def set2Const(self, *args): return _TaylorPLib.Polynomial_set2Const(self, *args)
+    def set2Id(self): return _TaylorPLib.Polynomial_set2Id(self)
+    def set2Zero(self, *args): return _TaylorPLib.Polynomial_set2Zero(self, *args)
+    def setCoeffs(self, *args): return _TaylorPLib.Polynomial_setCoeffs(self, *args)
+Polynomial_swigregister = _TaylorPLib.Polynomial_swigregister
+Polynomial_swigregister(Polynomial)
+
 class Matrix(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Matrix, name, value)
@@ -123,52 +170,6 @@ class Matrix(_object):
     def _print(self, *args): return _TaylorPLib.Matrix__print(self, *args)
 Matrix_swigregister = _TaylorPLib.Matrix_swigregister
 Matrix_swigregister(Matrix)
-
-class Polynomial(_object):
-    __swig_setmethods__ = {}
-    __setattr__ = lambda self, name, value: _swig_setattr(self, Polynomial, name, value)
-    __swig_getmethods__ = {}
-    __getattr__ = lambda self, name: _swig_getattr(self, Polynomial, name)
-    __repr__ = _swig_repr
-    def __init__(self, *args): 
-        this = _TaylorPLib.new_Polynomial(*args)
-        try: self.this.append(this)
-        except: self.this = this
-    __swig_destroy__ = _TaylorPLib.delete_Polynomial
-    __del__ = lambda self : None;
-    def order(self): return _TaylorPLib.Polynomial_order(self)
-    def ncoeff(self): return _TaylorPLib.Polynomial_ncoeff(self)
-    def __eq__(self, *args): return _TaylorPLib.Polynomial___eq__(self, *args)
-    def __ne__(self, *args): return _TaylorPLib.Polynomial___ne__(self, *args)
-    def __lt__(self, *args): return _TaylorPLib.Polynomial___lt__(self, *args)
-    def __le__(self, *args): return _TaylorPLib.Polynomial___le__(self, *args)
-    def __gt__(self, *args): return _TaylorPLib.Polynomial___gt__(self, *args)
-    def __ge__(self, *args): return _TaylorPLib.Polynomial___ge__(self, *args)
-    def __add__(self, *args): return _TaylorPLib.Polynomial___add__(self, *args)
-    def __iadd__(self, *args): return _TaylorPLib.Polynomial___iadd__(self, *args)
-    def __neg__(self): return _TaylorPLib.Polynomial___neg__(self)
-    def __sub__(self, *args): return _TaylorPLib.Polynomial___sub__(self, *args)
-    def __isub__(self, *args): return _TaylorPLib.Polynomial___isub__(self, *args)
-    def __mul__(self, *args): return _TaylorPLib.Polynomial___mul__(self, *args)
-    def __imul__(self, *args): return _TaylorPLib.Polynomial___imul__(self, *args)
-    def __div__(self, *args): return _TaylorPLib.Polynomial___div__(self, *args)
-    def __idiv__(self, *args): return _TaylorPLib.Polynomial___idiv__(self, *args)
-    def sqr(self): return _TaylorPLib.Polynomial_sqr(self)
-    def setSqr(self): return _TaylorPLib.Polynomial_setSqr(self)
-    def sqrt(self): return _TaylorPLib.Polynomial_sqrt(self)
-    def setSqrt(self): return _TaylorPLib.Polynomial_setSqrt(self)
-    def _print(self, *args): return _TaylorPLib.Polynomial__print(self, *args)
-    def eval(self, *args): return _TaylorPLib.Polynomial_eval(self, *args)
-    def feval(self): return _TaylorPLib.Polynomial_feval(self)
-    def shift(self): return _TaylorPLib.Polynomial_shift(self)
-    def isConst(self, *args): return _TaylorPLib.Polynomial_isConst(self, *args)
-    def isId(self, *args): return _TaylorPLib.Polynomial_isId(self, *args)
-    def isZero(self, *args): return _TaylorPLib.Polynomial_isZero(self, *args)
-    def set2zero(self, *args): return _TaylorPLib.Polynomial_set2zero(self, *args)
-    def set2const(self, *args): return _TaylorPLib.Polynomial_set2const(self, *args)
-    def setCoeffs(self, *args): return _TaylorPLib.Polynomial_setCoeffs(self, *args)
-Polynomial_swigregister = _TaylorPLib.Polynomial_swigregister
-Polynomial_swigregister(Polynomial)
 
 class MathException(_object):
     __swig_setmethods__ = {}
