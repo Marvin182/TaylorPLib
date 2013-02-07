@@ -79,7 +79,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="test.cpp" />
-    <ClCompile Include="TestDoubleMatrix.cpp" />
+    <ClCompile Include="TestMatrix.cpp" />
     <ClCompile Include="TestPolynomial.cpp" />
   </ItemGroup>
   <ItemGroup>

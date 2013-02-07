@@ -242,8 +242,8 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>_TaylorPLib.pyd</OutputFile>
-      <ImportLibrary>.\Release\_TaylorPLib.lib</ImportLibrary>
+      <OutputFile>TaylorPLib.pyd</OutputFile>
+      <ImportLibrary>.\Release\TaylorPLib.lib</ImportLibrary>
       <AdditionalDependencies>$(PYTHON_LIB);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>

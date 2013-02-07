@@ -18,10 +18,10 @@
     <ClCompile Include="TestPolynomial.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="TestDoubleMatrix.cpp">
+    <ClCompile Include="test.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="test.cpp">
+    <ClCompile Include="TestMatrix.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
   </ItemGroup>
