@@ -52,7 +52,7 @@ Polynomial::Polynomial(int order, bool initialize):
  */
 Polynomial::Polynomial(const Polynomial &p):
 	_constant(0),
-	_order(0),
+	_order(-1),
 	_coeffs(0)
 {
 	copyFrom(p);
