@@ -2961,9 +2961,9 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 /* -------- TYPES TABLE (BEGIN) -------- */
 
 #define SWIGTYPE_p_FILE swig_types[0]
-#define SWIGTYPE_p_MathException swig_types[1]
-#define SWIGTYPE_p_Matrix swig_types[2]
-#define SWIGTYPE_p_Polynomial swig_types[3]
+#define SWIGTYPE_p_LibMatrix__Matrix swig_types[1]
+#define SWIGTYPE_p_LibMatrix__Polynomial swig_types[2]
+#define SWIGTYPE_p_MathException swig_types[3]
 #define SWIGTYPE_p_char swig_types[4]
 #define SWIGTYPE_p_double swig_types[5]
 #define SWIGTYPE_p_int swig_types[6]
@@ -3365,11 +3365,11 @@ extern "C" {
 #endif
 SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *result = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_Polynomial")) SWIG_fail;
-  result = (Polynomial *)new Polynomial();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Polynomial *)new LibMatrix::Polynomial();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3386,7 +3386,7 @@ SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial *result = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:new_Polynomial",&obj0,&obj1)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -3399,8 +3399,8 @@ SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Polynomial" "', argument " "2"" of type '" "bool""'");
   } 
   arg2 = static_cast< bool >(val2);
-  result = (Polynomial *)new Polynomial(arg1,arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Polynomial *)new LibMatrix::Polynomial(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3413,7 +3413,7 @@ SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_2(PyObject *SWIGUNUSEDPARM(self)
   int val1 ;
   int ecode1 = 0 ;
   PyObject * obj0 = 0 ;
-  Polynomial *result = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_Polynomial",&obj0)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -3421,8 +3421,8 @@ SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_2(PyObject *SWIGUNUSEDPARM(self)
     SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "int""'");
   } 
   arg1 = static_cast< int >(val1);
-  result = (Polynomial *)new Polynomial(arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Polynomial *)new LibMatrix::Polynomial(arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3431,23 +3431,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_3(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = 0 ;
+  LibMatrix::Polynomial *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Polynomial *result = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_Polynomial",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Polynomial,  0  | 0);
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Polynomial" "', argument " "1"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Polynomial" "', argument " "1"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (Polynomial *)new Polynomial((Polynomial const &)*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, SWIG_POINTER_NEW |  0 );
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (LibMatrix::Polynomial *)new LibMatrix::Polynomial((LibMatrix::Polynomial const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3469,7 +3469,7 @@ SWIGINTERN PyObject *_wrap_new_Polynomial(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_new_Polynomial__SWIG_3(self, args);
@@ -3505,27 +3505,27 @@ SWIGINTERN PyObject *_wrap_new_Polynomial(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Polynomial'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::Polynomial()\n"
-    "    Polynomial::Polynomial(int,bool)\n"
-    "    Polynomial::Polynomial(int)\n"
-    "    Polynomial::Polynomial(Polynomial const &)\n");
+    "    LibMatrix::Polynomial::Polynomial()\n"
+    "    LibMatrix::Polynomial::Polynomial(int,bool)\n"
+    "    LibMatrix::Polynomial::Polynomial(int)\n"
+    "    LibMatrix::Polynomial::Polynomial(LibMatrix::Polynomial const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_delete_Polynomial(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_Polynomial",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Polynomial" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Polynomial" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -3536,19 +3536,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_order(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_order",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_order" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_order" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (int)((Polynomial const *)arg1)->order();
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (int)((LibMatrix::Polynomial const *)arg1)->order();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -3558,19 +3558,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_ncoeff(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_ncoeff",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_ncoeff" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_ncoeff" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (int)((Polynomial const *)arg1)->ncoeff();
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (int)((LibMatrix::Polynomial const *)arg1)->ncoeff();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -3580,8 +3580,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___eq__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3591,20 +3591,20 @@ SWIGINTERN PyObject *_wrap_Polynomial___eq__(PyObject *SWIGUNUSEDPARM(self), PyO
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___eq__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___eq__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___eq__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___eq__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)((Polynomial const *)arg1)->operator ==((Polynomial const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (bool)((LibMatrix::Polynomial const *)arg1)->operator ==((LibMatrix::Polynomial const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -3614,8 +3614,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___ne__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3625,20 +3625,20 @@ SWIGINTERN PyObject *_wrap_Polynomial___ne__(PyObject *SWIGUNUSEDPARM(self), PyO
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___ne__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ne__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ne__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ne__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)((Polynomial const *)arg1)->operator !=((Polynomial const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (bool)((LibMatrix::Polynomial const *)arg1)->operator !=((LibMatrix::Polynomial const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -3648,8 +3648,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___lt__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3659,20 +3659,20 @@ SWIGINTERN PyObject *_wrap_Polynomial___lt__(PyObject *SWIGUNUSEDPARM(self), PyO
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___lt__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___lt__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___lt__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___lt__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator <((Polynomial const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (bool)(arg1)->operator <((LibMatrix::Polynomial const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -3682,8 +3682,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___le__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3693,20 +3693,20 @@ SWIGINTERN PyObject *_wrap_Polynomial___le__(PyObject *SWIGUNUSEDPARM(self), PyO
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___le__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___le__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___le__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___le__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___le__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___le__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___le__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator <=((Polynomial const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (bool)(arg1)->operator <=((LibMatrix::Polynomial const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -3716,8 +3716,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___gt__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3727,20 +3727,20 @@ SWIGINTERN PyObject *_wrap_Polynomial___gt__(PyObject *SWIGUNUSEDPARM(self), PyO
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___gt__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___gt__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___gt__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___gt__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator >((Polynomial const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (bool)(arg1)->operator >((LibMatrix::Polynomial const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -3750,8 +3750,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___ge__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -3761,20 +3761,20 @@ SWIGINTERN PyObject *_wrap_Polynomial___ge__(PyObject *SWIGUNUSEDPARM(self), PyO
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___ge__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ge__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___ge__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___ge__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (bool)(arg1)->operator >=((Polynomial const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (bool)(arg1)->operator >=((LibMatrix::Polynomial const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -3784,32 +3784,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___add__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___add__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___add__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___add__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___add__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___add__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___add__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator +((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = ((LibMatrix::Polynomial const *)arg1)->operator +((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3818,32 +3818,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___iadd__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___iadd__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___iadd__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___iadd__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___iadd__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator +=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (arg1)->operator +=((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3852,20 +3852,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___neg__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial___neg__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___neg__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___neg__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = ((Polynomial const *)arg1)->operator -();
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = ((LibMatrix::Polynomial const *)arg1)->operator -();
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3874,32 +3874,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___sub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___sub__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___sub__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___sub__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___sub__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator -((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = ((LibMatrix::Polynomial const *)arg1)->operator -((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3908,32 +3908,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___isub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___isub__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___isub__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___isub__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___isub__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator -=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (arg1)->operator -=((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3942,7 +3942,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -3950,21 +3950,21 @@ SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(s
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___mul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  result = ((Polynomial const *)arg1)->operator *(arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  result = ((LibMatrix::Polynomial const *)arg1)->operator *(arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -3973,32 +3973,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___mul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___mul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___mul__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___mul__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator *((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = ((LibMatrix::Polynomial const *)arg1)->operator *((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4018,10 +4018,10 @@ SWIGINTERN PyObject *_wrap_Polynomial___mul__(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Polynomial, 0);
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_LibMatrix__Polynomial, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_Polynomial___mul____SWIG_1(self, args);
@@ -4031,7 +4031,7 @@ SWIGINTERN PyObject *_wrap_Polynomial___mul__(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -4052,7 +4052,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4060,21 +4060,21 @@ SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_0(PyObject *SWIGUNUSEDPARM(
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___imul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   result = (arg1)->operator *=(arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4083,32 +4083,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___imul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___imul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___imul__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___imul__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator *=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (arg1)->operator *=((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4128,10 +4128,10 @@ SWIGINTERN PyObject *_wrap_Polynomial___imul__(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Polynomial, 0);
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_LibMatrix__Polynomial, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_Polynomial___imul____SWIG_1(self, args);
@@ -4141,7 +4141,7 @@ SWIGINTERN PyObject *_wrap_Polynomial___imul__(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -4157,40 +4157,40 @@ SWIGINTERN PyObject *_wrap_Polynomial___imul__(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial___imul__'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::operator *=(double const)\n"
-    "    Polynomial::operator *=(Polynomial const &)\n");
+    "    LibMatrix::Polynomial::operator *=(double const)\n"
+    "    LibMatrix::Polynomial::operator *=(LibMatrix::Polynomial const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Polynomial___div__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___div__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___div__" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___div__" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___div__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___div__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___div__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___div__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = ((Polynomial const *)arg1)->operator /((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = ((LibMatrix::Polynomial const *)arg1)->operator /((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4199,32 +4199,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial___idiv__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
-  Polynomial *arg2 = 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial___idiv__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___idiv__" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial___idiv__" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Polynomial,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Polynomial,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "Polynomial const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Polynomial___idiv__" "', argument " "2"" of type '" "LibMatrix::Polynomial const &""'"); 
   }
-  arg2 = reinterpret_cast< Polynomial * >(argp2);
-  result = (arg1)->operator /=((Polynomial const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  result = (arg1)->operator /=((LibMatrix::Polynomial const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4233,20 +4233,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_sqr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_sqr",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqr" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqr" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = ((Polynomial const *)arg1)->sqr();
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = ((LibMatrix::Polynomial const *)arg1)->sqr();
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4255,17 +4255,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_setSqr(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_setSqr",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqr" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqr" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   (arg1)->setSqr();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4276,20 +4276,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_sqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Polynomial result;
+  LibMatrix::Polynomial result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_sqrt",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqrt" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_sqrt" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = ((Polynomial const *)arg1)->sqrt();
-  resultobj = SWIG_NewPointerObj((new Polynomial(static_cast< const Polynomial& >(result))), SWIGTYPE_p_Polynomial, SWIG_POINTER_OWN |  0 );
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = ((LibMatrix::Polynomial const *)arg1)->sqrt();
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Polynomial(static_cast< const LibMatrix::Polynomial& >(result))), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4298,17 +4298,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_setSqrt(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_setSqrt",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqrt" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setSqrt" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   (arg1)->setSqrt();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4319,17 +4319,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial__print",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   (arg1)->print();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4340,7 +4340,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   FILE *arg2 = (FILE *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4350,11 +4350,11 @@ SWIGINTERN PyObject *_wrap_Polynomial__print__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial__print",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial__print" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_FILE, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial__print" "', argument " "2"" of type '" "FILE *""'"); 
@@ -4381,7 +4381,7 @@ SWIGINTERN PyObject *_wrap_Polynomial__print(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Polynomial__print__SWIG_0(self, args);
@@ -4390,7 +4390,7 @@ SWIGINTERN PyObject *_wrap_Polynomial__print(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       void *vptr = 0;
@@ -4405,15 +4405,15 @@ SWIGINTERN PyObject *_wrap_Polynomial__print(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial__print'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::print()\n"
-    "    Polynomial::print(FILE *)\n");
+    "    LibMatrix::Polynomial::print()\n"
+    "    LibMatrix::Polynomial::print(FILE *)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Polynomial_eval(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   double arg3 ;
   void *argp1 = 0 ;
@@ -4428,11 +4428,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_eval(PyObject *SWIGUNUSEDPARM(self), PyObj
   double result;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:Polynomial_eval",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_eval" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_eval" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_eval" "', argument " "2"" of type '" "double""'");
@@ -4453,18 +4453,18 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_feval(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   double result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_feval",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_feval" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_feval" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   result = (double)(arg1)->feval();
   resultobj = SWIG_From_double(static_cast< double >(result));
   return resultobj;
@@ -4475,17 +4475,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_shift(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_shift",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_shift" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_shift" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   (arg1)->shift();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4496,19 +4496,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isConst",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (bool)((Polynomial const *)arg1)->isConst();
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (bool)((LibMatrix::Polynomial const *)arg1)->isConst();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -4518,7 +4518,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4529,11 +4529,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_isConst__SWIG_1(PyObject *SWIGUNUSEDPARM(s
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isConst",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isConst" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isConst" "', argument " "2"" of type '" "double""'");
@@ -4560,7 +4560,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_isConst(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Polynomial_isConst__SWIG_0(self, args);
@@ -4569,7 +4569,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_isConst(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -4585,27 +4585,27 @@ SWIGINTERN PyObject *_wrap_Polynomial_isConst(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isConst'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::isConst() const\n"
-    "    Polynomial::isConst(double)\n");
+    "    LibMatrix::Polynomial::isConst() const\n"
+    "    LibMatrix::Polynomial::isConst(double)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isId",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (bool)((Polynomial const *)arg1)->isId();
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (bool)((LibMatrix::Polynomial const *)arg1)->isId();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -4615,7 +4615,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4626,11 +4626,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_isId__SWIG_1(PyObject *SWIGUNUSEDPARM(self
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isId",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isId" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isId" "', argument " "2"" of type '" "double""'");
@@ -4657,7 +4657,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_isId(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Polynomial_isId__SWIG_0(self, args);
@@ -4666,7 +4666,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_isId(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -4682,27 +4682,27 @@ SWIGINTERN PyObject *_wrap_Polynomial_isId(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isId'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::isId() const\n"
-    "    Polynomial::isId(double)\n");
+    "    LibMatrix::Polynomial::isId() const\n"
+    "    LibMatrix::Polynomial::isId(double)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_isZero",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "Polynomial const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "LibMatrix::Polynomial const *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
-  result = (bool)((Polynomial const *)arg1)->isZero();
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (bool)((LibMatrix::Polynomial const *)arg1)->isZero();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -4712,7 +4712,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4723,11 +4723,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_isZero__SWIG_1(PyObject *SWIGUNUSEDPARM(se
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_isZero",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_isZero" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_isZero" "', argument " "2"" of type '" "double""'");
@@ -4754,7 +4754,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_isZero(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Polynomial_isZero__SWIG_0(self, args);
@@ -4763,7 +4763,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_isZero(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -4779,15 +4779,15 @@ SWIGINTERN PyObject *_wrap_Polynomial_isZero(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_isZero'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::isZero() const\n"
-    "    Polynomial::isZero(double)\n");
+    "    LibMatrix::Polynomial::isZero() const\n"
+    "    LibMatrix::Polynomial::isZero(double)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Polynomial_set2Const(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4797,11 +4797,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_set2Const(PyObject *SWIGUNUSEDPARM(self), 
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_set2Const",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Const" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Const" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_set2Const" "', argument " "2"" of type '" "double""'");
@@ -4817,17 +4817,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_set2Id(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_set2Id",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Id" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Id" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   (arg1)->set2Id();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4838,17 +4838,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_set2Zero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_set2Zero",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Zero" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Zero" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   (arg1)->set2Zero();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -4859,7 +4859,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Polynomial_set2Zero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   int arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4869,11 +4869,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_set2Zero__SWIG_1(PyObject *SWIGUNUSEDPARM(
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_set2Zero",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Zero" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_set2Zero" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Polynomial_set2Zero" "', argument " "2"" of type '" "int""'");
@@ -4900,7 +4900,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_set2Zero(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Polynomial_set2Zero__SWIG_0(self, args);
@@ -4909,7 +4909,7 @@ SWIGINTERN PyObject *_wrap_Polynomial_set2Zero(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Polynomial, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -4925,15 +4925,15 @@ SWIGINTERN PyObject *_wrap_Polynomial_set2Zero(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Polynomial_set2Zero'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Polynomial::set2Zero()\n"
-    "    Polynomial::set2Zero(int)\n");
+    "    LibMatrix::Polynomial::set2Zero()\n"
+    "    LibMatrix::Polynomial::set2Zero(int)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Polynomial_setCoeffs(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Polynomial *arg1 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
   double *arg2 = (double *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -4943,11 +4943,11 @@ SWIGINTERN PyObject *_wrap_Polynomial_setCoeffs(PyObject *SWIGUNUSEDPARM(self), 
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Polynomial_setCoeffs",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setCoeffs" "', argument " "1"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_setCoeffs" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg1 = reinterpret_cast< Polynomial * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_double, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Polynomial_setCoeffs" "', argument " "2"" of type '" "double *""'"); 
@@ -4964,17 +4964,17 @@ fail:
 SWIGINTERN PyObject *Polynomial_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Polynomial, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_LibMatrix__Polynomial, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
 SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)":new_Matrix")) SWIG_fail;
-  result = (Matrix *)new Matrix();
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix();
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -4995,7 +4995,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:new_Matrix",&obj0,&obj1,&obj2)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -5013,8 +5013,8 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_1(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Matrix" "', argument " "3"" of type '" "bool""'");
   } 
   arg3 = static_cast< bool >(val3);
-  result = (Matrix *)new Matrix(arg1,arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5031,7 +5031,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_2(PyObject *SWIGUNUSEDPARM(self), Py
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:new_Matrix",&obj0,&obj1)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -5044,8 +5044,8 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_2(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Matrix" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  result = (Matrix *)new Matrix(arg1,arg2);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix(arg1,arg2);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5070,7 +5070,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_3(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
   PyObject * obj3 = 0 ;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:new_Matrix",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -5093,8 +5093,8 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_3(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "new_Matrix" "', argument " "4"" of type '" "bool""'");
   } 
   arg4 = static_cast< bool >(val4);
-  result = (Matrix *)new Matrix(arg1,arg2,arg3,arg4);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix(arg1,arg2,arg3,arg4);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5115,7 +5115,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_4(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:new_Matrix",&obj0,&obj1,&obj2)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -5133,8 +5133,8 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_4(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "new_Matrix" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  result = (Matrix *)new Matrix(arg1,arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5143,23 +5143,23 @@ fail:
 
 SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_5(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = 0 ;
+  LibMatrix::Matrix *arg1 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:new_Matrix",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_Matrix,  0  | 0);
+  res1 = SWIG_ConvertPtr(obj0, &argp1, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Matrix" "', argument " "1"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "new_Matrix" "', argument " "1"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp1) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Matrix" "', argument " "1"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "new_Matrix" "', argument " "1"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (Matrix *)new Matrix((Matrix const &)*arg1);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix((LibMatrix::Matrix const &)*arg1);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5170,7 +5170,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_6(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject *resultobj = 0;
   int arg1 ;
   int arg2 ;
-  Polynomial *arg3 = (Polynomial *) 0 ;
+  LibMatrix::Polynomial *arg3 = (LibMatrix::Polynomial *) 0 ;
   int val1 ;
   int ecode1 = 0 ;
   int val2 ;
@@ -5180,7 +5180,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_6(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  Matrix *result = 0 ;
+  LibMatrix::Matrix *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:new_Matrix",&obj0,&obj1,&obj2)) SWIG_fail;
   ecode1 = SWIG_AsVal_int(obj0, &val1);
@@ -5193,13 +5193,13 @@ SWIGINTERN PyObject *_wrap_new_Matrix__SWIG_6(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Matrix" "', argument " "2"" of type '" "int""'");
   } 
   arg2 = static_cast< int >(val2);
-  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_Polynomial, 0 |  0 );
+  res3 = SWIG_ConvertPtr(obj2, &argp3,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   if (!SWIG_IsOK(res3)) {
-    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Matrix" "', argument " "3"" of type '" "Polynomial *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "new_Matrix" "', argument " "3"" of type '" "LibMatrix::Polynomial *""'"); 
   }
-  arg3 = reinterpret_cast< Polynomial * >(argp3);
-  result = (Matrix *)new Matrix(arg1,arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Matrix, SWIG_POINTER_NEW |  0 );
+  arg3 = reinterpret_cast< LibMatrix::Polynomial * >(argp3);
+  result = (LibMatrix::Matrix *)new LibMatrix::Matrix(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_NEW |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5221,7 +5221,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix(PyObject *self, PyObject *args) {
   }
   if (argc == 1) {
     int _v;
-    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_new_Matrix__SWIG_5(self, args);
@@ -5256,7 +5256,7 @@ SWIGINTERN PyObject *_wrap_new_Matrix(PyObject *self, PyObject *args) {
       }
       if (_v) {
         void *vptr = 0;
-        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_Polynomial, 0);
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
         _v = SWIG_CheckState(res);
         if (_v) {
           return _wrap_new_Matrix__SWIG_6(self, args);
@@ -5340,30 +5340,30 @@ SWIGINTERN PyObject *_wrap_new_Matrix(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'new_Matrix'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::Matrix()\n"
-    "    Matrix::Matrix(int,int,bool)\n"
-    "    Matrix::Matrix(int,int)\n"
-    "    Matrix::Matrix(int,int,int,bool)\n"
-    "    Matrix::Matrix(int,int,int)\n"
-    "    Matrix::Matrix(Matrix const &)\n"
-    "    Matrix::Matrix(int,int,Polynomial *)\n");
+    "    LibMatrix::Matrix::Matrix()\n"
+    "    LibMatrix::Matrix::Matrix(int,int,bool)\n"
+    "    LibMatrix::Matrix::Matrix(int,int)\n"
+    "    LibMatrix::Matrix::Matrix(int,int,int,bool)\n"
+    "    LibMatrix::Matrix::Matrix(int,int,int)\n"
+    "    LibMatrix::Matrix::Matrix(LibMatrix::Matrix const &)\n"
+    "    LibMatrix::Matrix::Matrix(int,int,LibMatrix::Polynomial *)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_delete_Matrix(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:delete_Matrix",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Matrix" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "delete_Matrix" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   delete arg1;
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -5374,19 +5374,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_nrows(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_nrows",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_nrows" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_nrows" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (int)((Matrix const *)arg1)->nrows();
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (int)((LibMatrix::Matrix const *)arg1)->nrows();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -5396,19 +5396,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_ncols(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_ncols",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_ncols" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_ncols" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (int)((Matrix const *)arg1)->ncols();
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (int)((LibMatrix::Matrix const *)arg1)->ncols();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -5418,19 +5418,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_dimT(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   int result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_dimT",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_dimT" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_dimT" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (int)((Matrix const *)arg1)->dimT();
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (int)((LibMatrix::Matrix const *)arg1)->dimT();
   resultobj = SWIG_From_int(static_cast< int >(result));
   return resultobj;
 fail:
@@ -5440,7 +5440,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_get(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   void *argp1 = 0 ;
@@ -5452,14 +5452,14 @@ SWIGINTERN PyObject *_wrap_Matrix_get(PyObject *SWIGUNUSEDPARM(self), PyObject *
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  Polynomial *result = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix_get",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_get" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_get" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_get" "', argument " "2"" of type '" "int""'");
@@ -5470,8 +5470,8 @@ SWIGINTERN PyObject *_wrap_Matrix_get(PyObject *SWIGUNUSEDPARM(self), PyObject *
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_get" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  result = (Polynomial *)((Matrix const *)arg1)->get(arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, 0 |  0 );
+  result = (LibMatrix::Polynomial *)((LibMatrix::Matrix const *)arg1)->get(arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5480,7 +5480,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___call__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   void *argp1 = 0 ;
@@ -5492,14 +5492,14 @@ SWIGINTERN PyObject *_wrap_Matrix___call__(PyObject *SWIGUNUSEDPARM(self), PyObj
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
   PyObject * obj2 = 0 ;
-  Polynomial *result = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix___call__",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___call__" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___call__" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix___call__" "', argument " "2"" of type '" "int""'");
@@ -5510,8 +5510,8 @@ SWIGINTERN PyObject *_wrap_Matrix___call__(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix___call__" "', argument " "3"" of type '" "int""'");
   } 
   arg3 = static_cast< int >(val3);
-  result = (Polynomial *) &(arg1)->operator ()(arg2,arg3);
-  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_Polynomial, 0 |  0 );
+  result = (LibMatrix::Polynomial *) &(arg1)->operator ()(arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5520,8 +5520,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___eq__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -5531,20 +5531,20 @@ SWIGINTERN PyObject *_wrap_Matrix___eq__(PyObject *SWIGUNUSEDPARM(self), PyObjec
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___eq__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___eq__" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___eq__" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___eq__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___eq__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___eq__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___eq__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = (bool)((Matrix const *)arg1)->operator ==((Matrix const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = (bool)((LibMatrix::Matrix const *)arg1)->operator ==((LibMatrix::Matrix const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -5554,8 +5554,8 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___ne__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
@@ -5565,20 +5565,20 @@ SWIGINTERN PyObject *_wrap_Matrix___ne__(PyObject *SWIGUNUSEDPARM(self), PyObjec
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___ne__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___ne__" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___ne__" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___ne__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___ne__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___ne__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___ne__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = (bool)((Matrix const *)arg1)->operator !=((Matrix const &)*arg2);
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = (bool)((LibMatrix::Matrix const *)arg1)->operator !=((LibMatrix::Matrix const &)*arg2);
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -5588,32 +5588,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___add__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___add__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___add__" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___add__" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___add__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___add__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___add__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___add__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = ((Matrix const *)arg1)->operator +((Matrix const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = ((LibMatrix::Matrix const *)arg1)->operator +((LibMatrix::Matrix const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5622,32 +5622,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___iadd__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___iadd__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___iadd__" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___iadd__" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___iadd__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___iadd__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___iadd__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___iadd__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = (arg1)->operator +=((Matrix const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = (arg1)->operator +=((LibMatrix::Matrix const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5656,32 +5656,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___sub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___sub__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___sub__" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___sub__" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___sub__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___sub__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___sub__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___sub__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = ((Matrix const *)arg1)->operator -((Matrix const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = ((LibMatrix::Matrix const *)arg1)->operator -((LibMatrix::Matrix const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5690,32 +5690,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___isub__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___isub__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___isub__" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___isub__" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___isub__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___isub__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___isub__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___isub__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = (arg1)->operator -=((Matrix const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = (arg1)->operator -=((LibMatrix::Matrix const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5724,20 +5724,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___neg__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix___neg__",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___neg__" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___neg__" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   result = (arg1)->operator -();
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5746,7 +5746,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -5754,21 +5754,21 @@ SWIGINTERN PyObject *_wrap_Matrix___mul____SWIG_0(PyObject *SWIGUNUSEDPARM(self)
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___mul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___mul__" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___mul__" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix___mul__" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
-  result = ((Matrix const *)arg1)->operator *(arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  result = ((LibMatrix::Matrix const *)arg1)->operator *(arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5777,7 +5777,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___imul__(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -5785,21 +5785,21 @@ SWIGINTERN PyObject *_wrap_Matrix___imul__(PyObject *SWIGUNUSEDPARM(self), PyObj
   int ecode2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___imul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, SWIG_POINTER_DISOWN |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_DISOWN |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___imul__" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___imul__" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix___imul__" "', argument " "2"" of type '" "double""'");
   } 
   arg2 = static_cast< double >(val2);
   result = (arg1)->operator *=(arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5808,32 +5808,32 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix___mul____SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
-  Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   void *argp2 = 0 ;
   int res2 = 0 ;
   PyObject * obj0 = 0 ;
   PyObject * obj1 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix___mul__",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___mul__" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix___mul__" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_Matrix,  0  | 0);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res2)) {
-    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___mul__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix___mul__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp2) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___mul__" "', argument " "2"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix___mul__" "', argument " "2"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg2 = reinterpret_cast< Matrix * >(argp2);
-  result = ((Matrix const *)arg1)->operator *((Matrix const &)*arg2);
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  result = ((LibMatrix::Matrix const *)arg1)->operator *((LibMatrix::Matrix const &)*arg2);
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -5853,10 +5853,10 @@ SWIGINTERN PyObject *_wrap_Matrix___mul__(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
-      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_Matrix, 0);
+      int res = SWIG_ConvertPtr(argv[1], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
       _v = SWIG_CheckState(res);
       if (_v) {
         return _wrap_Matrix___mul____SWIG_1(self, args);
@@ -5866,7 +5866,7 @@ SWIGINTERN PyObject *_wrap_Matrix___mul__(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -5887,11 +5887,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaABbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
-  Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -5909,11 +5909,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABbC(PyObject *SWIGUNUSEDPARM(self), PyObj
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_mmCaABbC",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaABbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaABbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaABbC" "', argument " "2"" of type '" "double""'");
@@ -5924,23 +5924,23 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABbC(PyObject *SWIGUNUSEDPARM(self), PyObj
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaABbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaABbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaABbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaABbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaABbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
-  (arg1)->mmCaABbC(arg2,arg3,(Matrix const &)*arg4,(Matrix const &)*arg5);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
+  (arg1)->mmCaABbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4,(LibMatrix::Matrix const &)*arg5);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -5950,13 +5950,13 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_bmmCaABbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   double arg4 ;
   double arg5 ;
-  Matrix *arg6 = 0 ;
-  Matrix *arg7 = 0 ;
+  LibMatrix::Matrix *arg6 = 0 ;
+  LibMatrix::Matrix *arg7 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -5980,11 +5980,11 @@ SWIGINTERN PyObject *_wrap_Matrix_bmmCaABbC(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj6 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:Matrix_bmmCaABbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_bmmCaABbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_bmmCaABbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_bmmCaABbC" "', argument " "2"" of type '" "int""'");
@@ -6005,23 +6005,23 @@ SWIGINTERN PyObject *_wrap_Matrix_bmmCaABbC(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Matrix_bmmCaABbC" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_Matrix,  0  | 0);
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_bmmCaABbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_bmmCaABbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg6 = reinterpret_cast< Matrix * >(argp6);
-  res7 = SWIG_ConvertPtr(obj6, &argp7, SWIGTYPE_p_Matrix,  0  | 0);
+  arg6 = reinterpret_cast< LibMatrix::Matrix * >(argp6);
+  res7 = SWIG_ConvertPtr(obj6, &argp7, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res7)) {
-    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "Matrix_bmmCaABbC" "', argument " "7"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "Matrix_bmmCaABbC" "', argument " "7"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp7) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABbC" "', argument " "7"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABbC" "', argument " "7"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg7 = reinterpret_cast< Matrix * >(argp7);
-  (arg1)->bmmCaABbC(arg2,arg3,arg4,arg5,(Matrix const &)*arg6,(Matrix const &)*arg7);
+  arg7 = reinterpret_cast< LibMatrix::Matrix * >(argp7);
+  (arg1)->bmmCaABbC(arg2,arg3,arg4,arg5,(LibMatrix::Matrix const &)*arg6,(LibMatrix::Matrix const &)*arg7);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6031,12 +6031,12 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCasABbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   double arg3 ;
   double arg4 ;
-  Matrix *arg5 = 0 ;
-  Matrix *arg6 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg6 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -6057,11 +6057,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCasABbC(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_mmCasABbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCasABbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCasABbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCasABbC" "', argument " "2"" of type '" "int""'");
@@ -6077,23 +6077,23 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCasABbC(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Matrix_mmCasABbC" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCasABbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCasABbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCasABbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCasABbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_Matrix,  0  | 0);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCasABbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCasABbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCasABbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCasABbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg6 = reinterpret_cast< Matrix * >(argp6);
-  (arg1)->mmCasABbC(arg2,arg3,arg4,(Matrix const &)*arg5,(Matrix const &)*arg6);
+  arg6 = reinterpret_cast< LibMatrix::Matrix * >(argp6);
+  (arg1)->mmCasABbC(arg2,arg3,arg4,(LibMatrix::Matrix const &)*arg5,(LibMatrix::Matrix const &)*arg6);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6103,12 +6103,12 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaAsBbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   double arg3 ;
   double arg4 ;
-  Matrix *arg5 = 0 ;
-  Matrix *arg6 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg6 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -6129,11 +6129,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAsBbC(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_mmCaAsBbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAsBbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAsBbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaAsBbC" "', argument " "2"" of type '" "int""'");
@@ -6149,23 +6149,23 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAsBbC(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode4), "in method '" "Matrix_mmCaAsBbC" "', argument " "4"" of type '" "double""'");
   } 
   arg4 = static_cast< double >(val4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaAsBbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaAsBbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAsBbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAsBbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_Matrix,  0  | 0);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaAsBbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaAsBbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAsBbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAsBbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg6 = reinterpret_cast< Matrix * >(argp6);
-  (arg1)->mmCaAsBbC(arg2,arg3,arg4,(Matrix const &)*arg5,(Matrix const &)*arg6);
+  arg6 = reinterpret_cast< LibMatrix::Matrix * >(argp6);
+  (arg1)->mmCaAsBbC(arg2,arg3,arg4,(LibMatrix::Matrix const &)*arg5,(LibMatrix::Matrix const &)*arg6);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6175,11 +6175,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaAUTBPbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
-  Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
   int *arg6 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6201,11 +6201,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAUTBPbC(PyObject *SWIGUNUSEDPARM(self), Py
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_mmCaAUTBPbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "2"" of type '" "double""'");
@@ -6216,28 +6216,28 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAUTBPbC(PyObject *SWIGUNUSEDPARM(self), Py
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAUTBPbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAUTBPbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAUTBPbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAUTBPbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
   res6 = SWIG_ConvertPtr(obj5, &argp6,SWIGTYPE_p_int, 0 |  0 );
   if (!SWIG_IsOK(res6)) {
     SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaAUTBPbC" "', argument " "6"" of type '" "int *""'"); 
   }
   arg6 = reinterpret_cast< int * >(argp6);
-  (arg1)->mmCaAUTBPbC(arg2,arg3,(Matrix const &)*arg4,(Matrix const &)*arg5,arg6);
+  (arg1)->mmCaAUTBPbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4,(LibMatrix::Matrix const &)*arg5,arg6);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6247,10 +6247,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaAATbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -6265,11 +6265,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAATbC(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:Matrix_mmCaAATbC",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAATbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAATbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaAATbC" "', argument " "2"" of type '" "double""'");
@@ -6280,15 +6280,15 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAATbC(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaAATbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAATbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAATbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAATbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAATbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  (arg1)->mmCaAATbC(arg2,arg3,(Matrix const &)*arg4);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  (arg1)->mmCaAATbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6298,10 +6298,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaATAbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -6316,11 +6316,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaATAbC(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:Matrix_mmCaATAbC",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaATAbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaATAbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaATAbC" "', argument " "2"" of type '" "double""'");
@@ -6331,15 +6331,15 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaATAbC(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaATAbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaATAbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaATAbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATAbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATAbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  (arg1)->mmCaATAbC(arg2,arg3,(Matrix const &)*arg4);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  (arg1)->mmCaATAbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6349,11 +6349,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaATBbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
-  Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -6371,11 +6371,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaATBbC(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_mmCaATBbC",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaATBbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaATBbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaATBbC" "', argument " "2"" of type '" "double""'");
@@ -6386,23 +6386,23 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaATBbC(PyObject *SWIGUNUSEDPARM(self), PyOb
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaATBbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaATBbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaATBbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaATBbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaATBbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
-  (arg1)->mmCaATBbC(arg2,arg3,(Matrix const &)*arg4,(Matrix const &)*arg5);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
+  (arg1)->mmCaATBbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4,(LibMatrix::Matrix const &)*arg5);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6412,11 +6412,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaATBPbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
-  Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
   int *arg6 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -6438,11 +6438,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaATBPbC(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_mmCaATBPbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaATBPbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaATBPbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaATBPbC" "', argument " "2"" of type '" "double""'");
@@ -6453,28 +6453,28 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaATBPbC(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaATBPbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaATBPbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaATBPbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBPbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBPbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaATBPbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaATBPbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBPbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaATBPbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
   res6 = SWIG_ConvertPtr(obj5, &argp6,SWIGTYPE_p_int, 0 |  0 );
   if (!SWIG_IsOK(res6)) {
     SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaATBPbC" "', argument " "6"" of type '" "int *""'"); 
   }
   arg6 = reinterpret_cast< int * >(argp6);
-  (arg1)->mmCaATBPbC(arg2,arg3,(Matrix const &)*arg4,(Matrix const &)*arg5,arg6);
+  (arg1)->mmCaATBPbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4,(LibMatrix::Matrix const &)*arg5,arg6);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6484,11 +6484,11 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
-  Matrix *arg5 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg5 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -6506,11 +6506,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_mmCaABTbC",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaABTbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaABTbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaABTbC" "', argument " "2"" of type '" "double""'");
@@ -6521,23 +6521,23 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaABTbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaABTbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaABTbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_Matrix,  0  | 0);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  res5 = SWIG_ConvertPtr(obj4, &argp5, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res5)) {
-    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaABTbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaABTbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp5) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "5"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "5"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg5 = reinterpret_cast< Matrix * >(argp5);
-  (arg1)->mmCaABTbC(arg2,arg3,(Matrix const &)*arg4,(Matrix const &)*arg5);
+  arg5 = reinterpret_cast< LibMatrix::Matrix * >(argp5);
+  (arg1)->mmCaABTbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4,(LibMatrix::Matrix const &)*arg5);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6547,13 +6547,13 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   bool arg3 ;
   double arg4 ;
   double arg5 ;
-  Matrix *arg6 = 0 ;
-  Matrix *arg7 = 0 ;
+  LibMatrix::Matrix *arg6 = 0 ;
+  LibMatrix::Matrix *arg7 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -6577,11 +6577,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj6 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:Matrix_mmCaABTbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaABTbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaABTbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaABTbC" "', argument " "2"" of type '" "int""'");
@@ -6602,23 +6602,23 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Matrix_mmCaABTbC" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_Matrix,  0  | 0);
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaABTbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaABTbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg6 = reinterpret_cast< Matrix * >(argp6);
-  res7 = SWIG_ConvertPtr(obj6, &argp7, SWIGTYPE_p_Matrix,  0  | 0);
+  arg6 = reinterpret_cast< LibMatrix::Matrix * >(argp6);
+  res7 = SWIG_ConvertPtr(obj6, &argp7, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res7)) {
-    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "Matrix_mmCaABTbC" "', argument " "7"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "Matrix_mmCaABTbC" "', argument " "7"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp7) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "7"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaABTbC" "', argument " "7"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg7 = reinterpret_cast< Matrix * >(argp7);
-  (arg1)->mmCaABTbC(arg2,arg3,arg4,arg5,(Matrix const &)*arg6,(Matrix const &)*arg7);
+  arg7 = reinterpret_cast< LibMatrix::Matrix * >(argp7);
+  (arg1)->mmCaABTbC(arg2,arg3,arg4,arg5,(LibMatrix::Matrix const &)*arg6,(LibMatrix::Matrix const &)*arg7);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6639,7 +6639,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC(PyObject *self, PyObject *args) {
   if (argc == 5) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6652,10 +6652,10 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC(PyObject *self, PyObject *args) {
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_Matrix, 0);
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
-            int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_Matrix, 0);
+            int res = SWIG_ConvertPtr(argv[4], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
             _v = SWIG_CheckState(res);
             if (_v) {
               return _wrap_Matrix_mmCaABTbC__SWIG_0(self, args);
@@ -6668,7 +6668,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC(PyObject *self, PyObject *args) {
   if (argc == 7) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6691,10 +6691,10 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC(PyObject *self, PyObject *args) {
               _v = SWIG_CheckState(res);
             }
             if (_v) {
-              int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_Matrix, 0);
+              int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
               _v = SWIG_CheckState(res);
               if (_v) {
-                int res = SWIG_ConvertPtr(argv[6], 0, SWIGTYPE_p_Matrix, 0);
+                int res = SWIG_ConvertPtr(argv[6], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
                 _v = SWIG_CheckState(res);
                 if (_v) {
                   return _wrap_Matrix_mmCaABTbC__SWIG_1(self, args);
@@ -6710,21 +6710,21 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaABTbC(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_mmCaABTbC'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::mmCaABTbC(double,double,Matrix const &,Matrix const &)\n"
-    "    Matrix::mmCaABTbC(int,bool,double,double,Matrix const &,Matrix const &)\n");
+    "    LibMatrix::Matrix::mmCaABTbC(double,double,LibMatrix::Matrix const &,LibMatrix::Matrix const &)\n"
+    "    LibMatrix::Matrix::mmCaABTbC(int,bool,double,double,LibMatrix::Matrix const &,LibMatrix::Matrix const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_bmmCaABTbC(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   double arg4 ;
   double arg5 ;
-  Matrix *arg6 = 0 ;
-  Matrix *arg7 = 0 ;
+  LibMatrix::Matrix *arg6 = 0 ;
+  LibMatrix::Matrix *arg7 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   int val2 ;
@@ -6748,11 +6748,11 @@ SWIGINTERN PyObject *_wrap_Matrix_bmmCaABTbC(PyObject *SWIGUNUSEDPARM(self), PyO
   PyObject * obj6 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOOO:Matrix_bmmCaABTbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5,&obj6)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_bmmCaABTbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_bmmCaABTbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_bmmCaABTbC" "', argument " "2"" of type '" "int""'");
@@ -6773,23 +6773,23 @@ SWIGINTERN PyObject *_wrap_Matrix_bmmCaABTbC(PyObject *SWIGUNUSEDPARM(self), PyO
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Matrix_bmmCaABTbC" "', argument " "5"" of type '" "double""'");
   } 
   arg5 = static_cast< double >(val5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_Matrix,  0  | 0);
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_bmmCaABTbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_bmmCaABTbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABTbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABTbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg6 = reinterpret_cast< Matrix * >(argp6);
-  res7 = SWIG_ConvertPtr(obj6, &argp7, SWIGTYPE_p_Matrix,  0  | 0);
+  arg6 = reinterpret_cast< LibMatrix::Matrix * >(argp6);
+  res7 = SWIG_ConvertPtr(obj6, &argp7, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res7)) {
-    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "Matrix_bmmCaABTbC" "', argument " "7"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res7), "in method '" "Matrix_bmmCaABTbC" "', argument " "7"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp7) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABTbC" "', argument " "7"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_bmmCaABTbC" "', argument " "7"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg7 = reinterpret_cast< Matrix * >(argp7);
-  (arg1)->bmmCaABTbC(arg2,arg3,arg4,arg5,(Matrix const &)*arg6,(Matrix const &)*arg7);
+  arg7 = reinterpret_cast< LibMatrix::Matrix * >(argp7);
+  (arg1)->bmmCaABTbC(arg2,arg3,arg4,arg5,(LibMatrix::Matrix const &)*arg6,(LibMatrix::Matrix const &)*arg7);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6799,10 +6799,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -6817,11 +6817,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:Matrix_mmCaIBbC",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaIBbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaIBbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaIBbC" "', argument " "2"" of type '" "double""'");
@@ -6832,15 +6832,15 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaIBbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaIBbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaIBbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaIBbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaIBbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  (arg1)->mmCaIBbC(arg2,arg3,(Matrix const &)*arg4);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  (arg1)->mmCaIBbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6850,12 +6850,12 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
   int *arg4 = (int *) 0 ;
   bool arg5 ;
-  Matrix *arg6 = 0 ;
+  LibMatrix::Matrix *arg6 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -6876,11 +6876,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_mmCaIBbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaIBbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaIBbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaIBbC" "', argument " "2"" of type '" "double""'");
@@ -6901,15 +6901,15 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode5), "in method '" "Matrix_mmCaIBbC" "', argument " "5"" of type '" "bool""'");
   } 
   arg5 = static_cast< bool >(val5);
-  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_Matrix,  0  | 0);
+  res6 = SWIG_ConvertPtr(obj5, &argp6, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res6)) {
-    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaIBbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res6), "in method '" "Matrix_mmCaIBbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp6) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaIBbC" "', argument " "6"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaIBbC" "', argument " "6"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg6 = reinterpret_cast< Matrix * >(argp6);
-  (arg1)->mmCaIBbC(arg2,arg3,arg4,arg5,(Matrix const &)*arg6);
+  arg6 = reinterpret_cast< LibMatrix::Matrix * >(argp6);
+  (arg1)->mmCaIBbC(arg2,arg3,arg4,arg5,(LibMatrix::Matrix const &)*arg6);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -6930,7 +6930,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC(PyObject *self, PyObject *args) {
   if (argc == 4) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6943,7 +6943,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC(PyObject *self, PyObject *args) {
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_Matrix, 0);
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_Matrix_mmCaIBbC__SWIG_0(self, args);
@@ -6955,7 +6955,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC(PyObject *self, PyObject *args) {
   if (argc == 6) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -6977,7 +6977,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC(PyObject *self, PyObject *args) {
               _v = SWIG_CheckState(res);
             }
             if (_v) {
-              int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_Matrix, 0);
+              int res = SWIG_ConvertPtr(argv[5], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
               _v = SWIG_CheckState(res);
               if (_v) {
                 return _wrap_Matrix_mmCaIBbC__SWIG_1(self, args);
@@ -6992,18 +6992,18 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaIBbC(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_mmCaIBbC'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::mmCaIBbC(double,double,Matrix const &)\n"
-    "    Matrix::mmCaIBbC(double,double,int *,bool,Matrix const &)\n");
+    "    LibMatrix::Matrix::mmCaIBbC(double,double,LibMatrix::Matrix const &)\n"
+    "    LibMatrix::Matrix::mmCaIBbC(double,double,int *,bool,LibMatrix::Matrix const &)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   double val2 ;
@@ -7018,11 +7018,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj3 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOO:Matrix_mmCaAIbC",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAIbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAIbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaAIbC" "', argument " "2"" of type '" "double""'");
@@ -7033,15 +7033,15 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_0(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaAIbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
-  (arg1)->mmCaAIbC(arg2,arg3,(Matrix const &)*arg4);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
+  (arg1)->mmCaAIbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7051,10 +7051,10 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   double arg3 ;
-  Matrix *arg4 = 0 ;
+  LibMatrix::Matrix *arg4 = 0 ;
   int *arg5 = (int *) 0 ;
   bool arg6 ;
   void *argp1 = 0 ;
@@ -7077,11 +7077,11 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_mmCaAIbC",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAIbC" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_mmCaAIbC" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_mmCaAIbC" "', argument " "2"" of type '" "double""'");
@@ -7092,14 +7092,14 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode3), "in method '" "Matrix_mmCaAIbC" "', argument " "3"" of type '" "double""'");
   } 
   arg3 = static_cast< double >(val3);
-  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_Matrix,  0  | 0);
+  res4 = SWIG_ConvertPtr(obj3, &argp4, SWIGTYPE_p_LibMatrix__Matrix,  0  | 0);
   if (!SWIG_IsOK(res4)) {
-    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
   if (!argp4) {
-    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "Matrix const &""'"); 
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_mmCaAIbC" "', argument " "4"" of type '" "LibMatrix::Matrix const &""'"); 
   }
-  arg4 = reinterpret_cast< Matrix * >(argp4);
+  arg4 = reinterpret_cast< LibMatrix::Matrix * >(argp4);
   res5 = SWIG_ConvertPtr(obj4, &argp5,SWIGTYPE_p_int, 0 |  0 );
   if (!SWIG_IsOK(res5)) {
     SWIG_exception_fail(SWIG_ArgError(res5), "in method '" "Matrix_mmCaAIbC" "', argument " "5"" of type '" "int *""'"); 
@@ -7110,7 +7110,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC__SWIG_1(PyObject *SWIGUNUSEDPARM(self
     SWIG_exception_fail(SWIG_ArgError(ecode6), "in method '" "Matrix_mmCaAIbC" "', argument " "6"" of type '" "bool""'");
   } 
   arg6 = static_cast< bool >(val6);
-  (arg1)->mmCaAIbC(arg2,arg3,(Matrix const &)*arg4,arg5,arg6);
+  (arg1)->mmCaAIbC(arg2,arg3,(LibMatrix::Matrix const &)*arg4,arg5,arg6);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -7131,7 +7131,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC(PyObject *self, PyObject *args) {
   if (argc == 4) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7144,7 +7144,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC(PyObject *self, PyObject *args) {
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_Matrix, 0);
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
             return _wrap_Matrix_mmCaAIbC__SWIG_0(self, args);
@@ -7156,7 +7156,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC(PyObject *self, PyObject *args) {
   if (argc == 6) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7169,7 +7169,7 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC(PyObject *self, PyObject *args) {
           _v = SWIG_CheckState(res);
         }
         if (_v) {
-          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_Matrix, 0);
+          int res = SWIG_ConvertPtr(argv[3], 0, SWIGTYPE_p_LibMatrix__Matrix, 0);
           _v = SWIG_CheckState(res);
           if (_v) {
             void *vptr = 0;
@@ -7193,15 +7193,15 @@ SWIGINTERN PyObject *_wrap_Matrix_mmCaAIbC(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_mmCaAIbC'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::mmCaAIbC(double,double,Matrix const &)\n"
-    "    Matrix::mmCaAIbC(double,double,Matrix const &,int *,bool)\n");
+    "    LibMatrix::Matrix::mmCaAIbC(double,double,LibMatrix::Matrix const &)\n"
+    "    LibMatrix::Matrix::mmCaAIbC(double,double,LibMatrix::Matrix const &,int *,bool)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_cpermutem__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int *arg2 = (int *) 0 ;
   bool arg3 ;
   void *argp1 = 0 ;
@@ -7215,11 +7215,11 @@ SWIGINTERN PyObject *_wrap_Matrix_cpermutem__SWIG_0(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj2 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOO:Matrix_cpermutem",&obj0,&obj1,&obj2)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_cpermutem" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_cpermutem" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_int, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_cpermutem" "', argument " "2"" of type '" "int *""'"); 
@@ -7240,7 +7240,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_cpermutem__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int *arg2 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -7250,11 +7250,11 @@ SWIGINTERN PyObject *_wrap_Matrix_cpermutem__SWIG_1(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_cpermutem",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_cpermutem" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_cpermutem" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_int, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_cpermutem" "', argument " "2"" of type '" "int *""'"); 
@@ -7281,7 +7281,7 @@ SWIGINTERN PyObject *_wrap_Matrix_cpermutem(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       void *vptr = 0;
@@ -7295,7 +7295,7 @@ SWIGINTERN PyObject *_wrap_Matrix_cpermutem(PyObject *self, PyObject *args) {
   if (argc == 3) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       void *vptr = 0;
@@ -7316,15 +7316,15 @@ SWIGINTERN PyObject *_wrap_Matrix_cpermutem(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_cpermutem'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::cpermutem(int *,bool)\n"
-    "    Matrix::cpermutem(int *)\n");
+    "    LibMatrix::Matrix::cpermutem(int *,bool)\n"
+    "    LibMatrix::Matrix::cpermutem(int *)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_rpermutem(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int *arg2 = (int *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -7334,11 +7334,11 @@ SWIGINTERN PyObject *_wrap_Matrix_rpermutem(PyObject *SWIGUNUSEDPARM(self), PyOb
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_rpermutem",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_rpermutem" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_rpermutem" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_int, 0 |  0 );
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_rpermutem" "', argument " "2"" of type '" "int *""'"); 
@@ -7354,17 +7354,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_transpose(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_transpose",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_transpose" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_transpose" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   (arg1)->transpose();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7375,20 +7375,20 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_asTranspose(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
-  Matrix result;
+  LibMatrix::Matrix result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_asTranspose",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_asTranspose" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_asTranspose" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = ((Matrix const *)arg1)->asTranspose();
-  resultobj = SWIG_NewPointerObj((new Matrix(static_cast< const Matrix& >(result))), SWIGTYPE_p_Matrix, SWIG_POINTER_OWN |  0 );
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = ((LibMatrix::Matrix const *)arg1)->asTranspose();
+  resultobj = SWIG_NewPointerObj((new LibMatrix::Matrix(static_cast< const LibMatrix::Matrix& >(result))), SWIGTYPE_p_LibMatrix__Matrix, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -7397,17 +7397,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_shift(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_shift",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_shift" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_shift" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   (arg1)->shift();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7418,19 +7418,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_isId(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_isId",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_isId" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_isId" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (bool)((Matrix const *)arg1)->isId();
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (bool)((LibMatrix::Matrix const *)arg1)->isId();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7440,19 +7440,19 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_isZero(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   bool result;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_isZero",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_isZero" "', argument " "1"" of type '" "Matrix const *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_isZero" "', argument " "1"" of type '" "LibMatrix::Matrix const *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
-  result = (bool)((Matrix const *)arg1)->isZero();
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (bool)((LibMatrix::Matrix const *)arg1)->isZero();
   resultobj = SWIG_From_bool(static_cast< bool >(result));
   return resultobj;
 fail:
@@ -7462,17 +7462,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_set2Id__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_set2Id",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Id" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Id" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   (arg1)->set2Id();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7483,7 +7483,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_set2Id__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
@@ -7505,11 +7505,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Id__SWIG_1(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_set2Id",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Id" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Id" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2Id" "', argument " "2"" of type '" "int""'");
@@ -7551,7 +7551,7 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Id(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Matrix_set2Id__SWIG_0(self, args);
@@ -7560,7 +7560,7 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Id(PyObject *self, PyObject *args) {
   if (argc == 5) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7594,15 +7594,15 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Id(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_set2Id'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::set2Id()\n"
-    "    Matrix::set2Id(int,int,int,int)\n");
+    "    LibMatrix::Matrix::set2Id()\n"
+    "    LibMatrix::Matrix::set2Id(int,int,int,int)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_set2IdFromIndices(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
@@ -7624,11 +7624,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2IdFromIndices(PyObject *SWIGUNUSEDPARM(sel
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_set2IdFromIndices",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2IdFromIndices" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2IdFromIndices" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2IdFromIndices" "', argument " "2"" of type '" "int""'");
@@ -7659,17 +7659,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_set2Zero__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix_set2Zero",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Zero" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Zero" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   (arg1)->set2Zero();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -7680,7 +7680,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_set2Zero__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
@@ -7702,11 +7702,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Zero__SWIG_1(PyObject *SWIGUNUSEDPARM(self
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_set2Zero",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Zero" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Zero" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2Zero" "', argument " "2"" of type '" "int""'");
@@ -7748,7 +7748,7 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Zero(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Matrix_set2Zero__SWIG_0(self, args);
@@ -7757,7 +7757,7 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Zero(PyObject *self, PyObject *args) {
   if (argc == 5) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7791,15 +7791,15 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Zero(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_set2Zero'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::set2Zero()\n"
-    "    Matrix::set2Zero(int,int,int,int)\n");
+    "    LibMatrix::Matrix::set2Zero()\n"
+    "    LibMatrix::Matrix::set2Zero(int,int,int,int)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_set2ZeroFromIndices(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
@@ -7821,11 +7821,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2ZeroFromIndices(PyObject *SWIGUNUSEDPARM(s
   PyObject * obj4 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOO:Matrix_set2ZeroFromIndices",&obj0,&obj1,&obj2,&obj3,&obj4)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2ZeroFromIndices" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2ZeroFromIndices" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2ZeroFromIndices" "', argument " "2"" of type '" "int""'");
@@ -7856,7 +7856,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_set2Val__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   double arg2 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -7866,11 +7866,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Val__SWIG_0(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_set2Val",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Val" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Val" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_double(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2Val" "', argument " "2"" of type '" "double""'");
@@ -7886,7 +7886,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix_set2Val__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
@@ -7912,11 +7912,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Val__SWIG_1(PyObject *SWIGUNUSEDPARM(self)
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_set2Val",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Val" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2Val" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2Val" "', argument " "2"" of type '" "int""'");
@@ -7963,7 +7963,7 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Val(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -7978,7 +7978,7 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Val(PyObject *self, PyObject *args) {
   if (argc == 6) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       {
@@ -8018,15 +8018,15 @@ SWIGINTERN PyObject *_wrap_Matrix_set2Val(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_set2Val'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::set2Val(double)\n"
-    "    Matrix::set2Val(int,int,int,int,double)\n");
+    "    LibMatrix::Matrix::set2Val(double)\n"
+    "    LibMatrix::Matrix::set2Val(int,int,int,int,double)\n");
   return 0;
 }
 
 
 SWIGINTERN PyObject *_wrap_Matrix_set2ValFromIndices(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   int arg2 ;
   int arg3 ;
   int arg4 ;
@@ -8052,11 +8052,11 @@ SWIGINTERN PyObject *_wrap_Matrix_set2ValFromIndices(PyObject *SWIGUNUSEDPARM(se
   PyObject * obj5 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OOOOOO:Matrix_set2ValFromIndices",&obj0,&obj1,&obj2,&obj3,&obj4,&obj5)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2ValFromIndices" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_set2ValFromIndices" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   ecode2 = SWIG_AsVal_int(obj1, &val2);
   if (!SWIG_IsOK(ecode2)) {
     SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "Matrix_set2ValFromIndices" "', argument " "2"" of type '" "int""'");
@@ -8092,17 +8092,17 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix__print__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
   PyObject * obj0 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"O:Matrix__print",&obj0)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix__print" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix__print" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   (arg1)->print();
   resultobj = SWIG_Py_Void();
   return resultobj;
@@ -8113,7 +8113,7 @@ fail:
 
 SWIGINTERN PyObject *_wrap_Matrix__print__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
-  Matrix *arg1 = (Matrix *) 0 ;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   char *arg2 = (char *) 0 ;
   void *argp1 = 0 ;
   int res1 = 0 ;
@@ -8124,11 +8124,11 @@ SWIGINTERN PyObject *_wrap_Matrix__print__SWIG_1(PyObject *SWIGUNUSEDPARM(self),
   PyObject * obj1 = 0 ;
   
   if (!PyArg_ParseTuple(args,(char *)"OO:Matrix__print",&obj0,&obj1)) SWIG_fail;
-  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_Matrix, 0 |  0 );
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
   if (!SWIG_IsOK(res1)) {
-    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix__print" "', argument " "1"" of type '" "Matrix *""'"); 
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix__print" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
   }
-  arg1 = reinterpret_cast< Matrix * >(argp1);
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
   res2 = SWIG_AsCharPtrAndSize(obj1, &buf2, NULL, &alloc2);
   if (!SWIG_IsOK(res2)) {
     SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix__print" "', argument " "2"" of type '" "char const *""'");
@@ -8157,7 +8157,7 @@ SWIGINTERN PyObject *_wrap_Matrix__print(PyObject *self, PyObject *args) {
   if (argc == 1) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       return _wrap_Matrix__print__SWIG_0(self, args);
@@ -8166,7 +8166,7 @@ SWIGINTERN PyObject *_wrap_Matrix__print(PyObject *self, PyObject *args) {
   if (argc == 2) {
     int _v;
     void *vptr = 0;
-    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_Matrix, 0);
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
     _v = SWIG_CheckState(res);
     if (_v) {
       int res = SWIG_AsCharPtrAndSize(argv[1], 0, NULL, 0);
@@ -8180,8 +8180,8 @@ SWIGINTERN PyObject *_wrap_Matrix__print(PyObject *self, PyObject *args) {
 fail:
   SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix__print'.\n"
     "  Possible C/C++ prototypes are:\n"
-    "    Matrix::print()\n"
-    "    Matrix::print(char const *)\n");
+    "    LibMatrix::Matrix::print()\n"
+    "    LibMatrix::Matrix::print(char const *)\n");
   return 0;
 }
 
@@ -8189,7 +8189,7 @@ fail:
 SWIGINTERN PyObject *Matrix_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
-  SWIG_TypeNewClientData(SWIGTYPE_p_Matrix, SWIG_NewClientData(obj));
+  SWIG_TypeNewClientData(SWIGTYPE_p_LibMatrix__Matrix, SWIG_NewClientData(obj));
   return SWIG_Py_Void();
 }
 
@@ -8439,36 +8439,36 @@ static PyMethodDef SwigMethods[] = {
 /* -------- TYPE CONVERSION AND EQUIVALENCE RULES (BEGIN) -------- */
 
 static swig_type_info _swigt__p_FILE = {"_p_FILE", "FILE *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_LibMatrix__Matrix = {"_p_LibMatrix__Matrix", "LibMatrix::Matrix *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_LibMatrix__Polynomial = {"_p_LibMatrix__Polynomial", "LibMatrix::Polynomial *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_MathException = {"_p_MathException", "MathException *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Matrix = {"_p_Matrix", "Matrix *", 0, 0, (void*)0, 0};
-static swig_type_info _swigt__p_Polynomial = {"_p_Polynomial", "Polynomial *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_FILE,
+  &_swigt__p_LibMatrix__Matrix,
+  &_swigt__p_LibMatrix__Polynomial,
   &_swigt__p_MathException,
-  &_swigt__p_Matrix,
-  &_swigt__p_Polynomial,
   &_swigt__p_char,
   &_swigt__p_double,
   &_swigt__p_int,
 };
 
 static swig_cast_info _swigc__p_FILE[] = {  {&_swigt__p_FILE, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_LibMatrix__Matrix[] = {  {&_swigt__p_LibMatrix__Matrix, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_LibMatrix__Polynomial[] = {  {&_swigt__p_LibMatrix__Polynomial, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_MathException[] = {  {&_swigt__p_MathException, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Matrix[] = {  {&_swigt__p_Matrix, 0, 0, 0},{0, 0, 0, 0}};
-static swig_cast_info _swigc__p_Polynomial[] = {  {&_swigt__p_Polynomial, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_FILE,
+  _swigc__p_LibMatrix__Matrix,
+  _swigc__p_LibMatrix__Polynomial,
   _swigc__p_MathException,
-  _swigc__p_Matrix,
-  _swigc__p_Polynomial,
   _swigc__p_char,
   _swigc__p_double,
   _swigc__p_int,

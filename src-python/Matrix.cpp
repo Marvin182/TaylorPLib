@@ -1,7 +1,7 @@
 #include "TaylorPLib.h"
 
 using namespace std;
-// using namespace LibMatrix;
+using namespace LibMatrix;
 
 //
 // C O N S T R U C T O R S

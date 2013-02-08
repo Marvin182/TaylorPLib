@@ -9,19 +9,19 @@ using namespace LibMatrix;
 
 namespace LibMatrix {
 	// needed by GTest to print matrices if some ASSERT_EQ(matrix1, matrix2) failed
-	std::ostream& operator<<(std::ostream &out, const Matrix &m)
-	{
-		out << setiosflags(ios::fixed) << setprecision(2);
-		for (int i = 0; i < m.nrows(); i++)
-		{
-			out << '\n';
-			for (int j = 0; j < m.ncols(); j++)
-			{
-				out << m.get(i, j) << '\t';
-			}
-		}
-		return out; 
-	}
+	// std::ostream& operator<<(std::ostream &out, const Matrix &m)
+	// {
+	// 	out << setiosflags(ios::fixed) << setprecision(2);
+	// 	for (int i = 0; i < m.nrows(); i++)
+	// 	{
+	// 		out << '\n';
+	// 		for (int j = 0; j < m.ncols(); j++)
+	// 		{
+	// 			out << m.get(i, j) << '\t';
+	// 		}
+	// 	}
+	// 	return out; 
+	// }
 
 	bool operator==(double x, const Polynomial &p)
 	{

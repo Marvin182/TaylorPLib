@@ -12,7 +12,7 @@
 #define MAX_MESSAGE_SIZE 256
 // #define MATH_ERROR(format, ...) MathException("%s(%d): " format, __FILE__, __LINE__, __VA_ARGS__)
 
-// namespace LibMatrix {
+namespace LibMatrix {
 
 #ifdef SWIG
 	class Polynomial
@@ -276,7 +276,7 @@
 		// void fprinttpm(FILE * fn, int *piv, char *str, double eps);
 	};
 
-// };
+};
 
 #ifdef SWIG
 	class MathException

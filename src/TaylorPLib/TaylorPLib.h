@@ -58,7 +58,7 @@ namespace LibMatrix {
     	static int unsetConstCount;
     	static int isConstCount;
     	void unsetConst();
-
+    	
 	public:
 		//
 		// Constructors, destructor
