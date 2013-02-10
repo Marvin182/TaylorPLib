@@ -6,6 +6,7 @@
 #include <stdexcept>
 #include <math.h>
 #include <typeinfo>
+#include <sstream>
 
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
@@ -128,6 +129,8 @@ namespace LibMatrix {
 		void set2Zero();
 		void set2Zero(int ord);
 		void setCoeffs(double *c);
+
+		std::string toString();
 	};
 
 #ifdef SWIG
@@ -274,6 +277,8 @@ namespace LibMatrix {
 		// 		char *str, double eps);
 		// void printtpm(int *piv, char *str, const char *const color, double eps);
 		// void fprinttpm(FILE * fn, int *piv, char *str, double eps);
+
+		std::string toString();
 	};
 
 };

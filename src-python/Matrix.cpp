@@ -2982,7 +2982,20 @@ void Matrix::print(const char *name)
 // 	}
 // }
 
-
+string Matrix::toString()
+{
+	stringstream stream;
+	// stream << setiosflags(ios::fixed) << setprecision(2);
+	for( int i = 0; i < _rows; i++ )
+ 	{
+ 		for( int j = 0; j < _cols; j++ )
+ 		{
+ 			stream << _data[i][j].toString() << '\t';
+ 		}
+ 		stream << "\n";
+ 	}
+ 	return stream.str();
+}
 
 
 /***************

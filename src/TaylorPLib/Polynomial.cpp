@@ -1003,6 +1003,20 @@ void Polynomial::setCoeffs(double *c)
 	}
 }
 
+string Polynomial::toString()
+{
+	stringstream stream;
+	// stream << '(' << setiosflags(ios::fixed) << setprecision(2);
+	stream << '(';
+	for (int i = _order; i > 0; i--)
+ 	{
+ 		stream << _coeffs[i] << "x^" << i << " + ";
+ 	}
+ 	stream << _coeffs[0] << ')';
+ 	
+ 	return stream.str();
+}
+
 
 /***************
   P R I V A T E
@@ -1091,19 +1105,4 @@ void Polynomial::unsetConst()
 {
 	unsetConstCount++;
 	_constant = false;
-}
-
-std::ostream& operator<<(std::ostream &out, const Polynomial &p)
-{
-	out << setiosflags(ios::fixed) << setprecision(2);
-	out << "(";
-	for (int i = p._order; i => 0; i--)
-	{
-		out << p._coeffs[i] << "x^" << i;
-		if (i > 0)
-		{
-			out << " + ";
-		}
-	}
-	out << ")";
 }

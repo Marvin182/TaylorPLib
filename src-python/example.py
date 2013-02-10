@@ -1,3 +1,3 @@
 import TaylorPLib
 
-m = TaylorPLib.Matrix(2, 3)
+M = TaylorPLib.Matrix(2, 3)

@@ -112,6 +112,7 @@ class Polynomial(_object):
     def set2Id(self): return _TaylorPLib.Polynomial_set2Id(self)
     def set2Zero(self, *args): return _TaylorPLib.Polynomial_set2Zero(self, *args)
     def setCoeffs(self, *args): return _TaylorPLib.Polynomial_setCoeffs(self, *args)
+    def toString(self): return _TaylorPLib.Polynomial_toString(self)
 Polynomial_swigregister = _TaylorPLib.Polynomial_swigregister
 Polynomial_swigregister(Polynomial)
 
@@ -168,6 +169,7 @@ class Matrix(_object):
     def set2Val(self, *args): return _TaylorPLib.Matrix_set2Val(self, *args)
     def set2ValFromIndices(self, *args): return _TaylorPLib.Matrix_set2ValFromIndices(self, *args)
     def _print(self, *args): return _TaylorPLib.Matrix__print(self, *args)
+    def toString(self): return _TaylorPLib.Matrix_toString(self)
 Matrix_swigregister = _TaylorPLib.Matrix_swigregister
 Matrix_swigregister(Matrix)
 

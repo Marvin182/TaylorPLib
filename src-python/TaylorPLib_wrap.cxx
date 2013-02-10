@@ -2967,8 +2967,9 @@ SWIG_Python_NonDynamicSetAttr(PyObject *obj, PyObject *name, PyObject *value) {
 #define SWIGTYPE_p_char swig_types[4]
 #define SWIGTYPE_p_double swig_types[5]
 #define SWIGTYPE_p_int swig_types[6]
-static swig_type_info *swig_types[8];
-static swig_module_info swig_module = {swig_types, 7, 0, 0, 0, 0};
+#define SWIGTYPE_p_std__string swig_types[7]
+static swig_type_info *swig_types[9];
+static swig_module_info swig_module = {swig_types, 8, 0, 0, 0, 0};
 #define SWIG_TypeQuery(name) SWIG_TypeQueryModule(&swig_module, &swig_module, name)
 #define SWIG_MangledTypeQuery(name) SWIG_MangledTypeQueryModule(&swig_module, &swig_module, name)
 
@@ -4955,6 +4956,28 @@ SWIGINTERN PyObject *_wrap_Polynomial_setCoeffs(PyObject *SWIGUNUSEDPARM(self), 
   arg2 = reinterpret_cast< double * >(argp2);
   (arg1)->setCoeffs(arg2);
   resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Polynomial_toString(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  LibMatrix::Polynomial *arg1 = (LibMatrix::Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Polynomial_toString",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Polynomial_toString" "', argument " "1"" of type '" "LibMatrix::Polynomial *""'"); 
+  }
+  arg1 = reinterpret_cast< LibMatrix::Polynomial * >(argp1);
+  result = (arg1)->toString();
+  resultobj = SWIG_NewPointerObj((new std::string(static_cast< const std::string& >(result))), SWIGTYPE_p_std__string, SWIG_POINTER_OWN |  0 );
   return resultobj;
 fail:
   return NULL;
@@ -8186,6 +8209,28 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_Matrix_toString(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  PyObject * obj0 = 0 ;
+  std::string result;
+  
+  if (!PyArg_ParseTuple(args,(char *)"O:Matrix_toString",&obj0)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_toString" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
+  }
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  result = (arg1)->toString();
+  resultobj = SWIG_NewPointerObj((new std::string(static_cast< const std::string& >(result))), SWIGTYPE_p_std__string, SWIG_POINTER_OWN |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
 SWIGINTERN PyObject *Matrix_swigregister(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *obj;
   if (!PyArg_ParseTuple(args,(char*)"O:swigregister", &obj)) return NULL;
@@ -8383,6 +8428,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Polynomial_set2Id", _wrap_Polynomial_set2Id, METH_VARARGS, NULL},
 	 { (char *)"Polynomial_set2Zero", _wrap_Polynomial_set2Zero, METH_VARARGS, NULL},
 	 { (char *)"Polynomial_setCoeffs", _wrap_Polynomial_setCoeffs, METH_VARARGS, NULL},
+	 { (char *)"Polynomial_toString", _wrap_Polynomial_toString, METH_VARARGS, NULL},
 	 { (char *)"Polynomial_swigregister", Polynomial_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_Matrix", _wrap_new_Matrix, METH_VARARGS, NULL},
 	 { (char *)"delete_Matrix", _wrap_delete_Matrix, METH_VARARGS, NULL},
@@ -8427,6 +8473,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Matrix_set2Val", _wrap_Matrix_set2Val, METH_VARARGS, NULL},
 	 { (char *)"Matrix_set2ValFromIndices", _wrap_Matrix_set2ValFromIndices, METH_VARARGS, NULL},
 	 { (char *)"Matrix__print", _wrap_Matrix__print, METH_VARARGS, NULL},
+	 { (char *)"Matrix_toString", _wrap_Matrix_toString, METH_VARARGS, NULL},
 	 { (char *)"Matrix_swigregister", Matrix_swigregister, METH_VARARGS, NULL},
 	 { (char *)"new_MathException", _wrap_new_MathException, METH_VARARGS, NULL},
 	 { (char *)"delete_MathException", _wrap_delete_MathException, METH_VARARGS, NULL},
@@ -8445,6 +8492,7 @@ static swig_type_info _swigt__p_MathException = {"_p_MathException", "MathExcept
 static swig_type_info _swigt__p_char = {"_p_char", "char *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_double = {"_p_double", "double *", 0, 0, (void*)0, 0};
 static swig_type_info _swigt__p_int = {"_p_int", "int *", 0, 0, (void*)0, 0};
+static swig_type_info _swigt__p_std__string = {"_p_std__string", "std::string *", 0, 0, (void*)0, 0};
 
 static swig_type_info *swig_type_initial[] = {
   &_swigt__p_FILE,
@@ -8454,6 +8502,7 @@ static swig_type_info *swig_type_initial[] = {
   &_swigt__p_char,
   &_swigt__p_double,
   &_swigt__p_int,
+  &_swigt__p_std__string,
 };
 
 static swig_cast_info _swigc__p_FILE[] = {  {&_swigt__p_FILE, 0, 0, 0},{0, 0, 0, 0}};
@@ -8463,6 +8512,7 @@ static swig_cast_info _swigc__p_MathException[] = {  {&_swigt__p_MathException, 
 static swig_cast_info _swigc__p_char[] = {  {&_swigt__p_char, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_double[] = {  {&_swigt__p_double, 0, 0, 0},{0, 0, 0, 0}};
 static swig_cast_info _swigc__p_int[] = {  {&_swigt__p_int, 0, 0, 0},{0, 0, 0, 0}};
+static swig_cast_info _swigc__p_std__string[] = {  {&_swigt__p_std__string, 0, 0, 0},{0, 0, 0, 0}};
 
 static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_FILE,
@@ -8472,6 +8522,7 @@ static swig_cast_info *swig_cast_initial[] = {
   _swigc__p_char,
   _swigc__p_double,
   _swigc__p_int,
+  _swigc__p_std__string,
 };
 
 
