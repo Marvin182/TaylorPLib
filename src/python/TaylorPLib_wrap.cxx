@@ -3066,7 +3066,7 @@ namespace swig {
 }
 
 
-#include "TaylorPLib.h"
+#include "..\src\TaylorPLib.h"
 
 
 SWIGINTERNINLINE PyObject*

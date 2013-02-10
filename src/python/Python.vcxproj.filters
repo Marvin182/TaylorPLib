@@ -15,12 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Polynomial.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="TaylorPLib.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -33,13 +27,19 @@
     <ClCompile Include="Matrix_wrap.cxx">
       <Filter>Source Files</Filter>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="TaylorPLib.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
+    <ClCompile Include="..\src\Matrix.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\src\Polynomial.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="TaylorPLib.i" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\TaylorPLib.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

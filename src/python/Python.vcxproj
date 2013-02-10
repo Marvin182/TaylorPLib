@@ -21,7 +21,7 @@
   <PropertyGroup Label="Globals">
     <SccProjectName />
     <SccLocalPath />
-    <ProjectName>uiae</ProjectName>
+    <ProjectName>Python</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -251,9 +251,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Matrix.cpp" />
+    <ClCompile Include="..\src\Matrix.cpp" />
+    <ClCompile Include="..\src\Polynomial.cpp" />
     <ClCompile Include="Matrix_wrap.cxx" />
-    <ClCompile Include="Polynomial.cpp" />
     <ClCompile Include="Polynomial_wrap.cxx" />
     <ClCompile Include="TaylorPLib.cpp" />
     <ClCompile Include="TaylorPLib_wrap.cxx" />
@@ -265,12 +265,12 @@
 echo PYTHON_INCLUDE: %PYTHON_INCLUDE% 
 echo PYTHON_LIB: %PYTHON_LIB% 
 echo on 
-..\..\..\swig.exe -c++ -python %(FullPath) </Command>
+swig.exe -c++ -python %(FullPath) </Command>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">echo In order to function correctly, please ensure the following environment variables are correctly set: 
 echo PYTHON_INCLUDE: %PYTHON_INCLUDE% 
 echo PYTHON_LIB: %PYTHON_LIB% 
 echo on 
-..\..\..\swig.exe -c++ -python %(FullPath) </Command>
+swig.exe -c++ -python %(FullPath) </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(InputName)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(InputName)_wrap.cxx;%(Outputs)</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">echo In order to function correctly, please ensure the following environment variables are correctly set: 
@@ -288,7 +288,7 @@ swig.exe -c++ -python %(FullPath) </Command>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TaylorPLib.h" />
+    <ClInclude Include="..\src\TaylorPLib.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

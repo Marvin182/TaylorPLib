@@ -2,9 +2,9 @@
 %module TaylorPLib
 
 %{
-#include "TaylorPLib.h"
+#include "..\src\TaylorPLib.h"
 %}
 
 /* Let's just grab the original header file here */
-%include "TaylorPLib.h"
+%include "..\src\TaylorPLib.h"
 
