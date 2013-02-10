@@ -58,7 +58,9 @@ namespace LibMatrix {
     	static int unsetConstCount;
     	static int isConstCount;
     	void unsetConst();
-    	
+
+		friend std::ostream& operator<<(std::ostream &out, const Polynomial &p);
+
 	public:
 		//
 		// Constructors, destructor

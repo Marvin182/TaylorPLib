@@ -1092,3 +1092,18 @@ void Polynomial::unsetConst()
 	unsetConstCount++;
 	_constant = false;
 }
+
+std::ostream& operator<<(std::ostream &out, const Polynomial &p)
+{
+	out << setiosflags(ios::fixed) << setprecision(2);
+	out << "(";
+	for (int i = p._order; i => 0; i--)
+	{
+		out << p._coeffs[i] << "x^" << i;
+		if (i > 0)
+		{
+			out << " + ";
+		}
+	}
+	out << ")";
+}
