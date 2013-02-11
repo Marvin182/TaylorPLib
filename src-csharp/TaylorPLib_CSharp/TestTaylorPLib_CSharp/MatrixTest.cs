@@ -581,6 +581,224 @@ namespace TestTaylorPLib_CSharp
             catch (Exception) { Assert.Fail(); }
         }
 
+        ///<summary>
+        ///Ein Test für mmCasABbC(int r, double alpha, double beta, Matrix A, Matrix B)
+        ///</summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCasABbC()
+        {
+            Polynomial[,] Pb = new Polynomial[5, 5];
+            Pb[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[0, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[0, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[0, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[1, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[1, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[1, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pb[2, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[2, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[2, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[2, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[2, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pb[3, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[3, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[3, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[3, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[3, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pb[4, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[4, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[4, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[4, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[4, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Polynomial[,] Pa = new Polynomial[5, 5];
+            Pa[0, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[0, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[0, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[0, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[1, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[1, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[1, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pa[2, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[2, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[2, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[2, 3] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[2, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pa[3, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[3, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[3, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[3, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pa[3, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pa[4, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[4, 1] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[4, 2] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[4, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pa[4, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Matrix A = new Matrix(5, 5, Pa);
+            Matrix B = new Matrix(5, 5, Pb);
+            double alpha = 2;
+            double beta = 2;
+            Matrix C = new Matrix(5, 5, 1);
+            Matrix D = new Matrix(5, 5, 1);
+
+            Matrix expect = (A * B * alpha) + (C * beta);
+            D.mmCaABbC(alpha, beta, A, B);
+            C.mmCasABbC(2, alpha, beta, A, B);
+            Assert.AreEqual(C.ToString(), expect.ToString());
+            Assert.AreEqual(D.ToString(), expect.ToString());
+
+            try
+            {
+                C.mmCasABbC(7, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix E = new Matrix(5, 4, 1);
+                C.mmCasABbC(2, alpha, beta, E, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix E = new Matrix(4, 4, 1);
+                E.mmCasABbC(2, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+        }
+
+        ///<summary>
+        ///Ein Test für mmCaAsBbC(int r, double alpha, double beta, Matrix A, Matrix B)
+        ///</summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaAsBbC()
+        {
+            Polynomial[,] Pb = new Polynomial[5, 5];
+            Pb[0, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[0, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[0, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[0, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[1, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[1, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[1, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pb[2, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[2, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[2, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[2, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[2, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pb[3, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[3, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[3, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[3, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[3, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pb[4, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[4, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[4, 2] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[4, 3] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[4, 4] = new Polynomial(1, new double[] { 2, 1 });
+
+            Polynomial[,] Pa = new Polynomial[5, 5];
+            Pa[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[0, 2] = new Polynomial(1, new double[] { 5, 6 });
+            Pa[0, 3] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[0, 4] = new Polynomial(1, new double[] { 5, 6 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[1, 2] = new Polynomial(1, new double[] { 5, 6 });
+            Pa[1, 3] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[1, 4] = new Polynomial(1, new double[] { 5, 6 });
+
+            Pa[2, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[2, 1] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[2, 2] = new Polynomial(1, new double[] { 5, 6 });
+            Pa[2, 3] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[2, 4] = new Polynomial(1, new double[] { 5, 6 });
+
+            Pa[3, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[3, 1] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[3, 2] = new Polynomial(1, new double[] { 5, 6 });
+            Pa[3, 3] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[3, 4] = new Polynomial(1, new double[] { 5, 6 });
+
+            Pa[4, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[4, 1] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[4, 2] = new Polynomial(1, new double[] { 5, 6 });
+            Pa[4, 3] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[4, 4] = new Polynomial(1, new double[] { 5, 6 });
+
+            Matrix A = new Matrix(5, 5, Pa);
+            Matrix B = new Matrix(5, 5, Pb);
+            double alpha = 2;
+            double beta = 2;
+            Matrix C = new Matrix(5, 5, 1);
+            Matrix D = new Matrix(5, 5, 1);
+
+            Matrix expect = (A * B * alpha) + (C * beta);
+            D.mmCaABbC(alpha, beta, A, B);
+            C.mmCaAsBbC(2, alpha, beta, A, B);
+            Assert.AreEqual(C.ToString(), expect.ToString());
+            Assert.AreEqual(D.ToString(), expect.ToString());
+
+            try
+            {
+                C.mmCaAsBbC(7, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix E = new Matrix(5, 4, 1);
+                C.mmCaAsBbC(2, alpha, beta, E, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix E = new Matrix(4, 4, 1);
+                E.mmCaAsBbC(2, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+        }
+
         #endregion
 
     }

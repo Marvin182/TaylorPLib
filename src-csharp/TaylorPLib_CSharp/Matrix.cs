@@ -421,6 +421,135 @@ namespace LibMatrix
             }
         }
 
+        /// <summary>
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * B + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        /// 	 B : p-by-n matrix<para/>
+        ///      C : r-by-n matrix (only the last r rows from A are interesting)<para/>
+        ///      alpha, beta : real numbers<para/>
+        /// <para/>
+        /// where A ("special" A) is of the form:<para/>
+        /// <para/>
+        ///     (         )<para/>
+        ///     (    X    )<para/>
+        ///     ( ------- )<para/>
+        ///     ( * ... * )<para/>
+        ///     ( * ... * )<para/>
+        /// <para/>
+        /// so that a particular matrix multiplication is needed.<para/>
+        /// </summary>
+        /// <param name="r">The last rows in A that are of interest (2 non-zero-rows in the example above)</param>
+        /// <param name="alpha">The scalar value that multiplies A * B</param>
+        /// <param name="beta">beta The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix</param>
+        /// <param name="B">an object of type Matrix</param>
+        public void mmCasABbC(int r, double alpha, double beta, Matrix A, Matrix B)
+        {
+	        if (r > A._rows)
+	        {
+		        throw new MathException(String.Format("The number of rows in A that are of interest (r = %d) must be smaller or equal than the total amount of rows in A (%d x %d).", r, A._rows, A._cols));
+	        }
+	        if (A._cols != B._rows)
+	        {
+		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+	        }
+	        if (A._rows != _rows || B._cols != _cols)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+	        }
+
+	        int n = A._rows - r;
+	        for( int i = 0; i < n; i++ )
+	        {
+		        for( int j = 0; j < B._cols; j++ )
+		        {
+			        _data[i,j] *= beta;
+		        }
+	        }
+
+	        for( int i = n; i < A._rows; i++ )
+	        {
+		        for( int j = 0; j < B._cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < B._rows; k++ )
+			        {
+				        h += A._data[i,k] * B._data[k,j];
+			        }
+
+			        _data[i,j] = h * alpha + _data[i,j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:<para/>
+        ///<para/>
+        ///     C = alpha * A * B + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        /// 		B : p-by-n matrix<para/>
+        /// 		C : m-by-r matrix (only the last r columns from B are interesting).<para/>
+        /// 		alpha, beta : real numbers<para/>
+        /// <para/>
+        /// where B ("special" B) is of the form:<para/>
+        /// <para/>
+        /// 		(   | * * * )<para/>
+        /// 		(   | . . . )<para/>
+        /// 		( X | . . . )<para/>
+        /// 		(   | . . . )<para/>
+        /// 		(   | * * * )<para/>
+        /// <para/>
+        /// so that a particular matrix multiplication is needed.<para/>
+        /// </summary>
+        /// <param name="r">The last columns in B that are of interest (3 non-zero-columns - * in the example above)</param>
+        /// <param name="alpha">The scalar value that multiplies A * B</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix</param>
+        /// <param name="B">an object of type Matrix</param>
+        public void mmCaAsBbC(int r, double alpha, double beta, Matrix A, Matrix B)
+        {
+            if (r > B._cols)
+	        {
+		        throw new MathException(String.Format("The number of columns in B that are of interest (r = %d) must be smaller or equal than the total amount of columns in B (%d x %d).", r, A._rows, A._cols));
+	        }
+	        if (A._cols != B._rows)	
+	        {
+		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+	        }
+	        if (A._rows != _rows || B._cols != _cols)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+	        }
+
+	        int n = B._cols - r;
+	        for( int i = 0; i < _rows; i++ )
+	        {
+		        // zero-columns of B
+		        for( int j = 0; j < n; j++ )
+		        {
+			        _data[i,j] *= beta;
+		        }
+
+		        // non-zero-columns of B
+		        for( int j = n; j < _cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < B._rows; k++ )
+			        {
+				        h += A._data[i,k] * B._data[k,j];
+			        }
+
+			        _data[i,j] = h * alpha + _data[i,j] * beta;
+		        }
+	        }
+        }
+
         #endregion
 
         /// <summary>
