@@ -505,6 +505,8 @@ namespace TestTaylorPLib_CSharp
         [TestMethod()]
         public void MatrixFunction_bmmCaABbC()
         {
+            #region definitions
+
             Polynomial[,] P1 = new Polynomial[5, 5];
             P1[0, 0] = new Polynomial(1, new double[] { 2, 2 });
             P1[0, 1] = new Polynomial(1, new double[] { 2, 2 });
@@ -535,6 +537,8 @@ namespace TestTaylorPLib_CSharp
             P1[4, 2] = new Polynomial(1, new double[] { 0, 0 });
             P1[4, 3] = new Polynomial(1, new double[] { 0, 0 });
             P1[4, 4] = new Polynomial(1, new double[] { 0, 1 });
+
+            #endregion
 
             Matrix A = new Matrix(5, 5, P1);
             Matrix B = new Matrix(5, 5, P1);
@@ -587,6 +591,8 @@ namespace TestTaylorPLib_CSharp
         [TestMethod()]
         public void MatrixFunction_mmCasABbC()
         {
+            #region definitions
+
             Polynomial[,] Pb = new Polynomial[5, 5];
             Pb[0, 0] = new Polynomial(1, new double[] { 2, 2 });
             Pb[0, 1] = new Polynomial(1, new double[] { 2, 2 });
@@ -649,6 +655,8 @@ namespace TestTaylorPLib_CSharp
             Pa[4, 3] = new Polynomial(1, new double[] { 2, 1 });
             Pa[4, 4] = new Polynomial(1, new double[] { 2, 1 });
 
+            #endregion
+
             Matrix A = new Matrix(5, 5, Pa);
             Matrix B = new Matrix(5, 5, Pb);
             double alpha = 2;
@@ -696,6 +704,8 @@ namespace TestTaylorPLib_CSharp
         [TestMethod()]
         public void MatrixFunction_mmCaAsBbC()
         {
+            #region definitions
+
             Polynomial[,] Pb = new Polynomial[5, 5];
             Pb[0, 0] = new Polynomial(1, new double[] { 0, 0 });
             Pb[0, 1] = new Polynomial(1, new double[] { 0, 0 });
@@ -758,6 +768,8 @@ namespace TestTaylorPLib_CSharp
             Pa[4, 3] = new Polynomial(1, new double[] { 1, 2 });
             Pa[4, 4] = new Polynomial(1, new double[] { 5, 6 });
 
+            #endregion 
+
             Matrix A = new Matrix(5, 5, Pa);
             Matrix B = new Matrix(5, 5, Pb);
             double alpha = 2;
@@ -797,6 +809,362 @@ namespace TestTaylorPLib_CSharp
             catch (MathException) { }
             catch (Exception) { Assert.Fail(); }
 
+        }
+
+        ///<summary>
+        ///Ein Test für mmCaAUTBPbC(double alpha, double beta, Matrix A, Matrix B, int[] piv)
+        ///</summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaAUTBPbC()
+        {
+            #region definitions
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 2, 2 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] PbUT = new Polynomial[5, 5];
+            PbUT[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            PbUT[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            PbUT[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            PbUT[1, 1] = new Polynomial(1, new double[] { 2, 2 });
+            #endregion
+
+            Matrix A = new Matrix(2, 2, Pa);
+            Matrix B = new Matrix(2, 2, Pb);
+            Matrix BUT = new Matrix(2,2,PbUT);
+            Matrix C = new Matrix(2, 2, 1);
+            Matrix D = new Matrix(2, 2, 1);
+            int[] piv = { 1, 0 };
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * BUT * alpha) + (C * beta);
+            D.mmCaABbC(alpha, beta, A, BUT);
+            C.mmCaAUTBPbC(alpha, beta, A, B, piv);
+            Assert.AreEqual(C.ToString(), expect.ToString());
+            Assert.AreEqual(D.ToString(), expect.ToString());
+
+            try
+            {
+                Matrix E = new Matrix(2, 1, 1);
+                C.mmCaAUTBPbC(alpha, beta, E, B, piv);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix E = new Matrix(1, 1, 1);
+                E.mmCaAUTBPbC(alpha, beta, A, B, piv);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für cpermutem(int[] piv, bool trans = false)
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_cpermutem()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            #endregion
+
+            Matrix expect = new Matrix(2, 2, Pb);
+            Matrix actual = new Matrix(2, 2, Pa);
+
+            actual.cpermutem(new int[] { 1, 0 });
+            Assert.AreEqual(actual.ToString(), expect.ToString());
+
+            actual = new Matrix(2, 2, Pa);
+            actual.cpermutem(new int[] { 1, 0 }, true);
+            Assert.AreEqual(actual.ToString(), expect.ToString());
+
+            try
+            {
+                actual.cpermutem(new int[] { 7, 0 });
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                actual.cpermutem(new int[] { -7, 0 });
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für rpermutem(int[] piv)
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_rpermutem()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            #endregion
+
+            Matrix expect = new Matrix(2, 2, Pb);
+            Matrix actual = new Matrix(2, 2, Pa);
+
+            actual.rpermutem(new int[] { 1, 0 });
+            Assert.AreEqual(actual.ToString(), expect.ToString());
+
+            try
+            {
+                actual.rpermutem(new int[] { 7, 0 });
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                actual.rpermutem(new int[] { -7, 0 });
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für transpose()
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_transpose()
+        {
+            #region definitions 
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 2, 2 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            Polynomial[,] Pc = new Polynomial[3, 2];
+            Pc[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            Pc[0, 1] = new Polynomial(1, new double[] { 2, 2 });
+
+            Pc[1, 0] = new Polynomial(1, new double[] { 3, 3 });
+            Pc[1, 1] = new Polynomial(1, new double[] { 4, 4 });
+
+            Pc[2, 0] = new Polynomial(1, new double[] { 5, 5 });
+            Pc[2, 1] = new Polynomial(1, new double[] { 6, 6 });
+
+            Polynomial[,] Pd = new Polynomial[2, 3];
+            Pd[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            Pd[0, 1] = new Polynomial(1, new double[] { 3, 3 });
+            Pd[0, 2] = new Polynomial(1, new double[] { 5, 5 });
+
+            Pd[1, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pd[1, 1] = new Polynomial(1, new double[] { 4, 4 });
+            Pd[1, 2] = new Polynomial(1, new double[] { 6, 6 });
+
+            #endregion
+
+            Matrix expect = new Matrix(2, 2, Pb);
+            Matrix actual = new Matrix(2, 2, Pa);
+
+            actual.transpose();
+            Assert.AreEqual(expect.ToString(), actual.ToString());
+
+            expect = new Matrix(3, 2, Pc);
+            actual = new Matrix(2, 3, Pd);
+            actual.transpose();
+
+            Assert.AreEqual(expect.ToString(), actual.ToString());
+
+        }
+
+        /// <summary>
+        /// Ein Test für asTranspose()
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_asTranspose()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 2, 2 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 2, 2 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            #endregion
+
+            Matrix expect = new Matrix(2, 2, Pb);
+            Matrix actual = new Matrix(2, 2, Pa);
+
+            Matrix c = actual.asTranspose();
+            Assert.AreEqual(expect.ToString(), c.ToString());
+            Assert.AreNotEqual(expect.ToString(), actual.ToString());
+
+        }
+        
+        /// <summary>
+        /// Ein Test für shift()
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_shift()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 2, 3 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 3, 0 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 2, 0 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 3, 0 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 2, 0 });
+
+            #endregion
+            
+            Matrix expect = new Matrix(2, 2, Pb);
+            Matrix actual = new Matrix(2, 2, Pa);
+
+            actual.shift();
+            Assert.AreEqual(expect.ToString(), actual.ToString());
+        }
+
+        /// <summary>
+        /// Ein Test für isId()
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_isId()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[2, 2];
+            Pa[0, 0] = new Polynomial(1, new double[] { 1, 0 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 1, 0 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 0, 1 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            Polynomial[,] Pc = new Polynomial[2, 2];
+            Pc[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            Pc[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pc[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pc[1, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            #endregion
+
+            Matrix idMatrix = new Matrix(2, 2, Pa);
+            Matrix nonIdMatrix = new Matrix(2, 2, Pb);
+            Matrix nonIdMatrix2 = new Matrix(2, 2, Pc);
+            Matrix nonIdMatrix3 = new Matrix(2, 3, 3);
+            Assert.IsTrue(idMatrix.isId());
+            Assert.IsFalse(nonIdMatrix.isId());
+            Assert.IsFalse(nonIdMatrix2.isId());
+            Assert.IsFalse(nonIdMatrix3.isId());
+        }
+
+        /// <summary>
+        /// Ein Test für isZero()
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_isZero()
+        {
+            Matrix isZeroMatrix = new Matrix(2, 2, 2);
+            Assert.IsTrue(isZeroMatrix.isZero());
+            isZeroMatrix[0, 0] = new Polynomial(2, new double[] { 0, 2, 4 });
+            Assert.IsFalse(isZeroMatrix.isZero());
+        }
+
+        /// <summary>
+        /// Ein Test für set2Id()
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_set2Id()
+        {
+            Matrix isZeroMatrix = new Matrix(2, 2, 2);
+            Assert.IsFalse(isZeroMatrix.isId());
+            isZeroMatrix.set2Id();
+            Assert.IsTrue(isZeroMatrix.isId());
+
+            try
+            {
+                isZeroMatrix = new Matrix(3, 2, 2);
+                isZeroMatrix.set2Id();
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
         }
 
         #endregion

@@ -519,6 +519,18 @@ namespace TestTaylorPLib_CSharp
         }
 
         /// <summary>
+        ///Ein Test für "set2Id()"
+        ///</summary>
+        [TestMethod()]
+        public void PolynomialSet2IdTest()
+        {
+            Polynomial p = new Polynomial(2, new double[] { 3, 4, 5 });
+            Assert.IsFalse(p.isId());
+            p.set2Id();
+            Assert.IsTrue(p.isId());
+        }
+
+        /// <summary>
         ///Ein Test für "set2const()"
         ///</summary>
         [TestMethod()]
