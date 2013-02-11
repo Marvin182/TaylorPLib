@@ -423,11 +423,11 @@ TEST_F(PolynomialMethods, set2Zero)
 	double p1[] = {1,1,2,1};
 	P1.setCoeffs(p1);
 	ASSERT_FALSE(P1.isZero(1));
-	P1.set2zero();
+	P1.set2Zero();
 	ASSERT_TRUE(P1.isZero(1));
 	P1.setCoeffs(p1);
 	ASSERT_FALSE(P1.isZero(1));
-	P1.set2zero(2);
+	P1.set2Zero(2);
 	ASSERT_TRUE(P1.isZero(1));
 }
 
@@ -438,7 +438,7 @@ TEST_F(PolynomialMethods, set2Const)
 	P1.setCoeffs(p1);
 
 	ASSERT_FALSE(P1.isConst());
-	P1.set2const(6);
+	P1.set2Const(6);
 	ASSERT_TRUE(P1.isConst());
 
 	Polynomial P2(3);
