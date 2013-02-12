@@ -791,6 +791,12 @@ namespace LibMatrix
             return true;
         }
 
+        /// <summary>
+        /// Sets a matrix to the identity one:<para/>
+        /// <para/>
+        ///     M = I<para/>
+        /// <para/>
+        /// </summary>
         public void set2Id()
         {
             if (_rows != _cols)
@@ -808,6 +814,193 @@ namespace LibMatrix
                     else
                     {
                         _data[i,j].set2Zero();
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Sets a submatrix to the identity one:<para/>
+        /// <para/>
+        ///     e.g. M = (    | 1 0 0 |    )<para/>
+        ///              ( M1 | 0 1 0 | M2 )<para/>
+        ///              (    | 0 0 1 |    )<para/>
+        ///              (        M3       )<para/>
+        /// <para/>
+        /// </summary>
+        /// <param name="top">The number of rows at the top to keep unchanged</param>
+        /// <param name="bottom">The number of rows at the bottom to keep unchanged</param>
+        /// <param name="left">The number of columns on the left to keep unchanged</param>
+        /// <param name="right">The number of columns on the right to keep unchanged</param>
+        public void set2Id(int top, int bottom, int left, int right)
+        {
+            int lastRow = _rows - bottom - 1;
+            int lastCol = _cols - right - 1;
+            set2IdFromIndices(top, lastRow, left, lastCol);
+        }
+
+        /// <summary>
+        /// Sets a submatrix to the identity one:<para/>
+        /// <para/>
+        ///     e.g. M = (    | 1 0 0 |    )<para/>
+        ///              ( M1 | 0 1 0 | M2 )<para/>
+        ///              (    | 0 0 1 |    )<para/>
+        ///              (        M3       )<para/>
+        /// </summary>
+        /// <param name="firstRow">The row from which to start on</param>
+        /// <param name="lastRow">The last row that should be considered</param>
+        /// <param name="firstCol">The column from which to start on</param>
+        /// <param name="lastCol">The last column that should be considered</param>
+        public void set2IdFromIndices(int firstRow, int lastRow, int firstCol, int lastCol)
+        {
+            if (firstRow < 0 || lastRow >= _rows)
+            {
+                throw new MathException("Error in set2Id, row bounds are wrong.");
+            }
+            if (firstCol < 0 || lastCol >= _cols)
+            {
+                throw new MathException("Error in set2Id, column bounds are wrong");
+            }
+
+            int rows = lastRow - firstRow + 1;
+            int cols = lastCol - firstCol + 1;
+
+            if (rows != cols)
+            {
+                throw new MathException("Error in set2Id, submatrix must be a square matrix in order to become a identity matrix.");
+            }
+
+            for (int i = firstRow; i <= lastRow; i++)
+            {
+                for (int j = firstCol; j <= lastCol; j++)
+                {
+                    if (i - firstRow == j - firstCol)
+                    {
+                        _data[i,j].set2Id();
+                    }
+                    else
+                    {
+                        _data[i,j].set2Zero();
+                    }
+                }
+            }
+
+        }
+
+        /// <summary>
+        /// Sets a matrix to zero entries.
+        /// </summary>
+        public void set2Zero()
+        {
+	        set2Val(0.0);
+        }
+
+        /// <summary>
+        /// Sets a submatrix to zero:<para/>
+        /// <para/>
+        ///     e.g. M = (    | 0 0 0 |    )<para/>
+        ///              ( M1 | 0 0 0 | M2 )<para/>
+        ///              (    | 0 0 0 |    )<para/>
+        ///              (        M3       )<para/>
+        /// </summary>
+        /// <param name="top">The number of rows at the top to keep unchanged</param>
+        /// <param name="bottom">The number of rows at the bottom to keep unchanged</param>
+        /// <param name="left">The number of columns on the left to keep unchanged</param>
+        /// <param name="right">The number of columns on the right to keep unchanged</param>
+        public void set2Zero(int top, int bottom, int left, int right) 
+        {
+            int lastRow = _rows - bottom - 1;
+            int lastCol = _cols - right - 1;
+            set2ZeroFromIndices(top, lastRow, left, lastCol);
+        }
+
+        /// <summary>
+        /// Sets a submatrix to zero:<para/>
+        /// <para/>
+        ///     e.g. M = (    | 0 0 0 |    )<para/>
+        ///              ( M1 | 0 0 0 | M2 )<para/>
+        ///              (    | 0 0 0 |    )<para/>
+        ///              (        M3       )<para/>
+        /// </summary>
+        /// <param name="firstRow">The row from which to start on</param>
+        /// <param name="lastRow">The last row that should be considered</param>
+        /// <param name="firstCol">The column from which to start on</param>
+        /// <param name="lastCol">The last column that should be considered</param>
+        public void set2ZeroFromIndices(int firstRow, int lastRow, int firstCol, int lastCol) 
+        {
+            set2ValFromIndices(firstRow, lastRow, firstCol, lastCol, 0.0);
+        }
+
+        /// <summary>
+        /// Sets a matrix to the value given as parameter.<para/>
+        /// </summary>
+        /// <param name="v">The double value to set the elements to</param>
+        public void set2Val(double v)
+        {
+	        set2ValFromIndices(0, _rows - 1, 0, _cols - 1, v);
+        }
+
+        /// <summary>
+        /// Sets a submatrix to the value given as parameter:<para/>
+        /// <para/>
+        ///     e.g. M = (    | v v v |    )<para/>
+        ///              ( M1 | v v v | M2 )<para/>
+        ///              (    | v v v |    )<para/>
+        ///              (        M3       )<para/>
+        /// </summary>
+        /// <param name="top">The number of rows at the top to keep unchanged</param>
+        /// <param name="bottom">The number of rows at the bottom to keep unchanged</param>
+        /// <param name="left">The number of columns on the left to keep unchanged</param>
+        /// <param name="right">The number of columns on the right to keep unchanged</param>
+        /// <param name="v">The double value to set the elements to</param>
+        public void set2Val(int top, int bottom, int left, int right, double v)
+        {
+            int lastRow = _rows - bottom - 1;
+            int lastCol = _cols - right - 1;
+            set2ValFromIndices(top, lastRow, left, lastCol, v);
+        }
+
+        /// <summary>
+        /// Sets a submatrix to the value given as parameter:<para/>
+        /// <para/>
+        ///     e.g. M = (    | v v v |    )<para/>
+        ///              ( M1 | v v v | M2 )<para/>
+        ///              (    | v v v |    )<para/>
+        ///              (        M3       )<para/>
+        /// </summary>
+        /// <param name="firstRow">The row from which to start on</param>
+        /// <param name="lastRow">The last row that should be considered</param>
+        /// <param name="firstCol">The column from which to start on</param>
+        /// <param name="lastCol">The last column that should be considered</param>
+        /// <param name="v">The double value to set the elements to</param>
+        public void set2ValFromIndices(int firstRow, int lastRow, int firstCol, int lastCol, double v)
+        {
+            if (firstRow < 0 || lastRow >= _rows)
+            {
+                throw new MathException("Invalid row bounds.");
+            }
+            if (firstCol < 0 || lastCol >= _cols)
+            {
+                throw new MathException("Invalid column bounds.");
+            }
+
+            if (v == 0.0)
+            {
+                for (int i = firstRow; i <= lastRow; i++)
+                {
+                    for (int j = firstCol; j <= lastCol; j++)
+                    {
+                        _data[i,j].set2Zero();
+                    }
+                }
+            }
+            else
+            {
+                for (int i = firstRow; i <= lastRow; i++)
+                {
+                    for (int j = firstCol; j <= lastCol; j++)
+                    {
+                        _data[i,j].set2const(v);
                     }
                 }
             }
