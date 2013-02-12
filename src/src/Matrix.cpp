@@ -2982,21 +2982,6 @@ void Matrix::print(const char *name)
 // 	}
 // }
 
-string Matrix::toString()
-{
-	stringstream stream;
-	// stream << setiosflags(ios::fixed) << setprecision(2);
-	for( int i = 0; i < _rows; i++ )
- 	{
- 		for( int j = 0; j < _cols; j++ )
- 		{
- 			stream << _data[i][j].toString() << '\t';
- 		}
- 		stream << "\n";
- 	}
- 	return stream.str();
-}
-
 
 /***************
   P R I V A T E
@@ -3071,4 +3056,19 @@ void Matrix::copyFrom(const Matrix &m)
 			_data[i][j] = m._data[i][j];
 		}
 	}
+}
+
+std::ostream& operator<<(std::ostream &out, const Matrix &m)
+{
+	out << '\n';
+	for (int i = 0; i < m.nrows(); i++)
+	{
+		for (int j = 0; j < m.ncols(); j++)
+		{
+			out << *m.get(i, j) << '\t';
+		}
+		out << '\n';
+	}
+
+	return out; 
 }

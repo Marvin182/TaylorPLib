@@ -5,20 +5,6 @@
 using namespace std;
 using namespace LibMatrix;
 
-namespace LibMatrix {
-	// needed by GTest to print polynomials if some ASSERT_EQ(Polynomial1, Polynomial2) failed
-	std::ostream& operator<<(std::ostream &out, const Polynomial &p)
-	{
-		out << setiosflags(ios::fixed) << setprecision(2);
-
-		for (int i = 0; i < p.ncoeff(); i++)
-		{
-			out << p[i] << '\t';
-		}
-		return out; 
-	}
-}
-
 /*
  * FIXTURES
  */

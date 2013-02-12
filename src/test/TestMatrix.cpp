@@ -8,24 +8,10 @@ using namespace LibMatrix;
 #define T(n) Polynomial() * (n)
 
 namespace LibMatrix {
-	// needed by GTest to print matrices if some ASSERT_EQ(matrix1, matrix2) failed
-	std::ostream& operator<<(std::ostream &out, const Matrix &m)
-	{
-		out << setiosflags(ios::fixed) << setprecision(2);
-		for (int i = 0; i < m.nrows(); i++)
-		{
-			out << '\n';
-			for (int j = 0; j < m.ncols(); j++)
-			{
-				out << m.get(i, j) << '\t';
-			}
-		}
-		return out; 
-	}
-
+	// handle short written doubles/ints as Taylor polynoms with zero order (contants)
 	bool operator==(double x, const Polynomial &p)
 	{
-		return p.isConst() && p[0] == x;
+		return p.isConst() && p.get(0) == x;
 	}
 }
 

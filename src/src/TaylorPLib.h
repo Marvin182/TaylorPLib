@@ -4,9 +4,10 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdexcept>
-#include <math.h>
+#include <iostream>
+#include <iomanip>
 #include <typeinfo>
-#include <sstream>
+#include <math.h>
 
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
@@ -74,11 +75,12 @@ namespace LibMatrix {
 		//
 		int order() const { return _order; }
 		int ncoeff() const { return _order + 1; }
+		double get(int index) const;
 
 		//
 		// Overloaded operators for Taylor arithmetic
 		//
-		double & operator[](int index) const;
+		double& operator[](int index);
 		Polynomial operator=(const Polynomial &p);
 		bool operator==(const Polynomial &p) const;
 		bool operator!=(const Polynomial &p) const;
@@ -129,9 +131,8 @@ namespace LibMatrix {
 		void set2Zero();
 		void set2Zero(int ord);
 		void setCoeffs(double *c);
-
-		std::string toString();
 	};
+
 
 #ifdef SWIG
 	class Matrix
@@ -178,7 +179,7 @@ namespace LibMatrix {
 		//
 		// Overloaded operators
 		//
-		Polynomial & operator()(int row, int col);			// Element
+		Polynomial& operator()(int row, int col);			// Element
 		Matrix operator=(const Matrix &m);				// Assignment operators
 		bool operator==(const Matrix &m) const;			// Comparison operators
 		bool operator!=(const Matrix &m) const;
@@ -277,11 +278,13 @@ namespace LibMatrix {
 		// 		char *str, double eps);
 		// void printtpm(int *piv, char *str, const char *const color, double eps);
 		// void fprinttpm(FILE * fn, int *piv, char *str, double eps);
-
-		std::string toString();
 	};
 
+
 };
+
+__declspec(dllexport) std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
+__declspec(dllexport) std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
 
 #ifdef SWIG
 	class MathException
