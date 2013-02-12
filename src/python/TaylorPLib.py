@@ -82,6 +82,7 @@ class Polynomial(_object):
     __del__ = lambda self : None;
     def order(self): return _TaylorPLib.Polynomial_order(self)
     def ncoeff(self): return _TaylorPLib.Polynomial_ncoeff(self)
+    def get(self, *args): return _TaylorPLib.Polynomial_get(self, *args)
     def __eq__(self, *args): return _TaylorPLib.Polynomial___eq__(self, *args)
     def __ne__(self, *args): return _TaylorPLib.Polynomial___ne__(self, *args)
     def __lt__(self, *args): return _TaylorPLib.Polynomial___lt__(self, *args)
@@ -112,7 +113,6 @@ class Polynomial(_object):
     def set2Id(self): return _TaylorPLib.Polynomial_set2Id(self)
     def set2Zero(self, *args): return _TaylorPLib.Polynomial_set2Zero(self, *args)
     def setCoeffs(self, *args): return _TaylorPLib.Polynomial_setCoeffs(self, *args)
-    def toString(self): return _TaylorPLib.Polynomial_toString(self)
 Polynomial_swigregister = _TaylorPLib.Polynomial_swigregister
 Polynomial_swigregister(Polynomial)
 
@@ -169,7 +169,6 @@ class Matrix(_object):
     def set2Val(self, *args): return _TaylorPLib.Matrix_set2Val(self, *args)
     def set2ValFromIndices(self, *args): return _TaylorPLib.Matrix_set2ValFromIndices(self, *args)
     def _print(self, *args): return _TaylorPLib.Matrix__print(self, *args)
-    def toString(self): return _TaylorPLib.Matrix_toString(self)
 Matrix_swigregister = _TaylorPLib.Matrix_swigregister
 Matrix_swigregister(Matrix)
 

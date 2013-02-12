@@ -14,13 +14,14 @@
 #define MAX_MESSAGE_SIZE 256
 // #define MATH_ERROR(format, ...) MathException("%s(%d): " format, __FILE__, __LINE__, __VA_ARGS__)
 
-namespace LibMatrix {
-
 #ifdef SWIG
-	class Polynomial
+#define DLL_EXPORT  
 #else
-	class __declspec(dllexport) Polynomial
+#define DLL_EXPORT __declspec(dllexport)
 #endif
+
+namespace LibMatrix {
+	class DLL_EXPORT Polynomial
 	{
 	//
 	// (Taylor) Polynomial with derivate degree n (n+1 coefficients):
@@ -134,11 +135,7 @@ namespace LibMatrix {
 	};
 
 
-#ifdef SWIG
-	class Matrix
-#else
-	class __declspec(dllexport) Matrix
-#endif
+	class DLL_EXPORT Matrix
 	{
 	private:
 		int _rows,											// The number of rows
@@ -283,14 +280,10 @@ namespace LibMatrix {
 
 };
 
-__declspec(dllexport) std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
-__declspec(dllexport) std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
+DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
+DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
 
-#ifdef SWIG
-	class MathException
-#else
-	class __declspec(dllexport) MathException
-#endif
+class DLL_EXPORT MathException
 {
 private:
 	char* _message;
