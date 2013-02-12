@@ -67,6 +67,21 @@ Polynomial::~Polynomial()
 	deallocateMemory();
 }
 
+/**
+ * Gets a single coeffizient of the polynomial. Index 0 is the constant part of the polynomial.
+ * 
+ * \param[in] index The index of the coeffizient to get.
+ * \return The value of the desired element.
+ *
+ */
+double Polynomial::get(int index) const
+{ 
+	if (index < 0 || index > _order)
+	{
+		throw MathException("%d is not a valid coefficient index of this %d order polynomial.", index, _order);
+	}
+	return _coeffs[index];
+}
 
 /**
  * Implements the [] operator (subscript operator).
@@ -77,13 +92,12 @@ Polynomial::~Polynomial()
  * \return The coefficient at that index.
  * 
  */
-double & Polynomial::operator[](int index) const
+double& Polynomial::operator[](int index)
 { 
 	if (index < 0 || index > _order)
 	{
-		throw MathException("Invalid coefficient index of polynomial."); // TODO add error code
+		throw MathException("%d is not a valid coefficient index of this %d order polynomial.", index, _order);
 	}
-
 	return _coeffs[index];
 }
 
@@ -326,7 +340,7 @@ Polynomial Polynomial::operator-(const Polynomial &p) const
 	if (isConst())
 	{
 		v = p;
-		v._coeffs[0] -= _coeffs[0];
+		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
 	}
 	else if (p.isConst())
 	{
@@ -1003,21 +1017,6 @@ void Polynomial::setCoeffs(double *c)
 	}
 }
 
-string Polynomial::toString()
-{
-	stringstream stream;
-	// stream << '(' << setiosflags(ios::fixed) << setprecision(2);
-	stream << '(';
-	for (int i = _order; i > 0; i--)
- 	{
- 		stream << _coeffs[i] << "x^" << i << " + ";
- 	}
- 	stream << _coeffs[0] << ')';
- 	
- 	return stream.str();
-}
-
-
 /***************
   P R I V A T E
   **************/
@@ -1105,4 +1104,17 @@ void Polynomial::unsetConst()
 {
 	unsetConstCount++;
 	_constant = false;
+}
+
+std::ostream& operator<<(std::ostream &out, const Polynomial &p)
+{
+	out << '(' << setiosflags(ios::fixed) << setprecision(2);
+
+	for (int i = p.order(); i > 0; i--)
+ 	{
+ 		out << p.get(i) << "x^" << i << " + ";
+ 	}
+ 	out << p.get(0) << ')';
+	
+	return out; 
 }

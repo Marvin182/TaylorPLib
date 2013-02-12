@@ -8,24 +8,10 @@ using namespace LibMatrix;
 #define T(n) Polynomial() * (n)
 
 namespace LibMatrix {
-	// needed by GTest to print matrices if some ASSERT_EQ(matrix1, matrix2) failed
-	std::ostream& operator<<(std::ostream &out, const Matrix &m)
-	{
-		out << setiosflags(ios::fixed) << setprecision(2);
-		for (int i = 0; i < m.nrows(); i++)
-		{
-			out << '\n';
-			for (int j = 0; j < m.ncols(); j++)
-			{
-				out << m.get(i, j) << '\t';
-			}
-		}
-		return out; 
-	}
-
+	// handle short written doubles/ints as Taylor polynoms with zero order (contants)
 	bool operator==(double x, const Polynomial &p)
 	{
-		return p.isConst() && p[0] == x;
+		return p.isConst() && p.get(0) == x;
 	}
 }
 
@@ -357,9 +343,6 @@ TEST_F(MatrixOperator, unary)
 
 TEST_F(MatrixOperator, minus)
 {
-
-
-
 	ASSERT_EQ(AminusB, A - B);
 
 	A -= B;
@@ -819,13 +802,13 @@ TEST_F(MatrixMethods, set2Val)
 
 TEST_F(MatrixMethods, set2Val2)
 {
-	// C.set2Val(2, 3, T(1), T(2), T(3).0);
+	C.set2Val(2, 3, 1, 2, 3.0);
 	ASSERT_EQ(C3, C);
 }
 
 TEST_F(MatrixMethods, set2ValFromIndices)
 {
-	// C.set2ValFromIndices(2, 4, T(1), T(4), T(3).0);
+	C.set2ValFromIndices(2, 4, 1, 4, 3.0);
 	ASSERT_EQ(C3, C);
 }
 

@@ -4,22 +4,24 @@
 #include <stdio.h>
 #include <stdarg.h>
 #include <stdexcept>
-#include <math.h>
+#include <iostream>
+#include <iomanip>
 #include <typeinfo>
-#include <sstream>
+#include <math.h>
 
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
 #define MAX_MESSAGE_SIZE 256
 // #define MATH_ERROR(format, ...) MathException("%s(%d): " format, __FILE__, __LINE__, __VA_ARGS__)
 
-namespace LibMatrix {
-
 #ifdef SWIG
-	class Polynomial
+#define DLL_EXPORT  
 #else
-	class __declspec(dllexport) Polynomial
+#define DLL_EXPORT __declspec(dllexport)
 #endif
+
+namespace LibMatrix {
+	class DLL_EXPORT Polynomial
 	{
 	//
 	// (Taylor) Polynomial with derivate degree n (n+1 coefficients):
@@ -74,11 +76,12 @@ namespace LibMatrix {
 		//
 		int order() const { return _order; }
 		int ncoeff() const { return _order + 1; }
+		double get(int index) const;
 
 		//
 		// Overloaded operators for Taylor arithmetic
 		//
-		double & operator[](int index) const;
+		double& operator[](int index);
 		Polynomial operator=(const Polynomial &p);
 		bool operator==(const Polynomial &p) const;
 		bool operator!=(const Polynomial &p) const;
@@ -129,15 +132,10 @@ namespace LibMatrix {
 		void set2Zero();
 		void set2Zero(int ord);
 		void setCoeffs(double *c);
-
-		std::string toString();
 	};
 
-#ifdef SWIG
-	class Matrix
-#else
-	class __declspec(dllexport) Matrix
-#endif
+
+	class DLL_EXPORT Matrix
 	{
 	private:
 		int _rows,											// The number of rows
@@ -178,7 +176,7 @@ namespace LibMatrix {
 		//
 		// Overloaded operators
 		//
-		Polynomial & operator()(int row, int col);			// Element
+		Polynomial& operator()(int row, int col);			// Element
 		Matrix operator=(const Matrix &m);				// Assignment operators
 		bool operator==(const Matrix &m) const;			// Comparison operators
 		bool operator!=(const Matrix &m) const;
@@ -277,17 +275,15 @@ namespace LibMatrix {
 		// 		char *str, double eps);
 		// void printtpm(int *piv, char *str, const char *const color, double eps);
 		// void fprinttpm(FILE * fn, int *piv, char *str, double eps);
-
-		std::string toString();
 	};
+
 
 };
 
-#ifdef SWIG
-	class MathException
-#else
-	class __declspec(dllexport) MathException
-#endif
+DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
+DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
+
+class DLL_EXPORT MathException
 {
 private:
 	char* _message;
