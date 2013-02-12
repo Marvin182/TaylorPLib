@@ -875,6 +875,670 @@ namespace TestTaylorPLib_CSharp
         }
 
         /// <summary>
+        /// Ein Test für mmCaAATbC(double alpha, double beta, Matrix A) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaAATbC()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] P_C = new Polynomial[2, 2];
+            P_C[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            P_C[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            #endregion
+
+            Matrix A = new Matrix(2, 2, P_A);
+            Matrix AT = A.asTranspose();
+            Matrix C = new Matrix(2, 2, P_C);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * AT * alpha) + (C * beta);
+            C.mmCaAATbC(alpha, beta, A);
+
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                Matrix D = new Matrix(1, 1, 1);
+                D.mmCaAATbC(alpha, beta, A);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaATAbC(double alpha, double beta, Matrix A) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaATAbC()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] P_C = new Polynomial[2, 2];
+            P_C[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            P_C[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            #endregion
+
+            Matrix A = new Matrix(2, 2, P_A);
+            Matrix AT = A.asTranspose();
+            Matrix C = new Matrix(2, 2, P_C);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = ( AT * A * alpha) + (C * beta);
+            C.mmCaATAbC(alpha, beta, A);
+
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                Matrix D = new Matrix(1, 1, 1);
+                D.mmCaATAbC(alpha, beta, A);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaATBbC(double alpha, double beta, Matrix A, Matrix B) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaATBbC()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            Polynomial[,] P_C = new Polynomial[2, 2];
+            P_C[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            P_C[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+
+            #endregion
+
+            Matrix A = new Matrix(2, 2, P_A);
+            Matrix B = new Matrix(2, 2, P_B);
+            Matrix C = new Matrix(2, 2, P_C);
+            Matrix AT = A.asTranspose();
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (AT * B * alpha) + (C * beta);
+            C.mmCaATBbC(alpha, beta, A, B);
+
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                Matrix D = new Matrix(1, 1, 1);
+                D.mmCaATBbC(alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                A = new Matrix(1, 2, 1);
+                C.mmCaATBbC(alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaATBPbC(double alpha, double beta, Matrix A, Matrix B, int[] piv) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaATBPbC()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 3];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[0, 2] = new Polynomial(1, new double[] { 4, 3 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[1, 2] = new Polynomial(1, new double[] { 4, 3 });
+
+            Polynomial[,] P_C = new Polynomial[3, 3];
+            P_C[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[0, 1] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[0, 2] = new Polynomial(1, new double[] { 2, 2 });
+
+            P_C[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[1, 1] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[1, 2] = new Polynomial(1, new double[] { 2, 2 });
+
+            P_C[2, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[2, 1] = new Polynomial(1, new double[] { 1, 1 });
+            P_C[2, 2] = new Polynomial(1, new double[] { 2, 2 });
+
+            Polynomial[,] P_B = new Polynomial[2, 3];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[0, 2] = new Polynomial(1, new double[] { 4, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[1, 2] = new Polynomial(1, new double[] { 4, 3 });
+
+            Polynomial[,] P_B2 = new Polynomial[2, 3];
+            P_B2[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B2[0, 1] = new Polynomial(1, new double[] { 4, 3 });
+            P_B2[0, 2] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B2[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B2[1, 1] = new Polynomial(1, new double[] { 4, 3 });
+            P_B2[1, 2] = new Polynomial(1, new double[] { 3, 2 });
+
+            #endregion
+
+            Matrix A = new Matrix(2, 3, P_A);
+            Matrix B = new Matrix(2, 3, P_B);
+            Matrix B2 = new Matrix(2, 3, P_B2);
+            Matrix C = new Matrix(3, 3, P_C);
+            Matrix AT = A.asTranspose();
+
+            double alpha = 2;
+            double beta = 2;
+            int[] piv = { 0, 2, 1 };
+
+            Matrix expect = (AT * B * alpha) + (C * beta);
+            C.mmCaATBPbC(alpha, beta, A, B2, piv);
+
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                Matrix D = new Matrix(3, 3, 1);
+                C.mmCaATBPbC(alpha, beta, D, B, piv);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                C = new Matrix(2, 2, 1);
+                C.mmCaATBPbC(alpha, beta, A, B, piv);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaABTbC(double alpha, double beta, Matrix A, Matrix B) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaABTbC()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            #endregion
+
+            Matrix A = new Matrix(2, 2, P_A);
+            Matrix B = new Matrix(2, 2, P_B);
+            Matrix C = new Matrix(2, 2, 1);
+            Matrix BT = B.asTranspose();
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * BT * alpha) + (C * beta);
+            Assert.AreNotEqual(expect.ToString(), C.ToString());
+            C.mmCaABTbC(alpha, beta, A, B);
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                Matrix D = new Matrix(3, 3, 1);
+                C.mmCaABTbC(alpha, beta, A, D);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix D = new Matrix(3, 3, 1);
+                D.mmCaABTbC(alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaABTbC(int r, bool up, double alpha, double beta, Matrix A, Matrix B)
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaABTbC_2()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            Polynomial[,] P_B2 = new Polynomial[2, 2];
+            P_B2[0, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_B2[0, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            P_B2[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_B2[1, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            #endregion
+
+            Matrix A = new Matrix(2, 2, P_A);
+            Matrix B = new Matrix(2, 2, P_B);
+            Matrix B2 = new Matrix(2, 2, P_B2);
+            Matrix C = new Matrix(2, 2, 1);
+
+            Matrix BT = B.asTranspose();
+            Matrix BT2 = B2.asTranspose();
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * BT * alpha) + (C * beta);
+            Assert.AreNotEqual(expect.ToString(), C.ToString());
+            C.mmCaABTbC(1, true, alpha, beta, A, B);
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            C = new Matrix(2, 2, 1);
+            expect = (A * BT2 * alpha) + (C * beta);
+            Assert.AreNotEqual(expect.ToString(), C.ToString());
+            C.mmCaABTbC(1, false, alpha, beta, A, B2);
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                A = new Matrix(2, 1, 1);
+                B = new Matrix(2, 2, 1);
+                C.mmCaABTbC(1, true, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                A = new Matrix(2, 2, 1);
+                B = new Matrix(2, 2, 1);
+                C.mmCaABTbC(3, true, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                A = new Matrix(3, 2, 1);
+                B = new Matrix(2, 2, 1);
+                C.mmCaABTbC(1, true, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für bmmCaABTbC(int r, int c, double alpha, double beta, Matrix A, Matrix B) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_bmmCaABTbC()
+        {
+
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[5, 5];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[0, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_A[0, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[0, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[1, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_A[1, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[1, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_A[2, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_A[2, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_A[2, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_A[2, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[2, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_A[3, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[3, 1] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[3, 2] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[3, 3] = new Polynomial(1, new double[] { 1, 0 });
+            P_A[3, 4] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_A[4, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[4, 1] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[4, 2] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[4, 3] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[4, 4] = new Polynomial(1, new double[] { 1, 0 });
+
+            Polynomial[,] P_B = new Polynomial[5, 5];
+            P_B[0, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_B[0, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_B[0, 3] = new Polynomial(1, new double[] { 4, 1 });
+            P_B[0, 4] = new Polynomial(1, new double[] { 5, 1 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_B[1, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_B[1, 3] = new Polynomial(1, new double[] { 4, 1 });
+            P_B[1, 4] = new Polynomial(1, new double[] { 5, 1 });
+            
+            P_B[2, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_B[2, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_B[2, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_B[2, 3] = new Polynomial(1, new double[] { 4, 1 });
+            P_B[2, 4] = new Polynomial(1, new double[] { 5, 1 });
+            
+            P_B[3, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_B[3, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_B[3, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_B[3, 3] = new Polynomial(1, new double[] { 4, 1 });
+            P_B[3, 4] = new Polynomial(1, new double[] { 5, 1 });
+
+            P_B[4, 0] = new Polynomial(1, new double[] { 1, 1 });
+            P_B[4, 1] = new Polynomial(1, new double[] { 2, 1 });
+            P_B[4, 2] = new Polynomial(1, new double[] { 3, 1 });
+            P_B[4, 3] = new Polynomial(1, new double[] { 4, 1 });
+            P_B[4, 4] = new Polynomial(1, new double[] { 5, 1 });
+
+            #endregion
+
+            Matrix A = new Matrix(5, 5, P_A);
+            Matrix B = new Matrix(5, 5, P_B);
+            Matrix BT = B.asTranspose();
+            Matrix C = new Matrix(5, 5, 1);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expect = (A * BT * alpha) + (C * beta);
+            Assert.AreNotEqual(expect.ToString(), C.ToString());
+            C.bmmCaABTbC(3, 3, alpha, beta, A, B);
+            Assert.AreEqual(expect.ToString(), C.ToString());
+
+            try
+            {
+                C.bmmCaABTbC(7, 3, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                C.bmmCaABTbC(3, 7, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                B = new Matrix(5, 4, 1);
+                C.bmmCaABTbC(3, 3, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                A = new Matrix(6, 6, 1);
+                B = new Matrix(6, 6, 1);
+                C.bmmCaABTbC(3, 3, alpha, beta, A, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaIBbC(double alpha, double beta, Matrix B) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaIBbC()
+        {
+            #region definitions 
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 0 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            #endregion
+
+            Matrix I = new Matrix(2, 2, P_A);
+            Matrix B = new Matrix(2, 2, P_B);
+            Matrix C = new Matrix(2, 2, 1);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expected = (I * B * alpha) + (C * beta);
+            Assert.AreNotEqual(expected.ToString(), C.ToString());
+            C.mmCaIBbC(alpha, beta, B);
+            Assert.AreEqual(expected.ToString(), C.ToString());
+
+            try
+            {
+                B = new Matrix(3, 3, 1);
+                C.mmCaIBbC(alpha, beta, B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaIBbC(double alpha, double beta, int[] piv, bool rows, Matrix B)
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaIBbC_2()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 1, 0 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            #endregion
+
+            Matrix I = new Matrix(2, 2, P_A);
+            Matrix B = new Matrix(2, 2, P_B);
+            Matrix C = new Matrix(2, 2, 1);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expected = (I * B * alpha) + (C * beta);
+            Assert.AreNotEqual(expected.ToString(), C.ToString());
+            C.mmCaIBbC(alpha, beta, new int[] { 1, 0 }, true, B);
+            Assert.AreEqual(expected.ToString(), C.ToString());
+
+            C = new Matrix(2, 2, 1);
+            Assert.AreNotEqual(expected.ToString(), C.ToString());
+            C.mmCaIBbC(alpha, beta, new int[] { 1, 0 }, false, B);
+            Assert.AreEqual(expected.ToString(), C.ToString());
+        }
+
+        /// <summary>
+        /// Ein Test für mmCaAIbC(double alpha, double beta, Matrix A) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_mmCaAIbC()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 1, 0 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            #endregion
+
+            Matrix I = new Matrix(2, 2, P_A);
+            Matrix A = new Matrix(2, 2, P_B);
+            Matrix C = new Matrix(2, 2, 1);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expected = (A * I * alpha) + (C * beta);
+            Assert.AreNotEqual(expected.ToString(), C.ToString());
+            C.mmCaAIbC(alpha, beta, A);
+            Assert.AreEqual(expected.ToString(), C.ToString());
+
+            try
+            {
+                A = new Matrix(3, 3, 1);
+                C.mmCaAIbC(alpha, beta, A);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+        }
+
+        [TestMethod()]
+        public void MatrixFunction_mmCaAIbC_2()
+        {
+            #region definitions
+
+            Polynomial[,] P_A = new Polynomial[2, 2];
+            P_A[0, 0] = new Polynomial(1, new double[] { 0, 0 });
+            P_A[0, 1] = new Polynomial(1, new double[] { 1, 0 });
+
+            P_A[1, 0] = new Polynomial(1, new double[] { 1, 0 });
+            P_A[1, 1] = new Polynomial(1, new double[] { 0, 0 });
+
+            Polynomial[,] P_B = new Polynomial[2, 2];
+            P_B[0, 0] = new Polynomial(1, new double[] { 3, 2 });
+            P_B[0, 1] = new Polynomial(1, new double[] { 2, 3 });
+
+            P_B[1, 0] = new Polynomial(1, new double[] { 2, 3 });
+            P_B[1, 1] = new Polynomial(1, new double[] { 3, 2 });
+
+            #endregion
+
+            Matrix I = new Matrix(2, 2, P_A);
+            Matrix A = new Matrix(2, 2, P_B);
+            Matrix C = new Matrix(2, 2, 1);
+            double alpha = 2;
+            double beta = 2;
+
+            Matrix expected = (A * I * alpha) + (C * beta);
+            Assert.AreNotEqual(expected.ToString(), C.ToString());
+            C.mmCaAIbC(alpha, beta, A, new int[] { 1, 0 }, true);
+            Assert.AreEqual(expected.ToString(), C.ToString());
+
+            C = new Matrix(2, 2, 1);
+            Assert.AreNotEqual(expected.ToString(), C.ToString());
+            C.mmCaAIbC(alpha, beta, A, new int[] { 1, 0 }, false);
+            Assert.AreEqual(expected.ToString(), C.ToString());
+        }
+
+        /// <summary>
         /// Ein Test für cpermutem(int[] piv, bool trans = false)
         /// </summary>
         [TestMethod()]
