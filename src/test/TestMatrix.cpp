@@ -805,13 +805,13 @@ TEST_F(MatrixMethods, set2Val)
 
 TEST_F(MatrixMethods, set2Val2)
 {
-	// C.set2Val(2, 3, T(1), T(2), T(3).0);
+	C.set2Val(2, 3, 1, 2, 3.0);
 	ASSERT_EQ(C3, C);
 }
 
 TEST_F(MatrixMethods, set2ValFromIndices)
 {
-	// C.set2ValFromIndices(2, 4, T(1), T(4), T(3).0);
+	C.set2ValFromIndices(2, 4, 1, 4, 3.0);
 	ASSERT_EQ(C3, C);
 }
 

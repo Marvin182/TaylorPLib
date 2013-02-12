@@ -1,5 +1,5 @@
-/*!
- * \file TPolyn.h
+/*! 
+* \file TPolyn.h
  * \brief Header file for the class \file TPolyn.cpp.
  * \author D. Monett Diaz
  * \date July, 2006
