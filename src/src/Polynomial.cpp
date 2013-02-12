@@ -340,7 +340,7 @@ Polynomial Polynomial::operator-(const Polynomial &p) const
 	if (isConst())
 	{
 		v = p;
-		v._coeffs[0] -= _coeffs[0];
+		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
 	}
 	else if (p.isConst())
 	{

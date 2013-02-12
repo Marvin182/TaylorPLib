@@ -343,9 +343,6 @@ TEST_F(MatrixOperator, unary)
 
 TEST_F(MatrixOperator, minus)
 {
-
-
-
 	ASSERT_EQ(AminusB, A - B);
 
 	A -= B;
