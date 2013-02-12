@@ -597,6 +597,493 @@ namespace LibMatrix
         }
 
         /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A * A^T + beta * C
+        /// 
+        /// with A, C : m-by-m matrix
+        ///      alpha, beta : real numbers
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * A^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix. Its transpose is also considered</param>
+        public void mmCaAATbC(double alpha, double beta, Matrix A) 
+        { 
+            // if A is a m-by-n matrix A * A^T is always a m-by-m matrix and must have the same dimension as this matrix
+	        if (A._rows != _rows || A._rows != _cols)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A * A^T (%d x %d) must match the current matrix (%d x %d).", A._rows, A._rows, _rows, _cols));
+	        }
+	
+	        for( int i = 0; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _rows; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < _rows; k++ )
+			        {
+                        h += A._data[i, k] * A._data[j, k];
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A^T * A + beta * C
+        /// 
+        /// with A, C : m-by-m matrix
+        ///      alpha, beta : real numbers
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * A^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix. Its transpose is also considered</param>
+        public void mmCaATAbC(double alpha, double beta, Matrix A) 
+        { 
+           	// if A is a m-by-n matrix A^T * A is always a n-by-n matrix and must have the same dimension as this matrix
+	        if (A._cols != _rows || _cols != _rows)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A^T * A (%d x %d) must match the current matrix (%d x %d).", A._cols, A._cols, _rows, _cols));
+	        }
+
+	        for( int i = 0; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _rows; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < A._rows; k++ )
+			        {
+                        h += A._data[k, i] * A._data[k, j];
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A^T * B + beta * C
+        /// 
+        /// with A : p-by-m matrix
+        ///      B : p-by-n matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * A^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix. Its transpose is also considered</param>
+        /// /// <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        public void mmCaATBbC(double alpha, double beta, Matrix A, Matrix B) 
+        { 
+	        // A^T und B can only be multiplied if A and B have the same number of rows
+	        if (A._rows != B._rows)
+	        {
+		        throw new MathException(String.Format("Cannot multiply A^T (%d x %d) und B (%d x %d).", A._cols, A._rows, B._rows, B._cols));
+	        }
+
+	        // (A^T * B) must have the same size as this matrix
+	        if (A._cols != _rows || B._cols != _cols)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A^T * B (%d x %d) must match the current matrix (%d x %d).", A._cols, B._cols, _rows, _cols));
+	        }
+
+	        for( int i = 0; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < B._rows; k++ )
+			        {
+                        h += A._data[k, i] * B._data[k, j];
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A^T * B + beta * C
+        /// 
+        /// with A : p-by-m matrix
+        ///      B : p-by-n matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// and a column pivoting on A^Ts rows
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * A^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix. Its transpose is also considered</param>
+        /// <param name="B">an object of type Matrix</param>
+        /// <param name="piv">a vector of permutations on the columns of B</param>
+        public void mmCaATBPbC(double alpha, double beta, Matrix A, Matrix B, int[] piv) 
+        { 
+            // A^T und B can only be multiplied if A and B have the same number of rows
+	        if (A._rows != B._rows)
+	        {
+		        throw new MathException(String.Format("Cannot multiply A^T (%d x %d) und B (%d x %d).", A._cols, A._rows, B._rows, B._cols));
+	        }
+
+	        // (A^T * B) must have the same size as this matrix
+	        if (A._cols != _rows || B._cols != _cols)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A^T * B (%d x %d) must match the current matrix (%d x %d).", A._cols, B._cols, _rows, _cols));
+	        }
+
+	        for( int i = 0; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < B._rows; k++ )
+			        {
+                        h += A._data[k, i] * B._data[k, piv[j]];
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A * B^T + beta * C
+        /// 
+        /// with A : m-by-p matrix
+        ///      B : n-by-p matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * B^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix.</param>
+        /// <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        public void mmCaABTbC(double alpha, double beta, Matrix A, Matrix B) 
+        { 
+            // A und B^T can only be multiplied if A and B have the same number of columns
+	        if (A._cols != B._cols)
+	        {
+		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B^T (%d x %d).", A._rows, A._cols, B._cols, B._rows));
+	        }
+
+	        // (A * B^T) must have the same size as this matrix
+	        if (A._rows != _rows || B._rows != _cols)
+	        {
+		        throw new MathException(String.Format("The size of the matrix A * B^T (%d x %d) must match the current matrix (%d x %d).", A._rows, B._rows, _rows, _cols));
+	        }
+
+	        for( int i = 0; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < A._cols; k++ )
+			        {
+                        h += A._data[i, k] * B._data[j, k];
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A * B^T + beta * C
+        /// 
+        /// with A : m-by-p matrix
+        ///      B : n-by-p matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// After transposing B, either its first or its last rows are considered for multiplication,
+        /// 
+        ///     ( * ... * )				(    X    )
+        ///     ( ------- )		or		( ------- )
+        ///     (         )				( * ... * )
+        ///     (    X    )				( * ... * )
+        ///     
+        /// according to A dimensions. I.e., the matrix A has less columns than B^T rows has.
+        /// </summary>
+        /// <param name="r">The number of rows from B that should be considered.</param>
+        /// <param name="up">The binary parameter to indicate whether the first or the last r rows</param>
+        /// <param name="alpha">The scalar value that multiplies A * B^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix.</param>
+        /// <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        public void mmCaABTbC(int r, bool up, double alpha, double beta, Matrix A, Matrix B) 
+        { 
+	        // A und B^T can only be multiplied if A and B have the same number of columns
+	        if (A._cols != B._cols)
+	        {
+		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B^T (%d x %d).", A._rows, A._cols, B._cols, B._rows));
+	        }
+
+	        // (A * B^T) must have the same size as this matrix
+	        if (A._rows != _rows || B._rows != _cols)
+	        {
+		        throw new MathException("Error in matrix multiplication. The result of A * B must have the same size as C (this matrix).");
+	        }
+
+	        // r <= (colmuns of B^T), which is equal to r <= (rows of B)
+	        if (r > B._rows)
+	        {
+		        throw new MathException("Error in matrix multiplication. r must be smaller or equal than the number of rows in B.");
+	        }
+
+	        int bRowsR = B._rows - r;
+
+	        for( int i = 0; i < A._rows; i++ )
+	        {
+		        for( int j = 0; j < B._cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        if (up)
+			        {
+				        // first r columns from B are used
+				        for( int k = 0; k < r; k++ )
+				        {
+                            h += A._data[i, k] * B._data[j, k];
+				        }
+			        }
+			        else
+			        {
+				        // last r columns from B are used
+				        for( int k = bRowsR; k < B._rows; k++ )
+				        {
+                            h += A._data[i, k] * B._data[j, k];
+				        }
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A * B^T + beta * C
+        /// 
+        /// with A : m-by-p matrix
+        ///      B : n-by-p matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// where the inferior-right block of A is an identity matrix like in:
+        ///     
+        ///     ( * * * 0 0 )
+        ///     ( * * * 0 0 )
+        ///     ( 0 0 0 1 0 )
+        ///     ( 0 0 0 0 1 )
+        ///     
+        /// so that a particular block multiplication is needed.
+        /// </summary>
+        /// <param name="r">The number of rows in A that are of interest (2 in the example above).</param>
+        /// <param name="c">The number of columns in A that are of interest (3 in the example above).</param>
+        /// <param name="alpha">The scalar value that multiplies A * B^T</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix.</param>
+        /// <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        public void bmmCaABTbC(int r, int c, double alpha, double beta, Matrix A, Matrix B) 
+        { 
+            if (r > A._rows)
+	        {
+		        throw new MathException("Error in matrix multiplication. r cannot be larger than the number of rows of A in total.");
+	        }
+	        if (c > A._cols)
+	        {
+		        throw new MathException("Error in matrix multiplication. c cannot be larger than the number of columns of A in total.");
+	        }
+	        if (A._cols != B._cols)
+	        {
+		        throw new MathException("Error in matrix multiplication. The matrices A und B^T cannot be multiplied because of wrong dimensions.");
+	        }
+	        if (A._rows != _rows || B._rows != _cols)
+	        {
+		        throw new MathException("Error in matrix multiplication. The dimension of the matrix A * B^T must match the current matrix.");
+	        }
+
+	        // only the first r rows from A are interesting
+	        for( int i = 0; i < r; i++ )
+	        {
+		        for( int j = 0; j < _cols; j++ )
+		        {
+			        Polynomial h = new Polynomial(_dimT);
+
+			        for( int k = 0; k < c; k++ )
+			        {
+                        h += A._data[i, k] * B._data[j, k];
+			        }
+
+                    _data[i, j] = h * alpha + _data[i, j] * beta;
+		        }
+	        }
+
+	        // last rows of A, with exactly one 1 per row
+	        int d = A._cols - A._rows;
+	        for ( int i = r; i < _rows; i++ )
+	        {
+		        for( int j = 0; j < _cols; j++ )
+		        {
+                    _data[i, j] = B._data[j, i + d] * alpha + _data[i, j] * beta;
+		        }
+	        }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * I * B + beta * C
+        /// 
+        /// with I : m-by-p matrix; identity matrix
+        ///      B : p-by-n matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies I * B</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="B">an object of type Matrix</param>
+        public void mmCaIBbC(double alpha, double beta, Matrix B) 
+        {
+            if (B._rows != _rows || B._cols != _cols)
+            {
+                throw new MathException("Error in matrix multiplication. The dimension of the matrix B must match the current matrix.");
+            }
+
+            for (int i = 0; i < _rows; i++)
+            {
+                for (int j = 0; j < _cols; j++)
+                {
+                    _data[i, j] = B._data[i, j] * alpha + _data[i, j] * beta;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * I * B + beta * C
+        /// 
+        /// with I : m-by-p matrix; identity matrix permuted according to a vector of permutations, piv
+        ///      B : p-by-n matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies I * B</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="piv">a vector of permutations on I, of type int</param>
+        /// <param name="rows">The binary parameter to indicate whether the rows or the columns of I should be permuted (true for the rows; false for the columns)</param>
+        /// <param name="B">an object of type Matrix</param>
+        public void mmCaIBbC(double alpha, double beta, int[] piv, bool rows, Matrix B) 
+        { 
+           	//TODO: implement a faster version without identity matrix
+	        Matrix Id = new Matrix(_rows, B._rows, _dimT);
+	        Id.set2Id();				
+
+	        if (rows)
+	        {
+		        // permute its columns
+		        Id.cpermutem(piv);
+	        }
+	        else
+	        {
+		        // permute its rows
+		        Id.rpermutem(piv);
+	        }
+	        mmCaABbC(alpha, beta, Id, B);
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A * I + beta * C
+        /// 
+        /// with A : m-by-p matrix
+        ///      I : p-by-n matrix; identity matrix
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * I</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix</param>
+        public void mmCaAIbC(double alpha, double beta, Matrix A) 
+        {
+            if (A._rows != _rows || A._cols != _cols)
+            {
+                throw new MathException("Error in matrix multiplication. The dimension of the matrix A must match the current matrix.");
+            }
+
+            for (int i = 0; i < _rows; i++)
+            {
+                for (int j = 0; j < _cols; j++)
+                {
+                    _data[i, j] = A._data[i, j] * alpha + _data[i, j] * beta;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Matrix multiplication of the form:
+        /// 
+        ///     C = alpha * A * I + beta * C
+        /// 
+        /// with A : m-by-p matrix
+        ///      I : p-by-n matrix; identity matrix permuted according to a vector of permutations, piv
+        ///      C : m-by-n matrix
+        ///      alpha, beta : real numbers
+        ///      
+        /// </summary>
+        /// <param name="alpha">The scalar value that multiplies A * I</param>
+        /// <param name="beta">The scalar value that multiplies C</param>
+        /// <param name="A">an object of type Matrix</param>
+        /// <param name="piv">a vector of permutations on I, of type int</param>
+        /// <param name="rows">The binary parameter to indicate whether the rows or the columns of I should be permuted (true for the rows; false for the columns)</param>
+        public void mmCaAIbC(double alpha, double beta, Matrix A, int[] piv, bool rows) 
+        { 
+           	// TODO: implement a faster version without identity matrix
+	        Matrix Id = new Matrix( A._cols, _cols, _dimT);
+	        Id.set2Id();
+
+	        if(rows)
+	        {
+		        // permute its columns
+		        Id.cpermutem(piv);
+	        }
+	        else
+	        {
+		        // permute its rows
+		        Id.rpermutem(piv);
+	        }
+
+	        mmCaABbC(alpha, beta, A, Id);
+        }
+
+        #endregion
+
+        #region S O L V I N G   S Y S T E M S   O F   E Q U A T I O N S
+
+        /// <summary>
         /// Permutes the columns of a matrix given a vector of permutations. <para/>
         /// <para/>
         /// For example, in case a matrix A is permuted after a QR decomposition with column pivoting,<para/>
