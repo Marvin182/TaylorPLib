@@ -865,6 +865,13 @@ namespace LibMatrix
         }
 
         /// <summary>
+        /// sets the Polynomial to id
+        /// </summary>
+        public void set2Id() { 
+            set2const(1.0); 
+        }
+
+        /// <summary>
         /// Returns value at the given index from the array
         /// </summary>
         /// <param name="index">The index to be analyzed.</param>
