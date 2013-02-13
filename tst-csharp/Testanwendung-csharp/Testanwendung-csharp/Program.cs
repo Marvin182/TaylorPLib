@@ -21,7 +21,11 @@ namespace Testanwendung_csharp
             Console.ReadKey();
             Console.Clear();
             Console.WriteLine("Spezielle Matrizenmultiplikation: \n");
-            showSpecialMatrix();
+            showSpecialMatrixMultiplication();
+            Console.ReadKey();
+            Console.Clear();
+            Console.WriteLine("Exception Catching: \n");
+            showError();
             Console.ReadKey();
 
         }
@@ -121,7 +125,7 @@ namespace Testanwendung_csharp
             Console.WriteLine("M1 * M2: \n" + M4.ToString());
         }
 
-        private static void showSpecialMatrix()
+        private static void showSpecialMatrixMultiplication()
         {
             #region definitions
 
@@ -196,6 +200,51 @@ namespace Testanwendung_csharp
                 Console.WriteLine("Both Are Equal...");
             else
                 Console.WriteLine("Both Are NOT Equal. Something went wrong...");
+        }
+
+        private static void showError()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[3, 3];
+            Pa[0, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[0, 2] = new Polynomial(1, new double[] { 5, 6 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 7, 8 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 9, 0 });
+            Pa[1, 2] = new Polynomial(1, new double[] { 1, 2 });
+
+            Pa[2, 0] = new Polynomial(1, new double[] { 3, 4 });
+            Pa[2, 1] = new Polynomial(1, new double[] { 5, 6 });
+            Pa[2, 2] = new Polynomial(1, new double[] { 7, 8 });
+
+            Polynomial[,] Pb = new Polynomial[2, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 3, 4 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 5, 6 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 3, 4 });
+
+            #endregion
+
+            Matrix M1 = new Matrix(3, 3, Pa);
+            Matrix M2 = new Matrix(2, 2, Pb);
+
+            Console.WriteLine("M1: \n" + M1.ToString());
+            Console.WriteLine("M2: \n" + M2.ToString());
+
+            Console.WriteLine("M1 + M2: ");
+            try
+            {
+                Matrix M3 = M1 + M2;
+                Console.WriteLine("M3: \n" + M3.ToString());
+            }
+            catch (MathException e)
+            {
+                Console.WriteLine("Es ist ein Fehler aufgetreten: \n" + e.what());
+            }
+
         }
     }
 }
