@@ -43,7 +43,7 @@ namespace LibMatrix
         public Polynomial get(int row, int col)
         {
             if (row >= _rows || row < 0 || col >= _cols || col < 0)
-                throw new MathException(String.Format("(%d, %d) is not a alid index of %d x %d matrix", row, col, _rows, _cols));
+                throw new MathException(String.Format("({0:d}, {0:d}) is not a alid index of {0:d} x {0:d} matrix", row, col, _rows, _cols));
 
             return _data[row, col];
         }
@@ -141,14 +141,14 @@ namespace LibMatrix
             get
             {
                 if (row >= _rows || row < 0 || col >= _cols || col < 0)
-                    throw new MathException(String.Format("(%d, %d) is not a alid index of %d x %d matrix", row, col, _rows, _cols));
+                    throw new MathException(String.Format("({0:d}, {0:d}) is not a alid index of {0:d} x {0:d} matrix", row, col, _rows, _cols));
 
                 return _data[row, col];
             }
             set
             {
                 if (row >= _rows || row < 0 || col >= _cols || col < 0)
-                    throw new MathException(String.Format("(%d, %d) is not a alid index of %d x %d matrix", row, col, _rows, _cols));
+                    throw new MathException(String.Format("({0:d}, {0:d}) is not a alid index of {0:d} x {0:d} matrix", row, col, _rows, _cols));
 
                 _data[row, col] = value;
             }
@@ -200,7 +200,7 @@ namespace LibMatrix
 	        // dimensions checking
 	        if(a._rows != b._rows || a._cols != b._cols)
 	        {
-		        throw new MathException(String.Format("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", a._rows, a._cols, b._rows, b._cols));
+                throw new MathException(String.Format("Cannot add up a {0:d} x {0:d} matrix (left side) and a {0:d} x {0:d} (right side) matrix.", a._rows, a._cols, b._rows, b._cols));
 	        }
 
 	        // an auxiliary object
@@ -228,7 +228,7 @@ namespace LibMatrix
             // dimensions checking
             if (a._rows != b._rows || a._cols != b._cols)
             {
-                throw new MathException(String.Format("Cannot add up a %d x %d matrix (left side) and a %d x %d (right side) matrix.", a._rows, a._cols, b._rows, b._cols));
+                throw new MathException(String.Format("Cannot add up a {0:d} x {0:d} matrix (left side) and a {0:d} x {0:d} (right side) matrix.", a._rows, a._cols, b._rows, b._cols));
             }
 
             // an auxiliary object
@@ -290,7 +290,7 @@ namespace LibMatrix
         public static Matrix operator *(Matrix a, Matrix b)
         {
             if (a._cols != b._rows)
-                throw new MathException(String.Format("Cannot multiply a %d x %d with a %d x %d matrix. The number of rows in m must match the number of colmuns in this matrix.", a._rows, a._cols, b._rows, b._cols));
+                throw new MathException(String.Format("Cannot multiply a {0:d} x {0:d} with a {0:d} x {0:d} matrix. The number of rows in m must match the number of colmuns in this matrix.", a._rows, a._cols, b._rows, b._cols));
 
             Matrix aux = new Matrix(a._rows, b._cols, a._dimT);
 
@@ -328,11 +328,11 @@ namespace LibMatrix
         {
             if (A._cols != B._rows)
             {
-                throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+                throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._rows, A._cols, B._rows, B._cols));
             }
             if (A._rows != _rows || B._cols != _cols)
             {
-                throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+                throw new MathException(String.Format("The size of the matrix A * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, B._cols, _rows, _cols));
             }
 
             for( int i = 0; i < _rows; i++ )
@@ -379,19 +379,19 @@ namespace LibMatrix
         {
             if (r > B._rows)
             {
-                throw new MathException(String.Format("The parameter r (= %d) must be smaller or equal than the number of rows in B (%d x %d).", r, B._rows, B._cols));
+                throw new MathException(String.Format("The parameter r (= {0:d}) must be smaller or equal than the number of rows in B ({0:d} x {0:d}).", r, B._rows, B._cols));
             }
             if (c > B._cols)
             {
-                throw new MathException(String.Format("The parameter c (= %d) must be smaller or equal than the number of columns in B (%d x %d).", c, B._rows, B._cols));
+                throw new MathException(String.Format("The parameter c (= {0:d}) must be smaller or equal than the number of columns in B ({0:d} x {0:d}).", c, B._rows, B._cols));
             }
             if (A._cols != B._rows)
             {
-                throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+                throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._rows, A._cols, B._rows, B._cols));
             }
             if (A._rows != _rows || B._cols != _cols)
             {
-                throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+                throw new MathException(String.Format("The size of the matrix A * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, B._cols, _rows, _cols));
             }
 
             int cr = c - r;
@@ -450,15 +450,15 @@ namespace LibMatrix
         {
 	        if (r > A._rows)
 	        {
-		        throw new MathException(String.Format("The number of rows in A that are of interest (r = %d) must be smaller or equal than the total amount of rows in A (%d x %d).", r, A._rows, A._cols));
+                throw new MathException(String.Format("The number of rows in A that are of interest (r = {0:d}) must be smaller or equal than the total amount of rows in A ({0:d} x {0:d}).", r, A._rows, A._cols));
 	        }
 	        if (A._cols != B._rows)
 	        {
-		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+                throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._rows, A._cols, B._rows, B._cols));
 	        }
 	        if (A._rows != _rows || B._cols != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+                throw new MathException(String.Format("The size of the matrix A * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, B._cols, _rows, _cols));
 	        }
 
 	        int n = A._rows - r;
@@ -515,15 +515,15 @@ namespace LibMatrix
         {
             if (r > B._cols)
 	        {
-		        throw new MathException(String.Format("The number of columns in B that are of interest (r = %d) must be smaller or equal than the total amount of columns in B (%d x %d).", r, A._rows, A._cols));
+                throw new MathException(String.Format("The number of columns in B that are of interest (r = {0:d}) must be smaller or equal than the total amount of columns in B ({0:d} x {0:d}).", r, A._rows, A._cols));
 	        }
 	        if (A._cols != B._rows)	
 	        {
-		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+                throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._rows, A._cols, B._rows, B._cols));
 	        }
 	        if (A._rows != _rows || B._cols != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+                throw new MathException(String.Format("The size of the matrix A * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, B._cols, _rows, _cols));
 	        }
 
 	        int n = B._cols - r;
@@ -573,11 +573,11 @@ namespace LibMatrix
         {
 	        if (A._cols != B._rows)	
 	        {
-		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B (%d x %d).", A._rows, A._cols, B._rows, B._cols));
+		        throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._rows, A._cols, B._rows, B._cols));
 	        }
 	        if (A._rows != _rows || B._cols != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A * B (%d x %d) must match the current matrix (%d x %d).", A._rows, B._cols, _rows, _cols));
+		        throw new MathException(String.Format("The size of the matrix A * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, B._cols, _rows, _cols));
 	        }
 
 	        for( int i = 0; i < _rows; i++ )
@@ -612,7 +612,7 @@ namespace LibMatrix
             // if A is a m-by-n matrix A * A^T is always a m-by-m matrix and must have the same dimension as this matrix
 	        if (A._rows != _rows || A._rows != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A * A^T (%d x %d) must match the current matrix (%d x %d).", A._rows, A._rows, _rows, _cols));
+		        throw new MathException(String.Format("The size of the matrix A * A^T ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, A._rows, _rows, _cols));
 	        }
 	
 	        for( int i = 0; i < _rows; i++ )
@@ -647,7 +647,7 @@ namespace LibMatrix
            	// if A is a m-by-n matrix A^T * A is always a n-by-n matrix and must have the same dimension as this matrix
 	        if (A._cols != _rows || _cols != _rows)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A^T * A (%d x %d) must match the current matrix (%d x %d).", A._cols, A._cols, _rows, _cols));
+		        throw new MathException(String.Format("The size of the matrix A^T * A ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._cols, A._cols, _rows, _cols));
 	        }
 
 	        for( int i = 0; i < _rows; i++ )
@@ -685,13 +685,13 @@ namespace LibMatrix
 	        // A^T und B can only be multiplied if A and B have the same number of rows
 	        if (A._rows != B._rows)
 	        {
-		        throw new MathException(String.Format("Cannot multiply A^T (%d x %d) und B (%d x %d).", A._cols, A._rows, B._rows, B._cols));
+		        throw new MathException(String.Format("Cannot multiply A^T ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._cols, A._rows, B._rows, B._cols));
 	        }
 
 	        // (A^T * B) must have the same size as this matrix
 	        if (A._cols != _rows || B._cols != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A^T * B (%d x %d) must match the current matrix (%d x %d).", A._cols, B._cols, _rows, _cols));
+		        throw new MathException(String.Format("The size of the matrix A^T * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._cols, B._cols, _rows, _cols));
 	        }
 
 	        for( int i = 0; i < _rows; i++ )
@@ -732,13 +732,13 @@ namespace LibMatrix
             // A^T und B can only be multiplied if A and B have the same number of rows
 	        if (A._rows != B._rows)
 	        {
-		        throw new MathException(String.Format("Cannot multiply A^T (%d x %d) und B (%d x %d).", A._cols, A._rows, B._rows, B._cols));
+		        throw new MathException(String.Format("Cannot multiply A^T ({0:d} x {0:d}) und B ({0:d} x {0:d}).", A._cols, A._rows, B._rows, B._cols));
 	        }
 
 	        // (A^T * B) must have the same size as this matrix
 	        if (A._cols != _rows || B._cols != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A^T * B (%d x %d) must match the current matrix (%d x %d).", A._cols, B._cols, _rows, _cols));
+		        throw new MathException(String.Format("The size of the matrix A^T * B ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._cols, B._cols, _rows, _cols));
 	        }
 
 	        for( int i = 0; i < _rows; i++ )
@@ -777,13 +777,13 @@ namespace LibMatrix
             // A und B^T can only be multiplied if A and B have the same number of columns
 	        if (A._cols != B._cols)
 	        {
-		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B^T (%d x %d).", A._rows, A._cols, B._cols, B._rows));
+		        throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B^T ({0:d} x {0:d}).", A._rows, A._cols, B._cols, B._rows));
 	        }
 
 	        // (A * B^T) must have the same size as this matrix
 	        if (A._rows != _rows || B._rows != _cols)
 	        {
-		        throw new MathException(String.Format("The size of the matrix A * B^T (%d x %d) must match the current matrix (%d x %d).", A._rows, B._rows, _rows, _cols));
+		        throw new MathException(String.Format("The size of the matrix A * B^T ({0:d} x {0:d}) must match the current matrix ({0:d} x {0:d}).", A._rows, B._rows, _rows, _cols));
 	        }
 
 	        for( int i = 0; i < _rows; i++ )
@@ -832,7 +832,7 @@ namespace LibMatrix
 	        // A und B^T can only be multiplied if A and B have the same number of columns
 	        if (A._cols != B._cols)
 	        {
-		        throw new MathException(String.Format("Cannot multiply A (%d x %d) und B^T (%d x %d).", A._rows, A._cols, B._cols, B._rows));
+		        throw new MathException(String.Format("Cannot multiply A ({0:d} x {0:d}) und B^T ({0:d} x {0:d}).", A._rows, A._cols, B._cols, B._rows));
 	        }
 
 	        // (A * B^T) must have the same size as this matrix
