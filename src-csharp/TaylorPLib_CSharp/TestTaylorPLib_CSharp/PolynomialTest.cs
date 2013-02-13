@@ -239,8 +239,9 @@ namespace TestTaylorPLib_CSharp
             Assert.AreEqual(a1, expected);
             Polynomial a3 = new Polynomial(3, new double[] { 6, 0, 0, 0 });
             Polynomial expectedA3 = new Polynomial(3, new double[] { -3, 2, 1, 0 });
+            Polynomial expectedA3_A1 = new Polynomial(3, new double[] { 3, -2, -1, 0 });
             Assert.IsTrue(a1 - a3 == expectedA3);
-            Assert.IsTrue(a3 - a1 == expectedA3);
+            Assert.IsTrue(a3 - a1 == expectedA3_A1);
             a1 -= a3;
             Assert.AreEqual(a1, expectedA3);
 

@@ -39,8 +39,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
-    <Reference Include="TaylorPLib_CSharp">
-      <HintPath>..\..\..\..\Studienprojekt 2\TaylorPLib\src-csharp\TaylorPLib_CSharp\bin\Debug\TaylorPLib_CSharp.dll</HintPath>
+    <Reference Include="TaylorPLib_CSharp, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\src-csharp\TaylorPLib_CSharp\bin\Debug\TaylorPLib_CSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

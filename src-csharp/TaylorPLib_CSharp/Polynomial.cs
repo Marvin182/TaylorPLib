@@ -394,8 +394,8 @@ namespace LibMatrix
             Polynomial retval = new Polynomial(a._order);
             if (a.isConst())
             {
-                retval = new Polynomial(b);
-                retval[0] -= a[0];
+                retval = new Polynomial(-b);
+                retval[0] = a[0] - b[0];
             }
             else if (b.isConst())
             {
