@@ -6,9 +6,9 @@ using namespace LibMatrix;
 
 int main(int argc, char **argv)
 {
-	Matrix m(2, 3);
+	Polynomial p(3, 3.41, 4.0, 3.0, 2.0);
 	
-	cout << m;
+	cout << endl << p;
 
 	return 0;
 }

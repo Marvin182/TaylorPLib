@@ -59,6 +59,33 @@ Polynomial::Polynomial(const Polynomial &p):
 }
 
 /**
+ * Short construtor for small hardcoded polynomials.
+ *
+ * \param[in] order Order of the new polynomial.
+ * \param[in] constVal Constant part of the polynomial.
+ * \param[in] values All non constant coefficients of the new polynomial (order ascending)
+ *
+ */
+Polynomial::Polynomial(int order, double constVal, ...):
+	_constant(order == 0 ? 1 : -1),
+	_order(order),
+	_coeffs(0)
+{
+	allocateMemory(false);
+
+	va_list args;
+	va_start(args, constVal);
+
+	_coeffs[0] = constVal;
+	for( int i = 1; i <= _order; i++ )
+	{
+		_coeffs[i] = va_arg(args, double);
+	}	
+
+	va_end(args);
+}
+
+/**
  * Destructor. Cleans up the object.
  * 
  */
@@ -339,7 +366,7 @@ Polynomial Polynomial::operator-(const Polynomial &p) const
 	Polynomial v(_order, false);
 	if (isConst())
 	{
-		v = p;
+		v = -p;
 		v._coeffs[0] = _coeffs[0] - p._coeffs[0];
 	}
 	else if (p.isConst())
@@ -1108,7 +1135,7 @@ void Polynomial::unsetConst()
 
 std::ostream& operator<<(std::ostream &out, const Polynomial &p)
 {
-	out << '(' << setiosflags(ios::fixed) << setprecision(2);
+	out << '(' << setiosflags(ios::fixed) << setprecision(1);
 
 	for (int i = p.order(); i > 0; i--)
  	{
