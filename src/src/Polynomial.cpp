@@ -125,6 +125,13 @@ double& Polynomial::operator[](int index)
 	{
 		throw MathException("%d is not a valid coefficient index of this %d order polynomial.", index, _order);
 	}
+	
+	if (index > 0)
+	{
+		// the constant state of the polynomial is no longer kown
+		_constant = -1;
+	}
+
 	return _coeffs[index];
 }
 
@@ -309,6 +316,9 @@ Polynomial Polynomial::operator+=(const Polynomial &p)
 	}
 	else
 	{
+		// constant state is undefined now
+		_constant = -1;
+
 		for (int i = 0; i <= _order; i++)
 		{
 			_coeffs[i] += p._coeffs[i];
@@ -408,6 +418,9 @@ Polynomial Polynomial::operator-=(const Polynomial &p)
 	}
 	else
 	{
+		// constant state is undefined now
+		_constant = -1;
+
 		for (int k = 0; k <= _order; k++)
 		{
 			_coeffs[k] -= p._coeffs[k];
@@ -541,38 +554,7 @@ Polynomial Polynomial::operator*=(const Polynomial &p)
 	}
 
 	*this = *this * p;
-	/*
-	// if one of the polynomial is constant we can optimize a bit
-	Polynomial v(_order, false);
-	if (isConst())
-	{
-		for (int i = 0; i <= _order; i++)
-		{
-			v._coeffs[i] = _coeffs[0] * p._coeffs[i];
-		}
-	}
-	else if (p.isConst())
-	{
-		for (int i = 0; i <= _order; i++)
-		{
-			v._coeffs[i] = _coeffs[i] * p._coeffs[0];
-		}
-	}
-	else
-	{
-		// general case
-		for (int i = 0; i <= _order; i++)
-		{
-			v._coeffs[i] = 0.0;
-			for (int j = 0; j < i + 1; j++)
-			{
-				v._coeffs[i] += _coeffs[j] * p._coeffs[i - j];
-			}	
-		}
-	}
-	
-	*this = v;
-	*/	
+
 	return *this;
 
 }

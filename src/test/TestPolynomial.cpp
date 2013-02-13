@@ -133,16 +133,16 @@ TEST_F(PolynomialOperator, comparsion)
 	}
 	ASSERT_FALSE(A == biggerA);
 
-	// ASSERT_EQ and ASSERT_EQ should use the comparision operators
+	// ASSERT_EQ and ASSERT_NE should use the comparision operators
 	ASSERT_EQ(A, asA);
 	ASSERT_NE(A, B);
 
-	ASSERT_TRUE( A < B );
-	ASSERT_FALSE( A < asA );
-	ASSERT_TRUE( A <= asA );
-	ASSERT_TRUE( B > A );
-	ASSERT_FALSE( asA > A );
-	ASSERT_TRUE( asA >= A );
+	ASSERT_TRUE(A < B);
+	ASSERT_FALSE(A < asA);
+	ASSERT_TRUE(A <= asA);
+	ASSERT_TRUE(B > A);
+	ASSERT_FALSE(asA > A);
+	ASSERT_TRUE(asA >= A);
 }
 
 TEST_F(PolynomialOperator, plus)
@@ -188,34 +188,15 @@ TEST_F(PolynomialOperator, timesPolynomial)
 
 TEST_F(PolynomialOperator, divPolynomial)
 {
-	Polynomial P1(2);
-	Polynomial P2(2);
-
-	double x1[] = {2,4,6};
-	double x2[] = {1,2,3};
-
-	P1.setCoeffs(x1);
-	P2.setCoeffs(x2);
+	Polynomial P1(2, 2.0, 4.0, 6.0);
+	Polynomial P2(2, 1.0, 2.0, 3.0);
 
 	Polynomial P3 = P1 / P2;
 	Polynomial P4 = P2 * P3;
 	ASSERT_EQ(P1, P4);
 
-	/*
-	printf("\nP1: \n");
-	P1.print();
-	printf("\nP2: \n");
-	P2.print();
-	printf("\nP3 = P1 / P2: \n");
-	P3.print();
-	printf("\nP4 = P1 = P3 * P2: \n");
-	P4.print();
-	printf("\n");
-	*/
 	P1 /= P2;
-	Polynomial PExpect(2);
-	double expect[] = {2,0,0};
-	PExpect.setCoeffs(expect);
+	Polynomial PExpect(2, 2.0, 0.0, 0.0);
 	ASSERT_EQ(PExpect, P1);
 }
 
@@ -225,18 +206,21 @@ TEST_F(PolynomialOperator, divPolynomial)
 TEST_F(PolynomialMethods, isConst)
 {
 	Polynomial P1;
-	Polynomial P2(2);
-	Polynomial P3(2);
-
-	double p2[] = {5,0,0};
-	P2.setCoeffs(p2);
-
-	double p3[] = {5,3,1};
-	P3.setCoeffs(p3);
+	Polynomial P2(2, 5.0, 0.0, 0.0);
+	Polynomial P3(2, 5.0, 3.0, 1.0);
 
 	ASSERT_TRUE(P1.isConst());
 	ASSERT_TRUE(P2.isConst());
 	ASSERT_FALSE(P3.isConst());
+
+	Polynomial P4 = P3;
+	ASSERT_FALSE(P4.isConst());
+	P4 -= Polynomial(2, 0.0, 3.0, 1.0);
+	ASSERT_TRUE(P4.isConst());
+	P4 += Polynomial(2, 2.0, 0.0, 0.0);
+	ASSERT_TRUE(P4.isConst());
+	P4 -= Polynomial(2, 2.0, 1.0, 0.0);
+	ASSERT_FALSE(P4.isConst());
 }
 
 TEST_F(PolynomialMethods, isConstWithEps)
