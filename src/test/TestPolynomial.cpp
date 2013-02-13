@@ -15,40 +15,12 @@ protected:
 	PolynomialOperator()
 	{
 		A = Polynomial(1, 1.0, 2.0);
-		B = Polynomial(1);
-		AplusB = Polynomial(1);
-		minusA = Polynomial(1);
-		AminusB = Polynomial(1);
-		twoA = Polynomial(1);
-		AB = Polynomial(1);
-
-		// B
-		double b[] = { 5, 2 };
-		B.setCoeffs(b);
-
-		// A + B
-		double aplusb[] = { 6, 4 };
-		AplusB.setCoeffs(aplusb);
-
-		// - A
-		double minusa[] = { -1, -2 };
-		minusA.setCoeffs(minusa);
-
-		// A - B
-		double aminusb[] = { -4, 0 };
-		AminusB.setCoeffs(aminusb);
-
-		// 2 * A
-		double twoa[] = { 2, 4 };
-		twoA.setCoeffs(twoa);
-
-		// A * B
-		// echtes A * B
-		// double ab[] = { 5, 12, 4 };
-		// AB.setCoeffs(ab);
-		// unechtes A * B (grad bleibt erhalten)
-		double ab[] = { 5, 12 };
-		AB.setCoeffs(ab);
+		B = Polynomial(1, 5.0, 2.0);
+		AplusB = Polynomial(1, 6.0, 4.0);
+		minusA = Polynomial(1, -1.0, -2.0);
+		AminusB = Polynomial(1, -4.0, 0.0);
+		twoA = Polynomial(1, 2.0, 4.0);
+		AB = Polynomial(1, 5.0, 12.0); // we ignore the square part
 	}
 };
 
@@ -56,17 +28,10 @@ class PolynomialMethods: public ::testing::Test
 {
 protected:
 	Polynomial ID, Zero;
-	PolynomialMethods() {
-
-		Zero = Polynomial(2);
-
-		// ID 
-		double id[] = {1};
-		ID.setCoeffs(id);
-
-		// Zero
-		double zero[] = {0,0,0};
-		Zero.setCoeffs(zero);
+	PolynomialMethods()
+	{
+		ID = Polynomial(0, 1.0);
+		Zero = Polynomial(2, 0.0, 0.0, 0.0);
 	}
 };
 
@@ -76,25 +41,23 @@ protected:
 	Polynomial A, B;
 	PolynomialExceptions()
 	{
-		double a[] = {0,1,2};
-		double b[] = {2,1,2,4};
-		A = Polynomial(2);
-		B = Polynomial(3);
-		A.setCoeffs(a);
-		B.setCoeffs(b);
+		A = Polynomial(2, 0.0, 1.0, 2.0);
+		B = Polynomial(3, 2.0, 1.0, 2.0, 4.0);
 	}
 };
+
 
 /*
  * Constructor Tests
  */
 TEST(PolynomialConstructor, default_constructor)
 {
-	// like Polynomial (const=1,order=0,nrcoeffs=order + 1);
+	// like Polynomial (const=1, order=0, nrcoeffs=order+1);
 	Polynomial p;
 	ASSERT_TRUE(p.isConst());
-	ASSERT_EQ(0,p.order());
-	ASSERT_EQ(1,p.ncoeff());
+	ASSERT_EQ(0, p.order());
+	ASSERT_EQ(1, p.ncoeff());
+	ASSERT_EQ(1, p[0]);
 }
 
 TEST(PolynomialConstructor, order_constructor)
@@ -102,33 +65,39 @@ TEST(PolynomialConstructor, order_constructor)
 	Polynomial p(2);
 	// should also be constant, because all values are zero initialized
 	ASSERT_TRUE(p.isConst());
-	ASSERT_EQ(2,p.order());
-	ASSERT_EQ(3,p.ncoeff());
+	ASSERT_EQ(2, p.order());
+	ASSERT_EQ(3, p.ncoeff());
+	ASSERT_EQ(0, p[0]);
+	ASSERT_EQ(0, p[1]);
+	ASSERT_EQ(0, p[2]);
 }
 
-TEST(PolynomialConstructor, test_and_copy_constructor)
+TEST(PolynomialConstructor, short_constructor)
 {
-	double c[] = { 2, 3, 4 };
-	Polynomial p(2);
-	p.setCoeffs(c);
+	Polynomial p(2, 2.0, 3.0, 4.0);
+
+	ASSERT_FALSE(p.isConst());
+	ASSERT_EQ(2, p[0]);
+	ASSERT_EQ(3, p[1]);
+	ASSERT_EQ(4, p[2]);
+}
+
+TEST(PolynomialConstructor, copy_constructor)
+{
+	Polynomial p(2, 2.0, 3.0, 4.0);
 
 	ASSERT_FALSE(p.isConst());
 	ASSERT_EQ(2, p[0]);
 	ASSERT_EQ(3, p[1]);
 	ASSERT_EQ(4, p[2]);
 
-	Polynomial clone(p);
-	ASSERT_EQ(p,clone);
-}
+	Polynomial copy(p);
+	ASSERT_EQ(p, copy);
 
-TEST(PolynomialConstructor, short_constructor)
-{
-	Polynomial pShort(2, 2.0, 3.0, 4.0);
-
-	ASSERT_FALSE(pShort.isConst());
-	ASSERT_EQ(2, pShort[0]);
-	ASSERT_EQ(3, pShort[1]);
-	ASSERT_EQ(4, pShort[2]);
+	ASSERT_FALSE(copy.isConst());
+	ASSERT_EQ(2, copy[0]);
+	ASSERT_EQ(3, copy[1]);
+	ASSERT_EQ(4, copy[2]);
 }
 
 /*
@@ -137,7 +106,8 @@ TEST(PolynomialConstructor, short_constructor)
 TEST_F(PolynomialOperator, assignment)
 {
 	B = A;
-	ASSERT_EQ(A,B);
+	ASSERT_EQ(A, B);
+	ASSERT_EQ(B, A);
 
 	for (int i = 0; i < A.ncoeff(); i++)
 	{
@@ -161,7 +131,6 @@ TEST_F(PolynomialOperator, comparsion)
 	{
 		biggerA[i] = A[i];
 	}
-	// biggerA.print();
 	ASSERT_FALSE(A == biggerA);
 
 	// ASSERT_EQ and ASSERT_EQ should use the comparision operators
@@ -179,6 +148,7 @@ TEST_F(PolynomialOperator, comparsion)
 TEST_F(PolynomialOperator, plus)
 {
 	ASSERT_EQ(AplusB, A + B);
+
 	A += B;
 	ASSERT_EQ(AplusB, A);
 }
@@ -199,55 +169,21 @@ TEST_F(PolynomialOperator, minus)
 TEST_F(PolynomialOperator, timesScalar)
 {
 	ASSERT_EQ(twoA, A * 2.0);
+
 	A *= 2.0;
 	ASSERT_EQ(twoA, A);
 }
 
 TEST_F(PolynomialOperator, timesPolynomial)
 {
-	Polynomial P1(2);
-	Polynomial P2(2);
-	// Polynomial PExpect(4);
-	Polynomial PExpect(2);
-	double x1[] = {1,2,3};
-	double x2[] = {2,3,4};
-	//double expect[] = {2, 7, 16, 17, 12};
-	double expect[] = {2, 7, 16};
-	/*
-	printf("\nP1: \n");
-	P1.print();
-	printf("\nP2: \n");
-	P2.print();
-	printf("\nP1 * P2: \n");
-	(P1 * P2).print();
-	printf("\n");
-	*/
-	P1.setCoeffs(x1);
-	P2.setCoeffs(x2);
-	PExpect.setCoeffs(expect);
+	Polynomial P1(2, 1.0, 2.0, 3.0);
+	Polynomial P2(2, 2.0, 3.0, 4.0);
+	Polynomial PExpect(2, 2.0, 7.0, 16.0);
+
 	ASSERT_EQ(PExpect, P1 * P2);
 
 	A *= B;
 	ASSERT_EQ(AB, A);
-	/*
-
-	double testX1[] = {2,3,4,5};
-	double testX2[] = {4,5,6,7};
-
-	Polynomial TestX1(3);
-	Polynomial TestX2(3);
-	TestX1.setCoeffs(testX1);
-	TestX2.setCoeffs(testX2);
-	*/
-	/*
-	printf("\nA: \n");
-	TestX1.print();
-	printf("\nB: \n");
-	TestX2.print();
-	printf("\nA * B: \n");
-	(TestX1 * TestX2).print();
-	printf("\n");
-	*/
 }
 
 TEST_F(PolynomialOperator, divPolynomial)
