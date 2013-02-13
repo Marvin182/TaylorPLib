@@ -2,7 +2,7 @@
 #define _TAYLORPLIB_H_
 
 #include <stdio.h>
-#include <stdarg.h>
+#include <stdarg.h> // MathException constuctor with format
 #include <stdexcept>
 #include <iostream>
 #include <iomanip>
@@ -66,10 +66,12 @@ namespace LibMatrix {
 		//
 		// Constructors, destructor
 		//
-		Polynomial();
-		Polynomial(int order, bool initialize = true);
-		Polynomial(const Polynomial &p);
-		~Polynomial();
+		Polynomial();											// Default constructor
+		Polynomial(int order, bool initialize = true);			// Regular constructor
+		Polynomial(const Polynomial &p);						// Copy construtor
+		Polynomial(int order, double constVal, ...);			// Short construtor for small hardcoded matrices
+
+		~Polynomial();											// Destructor
 
 		//
 		// Accessing properties
@@ -141,7 +143,7 @@ namespace LibMatrix {
 		int _rows,											// The number of rows
 			_cols,											// The number of columns
 			_dimT;											// The dimension of the Taylor polynomials 
-    	Polynomial **_data;										// The pointer to the allocated memory
+    	Polynomial **_data;									// The pointer to the allocated memory
 
     	void allocateMemory(bool initialize)
     		{ Matrix::allocateMemory(_data, _rows, _cols, _dimT, initialize); }
@@ -159,24 +161,23 @@ namespace LibMatrix {
 		Matrix(int rows, int cols, bool initialize = true);				// Regular constructor
 		Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
 		Matrix(const Matrix &m);										// Copy constructor
-
-		Matrix(int rows, int cols, Polynomial *values);						// Test construtor		
+		Matrix(int rows, int cols, Polynomial *values);					// Short construtor for small hardcoded matrices
 
 		~Matrix();														// Destructor
 
 		//
 		// Accessing properties
 		//
-		// double** data() { return _data; }			// Returns the ptr to the alloc. memory
-		int nrows() const { return _rows; }			// Returns the number of rows
-		int ncols() const { return _cols; }			// Returns the number of columns
-		int dimT() const { return _dimT; }			// Returns the dimension of the type T
-		const Polynomial* get(int row, int col) const;			// Returns a single element from the matrix
+		// double** data() { return _data; }				// Returns the ptr to the alloc. memory
+		int nrows() const { return _rows; }					// Returns the number of rows
+		int ncols() const { return _cols; }					// Returns the number of columns
+		int dimT() const { return _dimT; }					// Returns the dimension of the type T
+		const Polynomial* get(int row, int col) const;		// Returns a single element from the matrix
 
 		//
 		// Overloaded operators
 		//
-		Polynomial& operator()(int row, int col);			// Element
+		Polynomial& operator()(int row, int col);		// Element
 		Matrix operator=(const Matrix &m);				// Assignment operators
 		bool operator==(const Matrix &m) const;			// Comparison operators
 		bool operator!=(const Matrix &m) const;

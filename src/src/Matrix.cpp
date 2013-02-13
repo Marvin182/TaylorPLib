@@ -78,7 +78,11 @@ Matrix::Matrix(const Matrix &m):
 }
 
 /**
- * Easy constructor for testing.
+ * Short construtor for small hardcoded matrices.
+ *
+ * \param[in] rows Number of rows in the new matrix.
+ * \param[in] cols Number of columns in the new matrix.
+ * \param[in] values All values in the new matrix (left to the right, top to bottom)
  *
  */
 Matrix::Matrix(int rows, int cols, Polynomial *values):

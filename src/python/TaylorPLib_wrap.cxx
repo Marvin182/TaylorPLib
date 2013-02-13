@@ -3454,6 +3454,52 @@ fail:
 }
 
 
+SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_4__varargs__(PyObject *SWIGUNUSEDPARM(self), PyObject *args, PyObject *varargs) {
+  PyObject *resultobj = 0;
+  int arg1 ;
+  double arg2 ;
+  void *arg3 = 0 ;
+  int val1 ;
+  int ecode1 = 0 ;
+  double val2 ;
+  int ecode2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  LibMatrix::Polynomial *result = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:new_Polynomial",&obj0,&obj1)) SWIG_fail;
+  ecode1 = SWIG_AsVal_int(obj0, &val1);
+  if (!SWIG_IsOK(ecode1)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode1), "in method '" "new_Polynomial" "', argument " "1"" of type '" "int""'");
+  } 
+  arg1 = static_cast< int >(val1);
+  ecode2 = SWIG_AsVal_double(obj1, &val2);
+  if (!SWIG_IsOK(ecode2)) {
+    SWIG_exception_fail(SWIG_ArgError(ecode2), "in method '" "new_Polynomial" "', argument " "2"" of type '" "double""'");
+  } 
+  arg2 = static_cast< double >(val2);
+  result = (LibMatrix::Polynomial *)new LibMatrix::Polynomial(arg1,arg2,arg3);
+  resultobj = SWIG_NewPointerObj(SWIG_as_voidptr(result), SWIGTYPE_p_LibMatrix__Polynomial, SWIG_POINTER_NEW |  0 );
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_new_Polynomial__SWIG_4(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj;
+  PyObject *varargs;
+  PyObject *newargs;
+  
+  newargs = PyTuple_GetSlice(args,0,2);
+  varargs = PyTuple_GetSlice(args,2,PyTuple_Size(args)+1);
+  resultobj = _wrap_new_Polynomial__SWIG_4__varargs__(NULL,newargs,varargs);
+  Py_XDECREF(newargs);
+  Py_XDECREF(varargs);
+  return resultobj;
+}
+
+
 SWIGINTERN PyObject *_wrap_new_Polynomial(PyObject *self, PyObject *args) {
   int argc;
   PyObject *argv[3];
@@ -3493,6 +3539,25 @@ SWIGINTERN PyObject *_wrap_new_Polynomial(PyObject *self, PyObject *args) {
     }
     if (_v) {
       {
+        int res = SWIG_AsVal_double(argv[1], NULL);
+        _v = SWIG_CheckState(res);
+      }
+      if (_v) {
+        if (argc <= 2) {
+          return _wrap_new_Polynomial__SWIG_4(self, args);
+        }
+        return _wrap_new_Polynomial__SWIG_4(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    {
+      int res = SWIG_AsVal_int(argv[0], NULL);
+      _v = SWIG_CheckState(res);
+    }
+    if (_v) {
+      {
         int res = SWIG_AsVal_bool(argv[1], NULL);
         _v = SWIG_CheckState(res);
       }
@@ -3508,7 +3573,8 @@ fail:
     "    LibMatrix::Polynomial::Polynomial()\n"
     "    LibMatrix::Polynomial::Polynomial(int,bool)\n"
     "    LibMatrix::Polynomial::Polynomial(int)\n"
-    "    LibMatrix::Polynomial::Polynomial(LibMatrix::Polynomial const &)\n");
+    "    LibMatrix::Polynomial::Polynomial(LibMatrix::Polynomial const &)\n"
+    "    LibMatrix::Polynomial::Polynomial(int,double,...)\n");
   return 0;
 }
 

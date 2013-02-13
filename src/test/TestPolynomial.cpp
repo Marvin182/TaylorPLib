@@ -14,17 +14,13 @@ protected:
 	Polynomial A, B, AplusB, minusA, AminusB, twoA, AB;
 	PolynomialOperator()
 	{
-		A = Polynomial(1);
+		A = Polynomial(1, 1.0, 2.0);
 		B = Polynomial(1);
 		AplusB = Polynomial(1);
 		minusA = Polynomial(1);
 		AminusB = Polynomial(1);
 		twoA = Polynomial(1);
 		AB = Polynomial(1);
-
-		// A
-		double a[] = { 1, 2 };
-		A.setCoeffs(a);
 
 		// B
 		double b[] = { 5, 2 };
@@ -123,6 +119,16 @@ TEST(PolynomialConstructor, test_and_copy_constructor)
 
 	Polynomial clone(p);
 	ASSERT_EQ(p,clone);
+}
+
+TEST(PolynomialConstructor, short_constructor)
+{
+	Polynomial pShort(2, 2.0, 3.0, 4.0);
+
+	ASSERT_FALSE(pShort.isConst());
+	ASSERT_EQ(2, pShort[0]);
+	ASSERT_EQ(3, pShort[1]);
+	ASSERT_EQ(4, pShort[2]);
 }
 
 /*
