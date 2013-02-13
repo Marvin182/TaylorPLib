@@ -103,7 +103,7 @@ namespace LibMatrix
         /// <param name="p">The Taylor polynomial object to copy from.</param>
         public Polynomial(Polynomial p)
         {
-            initializePolynomial(p.order, p._coeffs, p._constant);
+            initializePolynomial(p.order, p._coeffs);
         }
 
         /// <summary>
@@ -174,7 +174,10 @@ namespace LibMatrix
                 if (i > _order || i < 0)
                     throw new MathException("Invalid coefficient index of polynomial.");
                 else
+                {
                     _coeffs[i] = value;
+                    _constant = -1;
+                }
 
             }
         }
