@@ -183,8 +183,8 @@ namespace Testanwendung_csharp
             Console.WriteLine("alpha: 2");
             Console.WriteLine("beta: 2\n");
             DateTime start = DateTime.Now;
-            String temp = ( (M1 * M2 * 2) + (M3 * 2) ).ToString();
-            Console.WriteLine( temp );
+            String temp = ((M1 * M2 * 2) + (M3 * 2)).ToString();
+            Console.WriteLine(temp);
             DateTime end = DateTime.Now;
             Console.WriteLine("Time needed: " + (end - start).ToString());
             Console.WriteLine("This was normal mode...");

@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // Allgemeine Informationen über eine Assembly werden über die folgenden 
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
-[assembly: AssemblyTitle("Testanwendung-csharp")]
+[assembly: AssemblyTitle("tst-csharp")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("F. Hoffmann La Roche Ltd")]
-[assembly: AssemblyProduct("Testanwendung-csharp")]
+[assembly: AssemblyProduct("tst-csharp")]
 [assembly: AssemblyCopyright("Copyright © F. Hoffmann La Roche Ltd 2013")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // Die folgende GUID bestimmt die ID der Typbibliothek, wenn dieses Projekt für COM verfügbar gemacht wird
-[assembly: Guid("873f5458-23cc-4914-a033-7b02fc39cbd1")]
+[assembly: Guid("e2de53ff-df9c-421c-9d30-4988c71eac61")]
 
 // Versionsinformationen für eine Assembly bestehen aus den folgenden vier Werten:
 //
