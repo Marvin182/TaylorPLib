@@ -16,11 +16,11 @@ C++
    *F shoud now contain the folder src/*
 2. Download and extract GTest to F\GTest\
 3. Open the F\GTest\msvc\gtest.sln in Visual Studio 
-   *Set up the Buildconfiguration to Release*
-   *In each of the four project solutions go to the properties tab (right click on project solution -> properties)*
-   *In the C/C++ -> Code Generation Tab change "Multithreaded (/MT)" to "Multithreaded-DLL (/MD)"*
-   *Compile it*
-   *This should produce a F\GTest\msvc\gtest\Release\ with the binaries (we need the lib files)*
+- Set up the Buildconfiguration to Release
+- In each of the four project solutions go to the properties tab (right click on project solution -> properties)
+- In the C/C++ -> Code Generation Tab change "Multithreaded (/MT)" to "Multithreaded-DLL (/MD)"
+- Compile it
+- This should produce a F\GTest\msvc\gtest\Release\ with the binaries (we need the lib files)
 4. Close the GTest project and open F\TaylorPLib\src\TaylorPLib.sln
 5. Compile and test the library with Strg + F5
 
