@@ -1,9 +1,7 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaylorPLib_CSharp", "TaylorPLib_CSharp.csproj", "{5AA87D4F-F91D-4F31-A859-A77114EE3D2A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestTaylorPLib_CSharp", "TestTaylorPLib_CSharp\TestTaylorPLib_CSharp.csproj", "{AABCC4E8-DA8B-4754-90B0-35015E323ED0}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E8BD2EC2-698C-4024-8DBC-9F69BFA9D03D}"
 	ProjectSection(SolutionItems) = preProject
@@ -11,6 +9,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		TaylorPLib_CSharp.vsmdi = TaylorPLib_CSharp.vsmdi
 		TraceAndTestImpact.testsettings = TraceAndTestImpact.testsettings
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharp Test", "TestTaylorPLib_CSharp\CSharp Test.csproj", "{AABCC4E8-DA8B-4754-90B0-35015E323ED0}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
