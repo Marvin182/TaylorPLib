@@ -13,7 +13,7 @@ C++
 
 ### Compiling the libary using Windows MSVC 2010
 1. Clone the repository to some folder F  
-   *F shoud now contain the folder src/
+   *F shoud now contain the folder src/*
 2. Download and extract GTest to F\GTest\
 3. Open the F\GTest\msvc\gtest.sln in Visual Studio 
    *Set up the Buildconfiguration to Release*
@@ -34,3 +34,6 @@ Python
 
 C#
 --
+
+### Dependencies
+- no additional depencies

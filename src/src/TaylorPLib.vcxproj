@@ -42,6 +42,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
+    <OutDir>$(SolutionDir)$(Configuration)\C++\</OutDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -72,6 +73,18 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <PostBuildEvent>
+      <Command>mkdir "$(TargetDir)Library\Include\"
+mkdir "$(TargetDir)Library\Lib\"
+mkdir "$(TargetDir)Library\DLL\"
+copy /Y "$(ProjectDir)*.h" "$(TargetDir)Library\Include\" 
+copy /Y "$(TargetDir)$(ProjectName).lib" "$(TargetDir)Library\Lib\" 
+copy /Y "$(TargetDir)$(ProjectName).dll" "$(TargetDir)Library\DLL\" </Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>rmdir /Q /S "$(TargetDir)Library
+</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="TaylorPLib.h" />

@@ -84,11 +84,11 @@
     <TargetName>_TaylorPLib</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir />
+    <OutDir>..\Release\Python\</OutDir>
     <IntDir>.\Release\</IntDir>
     <LinkIncremental>false</LinkIncremental>
     <TargetExt>.pyd</TargetExt>
-    <TargetName>_TaylorPLib</TargetName>
+    <TargetName>TaylorPLib</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -245,10 +245,24 @@
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <LinkDLL>true</LinkDLL>
       <SubSystem>Console</SubSystem>
-      <OutputFile>_TaylorPLib.pyd</OutputFile>
+      <OutputFile>TaylorPLib.pyd</OutputFile>
       <ImportLibrary>.\Release\TaylorPLib.lib</ImportLibrary>
       <AdditionalDependencies>$(PYTHON_LIB);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>mkdir "$(TargetDir)Library\Include"
+mkdir "$(TargetDir)Library\Binary"
+copy /Y "*.py" "$(TargetDir)"
+copy /Y "*.pyd" "$(TargetDir)"
+copy /Y "$(TargetName).py" "$(TargetDir)Library\Include"
+copy /Y "*.pyd" "$(TargetDir)Library\Binary"
+</Command>
+    </PostBuildEvent>
+    <PreBuildEvent>
+      <Command>del "$(TargetDir)\*.py"
+del "$(TargetDir)\*.pyd"
+rmdir /Q /S "$(TargetDir)Library"</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\src\Matrix.cpp" />
