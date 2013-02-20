@@ -1500,6 +1500,9 @@ namespace TestTaylorPLib_CSharp
             catch (Exception) { Assert.Fail(); }
         }
 
+        /// <summary>
+        /// Ein Test für mmCaAIbC()
+        /// </summary>
         [TestMethod()]
         public void MatrixFunction_mmCaAIbC_2()
         {
@@ -1538,6 +1541,73 @@ namespace TestTaylorPLib_CSharp
             Assert.AreEqual(expected.ToString(), C.ToString());
         }
 
+        /// <summary>
+        /// Ein Test für utsolve(Matrix A) 
+        /// </summary>
+        [TestMethod()]
+        public void MatrixFunction_utsolve()
+        {
+            #region definitions
+
+            Polynomial[,] Pa = new Polynomial[3, 3];
+            Pa[0, 0] = new Polynomial(1, new double[] { 3, 0 });
+            Pa[0, 1] = new Polynomial(1, new double[] { 1, 0 });
+            Pa[0, 2] = new Polynomial(1, new double[] { 0, 0 });
+
+            Pa[1, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[1, 1] = new Polynomial(1, new double[] { 4, 0 });
+            Pa[1, 2] = new Polynomial(1, new double[] { 6, 0 });
+
+            Pa[2, 0] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[2, 1] = new Polynomial(1, new double[] { 0, 0 });
+            Pa[2, 2] = new Polynomial(1, new double[] { 2, 0 });
+
+            Polynomial[,] Pb = new Polynomial[3, 2];
+            Pb[0, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[0, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Pb[1, 0] = new Polynomial(1, new double[] { 1, 2 });
+            Pb[1, 1] = new Polynomial(1, new double[] { 1, 2 });
+
+            Pb[2, 0] = new Polynomial(1, new double[] { 2, 1 });
+            Pb[2, 1] = new Polynomial(1, new double[] { 2, 1 });
+
+            #endregion
+
+            Matrix A = new Matrix(3, 3, Pa);
+            Matrix X = new Matrix(3, 2, Pb);
+            Matrix B = A * X;
+            A.utsolve(ref B);
+            Assert.AreEqual(B.ToString(), X.ToString());
+
+            try
+            {
+                X.utsolve(ref A);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            try
+            {
+                Matrix C = new Matrix(2, 2, 1);
+                C.utsolve(ref B);
+                Assert.Fail();
+            }
+            catch (MathException) { }
+            catch (Exception) { Assert.Fail(); }
+
+            A = new Matrix(3, 3, Pa);
+            X = new Matrix(3, 2, Pb);
+            B = A * X;
+            Matrix actual = new Matrix(X);
+
+            X = new Matrix(3, 2);
+            A.utsolve(B, X, new int[] { 0, 1, 2 });
+
+            Assert.AreEqual(actual.ToString(), X.ToString());
+        }
+        
         /// <summary>
         /// Ein Test für cpermutem(int[] piv, bool trans = false)
         /// </summary>
