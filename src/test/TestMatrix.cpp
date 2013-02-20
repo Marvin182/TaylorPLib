@@ -621,6 +621,7 @@ TEST_F(MatrixMultiplication, mmCaAIbC)
 }
 // void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool rows);
 
+
 /*
  * OTHER MATRIX METHODS
  */
@@ -628,6 +629,25 @@ TEST_F(MatrixMultiplication, mmCaAIbC)
 // int Matrix::tcfnorm(int nrTC, double *fn);
 // int Matrix::colnorm(double *c);
 // int Matrix::colnormdown(int pos, int *piv, double *c);
+
+TEST_F(MatrixMultiplication, utsolve)
+{
+	Polynomial a[] = {
+		T(3), T(1), T(0),
+		T(0), T(4), T(6),
+		T(0), T(0), T(2)
+	};
+	Matrix A(3, 3, a);
+	Matrix X(3, 2);
+	fillWithRandoms(X);
+
+	Matrix B = A * X;
+
+	A.utsolve(B);
+	// solution should be written in B, so X and B should be equal
+
+	ASSERT_EQ(X, B);
+}
 
 TEST_F(MatrixMethods, cpermutem)
 {
