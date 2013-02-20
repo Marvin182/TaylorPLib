@@ -67,6 +67,129 @@ except AttributeError:
     _newclass = 0
 
 
+class SwigPyIterator(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, SwigPyIterator, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, SwigPyIterator, name)
+    def __init__(self, *args, **kwargs): raise AttributeError("No constructor defined - class is abstract")
+    __repr__ = _swig_repr
+    __swig_destroy__ = _TaylorPLib.delete_SwigPyIterator
+    __del__ = lambda self : None;
+    def value(self): return _TaylorPLib.SwigPyIterator_value(self)
+    def incr(self, n=1): return _TaylorPLib.SwigPyIterator_incr(self, n)
+    def decr(self, n=1): return _TaylorPLib.SwigPyIterator_decr(self, n)
+    def distance(self, *args): return _TaylorPLib.SwigPyIterator_distance(self, *args)
+    def equal(self, *args): return _TaylorPLib.SwigPyIterator_equal(self, *args)
+    def copy(self): return _TaylorPLib.SwigPyIterator_copy(self)
+    def next(self): return _TaylorPLib.SwigPyIterator_next(self)
+    def __next__(self): return _TaylorPLib.SwigPyIterator___next__(self)
+    def previous(self): return _TaylorPLib.SwigPyIterator_previous(self)
+    def advance(self, *args): return _TaylorPLib.SwigPyIterator_advance(self, *args)
+    def __eq__(self, *args): return _TaylorPLib.SwigPyIterator___eq__(self, *args)
+    def __ne__(self, *args): return _TaylorPLib.SwigPyIterator___ne__(self, *args)
+    def __iadd__(self, *args): return _TaylorPLib.SwigPyIterator___iadd__(self, *args)
+    def __isub__(self, *args): return _TaylorPLib.SwigPyIterator___isub__(self, *args)
+    def __add__(self, *args): return _TaylorPLib.SwigPyIterator___add__(self, *args)
+    def __sub__(self, *args): return _TaylorPLib.SwigPyIterator___sub__(self, *args)
+    def __iter__(self): return self
+SwigPyIterator_swigregister = _TaylorPLib.SwigPyIterator_swigregister
+SwigPyIterator_swigregister(SwigPyIterator)
+
+class Line(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Line, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Line, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _TaylorPLib.Line_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _TaylorPLib.Line___nonzero__(self)
+    def __bool__(self): return _TaylorPLib.Line___bool__(self)
+    def __len__(self): return _TaylorPLib.Line___len__(self)
+    def pop(self): return _TaylorPLib.Line_pop(self)
+    def __getslice__(self, *args): return _TaylorPLib.Line___getslice__(self, *args)
+    def __setslice__(self, *args): return _TaylorPLib.Line___setslice__(self, *args)
+    def __delslice__(self, *args): return _TaylorPLib.Line___delslice__(self, *args)
+    def __delitem__(self, *args): return _TaylorPLib.Line___delitem__(self, *args)
+    def __getitem__(self, *args): return _TaylorPLib.Line___getitem__(self, *args)
+    def __setitem__(self, *args): return _TaylorPLib.Line___setitem__(self, *args)
+    def append(self, *args): return _TaylorPLib.Line_append(self, *args)
+    def empty(self): return _TaylorPLib.Line_empty(self)
+    def size(self): return _TaylorPLib.Line_size(self)
+    def clear(self): return _TaylorPLib.Line_clear(self)
+    def swap(self, *args): return _TaylorPLib.Line_swap(self, *args)
+    def get_allocator(self): return _TaylorPLib.Line_get_allocator(self)
+    def begin(self): return _TaylorPLib.Line_begin(self)
+    def end(self): return _TaylorPLib.Line_end(self)
+    def rbegin(self): return _TaylorPLib.Line_rbegin(self)
+    def rend(self): return _TaylorPLib.Line_rend(self)
+    def pop_back(self): return _TaylorPLib.Line_pop_back(self)
+    def erase(self, *args): return _TaylorPLib.Line_erase(self, *args)
+    def __init__(self, *args): 
+        this = _TaylorPLib.new_Line(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _TaylorPLib.Line_push_back(self, *args)
+    def front(self): return _TaylorPLib.Line_front(self)
+    def back(self): return _TaylorPLib.Line_back(self)
+    def assign(self, *args): return _TaylorPLib.Line_assign(self, *args)
+    def resize(self, *args): return _TaylorPLib.Line_resize(self, *args)
+    def insert(self, *args): return _TaylorPLib.Line_insert(self, *args)
+    def reserve(self, *args): return _TaylorPLib.Line_reserve(self, *args)
+    def capacity(self): return _TaylorPLib.Line_capacity(self)
+    __swig_destroy__ = _TaylorPLib.delete_Line
+    __del__ = lambda self : None;
+Line_swigregister = _TaylorPLib.Line_swigregister
+Line_swigregister(Line)
+
+class Array(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Array, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Array, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _TaylorPLib.Array_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _TaylorPLib.Array___nonzero__(self)
+    def __bool__(self): return _TaylorPLib.Array___bool__(self)
+    def __len__(self): return _TaylorPLib.Array___len__(self)
+    def pop(self): return _TaylorPLib.Array_pop(self)
+    def __getslice__(self, *args): return _TaylorPLib.Array___getslice__(self, *args)
+    def __setslice__(self, *args): return _TaylorPLib.Array___setslice__(self, *args)
+    def __delslice__(self, *args): return _TaylorPLib.Array___delslice__(self, *args)
+    def __delitem__(self, *args): return _TaylorPLib.Array___delitem__(self, *args)
+    def __getitem__(self, *args): return _TaylorPLib.Array___getitem__(self, *args)
+    def __setitem__(self, *args): return _TaylorPLib.Array___setitem__(self, *args)
+    def append(self, *args): return _TaylorPLib.Array_append(self, *args)
+    def empty(self): return _TaylorPLib.Array_empty(self)
+    def size(self): return _TaylorPLib.Array_size(self)
+    def clear(self): return _TaylorPLib.Array_clear(self)
+    def swap(self, *args): return _TaylorPLib.Array_swap(self, *args)
+    def get_allocator(self): return _TaylorPLib.Array_get_allocator(self)
+    def begin(self): return _TaylorPLib.Array_begin(self)
+    def end(self): return _TaylorPLib.Array_end(self)
+    def rbegin(self): return _TaylorPLib.Array_rbegin(self)
+    def rend(self): return _TaylorPLib.Array_rend(self)
+    def pop_back(self): return _TaylorPLib.Array_pop_back(self)
+    def erase(self, *args): return _TaylorPLib.Array_erase(self, *args)
+    def __init__(self, *args): 
+        this = _TaylorPLib.new_Array(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _TaylorPLib.Array_push_back(self, *args)
+    def front(self): return _TaylorPLib.Array_front(self)
+    def back(self): return _TaylorPLib.Array_back(self)
+    def assign(self, *args): return _TaylorPLib.Array_assign(self, *args)
+    def resize(self, *args): return _TaylorPLib.Array_resize(self, *args)
+    def insert(self, *args): return _TaylorPLib.Array_insert(self, *args)
+    def reserve(self, *args): return _TaylorPLib.Array_reserve(self, *args)
+    def capacity(self): return _TaylorPLib.Array_capacity(self)
+    __swig_destroy__ = _TaylorPLib.delete_Array
+    __del__ = lambda self : None;
+Array_swigregister = _TaylorPLib.Array_swigregister
+Array_swigregister(Array)
+
 MAX_MESSAGE_SIZE = _TaylorPLib.MAX_MESSAGE_SIZE
 class Polynomial(_object):
     __swig_setmethods__ = {}
@@ -113,6 +236,9 @@ class Polynomial(_object):
     def set2Id(self): return _TaylorPLib.Polynomial_set2Id(self)
     def set2Zero(self, *args): return _TaylorPLib.Polynomial_set2Zero(self, *args)
     def setCoeffs(self, *args): return _TaylorPLib.Polynomial_setCoeffs(self, *args)
+    def __getitem__(self, *args): return _TaylorPLib.Polynomial___getitem__(self, *args)
+    def __setitem__(self, *args): return _TaylorPLib.Polynomial___setitem__(self, *args)
+    def __str__(self): return _TaylorPLib.Polynomial___str__(self)
 Polynomial_swigregister = _TaylorPLib.Polynomial_swigregister
 Polynomial_swigregister(Polynomial)
 
@@ -169,6 +295,8 @@ class Matrix(_object):
     def set2Val(self, *args): return _TaylorPLib.Matrix_set2Val(self, *args)
     def set2ValFromIndices(self, *args): return _TaylorPLib.Matrix_set2ValFromIndices(self, *args)
     def _print(self, *args): return _TaylorPLib.Matrix__print(self, *args)
+    def __setitem__(self, *args): return _TaylorPLib.Matrix___setitem__(self, *args)
+    def __str__(self): return _TaylorPLib.Matrix___str__(self)
 Matrix_swigregister = _TaylorPLib.Matrix_swigregister
 Matrix_swigregister(Matrix)
 

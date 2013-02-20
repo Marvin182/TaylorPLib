@@ -9,6 +9,11 @@
 #include <typeinfo>
 #include <math.h>
 
+
+// needed for python port
+#include <sstream>
+#include <vector>
+
 #define abs(x) ((x) > 0 ? (x) : -(x))
 
 #define MAX_MESSAGE_SIZE 256
@@ -19,6 +24,13 @@
 #else
 #define DLL_EXPORT __declspec(dllexport)
 #endif
+
+namespace LibMatrix {
+	class Polynomial;
+	class Matrix;
+};
+DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
+DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
 
 namespace LibMatrix {
 	class DLL_EXPORT Polynomial
@@ -70,6 +82,7 @@ namespace LibMatrix {
 		Polynomial(int order, bool initialize = true);			// Regular constructor
 		Polynomial(const Polynomial &p);						// Copy construtor
 		Polynomial(int order, double constVal, ...);			// Short construtor for small hardcoded matrices
+		Polynomial(std::vector<double> coelffs);				// Even shorter constructor for Python port
 
 		~Polynomial();											// Destructor
 
@@ -133,7 +146,32 @@ namespace LibMatrix {
 		void set2Id() { set2Const(1.0); }
 		void set2Zero();
 		void set2Zero(int ord);
-		void setCoeffs(double *c);
+		void setCoeffs(double *coeffs);
+		void setCoeffs(std::vector<double> coeffs);
+
+
+		// Python
+
+		double __getitem__(int index) {
+			return _coeffs[index];
+		}
+
+		void __setitem__(int index, double value) {
+			_coeffs[index] = value;
+			_constant = -1;
+		}
+
+		char* __str__() {
+			std::ostringstream oss(std::ostringstream::out);
+			oss << (*this);
+
+			static std::string& tmp = oss.str();
+			static char* cstr;
+			tmp = oss.str();
+			cstr = (char*) tmp.c_str();
+
+			return cstr;
+		}
 	};
 
 
@@ -168,7 +206,6 @@ namespace LibMatrix {
 		//
 		// Accessing properties
 		//
-		// double** data() { return _data; }				// Returns the ptr to the alloc. memory
 		int nrows() const { return _rows; }					// Returns the number of rows
 		int ncols() const { return _cols; }					// Returns the number of columns
 		int dimT() const { return _dimT; }					// Returns the dimension of the type T
@@ -276,13 +313,28 @@ namespace LibMatrix {
 		// 		char *str, double eps);
 		// void printtpm(int *piv, char *str, const char *const color, double eps);
 		// void fprinttpm(FILE * fn, int *piv, char *str, double eps);
+
+
+		// Python operators
+
+		void __setitem__(int row, Polynomial p) {
+			_data[row][0] = p;
+			p.print();
+		}
+
+		const char* __str__() {
+			std::ostringstream oss(std::ostringstream::out);
+			oss << (*this);
+
+			static std::string& tmp = oss.str();
+			static char* cstr = (char*) tmp.c_str();
+
+			return cstr;
+		}
 	};
 
 
 };
-
-DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
-DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
 
 class DLL_EXPORT MathException
 {

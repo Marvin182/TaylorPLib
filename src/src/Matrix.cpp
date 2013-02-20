@@ -157,7 +157,7 @@ const Polynomial* Matrix::get(int row, int col) const
  * \return The value of the desired element.
  *
  */
-Polynomial &Matrix::operator()(int row, int col)
+Polynomial& Matrix::operator()(int row, int col)
 { 
 	// bounds checking
 	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
