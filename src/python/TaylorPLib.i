@@ -8,8 +8,9 @@
 %include "std_vector.i"
 
 namespace std {
-	%template(Line)  vector <double>;
-    %template(Array) vector< vector<double> >;
+	%template(DoubleArray) vector<double>;
+	%template(IntArray) vector<int>;
+    %template(2dArray) vector< vector<double> >;
 }
 
 /* Let's just grab the original header file here */

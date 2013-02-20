@@ -143,6 +143,53 @@ class Line(_object):
 Line_swigregister = _TaylorPLib.Line_swigregister
 Line_swigregister(Line)
 
+class Line2(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, Line2, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, Line2, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _TaylorPLib.Line2_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _TaylorPLib.Line2___nonzero__(self)
+    def __bool__(self): return _TaylorPLib.Line2___bool__(self)
+    def __len__(self): return _TaylorPLib.Line2___len__(self)
+    def pop(self): return _TaylorPLib.Line2_pop(self)
+    def __getslice__(self, *args): return _TaylorPLib.Line2___getslice__(self, *args)
+    def __setslice__(self, *args): return _TaylorPLib.Line2___setslice__(self, *args)
+    def __delslice__(self, *args): return _TaylorPLib.Line2___delslice__(self, *args)
+    def __delitem__(self, *args): return _TaylorPLib.Line2___delitem__(self, *args)
+    def __getitem__(self, *args): return _TaylorPLib.Line2___getitem__(self, *args)
+    def __setitem__(self, *args): return _TaylorPLib.Line2___setitem__(self, *args)
+    def append(self, *args): return _TaylorPLib.Line2_append(self, *args)
+    def empty(self): return _TaylorPLib.Line2_empty(self)
+    def size(self): return _TaylorPLib.Line2_size(self)
+    def clear(self): return _TaylorPLib.Line2_clear(self)
+    def swap(self, *args): return _TaylorPLib.Line2_swap(self, *args)
+    def get_allocator(self): return _TaylorPLib.Line2_get_allocator(self)
+    def begin(self): return _TaylorPLib.Line2_begin(self)
+    def end(self): return _TaylorPLib.Line2_end(self)
+    def rbegin(self): return _TaylorPLib.Line2_rbegin(self)
+    def rend(self): return _TaylorPLib.Line2_rend(self)
+    def pop_back(self): return _TaylorPLib.Line2_pop_back(self)
+    def erase(self, *args): return _TaylorPLib.Line2_erase(self, *args)
+    def __init__(self, *args): 
+        this = _TaylorPLib.new_Line2(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _TaylorPLib.Line2_push_back(self, *args)
+    def front(self): return _TaylorPLib.Line2_front(self)
+    def back(self): return _TaylorPLib.Line2_back(self)
+    def assign(self, *args): return _TaylorPLib.Line2_assign(self, *args)
+    def resize(self, *args): return _TaylorPLib.Line2_resize(self, *args)
+    def insert(self, *args): return _TaylorPLib.Line2_insert(self, *args)
+    def reserve(self, *args): return _TaylorPLib.Line2_reserve(self, *args)
+    def capacity(self): return _TaylorPLib.Line2_capacity(self)
+    __swig_destroy__ = _TaylorPLib.delete_Line2
+    __del__ = lambda self : None;
+Line2_swigregister = _TaylorPLib.Line2_swigregister
+Line2_swigregister(Line2)
+
 class Array(_object):
     __swig_setmethods__ = {}
     __setattr__ = lambda self, name, value: _swig_setattr(self, Array, name, value)
@@ -258,6 +305,7 @@ class Matrix(_object):
     def ncols(self): return _TaylorPLib.Matrix_ncols(self)
     def dimT(self): return _TaylorPLib.Matrix_dimT(self)
     def get(self, *args): return _TaylorPLib.Matrix_get(self, *args)
+    def set(self, *args): return _TaylorPLib.Matrix_set(self, *args)
     def __call__(self, *args): return _TaylorPLib.Matrix___call__(self, *args)
     def __eq__(self, *args): return _TaylorPLib.Matrix___eq__(self, *args)
     def __ne__(self, *args): return _TaylorPLib.Matrix___ne__(self, *args)
@@ -295,6 +343,7 @@ class Matrix(_object):
     def set2Val(self, *args): return _TaylorPLib.Matrix_set2Val(self, *args)
     def set2ValFromIndices(self, *args): return _TaylorPLib.Matrix_set2ValFromIndices(self, *args)
     def _print(self, *args): return _TaylorPLib.Matrix__print(self, *args)
+    def __getitem__(self, *args): return _TaylorPLib.Matrix___getitem__(self, *args)
     def __setitem__(self, *args): return _TaylorPLib.Matrix___setitem__(self, *args)
     def __str__(self): return _TaylorPLib.Matrix___str__(self)
 Matrix_swigregister = _TaylorPLib.Matrix_swigregister
