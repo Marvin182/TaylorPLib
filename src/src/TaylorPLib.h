@@ -252,7 +252,7 @@ namespace LibMatrix {
 		//
 		// Solving systems of equations
 		//
-		// int utsolve(Matrix &B);					// U X = B, back-substitution
+		void utsolve(Matrix &B);					// U X = B, back-substitution
 		// int utsolve(Matrix &B, Matrix &X, int *piv);// U X = B, back-substitution, pivoting
 		// int utsolve(T *b);						// U x = b, back-substitution
 		// int utxsolve(Matrix &B);					// X U = B, back-substitution
