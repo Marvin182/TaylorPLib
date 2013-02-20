@@ -29,6 +29,7 @@ namespace LibMatrix {
 	class Polynomial;
 	class Matrix;
 };
+
 DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Polynomial &p);
 DLL_EXPORT std::ostream& operator<<(std::ostream &out, const LibMatrix::Matrix &m);
 
@@ -210,6 +211,7 @@ namespace LibMatrix {
 		int ncols() const { return _cols; }					// Returns the number of columns
 		int dimT() const { return _dimT; }					// Returns the dimension of the type T
 		const Polynomial* get(int row, int col) const;		// Returns a single element from the matrix
+		void set(int row, int col, const Polynomial &p);	// Sets a single element from the matrix
 
 		//
 		// Overloaded operators
@@ -317,23 +319,30 @@ namespace LibMatrix {
 
 		// Python operators
 
-		void __setitem__(int row, Polynomial p) {
-			_data[row][0] = p;
-			p.print();
+		const Polynomial* __getitem__(std::vector<int> coords) {
+			// int row = coords[0];
+			// int col = coords[1];
+	
+			// return _data[row][col];
+			return get(coords[0], coords[1]);
 		}
 
-		const char* __str__() {
+		void __setitem__(std::vector<int> coords, const Polynomial &p) {
+			set(coords[0], coords[1], p);
+		}
+
+		char* __str__() {
 			std::ostringstream oss(std::ostringstream::out);
 			oss << (*this);
 
 			static std::string& tmp = oss.str();
-			static char* cstr = (char*) tmp.c_str();
+			static char* cstr;
+			tmp = oss.str();
+			cstr = (char*) tmp.c_str();
 
 			return cstr;
 		}
 	};
-
-
 };
 
 class DLL_EXPORT MathException

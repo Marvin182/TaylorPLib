@@ -125,7 +125,7 @@ Matrix::~Matrix()
 //
 
 /**
- * Gets a single element from the matrix.
+ * Returns a single element from the matrix.
  * 
  * \param[in] row The row index.
  * \param[in] col The column index.
@@ -140,6 +140,25 @@ const Polynomial* Matrix::get(int row, int col) const
 		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, _rows, _cols);
 	}
 	return &_data[row][col];
+}
+
+/**
+ * Sets a single element from the matrix.
+ * 
+ * \param[in] row The row index.
+ * \param[in] col The column index.
+ * \param[in] p The polynomial.
+ * \return The value of the desired element.
+ *
+ */
+void Matrix::set(int row, int col, const Polynomial &p)
+{ 
+	// bounds checking
+	if( row >= _rows  ||  row < 0  ||  col >= _cols  ||  col < 0 )
+	{
+		throw MathException("(%d, %d) is not a valid index of a %d x %d matrix.", row, col, _rows, _cols);
+	}
+	_data[row][col] = p;
 }
 
 
