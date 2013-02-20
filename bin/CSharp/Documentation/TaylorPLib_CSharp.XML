@@ -1,0 +1,1072 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TaylorPLib_CSharp</name>
+    </assembly>
+    <members>
+        <member name="T:LibMatrix.Polynomial">
+             <summary>
+            
+             (Taylor) Polynomial with derivate degree n (n+1 coefficients):<para/>
+             <para/>
+             P_n(x) = f(a) + (x-a)*f'(a)/1! + (x-a)^2*f''(a)/2! + (x-a)^3*f'''(a)/3! <para/>
+            			+ ... + (x-a)^n*f^{(n)}(a)/n!<para/>
+             <para/>
+            		  = sum{k=0}{n} (x-a)^k*f^{(k)}(a)/k!<para/>
+             <para/>
+             being 'f' the function to be approximated by P_n(x) at point 'a', with its<para/>
+             first n derivatives existing on a closed interval I, so that<para/>
+             <para/>
+             f(x) = P_n(x) + R_n(x)<para/>
+             <para/>
+             the remainder term being R_n(x) = (x-a)^{n+1}*f^{(n+1)}(c)/(n+1)! for some<para/>
+             'c' between 'x' and 'a'.<para/>
+             <para/>
+             Another often used form:<para/>
+             <para/>
+             f(x0+h) = f(x0) + h*f'(x0)/1! + h^2*f''(x0)/2! + h^3*f'''(x0)/3! <para/>
+            			+ ... + h^n*f^{(n)}(x0)/n!<para/>
+             <para/>
+             </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.#ctor">
+            <summary>
+            Default constructor for the class. Creates the object.<para/>
+            It is a Taylor polynomial of order zero, i.e., it has a constant value: <para/>
+            <para/>
+            p(x) = 1
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.#ctor(System.Int32)">
+            <summary>
+            Constructor for the class with a derivative order as parameter. Creates the object.<para/>
+            Example, order=3 &lt;==/&gt; 4 coefficients:<para/>
+            <para/>
+            p(x) = p_0 + p_1*x + p_2*x^2 + p_3*x^3<para/>
+            </summary>
+            <param name="order">The derivative order of the Taylor polynomial.</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.#ctor(System.Int32,System.Double[],System.Int32)">
+            <summary>
+            Constructor for the class with given params<para/>
+            </summary>
+            <param name="order">number of items (zerobased)</param>
+            <param name="coeffs">must match order<para/>
+            e.g.: order = 3 -> coeffs = new double[4] with values</param>
+            <param name="constant">[optional] 1 = constant,<para /> zero = not constant<para />, -1 = unknown<para/> </param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.#ctor(LibMatrix.Polynomial)">
+            <summary>
+            Copy constructor.<para/>
+            Polynomial newtp = new Polynomial(oldtp);<para/>
+            Equivalent to Polynomial newtp = oldtp;
+            </summary>
+            <param name="p">The Taylor polynomial object to copy from.</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.Finalize">
+            <summary>
+            Destructor. Cleans up the object.
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.unsetConst">
+            <summary>
+            fior unseting the constCount
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.initializePolynomial(System.Int32,System.Double[],System.Int32)">
+            <summary>
+            for initializing the Polynomial<para/>
+            </summary>
+            <param name="order">The order of Polynomial</param>
+            <param name="coeffs">The Values </param>
+            <param name="constant">default = -1</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Equality(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the == operator.<para/>
+            Compares two Taylor polynomials.<para/>
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>true if equal</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Inequality(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the != operator.<para/>
+            Compares two Taylor polynomials.<para/>
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>true if not equal</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.Equals(System.Object)">
+            <summary>
+            Overrides the base function Equals
+            </summary>
+            <param name="obj">object of Polynomial</param>
+            <returns>true if coeffs[] are equal</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.GetHashCode">
+            <summary>
+            Overrides the base function GetHashCode()
+            </summary>
+            <returns>hash of coeffs[]</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_LessThan(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the &lt; operator.<para/>
+            Compares two Taylor polynomials according to the value of the first coefficient.
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>true if a &lt; b</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_LessThanOrEqual(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the &lt;= operator.<para/>
+            Compares two Taylor polynomials according to the value of the first coefficient.
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>true if a &lt;= b</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_GreaterThan(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the > operator.<para/>
+            Compares two Taylor polynomials according to the value of the first coefficient.
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>true if a > b</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_GreaterThanOrEqual(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the >= operator.<para/>
+            Compares two Taylor polynomials according to the value of the first coefficient.
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>true if a >= b</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Addition(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the + operator
+            </summary>
+            <param name="a">Polynomial on the left side</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>a + b (if order mathches)</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_UnaryNegation(LibMatrix.Polynomial)">
+            <summary>
+            Implements the unary - Operator
+            </summary>
+            <param name="a"></param>
+            <returns></returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Subtraction(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Implements the -= operator.<para/>
+            Substracts a Taylor polynomial from the current one using pointers to arrays that <para/>
+            store the coefficients.<para/>
+            </summary>
+            <param name="a">the Taylor polynomial to be substracted from.</param>
+            <param name="b">Polynomial on the right side</param>
+            <returns>a - b (if order mathches)</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Multiply(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Multiplies two Taylor polynomials. Implements the * operator for Taylor arithmetic.<para/>
+            The following coefficient propagation rule is applied:<para/>
+            <para/>
+            		v_k = sum_{j=0}{k}  u_j * w_{k-j}<para/>
+            <para/>
+            for k = 1...d and v(t) = u(t) * w(t), u, v, w being Taylor polynomials, and d being <para/>
+            the derivative degree.<para/>
+            <para/>
+            It is assumed that all three Taylor polynomials have the same derivative degree d.<para/>
+            Three different cases are distinguished here: when at least one of the polynomials<para/>
+            is a constant polynomial and when both polynomials are not.<para/>
+            <para/>
+            (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques<para/>
+            of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM,<para/>
+            Philadelphia, PA, 2000)<para/>
+            </summary>
+            <param name="a">the Taylor polynomial to be multiplied with.</param>
+            <param name="b">the Taylor polynomial to be multiplied by.</param>
+            <returns>The resulting Polynomail (without changing the order)</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Multiply(LibMatrix.Polynomial,System.Double)">
+            <summary>
+            Implements the * operator.<para/>
+            Multiplies a Taylor polynomial by a scalar.<para/>
+            </summary>
+            <param name="a">The Polynomial value to multiply with</param>
+            <param name="d">The scalar value to multiply by</param>
+            <returns></returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.op_Division(LibMatrix.Polynomial,LibMatrix.Polynomial)">
+            <summary>
+            Divides a Taylor polynomial (dividend) by another Taylor polynomial (divisor).<para/>
+            Implements the / operator for Taylor arithmetic.<para/>
+            <para/>
+            		v_k = 1 / w_0 * [u_k - sum_{j=0}{k-1}  v_j * w_{k-j}]<para/>
+            <para/>
+            for k = 1...d and v(t) = u(t) / w(t), u, v, w being Taylor polynomials, and d being <para/>
+            the derivative degree.<para/>
+            <para/>
+            It is assumed that all three Taylor polynomials have the same derivative degree d.<para/>
+            <para/>
+            (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques<para/>
+            of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, <para/>
+            Philadelphia, PA, 2000)<para/>
+            </summary>
+            <param name="a">Polynomial as divisor</param>
+            <param name="b">Polynomial as divident</param>
+            <returns>the resulting Taylor polynomial.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.sqr">
+            <summary>
+            Polynomial PExpect = new Polynomial(3, new double[] { 1, 4, 10, 20 });<para/>
+            Taylor arithmetic.<para/>
+            <para/>
+            The following coefficient propagation rule is applied:<para/>
+            <para/>
+                v_k = sum_{j=0}{k}  u_j * u_{k-j}<para/>
+            <para/>
+            for k = 1...d and v(t) = u(t)^2, u and v being a Taylor polynomials, and d being<para/>
+            the derivative degree.<para/>
+            <para/>
+            (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques<para/>
+            of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, <para/>
+            Philadelphia, PA, 2000)<para/>
+            </summary>
+            <returns>The resulting Taylor polynomial.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.setSqr">
+            <summary>
+            Sets this Taylor polynomial to its square.<para/>
+            <para/>
+            The following coefficient propagation rule is applied:<para/>
+            <para/>
+            		v_k = sum_{j=0}{k}  u_j * u_{k-j}<para/>
+            <para/>
+            for k = 1...d and v(t) = u(t)^2, u and v being a Taylor polynomials, and d being<para/> 
+            the derivative degree.<para/>
+            <para/>
+            (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques<para/>
+            of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, <para/>
+            Philadelphia, PA, 2000)<para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.sqrt">
+            <summary>
+            Calculates the square root of a Taylor polynomial. Implements the square root function <para/>
+            for Taylor arithmetic.<para/>
+            <para/>
+            The following coefficient propagation rule is applied:<para/>
+            <para/>
+            		v_k = 1 / 2*v_0 * [u_k - sum_{j=1}{k-1}  v_j * v_{k-j}]<para/>
+            <para/>
+            for k = 1...d and v(t) = sqrt(u(t)), u and v being a Taylor polynomials, and d being <para/>
+            the derivative degree. In particular, v_0 = sqrt(u_0).<para/>
+            <para/>
+            (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques<para/>
+            of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, <para/>
+            Philadelphia, PA, 2000)<para/>
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.setSqrt">
+            <summary>
+            Sets this Taylor polynomial to its square root.<para/>
+            <para/>
+            The following coefficient propagation rule is applied:<para/>
+            <para/>
+            		v_k = 1 / 2*v_0 * [u_k - sum_{j=1}{k-1}  v_j * v_{k-j}]<para/>
+            <para/>
+            for k = 1...d and v(t) = sqrt(u(t)), u and v being a Taylor polynomials, and d being <para/>
+            the derivative degree. In particular, v_0 = sqrt(u_0).<para/>
+            <para/>
+            (See Griewank's book, p.222 from "Evaluating Derivatives: Principles and Techniques<para/>
+            of Algorithmic Differentiation". In Frontiers in Applied Mathematics Nr. 19, SIAM, <para/>
+            Philadelphia, PA, 2000)<para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.print">
+            <summary>
+            Prints out the coefficients of a Taylor polynomial, starting by the independent term.<para/>
+            Prints out to Standard Output (Console)<para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.print(System.String)">
+            <summary>
+            Prints out to a file the coefficients of a Taylor polynomial, starting by the <para/>
+            independent term.<para/>
+            </summary>
+            <param name="filenameWithPath">The output file to write the polynomial to.</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.eval(System.Double,System.Double)">
+            <summary>
+            Evaluates a Taylor polynomial at a given value with a point of expansion.<para/>
+            </summary>
+            <param name="x">The value to evaluate the polynomial at.</param>
+            <param name="alpha">alpha The point of expansion.</param>
+            <returns>The result of the evaluation.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.feval">
+            <summary>
+            Returns the first coefficient of the Taylor polynomial, i.e., the evaluation of the function.
+            </summary>
+            <returns>The evaluation of the function at the initial point.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.shift">
+            <summary>
+            Implements the SHIFT operator to calculate the derivative of a Taylor polynomial.<para/>
+            <para/>
+            The new coefficients are shifted to the left and the last one is zeroed.<para/>
+            E.g.:<para/>
+            		y(t) = sum_{j=0}^{d} y_j * t^j + O(t^d+1)<para/>
+            			 = y_0 + y_1*t + y_2*t^2 + ... + y_d*t^d<para/>
+            <para/>
+            		y'(t) = y_1 + 2*y_2*t + 3*y_3*t^2 + ... + d*y_d*t^d-1 + 0<para/>
+            <para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.isConst">
+            <summary>
+            Checks if Polynomial is constant<para/>
+            (if _constant unknown then it will be set)<para/>
+            </summary>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Polynomial.isConst(System.Double)" ignoriert -->
+        <member name="M:LibMatrix.Polynomial.isId">
+            <summary>
+            Returns \a true in case it is a constant Taylor polynomial with value 1; <para/>
+            \a false otherwise.<para/>
+            </summary>
+            <returns>\a true if it is a constant Taylor polynomial with value 1; \a false otherwise.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.isId(System.Double)">
+            <summary>
+            Returns \a true in case it is near a constant Taylor polynomial with value 1; <para/>
+            \a false otherwise.<para/>
+            </summary>
+            <param name="eps">The threshold value to compare with.</param>
+            <returns>\a true if it is a constant Taylor polynomial with value 1; \a false otherwise.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.isZero">
+            <summary>
+            Returns \a true in case all coefficients of the Taylor polynomial are zeroed; <para/>
+            \a false otherwise.<para/>
+            </summary>
+            <returns>\a true if all coefficients are zeroed; \a false otherwise.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.isZero(System.Double)">
+            <summary>
+             Returns \a true in case all coefficients of the Taylor polynomial are lower or equal than<para/>
+             a threshold given as parameter; \a false otherwise.<para/>
+            </summary>
+            <param name="eps">The threshold value to compare with.</param>
+            <returns>\a true if all coefficients are almost null; \a false otherwise.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.set2Zero">
+            <summary>
+            Sets all coefficients of a Taylor polynomial to zero.<para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.set2Zero(System.Int32)">
+            <summary>
+            Sets the coefficients of a Taylor polynomial to zero, from the order given as parameter on.
+            </summary>
+            <param name="order">Derivative order from which to start on (increasingly).</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.set2const(System.Double)">
+            <summary>
+            Sets a Taylor polynomial to the constant given as parameter.
+            </summary>
+            <param name="c">The constant value of type \a double to set the Taylor polynomial to.</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.setCoeffs(System.Double[])">
+            <summary>
+            Sets the coefficients of a Taylor polynomial to the ones given as parameter.
+            </summary>
+            <param name="c">A vector of coefficients of type \type double.</param>
+        </member>
+        <member name="M:LibMatrix.Polynomial.set2Id">
+            <summary>
+            sets the Polynomial to id
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Polynomial.getValueAt(System.Int32)">
+            <summary>
+            Returns value at the given index from the array
+            </summary>
+            <param name="index">The index to be analyzed.</param>
+            <returns>The coefficient at that index.</returns>
+        </member>
+        <member name="M:LibMatrix.Polynomial.ToString">
+            <summary>
+            Returns a String of the Polynomial
+            </summary>
+            <returns>String in the Format 2x^2 + -1x^1 + 7</returns>
+        </member>
+        <member name="P:LibMatrix.Polynomial.order">
+            <summary>
+            returns order<para/>
+            </summary>
+        </member>
+        <member name="P:LibMatrix.Polynomial.ncoeff">
+            <summary>
+            returns the number of coeffs<para/>
+            </summary>
+        </member>
+        <member name="P:LibMatrix.Polynomial.Item(System.Int32)">
+            <summary>
+            poly[2] = 7, i.e., '[]' also in the left side!)
+            </summary>
+            <param name="i">The index to be analyzed.</param>
+            <returns>The coefficient at that index.</returns>
+        </member>
+        <member name="T:LibMatrix.Matrix">
+            <summary>
+            Matrix Class
+            </summary>
+        </member>
+        <member name="F:LibMatrix.Matrix._rows">
+            <summary>
+            Number of rows
+            </summary>
+        </member>
+        <member name="F:LibMatrix.Matrix._cols">
+            <summary>
+            Number of columns
+            </summary>
+        </member>
+        <member name="F:LibMatrix.Matrix._dimT">
+            <summary>
+            The dimension of the Taylor polynomials
+            </summary>
+        </member>
+        <member name="F:LibMatrix.Matrix._data">
+            <summary>
+            The Taylor Polynomials in an 2 dimensional Matrix Array
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.#ctor">
+            <summary>
+            Default constructor for the class. Creates the object.<para/>
+            <para/>
+            It is a 1-by-1 matrix, i.e., it has only one element, which is set to zero:<para/>
+            <para/>
+            		m(0,0) == 0.0<para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Constructor for the class with both the number of rows and columns as parameters.<para/> 
+            Creates the object.
+            </summary>
+            <param name="rows">The number of rows.</param>
+            <param name="cols">The number of columns.</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.#ctor(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Constructor for the class with both the number of rows and columns as parameters,<para/> 
+            as well as the dimension of the elements' type, e.g., the Taylor polynomial's grade. <para/> 
+            Creates the object.<para/> 
+            </summary>
+            <param name="rows">The number of rows.</param>
+            <param name="cols">The number of columns.</param>
+            <param name="dimT">The dimension</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.#ctor(LibMatrix.Matrix)">
+            <summary>
+            Copy constructor.<para/> 
+            <para/> 
+            		Matrix *newm = new Matrix( (*m) );<para/> 
+            </summary>
+            <param name="matrix"> A Matrix object to copy from.</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.#ctor(System.Int32,System.Int32,LibMatrix.Polynomial[0:,0:])">
+            <summary>
+            Easy constructor for testing.
+            </summary>
+            <param name="rows">The number of rows.</param>
+            <param name="cols">The number of columns.</param>
+            <param name="values">an initialised Polynom</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.Finalize">
+            <summary>
+            Destructor. Cleans up the object.
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_Equality(LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Implements the == operator. It compares two matrices.
+            </summary>
+            <param name="a">Matrix on the left side</param>
+            <param name="b">Matrix on the right side</param>
+            <returns>true if the matrices are equal. Otherwise it returns false.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_Inequality(LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Implements the != operator.<para/>
+            Compares two matrices.<para/>
+            </summary>
+            <param name="a">Matrix on the left side</param>
+            <param name="b">Matrix on the right side</param>
+            <returns>true if not equal</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_Addition(LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Implements the + operator. It adds up two matrices.
+            </summary>
+            <param name="a">Matrix on the left side</param>
+            <param name="b">Matrix on the right side</param>
+            <returns>the resulting Matrix object.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_Subtraction(LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Implements the - operator. It substracts two matrices.
+            </summary>
+            <param name="a">Matrix on the left side</param>
+            <param name="b">Matrix on the right side</param>
+            <returns>the resulting Matrix object.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_UnaryNegation(LibMatrix.Matrix)">
+            <summary>
+            Implements the unary - operator.
+            </summary>
+            <param name="a">Matrix to operate on</param>
+            <returns>the resulting Matrix object.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_Multiply(LibMatrix.Matrix,System.Double)">
+            <summary>
+            Implements the * operator. It multiplies a matrix by a scalar.
+            </summary>
+            <param name="a">The Matrix to multiply with.</param>
+            <param name="alpha">The scalar to multiply by.</param>
+            <returns>the resulting Matrix object.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.op_Multiply(LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Implements the * operator. It multiplies the matrix with another matrix.
+            </summary>
+            <param name="a">Matrix on the left side</param>
+            <param name="b">Matrix on the right side</param>
+            <returns>the resulting Matrix object.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaABbC(System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * B + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+            	 B : p-by-n matrix<para/>
+            	 C : m-by-n matrix<para/>
+            	 alpha, beta : real numbers<para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * B</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix</param>
+            <param name="B">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.bmmCaABbC(System.Int32,System.Int32,System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * B + beta * C <para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+            	 B : p-by-n matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+            <para/>
+            where the inferior-right block of B is an identity matrix like in:<para/>
+                ( * * * 0 0 )<para/>
+                ( * * * 0 0 )<para/>
+                ( 0 0 0 1 0 )<para/>
+                ( 0 0 0 0 1 )<para/>
+            <para/>
+            so that a particular block multiplication is needed.<para/>
+            </summary>
+            <param name="r">The number of rows in B that are of interest (2 in the example above)</param>
+            <param name="c">The number of columns in B that are of interest (3 in the example above)</param>
+            <param name="alpha">The scalar value that multiplies A * B</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix</param>
+            <param name="B">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCasABbC(System.Int32,System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * B + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+            	 B : p-by-n matrix<para/>
+                 C : r-by-n matrix (only the last r rows from A are interesting)<para/>
+                 alpha, beta : real numbers<para/>
+            <para/>
+            where A ("special" A) is of the form:<para/>
+            <para/>
+                (         )<para/>
+                (    X    )<para/>
+                ( ------- )<para/>
+                ( * ... * )<para/>
+                ( * ... * )<para/>
+            <para/>
+            so that a particular matrix multiplication is needed.<para/>
+            </summary>
+            <param name="r">The last rows in A that are of interest (2 non-zero-rows in the example above)</param>
+            <param name="alpha">The scalar value that multiplies A * B</param>
+            <param name="beta">beta The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix</param>
+            <param name="B">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaAsBbC(System.Int32,System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+             <summary>
+             Matrix multiplication of the form:<para/>
+            <para/>
+                 C = alpha * A * B + beta * C<para/>
+             <para/>
+             with A : m-by-p matrix<para/>
+             		B : p-by-n matrix<para/>
+             		C : m-by-r matrix (only the last r columns from B are interesting).<para/>
+             		alpha, beta : real numbers<para/>
+             <para/>
+             where B ("special" B) is of the form:<para/>
+             <para/>
+             		(   | * * * )<para/>
+             		(   | . . . )<para/>
+             		( X | . . . )<para/>
+             		(   | . . . )<para/>
+             		(   | * * * )<para/>
+             <para/>
+             so that a particular matrix multiplication is needed.<para/>
+             </summary>
+             <param name="r">The last columns in B that are of interest (3 non-zero-columns - * in the example above)</param>
+             <param name="alpha">The scalar value that multiplies A * B</param>
+             <param name="beta">The scalar value that multiplies C</param>
+             <param name="A">an object of type Matrix</param>
+             <param name="B">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaAUTBPbC(System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix,System.Int32[])">
+             <summary>
+             Matrix multiplication of the form:<para/>
+            <para/>
+                 C = alpha * A * UTB + beta * C<para/>
+             <para/>
+             where UTB means that only the upper triangular part is of interest. Furthermore, a column<para/>
+             pivoting on B is considered.<para/>
+             <para/>
+             with A : m-by-p matrix<para/>
+             		B : p-by-n matrix<para/>
+             		C : m-by-r matrix (only the last r columns from B are interesting).<para/>
+             		alpha, beta : real numbers<para/>
+             <para/>
+             </summary>
+             <param name="alpha">The scalar value that multiplies A * B</param>
+             <param name="beta">The scalar value that multiplies C</param>
+             <param name="A">an object of type Matrix</param>
+             <param name="B">an object of type Matrix</param>
+             <param name="piv">a vector of permutations on the columns of B</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaAATbC(System.Double,System.Double,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * A^T + beta * C<para/>
+            <para/>
+            with A, C : m-by-m matrix<para/>
+                 alpha, beta : real numbers<para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * A^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix. Its transpose is also considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaATAbC(System.Double,System.Double,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A^T * A + beta * C<para/>
+            <para/>
+            with A, C : m-by-m matrix<para/>
+                 alpha, beta : real numbers<para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * A^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix. Its transpose is also considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaATBbC(System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A^T * B + beta * C<para/>
+            <para/>
+            with A : p-by-m matrix<para/>
+                 B : p-by-n matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * A^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix. Its transpose is also considered</param>
+            /// <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaATBPbC(System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix,System.Int32[])">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A^T * B + beta * C<para/>
+            <para/>
+            with A : p-by-m matrix<para/>
+                 B : p-by-n matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+            <para/>
+            and a column pivoting on A^Ts rows<para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * A^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix. Its transpose is also considered</param>
+            <param name="B">an object of type Matrix</param>
+            <param name="piv">a vector of permutations on the columns of B</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaABTbC(System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * B^T + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+                 B : n-by-p matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * B^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix.</param>
+            <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaABTbC(System.Int32,System.Boolean,System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * B^T + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+                 B : n-by-p matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            After transposing B, either its first or its last rows are considered for multiplication,<para/>
+            <para/>
+                ( * ... * )				(    X    )<para/>
+                ( ------- )		or		( ------- )<para/>
+                (         )				( * ... * )<para/>
+                (    X    )				( * ... * )<para/>
+                <para/>
+            according to A dimensions. I.e., the matrix A has less columns than B^T rows has.<para/>
+            </summary>
+            <param name="r">The number of rows from B that should be considered.</param>
+            <param name="up">The binary parameter to indicate whether the first or the last r rows</param>
+            <param name="alpha">The scalar value that multiplies A * B^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix.</param>
+            <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.bmmCaABTbC(System.Int32,System.Int32,System.Double,System.Double,LibMatrix.Matrix,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * B^T + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+                 B : n-by-p matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            where the inferior-right block of A is an identity matrix like in:<para/>
+                <para/>
+                ( * * * 0 0 )<para/>
+                ( * * * 0 0 )<para/>
+                ( 0 0 0 1 0 )<para/>
+                ( 0 0 0 0 1 )<para/>
+                <para/>
+            so that a particular block multiplication is needed.<para/>
+            </summary>
+            <param name="r">The number of rows in A that are of interest (2 in the example above).</param>
+            <param name="c">The number of columns in A that are of interest (3 in the example above).</param>
+            <param name="alpha">The scalar value that multiplies A * B^T</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix.</param>
+            <param name="B">an object of type Matrix. Its transpose is also considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaIBbC(System.Double,System.Double,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * I * B + beta * C<para/>
+            <para/>
+            with I : m-by-p matrix; identity matrix<para/>
+                 B : p-by-n matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies I * B</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="B">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaIBbC(System.Double,System.Double,System.Int32[],System.Boolean,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * I * B + beta * C<para/>
+            <para/>
+            with I : m-by-p matrix; identity matrix permuted according to a vector of permutations, piv<para/>
+                 B : p-by-n matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies I * B</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="piv">a vector of permutations on I, of type int</param>
+            <param name="rows">The binary parameter to indicate whether the rows or the columns of I should be permuted (true for the rows; false for the columns)</param>
+            <param name="B">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaAIbC(System.Double,System.Double,LibMatrix.Matrix)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * I + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+                 I : p-by-n matrix; identity matrix<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * I</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.mmCaAIbC(System.Double,System.Double,LibMatrix.Matrix,System.Int32[],System.Boolean)">
+            <summary>
+            Matrix multiplication of the form:<para/>
+            <para/>
+                C = alpha * A * I + beta * C<para/>
+            <para/>
+            with A : m-by-p matrix<para/>
+                 I : p-by-n matrix; identity matrix permuted according to a vector of permutations, piv<para/>
+                 C : m-by-n matrix<para/>
+                 alpha, beta : real numbers<para/>
+                 <para/>
+            </summary>
+            <param name="alpha">The scalar value that multiplies A * I</param>
+            <param name="beta">The scalar value that multiplies C</param>
+            <param name="A">an object of type Matrix</param>
+            <param name="piv">a vector of permutations on I, of type int</param>
+            <param name="rows">The binary parameter to indicate whether the rows or the columns of I should be permuted (true for the rows; false for the columns)</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.cpermutem(System.Int32[],System.Boolean)">
+            <summary>
+            Permutes the columns of a matrix given a vector of permutations. <para/>
+            <para/>
+            For example, in case a matrix A is permuted after a QR decomposition with column pivoting,<para/>
+            then the resulting matrix in the upper triangular matrix R. <para/>
+            <para/>
+            </summary>
+            <param name="piv">a vector of permutations on the columns of A</param>
+            <param name="trans">The boolean parameter to indicate whether to transpose the vector of permutations piv or not (=1, transpose; =0, otherwise). Default is false</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.rpermutem(System.Int32[])">
+            <summary>
+            Permutes the rows of a matrix given a vector of permutations. 
+            </summary>
+            <param name="piv">a vector of permutations on the rows of A</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.transpose">
+            <summary>
+            Transposes this matrix in place.
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.asTranspose">
+            <summary>
+            Creata the transposes of this matrix. This matrix opject remains unchanged. <para/>
+            </summary>
+            <returns>The transposed matrix object</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.shift">
+            <summary>
+            Implements the shift operator to calculate the derivative of Taylor polynomials<para/>
+            in case the elements of the matrix are such, like in:<para/>
+            <para/>
+            y(t) = sum_{j=0}^{d} y_j * t^j + O(t^d+1)<para/>
+            	 = y_0 + y_1*t + y_2*t^2 + ... + y_d*t^d<para/>
+            <para/>
+            y'(t) = y_1 + 2*y_2*t + 3*y_3*t^2 + ... + d*y_d*t^d-1<para/>
+            <para/>
+            Internally, the coefficients are shifted to the left and the last one is zeroed.<para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.isId">
+            <summary>
+            Returns true in case the given matrix is the identity matrix; false otherwise.
+            </summary>
+            <returns>true if the matrix is the identity matrix; false otherwise.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.isZero">
+            <summary>
+            Returns true in case the given matrix is the zero matrix; false otherwise.
+            </summary>
+            <returns>true if the matrix is the zero matrix; false otherwise.</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2Id">
+            <summary>
+            Sets a matrix to the identity one:<para/>
+            <para/>
+                M = I<para/>
+            <para/>
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2Id(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a submatrix to the identity one:<para/>
+            <para/>
+                e.g. M = (    | 1 0 0 |    )<para/>
+                         ( M1 | 0 1 0 | M2 )<para/>
+                         (    | 0 0 1 |    )<para/>
+                         (        M3       )<para/>
+            <para/>
+            </summary>
+            <param name="top">The number of rows at the top to keep unchanged</param>
+            <param name="bottom">The number of rows at the bottom to keep unchanged</param>
+            <param name="left">The number of columns on the left to keep unchanged</param>
+            <param name="right">The number of columns on the right to keep unchanged</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2IdFromIndices(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a submatrix to the identity one:<para/>
+            <para/>
+                e.g. M = (    | 1 0 0 |    )<para/>
+                         ( M1 | 0 1 0 | M2 )<para/>
+                         (    | 0 0 1 |    )<para/>
+                         (        M3       )<para/>
+            </summary>
+            <param name="firstRow">The row from which to start on</param>
+            <param name="lastRow">The last row that should be considered</param>
+            <param name="firstCol">The column from which to start on</param>
+            <param name="lastCol">The last column that should be considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2Zero">
+            <summary>
+            Sets a matrix to zero entries.
+            </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2Zero(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a submatrix to zero:<para/>
+            <para/>
+                e.g. M = (    | 0 0 0 |    )<para/>
+                         ( M1 | 0 0 0 | M2 )<para/>
+                         (    | 0 0 0 |    )<para/>
+                         (        M3       )<para/>
+            </summary>
+            <param name="top">The number of rows at the top to keep unchanged</param>
+            <param name="bottom">The number of rows at the bottom to keep unchanged</param>
+            <param name="left">The number of columns on the left to keep unchanged</param>
+            <param name="right">The number of columns on the right to keep unchanged</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2ZeroFromIndices(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Sets a submatrix to zero:<para/>
+            <para/>
+                e.g. M = (    | 0 0 0 |    )<para/>
+                         ( M1 | 0 0 0 | M2 )<para/>
+                         (    | 0 0 0 |    )<para/>
+                         (        M3       )<para/>
+            </summary>
+            <param name="firstRow">The row from which to start on</param>
+            <param name="lastRow">The last row that should be considered</param>
+            <param name="firstCol">The column from which to start on</param>
+            <param name="lastCol">The last column that should be considered</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2Val(System.Double)">
+            <summary>
+            Sets a matrix to the value given as parameter.<para/>
+            </summary>
+            <param name="v">The double value to set the elements to</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2Val(System.Int32,System.Int32,System.Int32,System.Int32,System.Double)">
+            <summary>
+            Sets a submatrix to the value given as parameter:<para/>
+            <para/>
+                e.g. M = (    | v v v |    )<para/>
+                         ( M1 | v v v | M2 )<para/>
+                         (    | v v v |    )<para/>
+                         (        M3       )<para/>
+            </summary>
+            <param name="top">The number of rows at the top to keep unchanged</param>
+            <param name="bottom">The number of rows at the bottom to keep unchanged</param>
+            <param name="left">The number of columns on the left to keep unchanged</param>
+            <param name="right">The number of columns on the right to keep unchanged</param>
+            <param name="v">The double value to set the elements to</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.set2ValFromIndices(System.Int32,System.Int32,System.Int32,System.Int32,System.Double)">
+            <summary>
+            Sets a submatrix to the value given as parameter:<para/>
+            <para/>
+                e.g. M = (    | v v v |    )<para/>
+                         ( M1 | v v v | M2 )<para/>
+                         (    | v v v |    )<para/>
+                         (        M3       )<para/>
+            </summary>
+            <param name="firstRow">The row from which to start on</param>
+            <param name="lastRow">The last row that should be considered</param>
+            <param name="firstCol">The column from which to start on</param>
+            <param name="lastCol">The last column that should be considered</param>
+            <param name="v">The double value to set the elements to</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.ToString">
+            <summary>
+            Returns a String of the Matrix<para/>
+            </summary>
+            <returns>String of matrix</returns>
+        </member>
+        <member name="P:LibMatrix.Matrix.Item(System.Int32,System.Int32)">
+            <summary>
+            Implements the [] operator.
+            </summary>
+            <param name="row">The row index</param>
+            <param name="col">The column index</param>
+            <returns>The value of the desired element.</returns>
+        </member>
+        <member name="T:LibMatrix.MathException">
+            <summary>
+            Exception Class for own Exceptions in Matrix and Polynomial
+            </summary>
+        </member>
+        <member name="M:LibMatrix.MathException.#ctor">
+            <summary>
+            Base Constructor
+            </summary>
+        </member>
+        <member name="M:LibMatrix.MathException.#ctor(System.String)">
+            <summary>
+            Base Constructor with initializing the Message
+            </summary>
+            <param name="message">Message the Exception should throw</param>
+        </member>
+        <member name="M:LibMatrix.MathException.what">
+            <summary>
+            Returns the Exception description 
+            </summary>
+            <returns>String of the exception description</returns>
+        </member>
+    </members>
+</doc>
