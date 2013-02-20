@@ -597,12 +597,12 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A * A^T + beta * C
-        /// 
-        /// with A, C : m-by-m matrix
-        ///      alpha, beta : real numbers
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * A^T + beta * C<para/>
+        /// <para/>
+        /// with A, C : m-by-m matrix<para/>
+        ///      alpha, beta : real numbers<para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * A^T</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -632,12 +632,12 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A^T * A + beta * C
-        /// 
-        /// with A, C : m-by-m matrix
-        ///      alpha, beta : real numbers
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A^T * A + beta * C<para/>
+        /// <para/>
+        /// with A, C : m-by-m matrix<para/>
+        ///      alpha, beta : real numbers<para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * A^T</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -667,14 +667,14 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A^T * B + beta * C
-        /// 
-        /// with A : p-by-m matrix
-        ///      B : p-by-n matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A^T * B + beta * C<para/>
+        /// <para/>
+        /// with A : p-by-m matrix<para/>
+        ///      B : p-by-n matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * A^T</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -711,16 +711,16 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A^T * B + beta * C
-        /// 
-        /// with A : p-by-m matrix
-        ///      B : p-by-n matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
-        /// and a column pivoting on A^Ts rows
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A^T * B + beta * C<para/>
+        /// <para/>
+        /// with A : p-by-m matrix<para/>
+        ///      B : p-by-n matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        /// <para/>
+        /// and a column pivoting on A^Ts rows<para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * A^T</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -758,15 +758,15 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A * B^T + beta * C
-        /// 
-        /// with A : m-by-p matrix
-        ///      B : n-by-p matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * B^T + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        ///      B : n-by-p matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * B^T</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -803,23 +803,23 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A * B^T + beta * C
-        /// 
-        /// with A : m-by-p matrix
-        ///      B : n-by-p matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
-        /// After transposing B, either its first or its last rows are considered for multiplication,
-        /// 
-        ///     ( * ... * )				(    X    )
-        ///     ( ------- )		or		( ------- )
-        ///     (         )				( * ... * )
-        ///     (    X    )				( * ... * )
-        ///     
-        /// according to A dimensions. I.e., the matrix A has less columns than B^T rows has.
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * B^T + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        ///      B : n-by-p matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
+        /// After transposing B, either its first or its last rows are considered for multiplication,<para/>
+        /// <para/>
+        ///     ( * ... * )				(    X    )<para/>
+        ///     ( ------- )		or		( ------- )<para/>
+        ///     (         )				( * ... * )<para/>
+        ///     (    X    )				( * ... * )<para/>
+        ///     <para/>
+        /// according to A dimensions. I.e., the matrix A has less columns than B^T rows has.<para/>
         /// </summary>
         /// <param name="r">The number of rows from B that should be considered.</param>
         /// <param name="up">The binary parameter to indicate whether the first or the last r rows</param>
@@ -878,23 +878,23 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A * B^T + beta * C
-        /// 
-        /// with A : m-by-p matrix
-        ///      B : n-by-p matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
-        /// where the inferior-right block of A is an identity matrix like in:
-        ///     
-        ///     ( * * * 0 0 )
-        ///     ( * * * 0 0 )
-        ///     ( 0 0 0 1 0 )
-        ///     ( 0 0 0 0 1 )
-        ///     
-        /// so that a particular block multiplication is needed.
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * B^T + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        ///      B : n-by-p matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
+        /// where the inferior-right block of A is an identity matrix like in:<para/>
+        ///     <para/>
+        ///     ( * * * 0 0 )<para/>
+        ///     ( * * * 0 0 )<para/>
+        ///     ( 0 0 0 1 0 )<para/>
+        ///     ( 0 0 0 0 1 )<para/>
+        ///     <para/>
+        /// so that a particular block multiplication is needed.<para/>
         /// </summary>
         /// <param name="r">The number of rows in A that are of interest (2 in the example above).</param>
         /// <param name="c">The number of columns in A that are of interest (3 in the example above).</param>
@@ -949,15 +949,15 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * I * B + beta * C
-        /// 
-        /// with I : m-by-p matrix; identity matrix
-        ///      B : p-by-n matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * I * B + beta * C<para/>
+        /// <para/>
+        /// with I : m-by-p matrix; identity matrix<para/>
+        ///      B : p-by-n matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies I * B</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -979,15 +979,15 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * I * B + beta * C
-        /// 
-        /// with I : m-by-p matrix; identity matrix permuted according to a vector of permutations, piv
-        ///      B : p-by-n matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * I * B + beta * C<para/>
+        /// <para/>
+        /// with I : m-by-p matrix; identity matrix permuted according to a vector of permutations, piv<para/>
+        ///      B : p-by-n matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies I * B</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -1014,15 +1014,15 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A * I + beta * C
-        /// 
-        /// with A : m-by-p matrix
-        ///      I : p-by-n matrix; identity matrix
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * I + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        ///      I : p-by-n matrix; identity matrix<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * I</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -1044,15 +1044,15 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Matrix multiplication of the form:
-        /// 
-        ///     C = alpha * A * I + beta * C
-        /// 
-        /// with A : m-by-p matrix
-        ///      I : p-by-n matrix; identity matrix permuted according to a vector of permutations, piv
-        ///      C : m-by-n matrix
-        ///      alpha, beta : real numbers
-        ///      
+        /// Matrix multiplication of the form:<para/>
+        /// <para/>
+        ///     C = alpha * A * I + beta * C<para/>
+        /// <para/>
+        /// with A : m-by-p matrix<para/>
+        ///      I : p-by-n matrix; identity matrix permuted according to a vector of permutations, piv<para/>
+        ///      C : m-by-n matrix<para/>
+        ///      alpha, beta : real numbers<para/>
+        ///      <para/>
         /// </summary>
         /// <param name="alpha">The scalar value that multiplies A * I</param>
         /// <param name="beta">The scalar value that multiplies C</param>
@@ -1496,7 +1496,7 @@ namespace LibMatrix
         #endregion
 
         /// <summary>
-        /// Returns a String of the Matrix
+        /// Returns a String of the Matrix<para/>
         /// </summary>
         /// <returns>String of matrix</returns>
         override public String ToString()

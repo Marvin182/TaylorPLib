@@ -8,7 +8,7 @@ src/python/_TaylorPLib.pyd
 __pycache__/
 
 # Build and Object Folders
-bin/
+# bin/
 obj/
 
 #User Specific Files
@@ -89,7 +89,7 @@ publish
 *.Publish.xml
 
 # Others
-[Bb]in
+# [Bb]in
 [Oo]bj
 sql
 TestResults
