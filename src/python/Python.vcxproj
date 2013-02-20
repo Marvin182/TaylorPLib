@@ -296,7 +296,7 @@ swig.exe -c++ -python %(FullPath) </Command>
 echo PYTHON_INCLUDE: %PYTHON_INCLUDE% 
 echo PYTHON_LIB: %PYTHON_LIB% 
 echo on 
-swig.exe -c++ -python %(FullPath) </Command>
+swig.exe -c++ -python "%(FullPath)" </Command>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(InputName)_wrap.cxx;%(Outputs)</Outputs>
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(InputName)_wrap.cxx;%(Outputs)</Outputs>
     </CustomBuild>
