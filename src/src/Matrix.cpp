@@ -1268,44 +1268,54 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 // S O L V I N G   S Y S T E M S   O F   E Q U A T I O N S
 //
 
-// /**
-//  * Solves the equation
-//  * 
-//  * 		U X = B
-//  * 
-//  * by back-substitution, where:
-//  * 
-//  * 		U : m-by-m upper triangular matrix, non-singular
-//  * 		X : m-by-n matrix
-//  * 		B : m-by-n matrix, overwritten with the solution on output.
-//  *
-//  * The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from 
-//  * Golub & Van Loan's book:
-//  * 
-//  * 		x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n
-//  * 
-//  * \param[in/out] B The pointer to \a B, an object of type \type Matrix that is the independent 
-//  * 		term on input. On output it contains the calculated solution \a X.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::utsolve( Matrix &B )
-// {
-// 	T sum( dimT() );										// auxiliary variable
-	
-// 	for( int k = 0; k < B._cols; k++ )
-// 	{
-// 		B( _rows - 1, k ) /= _data[ _rows - 1 ][ _rows - 1 ];
-// 		for( int i = _rows - 2; i > -1; i-- )
-// 		{
-// 				sum.set2Zero();								// p(x) = 0, initialization
-// 			for( int j = i + 1; j < _rows; j++ )
-// 				sum += _data[i][j] * B._data[j][k];
-// 			B._data[i][k] = ( B._data[i][k] - sum ) / _data[ i ][ i ];
-// 		}
-// 	}
-// 	return 0;
-// }
+/**
+ * Solves the equation
+ * 
+ * 		U X = B
+ * 
+ * by back-substitution, where:
+ * 
+ * 		U : m-by-m upper triangular matrix, non-singular
+ * 		X : m-by-n matrix
+ * 		B : m-by-n matrix, overwritten with the solution on output.
+ *
+ * The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from 
+ * Golub & Van Loan's book:
+ * 
+ * 		x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n
+ * 
+ * \param[in/out] B The pointer to \a B, an object of type \type Matrix that is the independent 
+ * 		term on input. On output it contains the calculated solution \a X.
+ * 
+ */
+void Matrix::utsolve(Matrix &B)
+{
+	if (!isSquare())
+	{
+		throw MathException("U (=this) must be u squra matrix.");
+	}
+
+	if (B._rows != _rows)
+	{
+		throw MathException("The numebr rows in B (%d) must match the number of rows in U (=this) (%d).", B._rows, _rows);
+	}
+
+	Polynomial sum(_dimT);
+
+	for( int k = 0; k < B._cols; k++ )
+	{
+		B(_rows - 1, k) /= _data[_rows - 1][_rows - 1];
+		for( int i = _rows - 2; i > -1; i-- )
+		{
+			sum.set2Zero();
+			for( int j = i + 1; j < _rows; j++ )
+			{
+				sum += _data[i][j] * B._data[j][k];
+			}	
+			B._data[i][k] = (B._data[i][k] - sum) / _data[i][i];
+		}
+	}
+}
 
 // /**
 //  * Solves the equation

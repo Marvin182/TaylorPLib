@@ -271,6 +271,7 @@ namespace LibMatrix {
 		void transpose();
 		Matrix asTranspose() const;
 		void shift();
+		bool isSquare() const { return _rows == _cols; }
 		bool isId() const;
 		// bool isId(double eps);
 		// bool isId(int m1, int m2, int n1, int n2, double eps);
