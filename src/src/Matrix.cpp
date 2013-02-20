@@ -93,6 +93,11 @@ Matrix::Matrix(int rows, int cols, Polynomial *values):
 {
 	allocateMemory(false);
 
+	if (values[0] != NULL) 
+	{
+		_dimT = values[0].order();
+	}
+
 	for( int i = 0; i < _rows; i++ )
 	{
 		for( int j = 0; j < _cols; j++ )
