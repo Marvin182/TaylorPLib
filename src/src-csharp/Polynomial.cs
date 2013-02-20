@@ -745,8 +745,8 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Returns \a true in case it is near a constant Taylor polynomial; 
-        /// \a false otherwise.
+        /// Returns \a true in case it is near a constant Taylor polynomial; </para>
+        /// \a false otherwise.</para>
         /// </summary>
         /// <param name="eps">The threshold value to compare with.</param>
         /// <returns>\a true if it is a constant Taylor polynomial; \a false otherwise.</returns>
