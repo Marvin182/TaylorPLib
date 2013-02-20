@@ -86,6 +86,24 @@ Polynomial::Polynomial(int order, double constVal, ...):
 }
 
 /**
+ * Short constructor for python port.
+ * \param[in] coeffs All coefficients of the new polynomial, from low to high order and the constan coefficient first.
+ *
+ */
+Polynomial::Polynomial(std::vector<double> coeffs):
+	_constant(coeffs.size() == 0 ? 1 : -1),
+	_order(coeffs.size() - 1),
+	_coeffs(0)
+{
+	allocateMemory(false);
+
+	for( int i = 0; i <= _order; i++)
+	{
+		_coeffs[i] = coeffs[i];
+	}
+}
+
+/**
  * Destructor. Cleans up the object.
  * 
  */
@@ -1018,13 +1036,23 @@ void Polynomial::set2Zero(int ord)
  * \param[in] c A vector of coefficients of type \type double.
  * 
  */
-void Polynomial::setCoeffs(double *c)
+void Polynomial::setCoeffs(double *coeffs)
 {
 	for (int i = 0; i <= _order; i++)
 	{
-		_coeffs[i] = c[i];
+		_coeffs[i] = coeffs[i];
 	}
 }
+
+
+void Polynomial::setCoeffs(vector<double> coeffs)
+{
+	for (int i = 0; i <= _order; i++)
+	{
+		_coeffs[i] = coeffs[i];
+	}
+}
+
 
 /***************
   P R I V A T E
@@ -1117,13 +1145,14 @@ void Polynomial::unsetConst()
 
 std::ostream& operator<<(std::ostream &out, const Polynomial &p)
 {
-	out << '(' << setiosflags(ios::fixed) << setprecision(1);
+	out << setiosflags(ios::fixed) << setprecision(1);
 
-	for (int i = p.order(); i > 0; i--)
+	out << '(' << p.get(0);
+	for (int i = 1; i <= p.order(); i++)
  	{
- 		out << p.get(i) << "x^" << i << " + ";
+ 		out << " + " << p.get(i) << "x^" << i;
  	}
- 	out << p.get(0) << ')';
+ 	out<< ')';
 	
 	return out; 
 }
