@@ -1,5 +1,10 @@
+
 notes.md
 src/python/_TaylorPLib.pyd
+src/python/TaylorPLib.py
+
+# SWIG
+*.cxx
 
 # Sublime Text workspace file
 *.sublime-workspace
