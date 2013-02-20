@@ -1317,133 +1317,115 @@ void Matrix::utsolve(Matrix &B)
 	}
 }
 
-// /**
-//  * Solves the equation
-//  * 
-//  * 		U X = B
-//  * 
-//  * by back-substitution, where:
-//  * 
-//  * 		U : m-by-m upper triangular matrix, non-singular
-//  * 		X : m-by-n matrix
-//  * 		B : m-by-n matrix, overwritten with the solution on output.
-//  *
-//  * The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from 
-//  * Golub & Van Loan's book:
-//  * 
-//  * 		x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n
-//  * 
-//  * \param[in/out] B The pointer to \a B, an object of type \type Matrix that is the independent 
-//  * 		term on input. On output it contains the calculated solution \a X.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::utsolve( Matrix &B, Matrix &X, int *piv )
-// {
-// 	T sum( dimT() );
+/**
+ * Solves the equation
+ * 
+ * 		U X = B
+ * 
+ * by back-substitution, where:
+ * 
+ * 		U : m-by-m upper triangular matrix, non-singular
+ * 		X : m-by-n matrix
+ * 		B : m-by-n matrix, overwritten with the solution on output.
+ *
+ * The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from 
+ * Golub & Van Loan's book:
+ * 
+ * 		x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n
+ * 
+ * \param[in/out] B The pointer to \a B, an object of type \type Matrix that is the independent 
+ * 		term on input. On output it contains the calculated solution \a X.
+ * 
+ */
+void Matrix::utsolve(Matrix &B, Matrix &X, int *piv)
+{
+	Polynomial sum(_dimT);
 	
-// 	for( int k = 0; k < B._cols; k++ )
-// 	{
-// 		X( _rows - 1, k ) = B( piv[ _rows - 1 ], k ) / _data[ piv[ _rows - 1 ] ][ _rows - 1 ];
-// 		for( int i = _rows - 2; i > -1; i-- )
-// 		{
-// 			if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 	// A zero value indicates 
-// 															// that both strings are equal
-// 				sum.set2Zero();								// p(x) = 0, initialization
-// 			//else sum = 0.0;
-// 			for( int j = i + 1; j < _rows; j++ )
-// 				sum += _data[ piv[ i ] ][ j ] * X( j, k );
-// 			X( i , k ) = ( B( piv[ i ], k ) - sum ) / _data[ piv[ i ] ][ i ];
-// 		}
-// 	}
-// 	return 0;
-// }
+	for( int k = 0; k < B._cols; k++ )
+	{
+		X(_rows - 1, k) = B(piv[ _rows - 1 ], k) / _data[piv[_rows - 1]][_rows - 1];
+		for( int i = _rows - 2; i > -1; i--)
+		{
+			sum.set2Zero();				
+			for( int j = i + 1; j < _rows; j++ )
+			{
+				sum += _data[piv[i]][j] * X(j, k);
+			}	
+			X(i, k) = (B(piv[i], k) - sum) / _data[piv[i]][i];
+		}
+	}
+}
 
-// /**
-//  * Solves the equation
-//  * 
-//  * 		U x = b
-//  * 
-//  * by back-substitution, where:
-//  * 
-//  * 		U : n-by-n upper triangular matrix, non-singular
-//  * 		x : n vector
-//  * 		B : n vector, overwritten with the solution on output.
-//  *
-//  * The x_i are calculated following the algorithm 3.1.2, p.89 from Golub & Van Loan's book:
-//  * 
-//  * 		x_i = ( b_i - sum_{j=i+1}^{n} u_ij * x_j ) / u_ii
-//  * 
-//  * \param[in/out] b The pointer to \a b, an object of type \type Matrix that is the independent 
-//  * 		term on input. On output it contains the calculated solution \a x.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::utsolve( T *b )
-// {
-// 	T sum( dimT() );
+/**
+ * Solves the equation
+ * 
+ * 		U x = b
+ * 
+ * by back-substitution, where:
+ * 
+ * 		U : n-by-n upper triangular matrix, non-singular
+ * 		x : n vector
+ * 		B : n vector, overwritten with the solution on output.
+ *
+ * The x_i are calculated following the algorithm 3.1.2, p.89 from Golub & Van Loan's book:
+ * 
+ * 		x_i = ( b_i - sum_{j=i+1}^{n} u_ij * x_j ) / u_ii
+ * 
+ * \param[in/out] b The pointer to \a b, an object of type \type Matrix that is the independent 
+ * 		term on input. On output it contains the calculated solution \a x.
+ * 
+ */
+void Matrix::utsolve(Polynomial *b)
+{
+	Polynomial sum(_dimT);
 	
-// 	//printf( red );
-// 	b[ _rows - 1 ] /= _data[ _rows - 1 ][ _rows - 1 ];
-// 	//printf( "\nb[ n - 1 ]=%.16g", b[ n - 1 ] );
-// 	for( int i = _rows - 2; i > -1; i-- )
-// 	{
-// 		if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 		// A zero value indicates 
-// 															// that both strings are equal
-// 			sum.set2Zero();									// p(x) = 0, initialization
-// 		//else sum = 0.0;
-// 		for( int j = i + 1; j < _rows; j++ )
-// 			sum += _data[i][j] * b[ j ];
-// 		//printf( "\nsum=%.16g", sum );
-// 		b[ i ] = ( b[ i ] - sum ) / _data[ i ][ i ];
-// 		//printf( "\ni=%d  -->  ", i );
-// 		//printf( "b[ i ]=%.16g", b[ i ] );
-// 	}
-// 	//printf( "\n" );
-// 	//printf( normal );
-// 	return 0;
-// }
+	b[_rows - 1] /= _data[_rows - 1][_rows - 1];
+	for( int i = _rows - 2; i > -1; i-- )
+	{
+		sum.set2Zero();
+		for( int j = i + 1; j < _rows; j++ )
+		{
+			sum += _data[i][j] * b[j];
+		}
+		b[i] = (b[i] - sum) / _data[i][i];
+	}
+}
 
-// /**
-//  * Solves the equation
-//  * 
-//  * 		X U = B
-//  * 
-//  * by back-substitution, where:
-//  * 
-//  * 		U : m-by-m upper triangular matrix, non-singular
-//  * 		X : m-by-n matrix
-//  * 		B : m-by-n matrix, overwritten with the solution on output.
-//  *
-//  * The X_ik are calculated making few modifications to the function 'utsolve' for UX=B.
-//  * 
-//  * \param[in/out] B The pointer to \a B, an object of type \type Matrix that is the independent 
-//  * 		term on input. On output it contains the calculated solution \a X.
-//  * \return The error code.
-//  * 
-//  */
-// int Matrix::utxsolve( Matrix &B )
-// {
-// 	T sum( dimT() );
+/**
+ * Solves the equation
+ * 
+ * 		X U = B
+ * 
+ * by back-substitution, where:
+ * 
+ * 		U : m-by-m upper triangular matrix, non-singular
+ * 		X : m-by-n matrix
+ * 		B : m-by-n matrix, overwritten with the solution on output.
+ *
+ * The X_ik are calculated making few modifications to the function 'utsolve' for UX=B.
+ * 
+ * \param[in/out] B The pointer to \a B, an object of type \type Matrix that is the independent 
+ * 		term on input. On output it contains the calculated solution \a X.
+ * 
+ */
+void Matrix::utxsolve(Matrix &B)
+{
+	Polynomial sum(_dimT);
 	
-// 	//printm( "A = \n", yellow );
-// 	//B.printm( "B = \n", yellow );
-// 	for( int k = 0; k < B._rows; k++ )
-// 	{
-// 		B._data[k][0] /= _data[ 0 ][ 0 ];
-// 		for( int i = 1; i < B._cols; i++ )
-// 		{
-// 			if( strcmp( sum.typeName(), "Polynomialn" ) == 0 ) 	// A zero value indicates 
-// 															// that both strings are equal
-// 				sum.set2Zero();								// p(x) = 0, initialization
-// 			//else sum = 0.0;
-// 			for( int j = 0; j < i; j++ )
-// 				sum += _data[ j ][ i ] * B._data[k][j];
-// 			B._data[k][i] = ( B._data[k][i] - sum ) / _data[ i ][ i ];
-// 		}
-// 	}
-// 	return 0;
-// }
+	for( int k = 0; k < B._rows; k++ )
+	{
+		B._data[k][0] /= _data[0][0];
+		for( int i = 1; i < B._cols; i++ )
+		{
+			sum.set2Zero();
+			for( int j = 0; j < i; j++ )
+			{
+				sum += _data[j][i] * B._data[k][j];
+			}
+			B._data[k][i] = (B._data[k][i] - sum) / _data[i][i];
+		}
+	}
+}
 
 // /**
 //  * Solves the equation

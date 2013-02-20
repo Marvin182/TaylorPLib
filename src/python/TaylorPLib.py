@@ -283,6 +283,7 @@ class Matrix(_object):
     def mmCaIBbC(self, *args): return _TaylorPLib.Matrix_mmCaIBbC(self, *args)
     def mmCaAIbC(self, *args): return _TaylorPLib.Matrix_mmCaAIbC(self, *args)
     def utsolve(self, *args): return _TaylorPLib.Matrix_utsolve(self, *args)
+    def utxsolve(self, *args): return _TaylorPLib.Matrix_utxsolve(self, *args)
     def cpermutem(self, *args): return _TaylorPLib.Matrix_cpermutem(self, *args)
     def rpermutem(self, *args): return _TaylorPLib.Matrix_rpermutem(self, *args)
     def transpose(self): return _TaylorPLib.Matrix_transpose(self)

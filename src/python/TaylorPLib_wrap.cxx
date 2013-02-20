@@ -13802,7 +13802,7 @@ fail:
 }
 
 
-SWIGINTERN PyObject *_wrap_Matrix_utsolve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+SWIGINTERN PyObject *_wrap_Matrix_utsolve__SWIG_0(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
   PyObject *resultobj = 0;
   LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
   LibMatrix::Matrix *arg2 = 0 ;
@@ -13828,6 +13828,196 @@ SWIGINTERN PyObject *_wrap_Matrix_utsolve(PyObject *SWIGUNUSEDPARM(self), PyObje
   }
   arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
   (arg1)->utsolve(*arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Matrix_utsolve__SWIG_1(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
+  LibMatrix::Matrix *arg3 = 0 ;
+  int *arg4 = (int *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  void *argp3 = 0 ;
+  int res3 = 0 ;
+  void *argp4 = 0 ;
+  int res4 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  PyObject * obj2 = 0 ;
+  PyObject * obj3 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OOOO:Matrix_utsolve",&obj0,&obj1,&obj2,&obj3)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_utsolve" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
+  }
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_utsolve" "', argument " "2"" of type '" "LibMatrix::Matrix &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_utsolve" "', argument " "2"" of type '" "LibMatrix::Matrix &""'"); 
+  }
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  res3 = SWIG_ConvertPtr(obj2, &argp3, SWIGTYPE_p_LibMatrix__Matrix,  0 );
+  if (!SWIG_IsOK(res3)) {
+    SWIG_exception_fail(SWIG_ArgError(res3), "in method '" "Matrix_utsolve" "', argument " "3"" of type '" "LibMatrix::Matrix &""'"); 
+  }
+  if (!argp3) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_utsolve" "', argument " "3"" of type '" "LibMatrix::Matrix &""'"); 
+  }
+  arg3 = reinterpret_cast< LibMatrix::Matrix * >(argp3);
+  res4 = SWIG_ConvertPtr(obj3, &argp4,SWIGTYPE_p_int, 0 |  0 );
+  if (!SWIG_IsOK(res4)) {
+    SWIG_exception_fail(SWIG_ArgError(res4), "in method '" "Matrix_utsolve" "', argument " "4"" of type '" "int *""'"); 
+  }
+  arg4 = reinterpret_cast< int * >(argp4);
+  (arg1)->utsolve(*arg2,*arg3,arg4);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Matrix_utsolve__SWIG_2(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Polynomial *arg2 = (LibMatrix::Polynomial *) 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_utsolve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_utsolve" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
+  }
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2,SWIGTYPE_p_LibMatrix__Polynomial, 0 |  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_utsolve" "', argument " "2"" of type '" "LibMatrix::Polynomial *""'"); 
+  }
+  arg2 = reinterpret_cast< LibMatrix::Polynomial * >(argp2);
+  (arg1)->utsolve(arg2);
+  resultobj = SWIG_Py_Void();
+  return resultobj;
+fail:
+  return NULL;
+}
+
+
+SWIGINTERN PyObject *_wrap_Matrix_utsolve(PyObject *self, PyObject *args) {
+  int argc;
+  PyObject *argv[5];
+  int ii;
+  
+  if (!PyTuple_Check(args)) SWIG_fail;
+  argc = args ? (int)PyObject_Length(args) : 0;
+  for (ii = 0; (ii < 4) && (ii < argc); ii++) {
+    argv[ii] = PyTuple_GET_ITEM(args,ii);
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Matrix_utsolve__SWIG_0(self, args);
+      }
+    }
+  }
+  if (argc == 2) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_LibMatrix__Polynomial, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        return _wrap_Matrix_utsolve__SWIG_2(self, args);
+      }
+    }
+  }
+  if (argc == 4) {
+    int _v;
+    void *vptr = 0;
+    int res = SWIG_ConvertPtr(argv[0], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
+    _v = SWIG_CheckState(res);
+    if (_v) {
+      void *vptr = 0;
+      int res = SWIG_ConvertPtr(argv[1], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
+      _v = SWIG_CheckState(res);
+      if (_v) {
+        void *vptr = 0;
+        int res = SWIG_ConvertPtr(argv[2], &vptr, SWIGTYPE_p_LibMatrix__Matrix, 0);
+        _v = SWIG_CheckState(res);
+        if (_v) {
+          void *vptr = 0;
+          int res = SWIG_ConvertPtr(argv[3], &vptr, SWIGTYPE_p_int, 0);
+          _v = SWIG_CheckState(res);
+          if (_v) {
+            return _wrap_Matrix_utsolve__SWIG_1(self, args);
+          }
+        }
+      }
+    }
+  }
+  
+fail:
+  SWIG_SetErrorMsg(PyExc_NotImplementedError,"Wrong number or type of arguments for overloaded function 'Matrix_utsolve'.\n"
+    "  Possible C/C++ prototypes are:\n"
+    "    LibMatrix::Matrix::utsolve(LibMatrix::Matrix &)\n"
+    "    LibMatrix::Matrix::utsolve(LibMatrix::Matrix &,LibMatrix::Matrix &,int *)\n"
+    "    LibMatrix::Matrix::utsolve(LibMatrix::Polynomial *)\n");
+  return 0;
+}
+
+
+SWIGINTERN PyObject *_wrap_Matrix_utxsolve(PyObject *SWIGUNUSEDPARM(self), PyObject *args) {
+  PyObject *resultobj = 0;
+  LibMatrix::Matrix *arg1 = (LibMatrix::Matrix *) 0 ;
+  LibMatrix::Matrix *arg2 = 0 ;
+  void *argp1 = 0 ;
+  int res1 = 0 ;
+  void *argp2 = 0 ;
+  int res2 = 0 ;
+  PyObject * obj0 = 0 ;
+  PyObject * obj1 = 0 ;
+  
+  if (!PyArg_ParseTuple(args,(char *)"OO:Matrix_utxsolve",&obj0,&obj1)) SWIG_fail;
+  res1 = SWIG_ConvertPtr(obj0, &argp1,SWIGTYPE_p_LibMatrix__Matrix, 0 |  0 );
+  if (!SWIG_IsOK(res1)) {
+    SWIG_exception_fail(SWIG_ArgError(res1), "in method '" "Matrix_utxsolve" "', argument " "1"" of type '" "LibMatrix::Matrix *""'"); 
+  }
+  arg1 = reinterpret_cast< LibMatrix::Matrix * >(argp1);
+  res2 = SWIG_ConvertPtr(obj1, &argp2, SWIGTYPE_p_LibMatrix__Matrix,  0 );
+  if (!SWIG_IsOK(res2)) {
+    SWIG_exception_fail(SWIG_ArgError(res2), "in method '" "Matrix_utxsolve" "', argument " "2"" of type '" "LibMatrix::Matrix &""'"); 
+  }
+  if (!argp2) {
+    SWIG_exception_fail(SWIG_ValueError, "invalid null reference " "in method '" "Matrix_utxsolve" "', argument " "2"" of type '" "LibMatrix::Matrix &""'"); 
+  }
+  arg2 = reinterpret_cast< LibMatrix::Matrix * >(argp2);
+  (arg1)->utxsolve(*arg2);
   resultobj = SWIG_Py_Void();
   return resultobj;
 fail:
@@ -15262,6 +15452,7 @@ static PyMethodDef SwigMethods[] = {
 	 { (char *)"Matrix_mmCaIBbC", _wrap_Matrix_mmCaIBbC, METH_VARARGS, NULL},
 	 { (char *)"Matrix_mmCaAIbC", _wrap_Matrix_mmCaAIbC, METH_VARARGS, NULL},
 	 { (char *)"Matrix_utsolve", _wrap_Matrix_utsolve, METH_VARARGS, NULL},
+	 { (char *)"Matrix_utxsolve", _wrap_Matrix_utxsolve, METH_VARARGS, NULL},
 	 { (char *)"Matrix_cpermutem", _wrap_Matrix_cpermutem, METH_VARARGS, NULL},
 	 { (char *)"Matrix_rpermutem", _wrap_Matrix_rpermutem, METH_VARARGS, NULL},
 	 { (char *)"Matrix_transpose", _wrap_Matrix_transpose, METH_VARARGS, NULL},
