@@ -676,7 +676,9 @@ namespace TestTaylorPLib_CSharp
             TextWriter tmp = Console.Out;
             StreamWriter sw = new StreamWriter(fs);
             Console.SetOut(sw);
+            #pragma warning disable 618
             P1.print();
+            #pragma warning restore 618
             Console.SetOut(tmp);
             sw.Close();
             string actual = File.ReadAllText(file);
