@@ -19,23 +19,6 @@ M[[1, 1]] = Polynomial([2.0, 3.0])
 print(M)
 
 
-
-print("Polynome: \n")
-# showPolynom()
-# Console.ReadKey()
-# Console.Clear()
-
-print("Matrizen mit Polynomen: \n")
-# showMatrix()
-# Console.ReadKey()
-# Console.Clear()
-
-print("Spezielle Matrizenmultiplikation: \n")
-# showSpecialMatrixMultiplication()
-# Console.ReadKey()
-
-
-
 def showPolynom():
 	p1 = Polynomial([2, 4, 3])
 	p2 = Polynomial([2, 4, 3])
@@ -194,3 +177,21 @@ def showPolynom():
 # 		print("Both Are Equal...")
 #     else:
 # 	    print("Both Are NOT Equal. Something went wrong...")
+
+
+
+
+print("Polynome: \n")
+showPolynom()
+# Console.ReadKey()
+# Console.Clear()
+
+print("Matrizen mit Polynomen: \n")
+# showMatrix()
+# Console.ReadKey()
+# Console.Clear()
+
+print("Spezielle Matrizenmultiplikation: \n")
+# showSpecialMatrixMultiplication()
+# Console.ReadKey()
+

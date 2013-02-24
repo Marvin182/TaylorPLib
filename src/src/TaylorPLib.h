@@ -119,7 +119,9 @@ namespace LibMatrix {
 		Polynomial operator*=(const double d);
 		Polynomial operator*=(const Polynomial &p);
 
+		Polynomial operator/(const double d) const;
 		Polynomial operator/(const Polynomial &p) const;
+		Polynomial operator/=(const double d);
 		Polynomial operator/=(const Polynomial &p);
 
 		//

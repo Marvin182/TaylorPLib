@@ -11,7 +11,8 @@ using namespace LibMatrix;
 class PolynomialOperator: public ::testing::Test
 {
 protected:
-	Polynomial A, B, AplusB, minusA, AminusB, twoA, AB;
+	Polynomial A, B, AplusB, minusA, AminusB, twoA, halfA, AB;
+	
 	PolynomialOperator()
 	{
 		A = Polynomial(1, 1.0, 2.0);
@@ -20,6 +21,7 @@ protected:
 		minusA = Polynomial(1, -1.0, -2.0);
 		AminusB = Polynomial(1, -4.0, 0.0);
 		twoA = Polynomial(1, 2.0, 4.0);
+		halfA = Polynomial(1, 0.5, 1.0);
 		AB = Polynomial(1, 5.0, 12.0); // we ignore the square part
 	}
 };
@@ -184,6 +186,14 @@ TEST_F(PolynomialOperator, timesPolynomial)
 
 	A *= B;
 	ASSERT_EQ(AB, A);
+}
+
+TEST_F(PolynomialOperator, divScalar)
+{
+	ASSERT_EQ(halfA, A / 2.0);
+
+	A /= 2.0;
+	ASSERT_EQ(halfA, A);
 }
 
 TEST_F(PolynomialOperator, divPolynomial)
