@@ -93,6 +93,7 @@ namespace LibMatrix {
 		int order() const { return _order; }
 		int ncoeff() const { return _order + 1; }
 		double get(int index) const;
+		void set(int index, double value);
 
 		//
 		// Overloaded operators for Taylor arithmetic
@@ -154,12 +155,11 @@ namespace LibMatrix {
 		// Python
 
 		double __getitem__(int index) {
-			return _coeffs[index];
+			return get(index);
 		}
-
+		
 		void __setitem__(int index, double value) {
-			_coeffs[index] = value;
-			_constant = -1;
+			set(index, value);
 		}
 
 		char* __str__() {
@@ -173,6 +173,7 @@ namespace LibMatrix {
 
 			return cstr;
 		}
+
 	};
 
 

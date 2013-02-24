@@ -92,7 +92,7 @@ Polynomial::Polynomial(int order, double constVal, ...):
  */
 Polynomial::Polynomial(std::vector<double> coeffs):
 	_constant(coeffs.size() == 0 ? 1 : -1),
-	_order(coeffs.size() - 1),
+	_order((int) coeffs.size() - 1),
 	_coeffs(0)
 {
 	allocateMemory(false);
@@ -126,6 +126,28 @@ double Polynomial::get(int index) const
 		throw MathException("%d is not a valid coefficient index of this %d order polynomial.", index, _order);
 	}
 	return _coeffs[index];
+}
+
+/**
+ * Sets a single coeffizient of the polynomial. Index 0 is the constant part of the polynomial.
+ * 
+ * \param[in] index The index of the coeffizient to get.
+ * \return The value of the desired element.
+ *
+ */
+void Polynomial::set(int index, double value)
+{ 
+	if (index < 0 || index > _order)
+	{
+		throw MathException("%d is not a valid coefficient index of this %d order polynomial.", index, _order);
+	}
+	
+	_coeffs[index] = value;
+
+	if (index > 0)
+	{
+		_constant = -1;
+	}
 }
 
 /**
