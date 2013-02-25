@@ -600,6 +600,26 @@ Polynomial Polynomial::operator*=(const Polynomial &p)
 }
 
 /**
+ * Implements the / operator.
+ * Divides a Taylor polynomial by a scalar.
+ * 
+ * \param[in] d The scalar value to divide by.
+ * \return A pointer to the resulting Taylor polynomial.
+ * 
+ */
+Polynomial Polynomial::operator/(double d) const
+{
+	Polynomial v(_order, false);
+	
+	for (int i = 0; i <= _order; i++)
+	{
+		v._coeffs[i] = _coeffs[i] / d;
+	}
+
+	return v;
+}
+
+/**
  * Divides a Taylor polynomial (dividend) by another Taylor polynomial (divisor). 
  * Implements the / operator for Taylor arithmetic.
  * 
@@ -640,6 +660,24 @@ Polynomial Polynomial::operator/(const Polynomial &p) const
 	}
 	
 	return v;
+}
+
+/**
+ * Implements the /= operator.
+ * Divides a Taylor polynomial by a scalar.
+ * 
+ * \param[in] d The scalar value to divide by.
+ * \return A pointer to the resulting Taylor polynomial.
+ * 
+ */
+Polynomial Polynomial::operator/=(double d)
+{
+	for (int i = 0; i <= _order; i++)
+	{
+		_coeffs[i] /= d;
+	}
+
+	return *this;
 }
 
 /**
