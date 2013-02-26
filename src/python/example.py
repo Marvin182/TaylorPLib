@@ -23,15 +23,18 @@ def showPolynom():
 	p1 = Polynomial([2, 4, 3])
 	p2 = Polynomial([2, 4, 3])
 
+	print(dir(p1))
+
 	p3 = p1 + p2
 	p4 = p1 * p2
+	p5 = p4.__div__(p2)
 	p5 = p4 / p2
 
-	print("p1:", p1)
-	print("p2:", p2)
-	print("p1 + p2:", p3)
-	print("p1 * p2:", p4)
-	print("p1 * p2 / p2:", p5)
+	print("p1:\t\t", p1)
+	print("p2:\t\t", p2)
+	print("p1 + p2:\t", p3)
+	print("p1 * p2:\t", p4)
+	print("p1 * p2 / p2:\t", p5)
 
 # def showMatrix():
 # 	Polynomial[,] Pa = new Polynomial[5, 5]
