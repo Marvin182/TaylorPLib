@@ -1577,12 +1577,12 @@ namespace TestTaylorPLib_CSharp
             Matrix A = new Matrix(3, 3, Pa);
             Matrix X = new Matrix(3, 2, Pb);
             Matrix B = A * X;
-            A.utsolve(ref B);
+            A.utsolve(B);
             Assert.AreEqual(B.ToString(), X.ToString());
 
             try
             {
-                X.utsolve(ref A);
+                X.utsolve(A);
                 Assert.Fail();
             }
             catch (MathException) { }
@@ -1591,7 +1591,7 @@ namespace TestTaylorPLib_CSharp
             try
             {
                 Matrix C = new Matrix(2, 2, 1);
-                C.utsolve(ref B);
+                C.utsolve(B);
                 Assert.Fail();
             }
             catch (MathException) { }
@@ -1600,12 +1600,52 @@ namespace TestTaylorPLib_CSharp
             A = new Matrix(3, 3, Pa);
             X = new Matrix(3, 2, Pb);
             B = A * X;
-            Matrix actual = new Matrix(X);
+            Matrix actual = new Matrix(3, 2, 1);
 
-            X = new Matrix(3, 2);
-            A.utsolve(B, X, new int[] { 0, 1, 2 });
+            // X = new Matrix(3, 2);
+            A.utsolve(B, actual, new int[] { 0, 1, 2 });
 
             Assert.AreEqual(actual.ToString(), X.ToString());
+
+            A = new Matrix(3, 3, Pa);
+
+            Polynomial[,] x = new Polynomial[3,1];
+            x[0, 0] = new Polynomial(1, new double[] { 2, 1 });
+            x[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            x[2, 0] = new Polynomial(1, new double[] { 2, 1 });
+
+            Polynomial[] x2 = new Polynomial[3];
+            x2[0] = new Polynomial(1, new double[] { 8, 4 });
+            x2[1] = new Polynomial(1, new double[] { 20, 10 });
+            x2[2] = new Polynomial(1, new double[] { 4, 2 });
+
+            Matrix XTest = new Matrix(3, 1, x);
+
+            Matrix BTest = A * XTest;
+
+            A.utsolve(x2);
+            Assert.AreEqual(x2[0].ToString(), x[0, 0].ToString());
+            Assert.AreEqual(x2[1].ToString(), x[1, 0].ToString());
+            Assert.AreEqual(x2[2].ToString(), x[2, 0].ToString());
+
+            Matrix U = new Matrix(3, 3, Pa);
+            Polynomial[,] XSolve = new Polynomial[2, 3];
+            XSolve[0, 0] = new Polynomial(1, new double[] { 2, 1 });
+            XSolve[0, 1] = new Polynomial(1, new double[] { 2, 1 });
+            XSolve[0, 2] = new Polynomial(1, new double[] { 2, 1 });
+
+            XSolve[1, 0] = new Polynomial(1, new double[] { 2, 1 });
+            XSolve[1, 1] = new Polynomial(1, new double[] { 2, 1 });
+            XSolve[1, 2] = new Polynomial(1, new double[] { 2, 1 });
+
+            X = new Matrix(2, 3, XSolve);
+
+            B = X * U;
+
+            U.utxsolve(B);
+
+            Assert.AreEqual(B.ToString(), X.ToString());
+
         }
         
         /// <summary>

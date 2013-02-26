@@ -37,9 +37,27 @@ namespace LibMatrix
 
         #region public getter and setter 
 
+        /// <summary>
+        /// Number of Rows
+        /// </summary>
+        /// <returns>Number of Rows</returns>
         public int nrows() { return _rows; }
+        /// <summary>
+        /// Number of Cols
+        /// </summary>
+        /// <returns>Number of Cols</returns>
         public int ncols() { return _cols; }
+        /// <summary>
+        /// Dimension of Polynomials
+        /// </summary>
+        /// <returns>Dimension of Polynomials</returns>
         public int dimT() { return _dimT; }
+        /// <summary>
+        /// Get the Polynomial at the given position
+        /// </summary>
+        /// <param name="row">row index</param>
+        /// <param name="col">col index</param>
+        /// <returns>Polynomial at given position</returns>
         public Polynomial get(int row, int col)
         {
             if (row >= _rows || row < 0 || col >= _cols || col < 0)
@@ -47,6 +65,10 @@ namespace LibMatrix
 
             return _data[row, col];
         }
+        /// <summary>
+        /// Square Matrix
+        /// </summary>
+        /// <returns>true if cols == rows</returns>
         public bool isSquare() { return _rows == _cols; }
         #endregion
 
@@ -1101,7 +1123,7 @@ namespace LibMatrix
         /// <para/>
         /// </summary>
         /// <param name="B">an object of type Matrix that is the independent </param>
-        public void utsolve(ref Matrix B)
+        public void utsolve(Matrix B)
         {
 	        if (!isSquare())
 	        {
@@ -1134,21 +1156,21 @@ namespace LibMatrix
         }
 
         /// <summary>
-        /// Solves the equation
-        /// 
-        ///    U X = B
-        /// 
-        /// by back-substitution, where:
-        /// 
-        ///    U : m-by-m upper triangular matrix, non-singular
-        ///    X : m-by-n matrix
-        ///    B : m-by-n matrix, overwritten with the solution on output.
-        ///
-        /// The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from 
-        /// Golub & Van Loan's book:
-        /// 
-        ///     x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n
-        ///     
+        /// Solves the equation<para/>
+        /// <para/>
+        ///    U X = B<para/>
+        /// <para/>
+        /// by back-substitution, where:<para/>
+        /// <para/>
+        ///    U : m-by-m upper triangular matrix, non-singular<para/>
+        ///    X : m-by-n matrix<para/>
+        ///    B : m-by-n matrix, overwritten with the solution on output.<para/>
+        ///<para/>
+        /// The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from <para/>
+        /// Golub & Van Loan's book:<para/>
+        /// <para/>
+        ///     x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n<para/>
+        ///     <para/>
         /// </summary>
         /// <param name="B">an object of type Matrix that is the independent</param>
         /// <param name="X">an object of type Matrix that is the independent</param>
@@ -1172,6 +1194,70 @@ namespace LibMatrix
 	        }
         }
 
+        /// <summary>
+        /// Solves the equation<para/>
+        /// <para/>
+        ///     U x = b<para/>
+        /// <para/>
+        /// by back-substitution, where:<para/>
+        /// <para/>
+        ///     U : n-by-n upper triangular matrix, non-singular<para/>
+        ///     x : n vector<para/>
+        ///     B : n vector, overwritten with the solution on output.<para/>
+        /// <para/>
+        /// The x_i are calculated following the algorithm 3.1.2, p.89 from Golub & Van Loan's book:<para/>
+        /// <para/>
+        ///     x_i = ( b_i - sum_{j=i+1}^{n} u_ij * x_j ) / u_ii<para/>
+        /// </summary>
+        /// <param name="b">an object of type Matrix that is the independent term on input</param>
+        public void utsolve(Polynomial[] b)
+        {
+	        Polynomial sum = new Polynomial(_dimT);
+	
+	        b[_rows - 1] /= _data[_rows - 1,_rows - 1];
+	        for( int i = _rows - 2; i > -1; i-- )
+	        {
+		        sum.set2Zero();
+		        for( int j = i + 1; j < _rows; j++ )
+		        {
+			        sum += _data[i,j] * b[j];
+		        }
+		        b[i] = (b[i] - sum) / _data[i,i];
+	        }
+        }
+
+        /// <summary>
+        /// Solves the equation<para/>
+        /// <para/>
+        ///     X U = B<para/>
+        /// <para/>
+        /// by back-substitution, where:<para/>
+        /// <para/>
+        ///     U : m-by-m upper triangular matrix, non-singular<para/>
+        ///     X : m-by-n matrix<para/>
+        ///     B : m-by-n matrix, overwritten with the solution on output.<para/>
+        /// <para/>
+        /// The X_ik are calculated making few modifications to the function 'utsolve' for UX=B.<para/>
+        /// </summary>
+        /// <param name="B">an object of type Matrix that is the independent term on input</param>
+        public void utxsolve(Matrix B)
+        {
+	        Polynomial sum = new Polynomial(_dimT);
+	
+	        for( int k = 0; k < B._rows; k++ )
+	        {
+                B._data[k, 0] /= _data[0, 0];
+		        for( int i = 1; i < B._cols; i++ )
+		        {
+			        sum.set2Zero();
+			        for( int j = 0; j < i; j++ )
+			        {
+                        sum += _data[j, i] * B._data[k, j];
+			        }
+                    B._data[k, i] = (B._data[k, i] - sum) / _data[i, i];
+		        }
+	        }
+        }
 
         /// <summary>
         /// Permutes the columns of a matrix given a vector of permutations. <para/>
