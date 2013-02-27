@@ -18,27 +18,10 @@ using namespace LibMatrix;
 Matrix::Matrix():
 	_rows(1),
 	_cols(1),
-	_dimT(0),
+	_order(0),
 	_data(0)
 {
 	allocateMemory(true);
-}
-
-/**
- * Constructor for the class with both the number of rows and columns as parameters. 
- * Creates the object.
- * 
- * \param[in] r The number of rows.
- * \param[in] c The number of columns.
- * 
- */
-Matrix::Matrix(int rows, int cols, bool initialize): 
-	_rows(rows), 
-	_cols(cols),
-	_dimT(0),
-	_data(0)
-{
-	allocateMemory(initialize);
 }
 
 /**
@@ -48,13 +31,13 @@ Matrix::Matrix(int rows, int cols, bool initialize):
  * 
  * \param[in] r The number of rows.
  * \param[in] c The number of columns.
- * \param[in] dimT The dimension of the type \type T.
+ * \param[in] order The dimension of the type \type T.
  * 
  */
-Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
+Matrix::Matrix(int rows, int cols, int order, bool initialize):
 	_rows(rows),
 	_cols(cols),
-	_dimT(dimT),
+	_order(order),
 	_data(0)
 {
 	allocateMemory(initialize);
@@ -69,9 +52,9 @@ Matrix::Matrix(int rows, int cols, int dimT, bool initialize):
  * 
  */
 Matrix::Matrix(const Matrix &m):
-	_rows(0),
-	_cols(0),
-	_dimT(0),
+	_rows(-1),
+	_cols(-1),
+	_order(-1),
 	_data(0)
 {
 	copyFrom(m);
@@ -88,15 +71,23 @@ Matrix::Matrix(const Matrix &m):
 Matrix::Matrix(int rows, int cols, Polynomial *values):
 	_rows(rows),
 	_cols(cols),
-	_dimT(0),
+	_order(-1),
 	_data(0)
 {
-	allocateMemory(false);
-
-	if (values[0] != NULL) 
+	if (_rows < 1 || _cols < 1)
 	{
-		_dimT = values[0].order();
+		throw MathException("%dx%d is not a valid matrix size.", _rows, _cols);
 	}
+
+	if (values[0] == NULL) 
+	{
+		throw MathException("Short Matrix construtor for a %dx%d matrix needs %d polynomial values.", _rows, _cols, _rows * _cols);
+	}
+
+	// get the order from the first Taylor Polynomial, the othe Taylor Polynomial have to have the same order
+	_order = values[0].order();
+
+	allocateMemory(false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -105,6 +96,48 @@ Matrix::Matrix(int rows, int cols, Polynomial *values):
 			_data[i][j] = values[i * _cols + j];
 		}
 	}
+}
+
+/**
+ * Short construtor for small hardcoded matrices in Python port.
+ *
+ * \param[in] rows Number of rows in the new matrix.
+ * \param[in] cols Number of columns in the new matrix.
+ * \param[in] values All values in the new matrix (left to the right, top to bottom)
+ *
+ */
+Matrix::Matrix(int rows, int cols, std::vector<Polynomial> values):
+	_rows(rows),
+	_cols(cols),
+	_order(-1),
+	_data(0)
+{
+	if (_rows < 1 && _cols < 1)
+	{
+		throw MathException("%dx%d is not a valid matrix size.", _rows, _cols);
+	}
+
+	// we could do !=, but while this constructor is for testing I like the possibility of having a very big vector
+	// of polynomials and then create different sized matrixes from it
+	unsigned int neededSize = _rows * _cols;
+	if (values.size() < neededSize)
+	{
+		throw MathException("Short construtor for a %dx%d matrix needs at least %d polynomial values, just %d were given.", _rows, _cols, _rows * _cols, values.size());
+	}
+
+	// get the order from the first Taylor Polynomial, the othe Taylor Polynomial have to have the same order
+	_order = values[0].order();
+
+	allocateMemory(false);
+
+	for( int i = 0; i < _rows; i++ )
+	{
+		for( int j = 0; j < _cols; j++ )
+		{
+			_data[i][j] = values[i * _cols + j];
+		}
+	}
+
 }
 
 //
@@ -218,7 +251,7 @@ Matrix Matrix::operator=(const Matrix &m)
  */
 bool Matrix::operator==( const Matrix &m ) const
 {
-	if(_rows != m._rows || _cols != m._cols) // TODO _dimT ?
+	if(_rows != m._rows || _cols != m._cols) // TODO _order ?
 	{
 		return false;
 	}
@@ -265,7 +298,7 @@ Matrix Matrix::operator+(const Matrix &m) const
 	}
 
 	// an auxiliary object
-	Matrix aux(_rows, _cols, _dimT, false);
+	Matrix aux(_rows, _cols, _order, false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -320,7 +353,7 @@ Matrix Matrix::operator-(const Matrix &m) const
 	}
 
 	// an auxiliary object
-	Matrix aux(_rows, _cols, _dimT, false);
+	Matrix aux(_rows, _cols, _order, false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -369,7 +402,7 @@ Matrix Matrix::operator-=(const Matrix &m)
 Matrix Matrix::operator-()
 {	
 	// an auxiliary object
-	Matrix aux( _rows, _cols, _dimT, false);
+	Matrix aux( _rows, _cols, _order, false);
 	
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -392,7 +425,7 @@ Matrix Matrix::operator-()
 Matrix Matrix::operator*(double alpha) const
 {
 	// an auxiliary object
-	Matrix aux(_rows, _cols, _dimT, false);
+	Matrix aux(_rows, _cols, _order, false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -439,7 +472,7 @@ Matrix Matrix::operator*(const Matrix &m) const
 		throw MathException("Cannot multiply a %d x %d with a %d x %d matrix. The number of rows in m must match the number of colmuns in this matrix.", _rows, _cols, m._rows, m._cols);
 	}
 
-	Matrix aux( _rows, m._cols, _dimT, true);
+	Matrix aux( _rows, m._cols, _order, true);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -491,7 +524,7 @@ void Matrix::mmCaABbC(double alpha, double beta, const Matrix &A, const Matrix &
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 			
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -557,7 +590,7 @@ void Matrix::bmmCaABbC(int r, int c, double alpha, double beta, const Matrix &A,
 	{
 		for( int j = 0; j < c; j++ ) 
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < r; k++ )
 			{
@@ -629,7 +662,7 @@ void Matrix::mmCasABbC(int r, double alpha, double beta, const Matrix &A, const 
 	{
 		for( int j = 0; j < B._cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -696,7 +729,7 @@ void Matrix::mmCaAsBbC(int r, double alpha, double beta, const Matrix &A, const 
 		// non-zero-columns of B
 		for( int j = n; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -744,7 +777,7 @@ void Matrix::mmCaAUTBPbC(double alpha, double beta, const Matrix &A, const Matri
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k <= j; k++ )
 			{
@@ -782,7 +815,7 @@ void Matrix::mmCaAATbC(double alpha, double beta, const Matrix &A)
 	{
 		for( int j = 0; j < _rows; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < _rows; k++ )
 			{
@@ -820,7 +853,7 @@ void Matrix::mmCaATAbC(double alpha, double beta, const Matrix &A)
 	{
 		for( int j = 0; j < _rows; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < A._rows; k++ )
 			{
@@ -867,7 +900,7 @@ void Matrix::mmCaATBbC(double alpha, double beta, const Matrix &A, const Matrix 
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -917,7 +950,7 @@ void Matrix::mmCaATBPbC(double alpha, double beta, const Matrix &A, const Matrix
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < B._rows; k++ )
 			{
@@ -964,7 +997,7 @@ void Matrix::mmCaABTbC(double alpha, double beta, const Matrix &A, const Matrix 
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < A._cols; k++ )
 			{
@@ -1030,7 +1063,7 @@ void Matrix::mmCaABTbC(int r, bool up, double alpha, double beta, const Matrix &
 	{
 		for( int j = 0; j < B._cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			if (up)
 			{
@@ -1104,7 +1137,7 @@ void Matrix::bmmCaABTbC(int r, int c, double alpha, double beta, const Matrix &A
 	{
 		for( int j = 0; j < _cols; j++ )
 		{
-			Polynomial h(_dimT);
+			Polynomial h(_order);
 
 			for( int k = 0; k < c; k++ )
 			{
@@ -1177,7 +1210,7 @@ void Matrix::mmCaIBbC(double alpha, double beta, int *piv, bool rows, const Matr
 {
 	// TODO implement a faster version without identity matrix
 
-	Matrix Id(_rows, B._rows, _dimT);
+	Matrix Id(_rows, B._rows, _order);
 	Id.set2Id();				
 
 	if (rows)
@@ -1247,7 +1280,7 @@ void Matrix::mmCaAIbC(double alpha, double beta, const Matrix &A, int *piv, bool
 {
 	// TODO implement a faster version without identity matrix
 	
-	Matrix Id( A._cols, _cols, _dimT);
+	Matrix Id( A._cols, _cols, _order);
 	Id.set2Id();
 
 	if(rows)
@@ -1300,7 +1333,7 @@ void Matrix::utsolve(Matrix &B)
 		throw MathException("The numebr rows in B (%d) must match the number of rows in U (=this) (%d).", B._rows, _rows);
 	}
 
-	Polynomial sum(_dimT);
+	Polynomial sum(_order);
 
 	for( int k = 0; k < B._cols; k++ )
 	{
@@ -1339,7 +1372,7 @@ void Matrix::utsolve(Matrix &B)
  */
 void Matrix::utsolve(Matrix &B, Matrix &X, int *piv)
 {
-	Polynomial sum(_dimT);
+	Polynomial sum(_order);
 	
 	for( int k = 0; k < B._cols; k++ )
 	{
@@ -1377,7 +1410,7 @@ void Matrix::utsolve(Matrix &B, Matrix &X, int *piv)
  */
 void Matrix::utsolve(Polynomial *b)
 {
-	Polynomial sum(_dimT);
+	Polynomial sum(_order);
 	
 	b[_rows - 1] /= _data[_rows - 1][_rows - 1];
 	for( int i = _rows - 2; i > -1; i-- )
@@ -1410,7 +1443,7 @@ void Matrix::utsolve(Polynomial *b)
  */
 void Matrix::utxsolve(Matrix &B)
 {
-	Polynomial sum(_dimT);
+	Polynomial sum(_order);
 	
 	for( int k = 0; k < B._rows; k++ )
 	{
@@ -1450,8 +1483,8 @@ void Matrix::utxsolve(Matrix &B)
 // {
 // 	int h, i, j, k, jpiv, jindex, *index;
 // 	double scalemax = 0.0, ratiomax, ratio, *scale;
-// 	T coeff( dimT() );
-// 	Matrix X( B._rows, B._cols, B.dimT() );
+// 	T coeff( order() );
+// 	Matrix X( B._rows, B._cols, B.order() );
   
 // 	try
 // 	{	
@@ -1567,7 +1600,7 @@ void Matrix::utxsolve(Matrix &B)
 // {
 // 	int i, j, k, jpiv, jindex, *index;
 // 	double scalemax = 0.0, ratiomax = 0.0, ratio, *scale;
-// 	T coeff( dimT() );
+// 	T coeff( order() );
   
 // 	try
 // 	{	
@@ -1798,7 +1831,7 @@ void Matrix::cpermutem(int *piv, bool trans)
 	}
 
 	Polynomial **newData;
-	Matrix::allocateMemory(newData, _rows, _cols, _dimT, false);
+	Matrix::allocateMemory(newData, _rows, _cols, _order, false);
 
 	int *pivT = 0;
 	if (trans)
@@ -1842,7 +1875,7 @@ void Matrix::rpermutem(int *piv)
 	}
 
 	Polynomial **newData;
-	Matrix::allocateMemory(newData, _rows, _cols, _dimT, false);
+	Matrix::allocateMemory(newData, _rows, _cols, _order, false);
 
 	for( int i = 0; i < _rows; i++ )
 	{
@@ -1884,7 +1917,7 @@ void Matrix::transpose()
 	{
 		// size changes, need to allocate new memomry :(
 		Polynomial **newData;
-		Matrix::allocateMemory(newData, _cols, _rows, _dimT, false);
+		Matrix::allocateMemory(newData, _cols, _rows, _order, false);
 
 		for( int i = 0; i < _rows; i++ )
 		{
@@ -1912,7 +1945,7 @@ void Matrix::transpose()
  */
 Matrix Matrix::asTranspose() const
 {
- 	Matrix aux(_cols, _rows);
+ 	Matrix aux(_cols, _rows, _order);
 
  	for( int i = 0; i < _rows; i++ )
  	{
@@ -1936,8 +1969,6 @@ Matrix Matrix::asTranspose() const
  * 
  * Internally, the coefficients are shifted to the left and the last one is zeroed.
  * 
- * \return The error code.
- * 
  */
 void Matrix::shift()
 {	
@@ -1948,6 +1979,16 @@ void Matrix::shift()
 			_data[i][j].shift();
 		}
 	}
+}
+
+/**
+ * Checks if the matrix is a square matrix.
+ * 
+ * \return \a true if the matrix is the square matrix; \a false otherwise.
+ */
+bool Matrix::isSquare() const
+{
+	return _rows == _cols;
 }
 
 /**
@@ -2341,7 +2382,7 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // int Matrix::trinvm( Matrix &Am )
 // {
 // 	int i, j, k;
-// 	T sum( dimT() ), p( dimT() );
+// 	T sum( order() ), p( order() );
 	
 // 	Am.set2Zero();											// some initialization
 // 	p.set2Const( 1.0 );
@@ -2375,7 +2416,7 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // int Matrix::trinvm( int r, Matrix &Am )
 // {
 // 	int i, j, k;
-// 	T sum( dimT() ), p( dimT() );
+// 	T sum( order() ), p( order() );
 	
 // 	p.set2Const( 1.0 );
 // 	for( int i = 0; i < r; i++ )
@@ -2432,7 +2473,7 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // bool Matrix::mcompare( Matrix &B, double eps )
 // {
 // 	bool equal = true;
-// 	T diff( dimT() );
+// 	T diff( order() );
 
 // 	for( int i = 0; i < _rows; i++ )
 // 	{
@@ -2464,7 +2505,7 @@ void Matrix::set2ValFromIndices(int firstRow, int lastRow, int firstCol, int las
 // bool Matrix::mcompare( Matrix &B, int r, double eps )
 // {
 // 	bool equal = true;
-// 	T diff( dimT() );
+// 	T diff( order() );
 
 // 	for( int i = 0; i < r; i++ )
 // 	{
@@ -3007,7 +3048,12 @@ void Matrix::print(const char *name)
   P R I V A T E
   **************/
 
-void Matrix::allocateMemory(Polynomial **&data, int rows, int cols, int dimT, bool initialize)
+void Matrix::allocateMemory(bool initialize)
+{
+	Matrix::allocateMemory(_data, _rows, _cols, _order, initialize);
+}    
+
+void Matrix::allocateMemory(Polynomial **&data, int rows, int cols, int order, bool initialize)
 {
 	try
 	{
@@ -3035,7 +3081,7 @@ void Matrix::allocateMemory(Polynomial **&data, int rows, int cols, int dimT, bo
 			{
 				for( int j = 0; j < cols; j++)
 				{
-					data[i][j] = Polynomial(dimT);
+					data[i][j] = Polynomial(order);
 				}
 			}
 		}
@@ -3050,6 +3096,11 @@ void Matrix::allocateMemory(Polynomial **&data, int rows, int cols, int dimT, bo
 	}
 }
 
+void Matrix::deallocateMemory()
+{
+	Matrix::deallocateMemory(_data, _rows, _cols);
+}
+
 void Matrix::deallocateMemory(Polynomial **&data, int rows, int cols)
 {
 	for( int i = 0; i < rows; i++ )
@@ -3061,13 +3112,16 @@ void Matrix::deallocateMemory(Polynomial **&data, int rows, int cols)
 
 void Matrix::copyFrom(const Matrix &m)
 {
-	deallocateMemory();
+	// only resize if needed
+	if (_rows != m._rows || _cols != m._cols)
+	{
+		deallocateMemory();
+		_rows = m._rows;
+		_cols = m._cols;
+		allocateMemory(false);
+	}
 
-	_rows = m._rows;
-	_cols = m._cols;
-	_dimT = m._dimT;
-
-	allocateMemory(false);
+	_order = m._order;
 
 	for( int i = 0; i < _rows; i++ )
 	{

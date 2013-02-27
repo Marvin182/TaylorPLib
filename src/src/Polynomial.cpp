@@ -34,12 +34,12 @@ Polynomial::Polynomial():
  * \param[in] order The derivative order of the Taylor polynomial.
  * 
  */
-Polynomial::Polynomial(int order, bool initialize):
+Polynomial::Polynomial(int order):
 	_constant(-1),
 	_order(order),
 	_coeffs(0)
 {
-	allocateMemory(initialize);
+	allocateMemory(true);
 }
 
 /**
@@ -163,7 +163,7 @@ double& Polynomial::operator[](int index)
 { 
 	if (index < 0 || index > _order)
 	{
-		throw MathException("%d is not a valid coefficient index of this %d order polynomial.", index, _order);
+		throw MathException("%d is not a valid coefficient index of this polynomial of order %d.", index, _order);
 	}
 	
 	if (index > 0)
@@ -1177,9 +1177,9 @@ void Polynomial::copyFrom(const Polynomial &p)
 		try
 		{
 			_coeffs = new double[_order + 1];
-			if (_coeffs == 0  ||  _coeffs == NULL)
+			if (_coeffs == 0 || _coeffs == NULL)
 			{
-				throw MathException("Memory allocation failure.");
+				throw MathException("Memory allocation failure in Polynomial.copyFrom().");
 			}
 			for (int i = 0; i <= _order; i++)
 			{
@@ -1188,11 +1188,7 @@ void Polynomial::copyFrom(const Polynomial &p)
 		}
 		catch (bad_alloc e)
 		{
-			throw MathException(e.what(), 4);
-		}
-		catch (...)
-		{
-			throw MathException("Error when allocating memory for a polynomial.");
+			throw MathException(e.what());
 		}
 	}
 }
@@ -1210,8 +1206,11 @@ std::ostream& operator<<(std::ostream &out, const Polynomial &p)
 	out << '(' << p.get(0);
 	for (int i = 1; i <= p.order(); i++)
  	{
- 		out << " + " << p.get(i) << "x^" << i;
- 	}
+ 		if (p.get(i) != 0.0)
+ 		{
+	 		out << " + " << p.get(i) << "x^" << i;
+	 	}
+	}
  	out<< ')';
 	
 	return out; 

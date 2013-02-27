@@ -89,14 +89,23 @@ class MatrixMultiplication: public ::testing::Test
 		Matrix A, B, C, I;
 		double alpha, beta;
 
-		Polynomial getRandomNumber() { return T(rand() % 10); }
+		Polynomial getRandomPolynomial(int order)
+		{
+			Polynomial p(order);
+			for (int i = 0; i <= order; i++)
+			{
+				p[i] = rand() % 10;
+			}
+			return p;
+		}
+
 		void fillWithRandoms(Matrix &m)
 		{
 			for (int i = 0; i < m.nrows(); i++)
 			{
 				for (int j = 0; j < m.ncols(); j++)
 				{
-					m(i, j) = getRandomNumber();
+					m(i, j) = getRandomPolynomial(m.order());
 				}
 			}
 		}
@@ -105,16 +114,16 @@ class MatrixMultiplication: public ::testing::Test
 			alpha(2.0),
 			beta(3.0)
 		{
-			A = Matrix(5, 5);
+			A = Matrix(5, 5, 0);
 			fillWithRandoms(A);
 
-			B = Matrix(5, 5);
+			B = Matrix(5, 5, 0);
 			fillWithRandoms(B);
 
-			C = Matrix(5, 5);
+			C = Matrix(5, 5, 0);
 			fillWithRandoms(C);
 
-			I = Matrix(5, 5);
+			I = Matrix(5, 5, 0);
 			I.set2Id();
 		}
 };
@@ -242,9 +251,10 @@ TEST(MatrixConstructor, default_constructor)
 TEST(MatrixConstructor, regular_constructor)
 {	
 	// regular constructor
-	Matrix r(2, 3);
+	Matrix r(2, 3, 0);
 	ASSERT_EQ(2, r.nrows());
 	ASSERT_EQ(3, r.ncols());
+	ASSERT_EQ(0, r.order());
 	ASSERT_EQ(0, r(0, 0));
 	ASSERT_EQ(0, r(1, 2));
 }
@@ -313,7 +323,7 @@ TEST_F(MatrixOperator, comparsion)
 	Matrix asA(A);
 	ASSERT_TRUE(A == asA);
 
-	Matrix biggerA(2, 3);
+	Matrix biggerA(2, 3, 0);
 	for (int i = 0; i < A.nrows(); i++)
 	{
 		for (int j = 0; j < A.ncols(); j++)
@@ -598,7 +608,7 @@ TEST_F(MatrixMultiplication, bmmCaABTbC)
 
 	A = Matrix(3, 4, a2);
 	B = Matrix(4, 3, b2);
-	C = Matrix(3, 3);
+	C = Matrix(3, 3, 0);
 	// Exception, da B transposed wird und da die Mulitplikation (3 x 4) * (3 x 4) nicht möglich ist
 	ASSERT_THROW(C.bmmCaABTbC(2, 3, alpha, beta, A, B), MathException);
 }
@@ -638,7 +648,7 @@ TEST_F(MatrixMultiplication, utsolve)
 		T(0), T(0), T(2)
 	};
 	Matrix A(3, 3, a);
-	Matrix X(3, 2);
+	Matrix X(3, 2, 0);
 	fillWithRandoms(X);
 
 	Matrix B = A * X;
@@ -853,9 +863,9 @@ TEST_F(MatrixExceptions, FunctionExceptions)
 {
 	// mmCaABbC
 	// Wrong Dimension of receiving Matrix
-	Matrix C(3, 3);
+	Matrix C(3, 3, 9);
 	ASSERT_THROW(C.mmCaABbC(1, 1, A, B),MathException);
-	C = Matrix(3, 2);
+	C = Matrix(3, 2, 0);
 	C.mmCaABbC(1, 1, A, B); // should be okay
 	// Wrong Multiplication Dimensions
 	ASSERT_THROW(C.mmCaABbC(1, 1, B, A),MathException);
@@ -867,7 +877,7 @@ TEST_F(MatrixExceptions, FunctionExceptions)
 	ASSERT_THROW(C.bmmCaABbC(2, 5, 1, 1, A, B), MathException);
 	// A.cols != B.rows
 	ASSERT_THROW(C.bmmCaABbC(1, 1, 1, 1, B, A), MathException);
-	C = Matrix(1, 2);
+	C = Matrix(1, 2, 0);
 	// A.rows != C.rows || A.cols != C.cols
 	ASSERT_THROW(C.bmmCaABbC(1, 1, 1, 1, A, B), MathException);
 }

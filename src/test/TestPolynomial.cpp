@@ -54,11 +54,10 @@ protected:
  */
 TEST(PolynomialConstructor, default_constructor)
 {
-	// like Polynomial (const=1, order=0, nrcoeffs=order+1);
+	// like Polynomial (const=1, order=0);
 	Polynomial p;
 	ASSERT_TRUE(p.isConst());
 	ASSERT_EQ(0, p.order());
-	ASSERT_EQ(1, p.ncoeff());
 	ASSERT_EQ(1, p[0]);
 }
 
@@ -68,7 +67,6 @@ TEST(PolynomialConstructor, order_constructor)
 	// should also be constant, because all values are zero initialized
 	ASSERT_TRUE(p.isConst());
 	ASSERT_EQ(2, p.order());
-	ASSERT_EQ(3, p.ncoeff());
 	ASSERT_EQ(0, p[0]);
 	ASSERT_EQ(0, p[1]);
 	ASSERT_EQ(0, p[2]);
@@ -111,7 +109,7 @@ TEST_F(PolynomialOperator, assignment)
 	ASSERT_EQ(A, B);
 	ASSERT_EQ(B, A);
 
-	for (int i = 0; i < A.ncoeff(); i++)
+	for (int i = 0; i <= A.order(); i++)
 	{
 		ASSERT_EQ(A[i], B[i]);
 	}
@@ -129,7 +127,7 @@ TEST_F(PolynomialOperator, comparsion)
 	ASSERT_TRUE(A == asA);
 
 	Polynomial biggerA(2);
-	for (int i = 0; i < A.ncoeff(); i++)
+	for (int i = 0; i <= A.order(); i++)
 	{
 		biggerA[i] = A[i];
 	}
