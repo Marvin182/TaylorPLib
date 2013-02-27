@@ -3,13 +3,20 @@ ToDo
 ----
 - Syntax Highlighting in Python Port
 - src/python/TaylorPLib.i in Anhang
-- 
+- Screenshot von example.py einfügen
 
 
-Quellen
--------
-http://www.swig.org/papers/PyTutorial98/PyTutorial98.pdf
-http://www.swig.org/Doc2.0/SWIGDocumentation.pdf
-irgendein Python Buch
-C++ Buch?
-http://arxiv.org/abs/0803.1838
+Literatur
+---------
+- Python
+ 	Mark Lutz: Learning Python, 4. Auflage, 9. Oktober 2009, O'Reilly Media
+- C++
+	???
+- Matrizenberechnungen
+	Das Buch das sie auch genutzt hat, suche ich dir nachher raus.
+- Taylorpolynome
+	Wenn ich noch zufällig auf etwas stoße, sage ich Bescheid, sonst eben nichts
+- Informationen zu SWIG
+	Juluis B. Lucks: Python - All a Scientist Needs, Version 1, 12. März 2008, http://arxiv.org/abs/0803.1838
+	SWIG Project: SWIG-2.0 Dokumentation, Stand: 16. Dezember 2012, http://www.swig.org/Doc2.0/SWIGDocumentation.pdf
+	David M. Beazley: Interfacing C/C++ and Python with SWIG, November 1998, International Python Conferenec
