@@ -9,7 +9,7 @@ using namespace std;
 int main(int argc, char **argv)
 {
 	::testing::InitGoogleTest(&argc, argv);
- 
+ #pragma warning( disable : 4244)
  	srand ( time(NULL) );
 
 	return RUN_ALL_TESTS();

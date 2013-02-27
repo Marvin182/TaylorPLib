@@ -190,6 +190,53 @@ class IntArray(_object):
 IntArray_swigregister = _TaylorPLib.IntArray_swigregister
 IntArray_swigregister(IntArray)
 
+class PolynomialArray(_object):
+    __swig_setmethods__ = {}
+    __setattr__ = lambda self, name, value: _swig_setattr(self, PolynomialArray, name, value)
+    __swig_getmethods__ = {}
+    __getattr__ = lambda self, name: _swig_getattr(self, PolynomialArray, name)
+    __repr__ = _swig_repr
+    def iterator(self): return _TaylorPLib.PolynomialArray_iterator(self)
+    def __iter__(self): return self.iterator()
+    def __nonzero__(self): return _TaylorPLib.PolynomialArray___nonzero__(self)
+    def __bool__(self): return _TaylorPLib.PolynomialArray___bool__(self)
+    def __len__(self): return _TaylorPLib.PolynomialArray___len__(self)
+    def pop(self): return _TaylorPLib.PolynomialArray_pop(self)
+    def __getslice__(self, *args): return _TaylorPLib.PolynomialArray___getslice__(self, *args)
+    def __setslice__(self, *args): return _TaylorPLib.PolynomialArray___setslice__(self, *args)
+    def __delslice__(self, *args): return _TaylorPLib.PolynomialArray___delslice__(self, *args)
+    def __delitem__(self, *args): return _TaylorPLib.PolynomialArray___delitem__(self, *args)
+    def __getitem__(self, *args): return _TaylorPLib.PolynomialArray___getitem__(self, *args)
+    def __setitem__(self, *args): return _TaylorPLib.PolynomialArray___setitem__(self, *args)
+    def append(self, *args): return _TaylorPLib.PolynomialArray_append(self, *args)
+    def empty(self): return _TaylorPLib.PolynomialArray_empty(self)
+    def size(self): return _TaylorPLib.PolynomialArray_size(self)
+    def clear(self): return _TaylorPLib.PolynomialArray_clear(self)
+    def swap(self, *args): return _TaylorPLib.PolynomialArray_swap(self, *args)
+    def get_allocator(self): return _TaylorPLib.PolynomialArray_get_allocator(self)
+    def begin(self): return _TaylorPLib.PolynomialArray_begin(self)
+    def end(self): return _TaylorPLib.PolynomialArray_end(self)
+    def rbegin(self): return _TaylorPLib.PolynomialArray_rbegin(self)
+    def rend(self): return _TaylorPLib.PolynomialArray_rend(self)
+    def pop_back(self): return _TaylorPLib.PolynomialArray_pop_back(self)
+    def erase(self, *args): return _TaylorPLib.PolynomialArray_erase(self, *args)
+    def __init__(self, *args): 
+        this = _TaylorPLib.new_PolynomialArray(*args)
+        try: self.this.append(this)
+        except: self.this = this
+    def push_back(self, *args): return _TaylorPLib.PolynomialArray_push_back(self, *args)
+    def front(self): return _TaylorPLib.PolynomialArray_front(self)
+    def back(self): return _TaylorPLib.PolynomialArray_back(self)
+    def assign(self, *args): return _TaylorPLib.PolynomialArray_assign(self, *args)
+    def resize(self, *args): return _TaylorPLib.PolynomialArray_resize(self, *args)
+    def insert(self, *args): return _TaylorPLib.PolynomialArray_insert(self, *args)
+    def reserve(self, *args): return _TaylorPLib.PolynomialArray_reserve(self, *args)
+    def capacity(self): return _TaylorPLib.PolynomialArray_capacity(self)
+    __swig_destroy__ = _TaylorPLib.delete_PolynomialArray
+    __del__ = lambda self : None;
+PolynomialArray_swigregister = _TaylorPLib.PolynomialArray_swigregister
+PolynomialArray_swigregister(PolynomialArray)
+
 MAX_MESSAGE_SIZE = _TaylorPLib.MAX_MESSAGE_SIZE
 class Polynomial(_object):
     __swig_setmethods__ = {}
@@ -204,7 +251,6 @@ class Polynomial(_object):
     __swig_destroy__ = _TaylorPLib.delete_Polynomial
     __del__ = lambda self : None;
     def order(self): return _TaylorPLib.Polynomial_order(self)
-    def ncoeff(self): return _TaylorPLib.Polynomial_ncoeff(self)
     def get(self, *args): return _TaylorPLib.Polynomial_get(self, *args)
     def set(self, *args): return _TaylorPLib.Polynomial_set(self, *args)
     def __eq__(self, *args): return _TaylorPLib.Polynomial___eq__(self, *args)
@@ -258,7 +304,7 @@ class Matrix(_object):
     __del__ = lambda self : None;
     def nrows(self): return _TaylorPLib.Matrix_nrows(self)
     def ncols(self): return _TaylorPLib.Matrix_ncols(self)
-    def dimT(self): return _TaylorPLib.Matrix_dimT(self)
+    def order(self): return _TaylorPLib.Matrix_order(self)
     def get(self, *args): return _TaylorPLib.Matrix_get(self, *args)
     def set(self, *args): return _TaylorPLib.Matrix_set(self, *args)
     def __call__(self, *args): return _TaylorPLib.Matrix___call__(self, *args)

@@ -912,9 +912,66 @@
             <param name="piv">a vector of permutations on I, of type int</param>
             <param name="rows">The binary parameter to indicate whether the rows or the columns of I should be permuted (true for the rows; false for the columns)</param>
         </member>
-        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Matrix.utsolve(LibMatrix.Matrix)" ignoriert -->
-        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Matrix.utsolve(LibMatrix.Matrix,LibMatrix.Matrix,System.Int32[])" ignoriert -->
-        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Matrix.utsolve(LibMatrix.Polynomial[])" ignoriert -->
+        <member name="M:LibMatrix.Matrix.utsolve(LibMatrix.Matrix)">
+            <summary>
+            Solves the equation<para/>
+            <para/>
+                U X = B<para/>
+            <para/>
+            by back-substitution, where:<para/>
+            <para/>
+                U : m-by-m upper triangular matrix, non-singular<para/>
+                X : m-by-n matrix<para/>
+                B : m-by-n matrix, overwritten with the solution on output.<para/>
+                <para/>
+            The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from <para/>
+            Golub &amp; Van Loan's book:<para/>
+            <para/>
+                x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n<para/>
+            <para/>
+            </summary>
+            <param name="B">an object of type Matrix that is the independent </param>
+        </member>
+        <member name="M:LibMatrix.Matrix.utsolve(LibMatrix.Matrix,LibMatrix.Matrix,System.Int32[])">
+             <summary>
+             Solves the equation<para/>
+             <para/>
+                U X = B<para/>
+             <para/>
+             by back-substitution, where:<para/>
+             <para/>
+                U : m-by-m upper triangular matrix, non-singular<para/>
+                X : m-by-n matrix<para/>
+                B : m-by-n matrix, overwritten with the solution on output.<para/>
+            <para/>
+             The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from <para/>
+             Golub &amp; Van Loan's book:<para/>
+             <para/>
+                 x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n<para/>
+                 <para/>
+             </summary>
+             <param name="B">an object of type Matrix that is the independent</param>
+             <param name="X">an object of type Matrix that is the independent</param>
+             <param name="piv"></param>
+        </member>
+        <member name="M:LibMatrix.Matrix.utsolve(LibMatrix.Polynomial[])">
+            <summary>
+            Solves the equation<para/>
+            <para/>
+                U x = b<para/>
+            <para/>
+            by back-substitution, where:<para/>
+            <para/>
+                U : n-by-n upper triangular matrix, non-singular<para/>
+                x : n vector<para/>
+                B : n vector, overwritten with the solution on output.<para/>
+            <para/>
+            The x_i are calculated following the algorithm 3.1.2, p.89 from Golub &amp; Van Loan's book:<para/>
+            <para/>
+                x_i = ( b_i - sum_{j=i+1}^{n} u_ij * x_j ) / u_ii<para/>
+            </summary>
+            <param name="b">an object of type Matrix that is the independent term on input</param>
+        </member>
         <member name="M:LibMatrix.Matrix.utxsolve(LibMatrix.Matrix)">
             <summary>
             Solves the equation<para/>
@@ -1089,6 +1146,19 @@
             <param name="firstCol">The column from which to start on</param>
             <param name="lastCol">The last column that should be considered</param>
             <param name="v">The double value to set the elements to</param>
+        </member>
+        <member name="M:LibMatrix.Matrix.Equals(System.Object)">
+            <summary>
+            Overrides the base function Equals
+            </summary>
+            <param name="obj">object of Polynomial</param>
+            <returns>true if Polynomial[,] are equal</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.GetHashCode">
+            <summary>
+            Overrides the base function GetHashCode()
+            </summary>
+            <returns>hash of summed Polynomial[,].GetHashCode()</returns>
         </member>
         <member name="M:LibMatrix.Matrix.ToString">
             <summary>

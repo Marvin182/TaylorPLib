@@ -80,10 +80,10 @@ namespace LibMatrix {
 		// Constructors, destructor
 		//
 		Polynomial();											// Default constructor
-		Polynomial(int order, bool initialize = true);			// Regular constructor
+		Polynomial(int order);									// Regular constructor
 		Polynomial(const Polynomial &p);						// Copy construtor
-		Polynomial(int order, double constVal, ...);			// Short construtor for small hardcoded matrices
-		Polynomial(std::vector<double> coelffs);				// Even shorter constructor for Python port
+		Polynomial(int order, double constCoeff, ...);			// Short construtor for small hardcoded matrices
+		Polynomial(std::vector<double> coeffs);					// Even shorter constructor for Python port
 
 		~Polynomial();											// Destructor
 
@@ -91,7 +91,6 @@ namespace LibMatrix {
 		// Accessing properties
 		//
 		int order() const { return _order; }
-		int ncoeff() const { return _order + 1; }
 		double get(int index) const;
 		void set(int index, double value);
 
@@ -184,26 +183,25 @@ namespace LibMatrix {
 	private:
 		int _rows,											// The number of rows
 			_cols,											// The number of columns
-			_dimT;											// The dimension of the Taylor polynomials 
+			_order;											// The order of the Taylor Polynomials
     	Polynomial **_data;									// The pointer to the allocated memory
 
-    	void allocateMemory(bool initialize)
-    		{ Matrix::allocateMemory(_data, _rows, _cols, _dimT, initialize); }
-    	static void allocateMemory(Polynomial **&data, int rows, int cols, int dimT, bool initialize);
-	    void deallocateMemory()
-	    	{ Matrix::deallocateMemory(_data, _rows, _cols); }
-	    static void deallocateMemory(Polynomial **&data, int rows, int cols);
+		void allocateMemory(bool initialize);
+		void deallocateMemory();
 		void copyFrom(const Matrix &m);
+		
+		static void allocateMemory(Polynomial **&data, int rows, int cols, int order, bool initialize);
+		static void deallocateMemory(Polynomial **&data, int rows, int cols);
 
 	public:
 		//
 		// Constructors, destructor
 		//
 		Matrix();														// Default constructor
-		Matrix(int rows, int cols, bool initialize = true);				// Regular constructor
-		Matrix(int rows, int cols, int dimT, bool initialize = true);	// Regular constructor
+		Matrix(int rows, int cols, int order, bool initialize = true);	// Regular constructor
 		Matrix(const Matrix &m);										// Copy constructor
 		Matrix(int rows, int cols, Polynomial *values);					// Short construtor for small hardcoded matrices
+		Matrix(int rows, int cols, std::vector<Polynomial> values);		// Short constructor for Python port
 
 		~Matrix();														// Destructor
 
@@ -212,7 +210,7 @@ namespace LibMatrix {
 		//
 		int nrows() const { return _rows; }					// Returns the number of rows
 		int ncols() const { return _cols; }					// Returns the number of columns
-		int dimT() const { return _dimT; }					// Returns the dimension of the type T
+		int order() const { return _order; }				// Returns the order of the Taylor Polynomials
 		const Polynomial* get(int row, int col) const;		// Returns a single element from the matrix
 		void set(int row, int col, const Polynomial &p);	// Sets a single element from the matrix
 
@@ -275,7 +273,7 @@ namespace LibMatrix {
 		void transpose();
 		Matrix asTranspose() const;
 		void shift();
-		bool isSquare() const { return _rows == _cols; }
+		bool isSquare() const;
 		bool isId() const;
 		// bool isId(double eps);
 		// bool isId(int m1, int m2, int n1, int n2, double eps);

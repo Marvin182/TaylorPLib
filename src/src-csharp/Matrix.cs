@@ -1672,6 +1672,34 @@ namespace LibMatrix
         #endregion
 
         /// <summary>
+        /// Overrides the base function Equals
+        /// </summary>
+        /// <param name="obj">object of Polynomial</param>
+        /// <returns>true if Polynomial[,] are equal</returns>
+        public override bool Equals(object obj)
+        {
+            Matrix p = obj as Matrix;
+            if ((object)p == null)
+            {
+                return false;
+            }
+            return (this == p);
+        }
+
+        /// <summary>
+        /// Overrides the base function GetHashCode()
+        /// </summary>
+        /// <returns>hash of summed Polynomial[,].GetHashCode()</returns>
+        public override int GetHashCode()
+        {
+            int retval = 0;
+            for (int i = 0; i < _rows; i++)
+                for (int j = 0; j < _cols; j++)
+                    retval += _data[i, j].GetHashCode();
+                return retval;
+        }
+
+        /// <summary>
         /// Returns a String of the Matrix<para/>
         /// </summary>
         /// <returns>String of matrix</returns>
