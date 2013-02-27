@@ -338,7 +338,14 @@
             (if _constant unknown then it will be set)<para/>
             </summary>
         </member>
-        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Polynomial.isConst(System.Double)" ignoriert -->
+        <member name="M:LibMatrix.Polynomial.isConst(System.Double)">
+            <summary>
+            Returns true in case it is near a constant Taylor polynomial; <para/>
+            false otherwise.<para/>
+            </summary>
+            <param name="eps">The threshold value to compare with.</param>
+            <returns>\a true if it is a constant Taylor polynomial; \a false otherwise.</returns>
+        </member>
         <member name="M:LibMatrix.Polynomial.isId">
             <summary>
             Returns \a true in case it is a constant Taylor polynomial with value 1; <para/>
@@ -451,6 +458,38 @@
             <summary>
             The Taylor Polynomials in an 2 dimensional Matrix Array
             </summary>
+        </member>
+        <member name="M:LibMatrix.Matrix.nrows">
+            <summary>
+            Number of Rows
+            </summary>
+            <returns>Number of Rows</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.ncols">
+            <summary>
+            Number of Cols
+            </summary>
+            <returns>Number of Cols</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.dimT">
+            <summary>
+            Dimension of Polynomials
+            </summary>
+            <returns>Dimension of Polynomials</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.get(System.Int32,System.Int32)">
+            <summary>
+            Get the Polynomial at the given position
+            </summary>
+            <param name="row">row index</param>
+            <param name="col">col index</param>
+            <returns>Polynomial at given position</returns>
+        </member>
+        <member name="M:LibMatrix.Matrix.isSquare">
+            <summary>
+            Square Matrix
+            </summary>
+            <returns>true if cols == rows</returns>
         </member>
         <member name="M:LibMatrix.Matrix.#ctor">
             <summary>
@@ -872,6 +911,25 @@
             <param name="A">an object of type Matrix</param>
             <param name="piv">a vector of permutations on I, of type int</param>
             <param name="rows">The binary parameter to indicate whether the rows or the columns of I should be permuted (true for the rows; false for the columns)</param>
+        </member>
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Matrix.utsolve(LibMatrix.Matrix)" ignoriert -->
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Matrix.utsolve(LibMatrix.Matrix,LibMatrix.Matrix,System.Int32[])" ignoriert -->
+        <!-- Ungültiger XML-Kommentar wurde für den Member "M:LibMatrix.Matrix.utsolve(LibMatrix.Polynomial[])" ignoriert -->
+        <member name="M:LibMatrix.Matrix.utxsolve(LibMatrix.Matrix)">
+            <summary>
+            Solves the equation<para/>
+            <para/>
+                X U = B<para/>
+            <para/>
+            by back-substitution, where:<para/>
+            <para/>
+                U : m-by-m upper triangular matrix, non-singular<para/>
+                X : m-by-n matrix<para/>
+                B : m-by-n matrix, overwritten with the solution on output.<para/>
+            <para/>
+            The X_ik are calculated making few modifications to the function 'utsolve' for UX=B.<para/>
+            </summary>
+            <param name="B">an object of type Matrix that is the independent term on input</param>
         </member>
         <member name="M:LibMatrix.Matrix.cpermutem(System.Int32[],System.Boolean)">
             <summary>
