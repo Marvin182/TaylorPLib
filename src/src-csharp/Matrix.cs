@@ -1117,7 +1117,7 @@ namespace LibMatrix
         ///     B : m-by-n matrix, overwritten with the solution on output.<para/>
         ///     <para/>
         /// The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from <para/>
-        /// Golub & Van Loan's book:<para/>
+        /// Golub &amp; Van Loan's book:<para/>
         /// <para/>
         ///     x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n<para/>
         /// <para/>
@@ -1167,7 +1167,7 @@ namespace LibMatrix
         ///    B : m-by-n matrix, overwritten with the solution on output.<para/>
         ///<para/>
         /// The X_ik are calculated making few modifications to the algorithm 3.1.2, p.89 from <para/>
-        /// Golub & Van Loan's book:<para/>
+        /// Golub &amp; Van Loan's book:<para/>
         /// <para/>
         ///     x_ik = ( b_ik - sum_{j=i+1}^{m} u_ij * x_jk ) / u_ii     for k=1,...,n<para/>
         ///     <para/>
@@ -1205,7 +1205,7 @@ namespace LibMatrix
         ///     x : n vector<para/>
         ///     B : n vector, overwritten with the solution on output.<para/>
         /// <para/>
-        /// The x_i are calculated following the algorithm 3.1.2, p.89 from Golub & Van Loan's book:<para/>
+        /// The x_i are calculated following the algorithm 3.1.2, p.89 from Golub &amp; Van Loan's book:<para/>
         /// <para/>
         ///     x_i = ( b_i - sum_{j=i+1}^{n} u_ij * x_j ) / u_ii<para/>
         /// </summary>
