@@ -66,36 +66,12 @@ def showMatrix():
 	M1[[4, 3]] = Polynomial([1, 2])
 	M1[[4, 4]] = Polynomial([5, 6])
 
-	M2 = Matrix(5, 5, 1)
-	M2[[0, 0]] = Polynomial([0, 0])
-	M2[[0, 1]] = Polynomial([0, 0])
-	M2[[0, 2]] = Polynomial([0, 0])
-	M2[[0, 3]] = Polynomial([2, 1])
-	M2[[0, 4]] = Polynomial([2, 1])
-
-	M2[[1, 0]] = Polynomial([0, 0])
-	M2[[1, 1]] = Polynomial([0, 0])
-	M2[[1, 2]] = Polynomial([0, 0])
-	M2[[1, 3]] = Polynomial([2, 1])
-	M2[[1, 4]] = Polynomial([2, 1])
-
-	M2[[2, 0]] = Polynomial([0, 0])
-	M2[[2, 1]] = Polynomial([0, 0])
-	M2[[2, 2]] = Polynomial([0, 0])
-	M2[[2, 3]] = Polynomial([2, 1])
-	M2[[2, 4]] = Polynomial([2, 1])
-
-	M2[[3, 0]] = Polynomial([0, 0])
-	M2[[3, 1]] = Polynomial([0, 0])
-	M2[[3, 2]] = Polynomial([0, 0])
-	M2[[3, 3]] = Polynomial([2, 1])
-	M2[[3, 4]] = Polynomial([2, 1])
-
-	M2[[4, 0]] = Polynomial([0, 0])
-	M2[[4, 1]] = Polynomial([0, 0])
-	M2[[4, 2]] = Polynomial([0, 0])
-	M2[[4, 3]] = Polynomial([2, 1])
-	M2[[4, 4]] = Polynomial([2, 1])
+	# lets do it a bit shorter this time
+	M2 = Matrix(5, 5, [Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([2, 1]), Polynomial([2, 1]), 
+		Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([2, 1]), Polynomial([2, 1]), 
+		Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([2, 1]), Polynomial([2, 1]), 
+		Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([2, 1]), Polynomial([2, 1]), 
+		Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([0, 0]), Polynomial([2, 1]), Polynomial([2, 1])])
 
 	print("M1:", M1)
 	print("M2:", M2)

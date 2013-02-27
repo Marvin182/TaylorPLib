@@ -12,7 +12,7 @@
 namespace std {
 	%template(DoubleArray) vector<double>;
 	%template(IntArray) vector<int>;
-    %template(DoubleDoubleArray) vector< vector<double> >;
+    %template(PolynomialArray) vector<LibMatrix::Polynomial>;
 }
 
 %ignore LibMatrix::Polynomial::operator=(const Polynomial &p);
