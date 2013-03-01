@@ -9,7 +9,7 @@ Literatur
 - Python  -> OK
  	Mark Lutz: Learning Python, 4. Auflage, 9. Oktober 2009, O'Reilly Media
 - C++
-	???
+	Jürgen Wolf: C++ von A bis Z: Das umfassende Handbuch, 2. Auflage, 28. Mai 2009, Galileo Computing
 - Matrizenberechnungen
 	Das Buch das sie auch genutzt hat, suche ich dir nachher raus.
 - Taylorpolynome
