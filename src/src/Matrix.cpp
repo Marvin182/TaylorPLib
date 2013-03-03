@@ -79,11 +79,6 @@ Matrix::Matrix(int rows, int cols, Polynomial *values):
 		throw MathException("%dx%d is not a valid matrix size.", _rows, _cols);
 	}
 
-	if (values[0] == NULL) 
-	{
-		throw MathException("Short Matrix construtor for a %dx%d matrix needs %d polynomial values.", _rows, _cols, _rows * _cols);
-	}
-
 	// get the order from the first Taylor Polynomial, the othe Taylor Polynomial have to have the same order
 	_order = values[0].order();
 
@@ -112,6 +107,8 @@ Matrix::Matrix(int rows, int cols, std::vector<Polynomial> values):
 	_order(-1),
 	_data(0)
 {
+	cout << "wrong constructor" << endl;
+
 	if (_rows < 1 && _cols < 1)
 	{
 		throw MathException("%dx%d is not a valid matrix size.", _rows, _cols);

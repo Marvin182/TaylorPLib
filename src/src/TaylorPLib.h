@@ -79,13 +79,13 @@ namespace LibMatrix {
 		//
 		// Constructors, destructor
 		//
-		Polynomial();											// Default constructor
-		Polynomial(int order);									// Regular constructor
-		Polynomial(const Polynomial &p);						// Copy construtor
-		Polynomial(int order, double constCoeff, ...);			// Short construtor for small hardcoded matrices
-		Polynomial(std::vector<double> coeffs);					// Even shorter constructor for Python port
+		Polynomial();										// Default constructor
+		explicit Polynomial(int order);						// Regular constructor
+		Polynomial(const Polynomial &p);					// Copy construtor
+		Polynomial(int order, double constCoeff, ...);		// Short construtor for small hardcoded matrices
+		Polynomial(std::vector<double> coeffs);				// Even shorter constructor for Python port
 
-		~Polynomial();											// Destructor
+		~Polynomial();										// Destructor
 
 		//
 		// Accessing properties
