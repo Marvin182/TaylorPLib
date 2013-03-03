@@ -640,244 +640,244 @@ TEST_F(MatrixMultiplication, mmCaAIbC)
 // int Matrix::colnorm(double *c);
 // int Matrix::colnormdown(int pos, int *piv, double *c);
 
-// TEST_F(MatrixMultiplication, utsolve)
-// {
-// 	Polynomial a[] = {
-// 		T(3.0), T(1.0), T(0.0),
-// 		T(0.0), T(4.0), T(6.0),
-// 		T(0.0), T(0.0), T(2.0)
-// 	};
-// 	Matrix A(3, 3, a);
-// 	Matrix X(3, 2, 0);
-// 	fillWithRandoms(X);
+TEST_F(MatrixMultiplication, utsolve)
+{
+	Polynomial a[] = {
+		T(3.0), T(1.0), T(0.0),
+		T(0.0), T(4.0), T(6.0),
+		T(0.0), T(0.0), T(2.0)
+	};
+	Matrix A(3, 3, a);
+	Matrix X(3, 2, 0);
+	fillWithRandoms(X);
 
-// 	Matrix B = A * X;
+	Matrix B = A * X;
 
-// 	A.utsolve(B);
-// 	// solution should be written in B, so X and B should be equal
+	A.utsolve(B);
+	// solution should be written in B, so X and B should be equal
 
-// 	ASSERT_EQ(X, B);
-// }
+	ASSERT_EQ(X, B);
+}
 
-// TEST_F(MatrixMethods, cpermutem)
-// {
-// 	int newOrder[] = {3, 0, 2, 1};
-// 	Polynomial b[] = {
-// 		 T(4.0),  T(1.0),  T(3.0),  T(2.0),
-// 		 T(8.0),  T(5.0),  T(7.0),  T(6.0),
-// 		T(12.0),  T(9.0),  T(11.0), T(10.0)
-// 	};
-// 	Matrix newB = Matrix(3, 4, b);
+TEST_F(MatrixMethods, cpermutem)
+{
+	int newOrder[] = {3, 0, 2, 1};
+	Polynomial b[] = {
+		 T(4.0),  T(1.0),  T(3.0),  T(2.0),
+		 T(8.0),  T(5.0),  T(7.0),  T(6.0),
+		T(12.0),  T(9.0),  T(11.0), T(10.0)
+	};
+	Matrix newB = Matrix(3, 4, b);
 
-// 	B.cpermutem((int*) newOrder);
-// 	ASSERT_EQ(newB, B);	
-// }
+	B.cpermutem((int*) newOrder);
+	ASSERT_EQ(newB, B);	
+}
 
-// TEST_F(MatrixMethods, cpermutem_trans)
-// {
-// 	int newOrder[] = {1, 3, 2, 0};
-// 	// Beim Transpose wird aus dem Pivot Vektor -> { 3, 0, 2, 1 }
+TEST_F(MatrixMethods, cpermutem_trans)
+{
+	int newOrder[] = {1, 3, 2, 0};
+	// Beim Transpose wird aus dem Pivot Vektor -> { 3, 0, 2, 1 }
 
-// 	Polynomial b[] = {
-// 		 T(4.0),  T(1.0),  T(3.0),  T(2.0),
-// 		 T(8.0),  T(5.0),  T(7.0),  T(6.0),
-// 		T(12.0),  T(9.0),  T(11.0), T(10.0)
-// 	};
-// 	Matrix newB = Matrix(3, 4, b);
+	Polynomial b[] = {
+		 T(4.0),  T(1.0),  T(3.0),  T(2.0),
+		 T(8.0),  T(5.0),  T(7.0),  T(6.0),
+		T(12.0),  T(9.0),  T(11.0), T(10.0)
+	};
+	Matrix newB = Matrix(3, 4, b);
 
-// 	B.cpermutem((int*) newOrder, true);
-// 	ASSERT_EQ(newB, B);	
-// }
+	B.cpermutem((int*) newOrder, true);
+	ASSERT_EQ(newB, B);	
+}
 
-// TEST_F(MatrixMethods, rpermutem)
-// {
-// 	int newOrder[] = {1, 2, 0};
-// 	Polynomial b[] = {
-// 		T(5.0),  T(6.0),  T(7.0),  T(8.0),
-// 		T(9.0), T(10.0), T(11.0), T(12.0),
-// 		T(1.0),  T(2.0),  T(3.0),  T(4.0)
-// 	};
-// 	Matrix newB = Matrix(3, 4, b);
+TEST_F(MatrixMethods, rpermutem)
+{
+	int newOrder[] = {1, 2, 0};
+	Polynomial b[] = {
+		T(5.0),  T(6.0),  T(7.0),  T(8.0),
+		T(9.0), T(10.0), T(11.0), T(12.0),
+		T(1.0),  T(2.0),  T(3.0),  T(4.0)
+	};
+	Matrix newB = Matrix(3, 4, b);
 
-// 	B.rpermutem((int*) newOrder);
-// 	ASSERT_EQ(newB, B);
-// }
+	B.rpermutem((int*) newOrder);
+	ASSERT_EQ(newB, B);
+}
 
-// TEST_F(MatrixMethods, transpose)
-// {
-// 	// test in place transpose
-// 	Polynomial atrans[] = {
-// 		T(1.0), T(4.0), T(7.0),
-// 		T(2.0), T(5.0), T(8.0),
-// 		T(3.0), T(6.0), T(9.0)
-// 	};
-// 	Matrix Atranspose(3, 3, atrans);
-// 	A.transpose();
-// 	ASSERT_EQ(Atranspose, A);
+TEST_F(MatrixMethods, transpose)
+{
+	// test in place transpose
+	Polynomial atrans[] = {
+		T(1.0), T(4.0), T(7.0),
+		T(2.0), T(5.0), T(8.0),
+		T(3.0), T(6.0), T(9.0)
+	};
+	Matrix Atranspose(3, 3, atrans);
+	A.transpose();
+	ASSERT_EQ(Atranspose, A);
 
-// 	// test normal transpose
-// 	Polynomial btrans[] = {
-// 		T(1.0),  T(5.0),  T(9.0),
-// 		T(2.0),  T(6.0), T(10.0),
-// 		T(3.0),  T(7.0), T(11.0),
-// 		T(4.0),  T(8.0), T(12.0)
-// 	};
-// 	Matrix Btranspose(4, 3, btrans);
-// 	B.transpose();
-// 	ASSERT_EQ(Btranspose, B);	
-// }
+	// test normal transpose
+	Polynomial btrans[] = {
+		T(1.0),  T(5.0),  T(9.0),
+		T(2.0),  T(6.0), T(10.0),
+		T(3.0),  T(7.0), T(11.0),
+		T(4.0),  T(8.0), T(12.0)
+	};
+	Matrix Btranspose(4, 3, btrans);
+	B.transpose();
+	ASSERT_EQ(Btranspose, B);	
+}
 
-// TEST_F(MatrixMethods, asTranspose)
-// {
-// 	Polynomial atrans[] = {
-// 		T(1.0), T(4.0), T(7.0),
-// 		T(2.0), T(5.0), T(8.0),
-// 		T(3.0), T(6.0), T(9.0)
-// 	};
-// 	Matrix Atranspose(3, 3, atrans);
-// 	ASSERT_EQ(Atranspose, A.asTranspose());
+TEST_F(MatrixMethods, asTranspose)
+{
+	Polynomial atrans[] = {
+		T(1.0), T(4.0), T(7.0),
+		T(2.0), T(5.0), T(8.0),
+		T(3.0), T(6.0), T(9.0)
+	};
+	Matrix Atranspose(3, 3, atrans);
+	ASSERT_EQ(Atranspose, A.asTranspose());
 
-// 	Polynomial btrans[] = {
-// 		T(1.0),  T(5.0),  T(9.0),
-// 		T(2.0),  T(6.0), T(10.0),
-// 		T(3.0),  T(7.0), T(11.0),
-// 		T(4.0),  T(8.0), T(12.0)
-// 	};
-// 	Matrix Btranspose(4, 3, btrans);
-// 	ASSERT_EQ(Btranspose, B.asTranspose());
-// }
+	Polynomial btrans[] = {
+		T(1.0),  T(5.0),  T(9.0),
+		T(2.0),  T(6.0), T(10.0),
+		T(3.0),  T(7.0), T(11.0),
+		T(4.0),  T(8.0), T(12.0)
+	};
+	Matrix Btranspose(4, 3, btrans);
+	ASSERT_EQ(Btranspose, B.asTranspose());
+}
 
-// TEST_F(MatrixMethods, shift)
-// {
-// 	// shift would be senseless for double matrices
-// }
+TEST_F(MatrixMethods, shift)
+{
+	// shift would be senseless for double matrices
+}
 
-// TEST_F(MatrixMethods, isId)
-// {
-// 	ASSERT_TRUE(I.isId());
-// 	ASSERT_FALSE(Z.isId());
-// 	ASSERT_FALSE(A.isId());
-// 	ASSERT_FALSE(B.isId());		
-// }
-// // bool Matrix::isId(double eps);
-// // bool Matrix::isId(int m1, int m2, int n1, int n2, double eps);
+TEST_F(MatrixMethods, isId)
+{
+	ASSERT_TRUE(I.isId());
+	ASSERT_FALSE(Z.isId());
+	ASSERT_FALSE(A.isId());
+	ASSERT_FALSE(B.isId());		
+}
+// bool Matrix::isId(double eps);
+// bool Matrix::isId(int m1, int m2, int n1, int n2, double eps);
 
-// TEST_F(MatrixMethods, isZero)
-// {
-//  	ASSERT_FALSE(I.isZero());
-// 	ASSERT_TRUE(Z.isZero());
-// 	ASSERT_FALSE(A.isZero());
-// 	ASSERT_FALSE(B.isZero());
-// }
-// // bool Matrix::isZero(double eps);
+TEST_F(MatrixMethods, isZero)
+{
+ 	ASSERT_FALSE(I.isZero());
+	ASSERT_TRUE(Z.isZero());
+	ASSERT_FALSE(A.isZero());
+	ASSERT_FALSE(B.isZero());
+}
+// bool Matrix::isZero(double eps);
 
-// TEST_F(MatrixMethods, set2Id)
-// {
-// 	A.set2Id();
-// 	ASSERT_EQ(I, A);
-// }
+TEST_F(MatrixMethods, set2Id)
+{
+	A.set2Id();
+	ASSERT_EQ(I, A);
+}
 
-// TEST_F(MatrixMethods, set2Id2)
-// {
-// 	C.set2Id(1, 3, 2, 1);
-// 	ASSERT_EQ(CId, C);
-// }
+TEST_F(MatrixMethods, set2Id2)
+{
+	C.set2Id(1, 3, 2, 1);
+	ASSERT_EQ(CId, C);
+}
 
-// TEST_F(MatrixMethods, set2IdFromIndices)
-// {
-// 	C.set2IdFromIndices(1, 4, 2, 5);
-// 	ASSERT_EQ(CId, C);
-// }
+TEST_F(MatrixMethods, set2IdFromIndices)
+{
+	C.set2IdFromIndices(1, 4, 2, 5);
+	ASSERT_EQ(CId, C);
+}
 
-// TEST_F(MatrixMethods, set2Zero)
-// {
-// 	A.set2Zero();
-// 	ASSERT_EQ(Z, A);
+TEST_F(MatrixMethods, set2Zero)
+{
+	A.set2Zero();
+	ASSERT_EQ(Z, A);
 
-// 	Polynomial zeros[] = {
-// 		T(0.0), T(0.0), T(0.0), T(0.0),
-// 		T(0.0), T(0.0), T(0.0), T(0.0),
-// 		T(0.0), T(0.0), T(0.0), T(0.0)
-// 	};
-// 	Matrix Zeros(3, 4, zeros);
-	
-// 	B.set2Zero();
-// 	ASSERT_EQ(Zeros, B);
-// }
+	Polynomial zeros[] = {
+		T(0.0), T(0.0), T(0.0), T(0.0),
+		T(0.0), T(0.0), T(0.0), T(0.0),
+		T(0.0), T(0.0), T(0.0), T(0.0)
+	};
+	Matrix Zeros(3, 4, zeros);
 
-// TEST_F(MatrixMethods, set2Zero2)
-// {
-// 	C.set2Zero(1, 3, 2, 3);
-// 	ASSERT_EQ(CZ, C);
-// }
+	B.set2Zero();
+	ASSERT_EQ(Zeros, B);
+}
 
-// TEST_F(MatrixMethods, set2ZeroFromIndices)
-// {
-// 	C.set2ZeroFromIndices(1, 4, 2, 3);
-// 	ASSERT_EQ(CZ, C);
-// }
+TEST_F(MatrixMethods, set2Zero2)
+{
+	C.set2Zero(1, 3, 2, 3);
+	ASSERT_EQ(CZ, C);
+}
 
-// TEST_F(MatrixMethods, set2Val)
-// {
-// 	Polynomial b42[] = {
-// 		T(42.0), T(42.0), T(42.0), T(42.0),
-// 		T(42.0), T(42.0), T(42.0), T(42.0),
-// 		T(42.0), T(42.0), T(42.0), T(42.0),
-// 	};
-// 	Matrix B42(3, 4, b42);
+TEST_F(MatrixMethods, set2ZeroFromIndices)
+{
+	C.set2ZeroFromIndices(1, 4, 2, 3);
+	ASSERT_EQ(CZ, C);
+}
 
-// 	B.set2Val(42.0);
-// 	ASSERT_EQ(B42, B);
-// }
+TEST_F(MatrixMethods, set2Val)
+{
+	Polynomial b42[] = {
+		T(42.0), T(42.0), T(42.0), T(42.0),
+		T(42.0), T(42.0), T(42.0), T(42.0),
+		T(42.0), T(42.0), T(42.0), T(42.0),
+	};
+	Matrix B42(3, 4, b42);
 
-// TEST_F(MatrixMethods, set2Val2)
-// {
-// 	C.set2Val(2, 3, 1, 2, 3.0);
-// 	ASSERT_EQ(C3, C);
-// }
+	B.set2Val(42.0);
+	ASSERT_EQ(B42, B);
+}
 
-// TEST_F(MatrixMethods, set2ValFromIndices)
-// {
-// 	C.set2ValFromIndices(2, 4, 1, 4, 3.0);
-// 	ASSERT_EQ(C3, C);
-// }
+TEST_F(MatrixMethods, set2Val2)
+{
+	C.set2Val(2, 3, 1, 2, 3.0);
+	ASSERT_EQ(C3, C);
+}
 
-// // int Matrix::trinvm(Matrix &Am);
-// // int Matrix::trinvm(int r, Matrix &Am);
-// // bool Matrix::mcompare(Matrix &B);
-// // bool Matrix::mcompare(Matrix &B, double eps);
-// // bool Matrix::mcompare(Matrix &B, int r, double eps);
+TEST_F(MatrixMethods, set2ValFromIndices)
+{
+	C.set2ValFromIndices(2, 4, 1, 4, 3.0);
+	ASSERT_EQ(C3, C);
+}
 
-// TEST_F(MatrixExceptions, OperatorExceptions)
-// {
-// 	ASSERT_THROW(A.get(4,3), MathException);
-// 	ASSERT_THROW(A(4,3), MathException);
-// 	ASSERT_THROW(A + B, MathException);
-// 	ASSERT_THROW(A += B, MathException);
-// 	ASSERT_THROW(A - B, MathException);
-// 	ASSERT_THROW(A -= B, MathException);
-// 	ASSERT_THROW(B * A, MathException);
-// }
+// int Matrix::trinvm(Matrix &Am);
+// int Matrix::trinvm(int r, Matrix &Am);
+// bool Matrix::mcompare(Matrix &B);
+// bool Matrix::mcompare(Matrix &B, double eps);
+// bool Matrix::mcompare(Matrix &B, int r, double eps);
 
-// TEST_F(MatrixExceptions, FunctionExceptions)
-// {
-// 	// mmCaABbC
-// 	// Wrong Dimension of receiving Matrix
-// 	Matrix C(3, 3, 9);
-// 	ASSERT_THROW(C.mmCaABbC(1, 1, A, B),MathException);
-// 	C = Matrix(3, 2, 0);
-// 	C.mmCaABbC(1, 1, A, B); // should be okay
-// 	// Wrong Multiplication Dimensions
-// 	ASSERT_THROW(C.mmCaABbC(1, 1, B, A),MathException);
+TEST_F(MatrixExceptions, OperatorExceptions)
+{
+	ASSERT_THROW(A.get(4,3), MathException);
+	ASSERT_THROW(A(4,3), MathException);
+	ASSERT_THROW(A + B, MathException);
+	ASSERT_THROW(A += B, MathException);
+	ASSERT_THROW(A - B, MathException);
+	ASSERT_THROW(A -= B, MathException);
+	ASSERT_THROW(B * A, MathException);
+}
 
-// 	// bmmCaABbC
-// 	// rows > rows of B
-// 	ASSERT_THROW(C.bmmCaABbC(5, 2, 1, 1, A, B), MathException);
-// 	// cols > cols of B
-// 	ASSERT_THROW(C.bmmCaABbC(2, 5, 1, 1, A, B), MathException);
-// 	// A.cols != B.rows
-// 	ASSERT_THROW(C.bmmCaABbC(1, 1, 1, 1, B, A), MathException);
-// 	C = Matrix(1, 2, 0);
-// 	// A.rows != C.rows || A.cols != C.cols
-// 	ASSERT_THROW(C.bmmCaABbC(1, 1, 1, 1, A, B), MathException);
-// }
+TEST_F(MatrixExceptions, FunctionExceptions)
+{
+	// mmCaABbC
+	// Wrong Dimension of receiving Matrix
+	Matrix C(3, 3, 9);
+	ASSERT_THROW(C.mmCaABbC(1, 1, A, B),MathException);
+	C = Matrix(3, 2, 0);
+	C.mmCaABbC(1, 1, A, B); // should be okay
+	// Wrong Multiplication Dimensions
+	ASSERT_THROW(C.mmCaABbC(1, 1, B, A),MathException);
+
+	// bmmCaABbC
+	// rows > rows of B
+	ASSERT_THROW(C.bmmCaABbC(5, 2, 1, 1, A, B), MathException);
+	// cols > cols of B
+	ASSERT_THROW(C.bmmCaABbC(2, 5, 1, 1, A, B), MathException);
+	// A.cols != B.rows
+	ASSERT_THROW(C.bmmCaABbC(1, 1, 1, 1, B, A), MathException);
+	C = Matrix(1, 2, 0);
+	// A.rows != C.rows || A.cols != C.cols
+	ASSERT_THROW(C.bmmCaABbC(1, 1, 1, 1, A, B), MathException);
+}
